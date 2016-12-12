@@ -1,9 +1,10 @@
 import {Component} from "@angular/core";
 
 @Component({
+    moduleId:module.id,
     selector: 'tickets',
+    templateUrl:'tickets.template.html'
 
-    template: '<h1>Tickets</h1>'
 })
 
 export class TicketsComponent {

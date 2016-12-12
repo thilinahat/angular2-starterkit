@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var DashboardComponent = (function () {
     function DashboardComponent() {
+        this.name = "DashBoard";
     }
     DashboardComponent = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'dashboard',
-            template: '<h1>Dashboard</h1>'
+            templateUrl: 'dashboard.template.html'
         }), 
         __metadata('design:paramtypes', [])
     ], DashboardComponent);

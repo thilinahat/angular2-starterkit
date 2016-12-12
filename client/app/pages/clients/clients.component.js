@@ -14,8 +14,9 @@ var ClientsComponent = (function () {
     }
     ClientsComponent = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'clients',
-            template: '<h1>ClientsComponent</h1>'
+            templateUrl: 'clients.template.html'
         }), 
         __metadata('design:paramtypes', [])
     ], ClientsComponent);

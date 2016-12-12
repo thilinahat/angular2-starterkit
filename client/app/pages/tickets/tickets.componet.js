@@ -15,8 +15,9 @@ var TicketsComponent = (function () {
     }
     TicketsComponent = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'tickets',
-            template: '<h1>Tickets</h1>'
+            templateUrl: 'tickets.template.html'
         }), 
         __metadata('design:paramtypes', [])
     ], TicketsComponent);
