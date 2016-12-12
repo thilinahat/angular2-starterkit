@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import { ClientService } from '../../services/client.service'
 
 @Component({
     moduleId:module.id,
@@ -228,7 +229,10 @@ export class ClientsComponent {
     {name: 'Zimbabwe', code: 'ZW'},
 ];
 
+    constructor(private clientService: ClientService) { }
+
     onSubmit(form: any): void {
         console.log('you submitted value:', form);
+        this.clientService.addClient(form);
     }
 }

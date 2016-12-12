@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser';
-import {RouterModule, Routes}   from '@angular/router';
 import {FormsModule} from "@angular/forms";
+import { HttpModule }    from '@angular/http';
 
 import {AppComponent} from "./app.component";
 import {ClientsComponent} from "./pages/clients/clients.component";
@@ -17,7 +17,7 @@ import { AppRoutingModule } from './app.routing';
 
 //when creating a component, add it here
 @NgModule({
-    imports: [BrowserModule, FormsModule, AppRoutingModule],
+    imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule],
     declarations: [AppComponent, ClientsComponent,
         DashboardComponent, TicketsComponent,
         ReportsComponent, SidenavigationComponent,],

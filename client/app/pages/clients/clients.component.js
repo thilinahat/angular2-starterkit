@@ -9,8 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var client_service_1 = require('../../services/client.service');
 var ClientsComponent = (function () {
-    function ClientsComponent() {
+    function ClientsComponent(clientService) {
+        this.clientService = clientService;
         this.states = ['Initial', 'Old', 'Terminated', 'Blocked'];
         this.countries = [
             { name: 'Afghanistan', code: 'AF' },
@@ -232,6 +234,7 @@ var ClientsComponent = (function () {
     }
     ClientsComponent.prototype.onSubmit = function (form) {
         console.log('you submitted value:', form);
+        this.clientService.addClient(form);
     };
     ClientsComponent = __decorate([
         core_1.Component({
@@ -240,7 +243,7 @@ var ClientsComponent = (function () {
             templateUrl: './clients.template.html',
             styleUrls: ['./clients.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [client_service_1.ClientService])
     ], ClientsComponent);
     return ClientsComponent;
 }());
