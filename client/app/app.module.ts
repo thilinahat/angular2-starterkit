@@ -16,7 +16,8 @@ const appRoutes: Routes = [
     { path: 'operator/dashboard', component: DashboardComponent },
     { path: 'operator/tickets', component: TicketsComponent},
     { path: 'operator/reports', component: ReportsComponent},
-    { path: 'operator', component: DashboardComponent },
+    { path: 'operator', redirectTo:'operator/dashboard' },
+    { path: '**', redirectTo:'operator/dashboard' },
   /*  {
         path: 'heroes',
         component: HeroListComponent,

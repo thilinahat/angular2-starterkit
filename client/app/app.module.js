@@ -23,7 +23,8 @@ var appRoutes = [
     { path: 'operator/dashboard', component: dashboard_component_1.DashboardComponent },
     { path: 'operator/tickets', component: tickets_componet_1.TicketsComponent },
     { path: 'operator/reports', component: reports_component_1.ReportsComponent },
-    { path: 'operator', component: dashboard_component_1.DashboardComponent },
+    { path: 'operator', redirectTo: 'operator/dashboard' },
+    { path: '**', redirectTo: 'operator/dashboard' },
 ];
 //when creating a component, add it here
 var AppModule = (function () {

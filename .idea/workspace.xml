@@ -70,11 +70,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.module.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.module.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/app/app.module.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="37" column="28" lean-forward="false" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="28" />
+            <state relative-caret-position="206">
+              <caret line="19" column="14" lean-forward="false" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -102,7 +102,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sidenavigation.template.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sidenavigation.template.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.template.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
@@ -154,7 +154,6 @@
         <option value="$PROJECT_DIR$/client/app/shared/components/navigation/navbar.component.ts" />
         <option value="$PROJECT_DIR$/client/app/shared/components/navigation/navbar.template.html" />
         <option value="$PROJECT_DIR$/client/app/shared/navigation/navitem.component.ts" />
-        <option value="$PROJECT_DIR$/client/app/app.module.ts" />
         <option value="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.component.html" />
         <option value="/HTML Fragment (app.component.ts:119).html" />
         <option value="$PROJECT_DIR$/client/app/app.component.ts" />
@@ -169,6 +168,7 @@
         <option value="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.template.html" />
         <option value="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.component.ts" />
         <option value="$PROJECT_DIR$/client/app/app.template.html" />
+        <option value="$PROJECT_DIR$/client/app/app.module.ts" />
       </list>
     </option>
   </component>
@@ -337,12 +337,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1481526415999</updated>
-      <workItem from="1481526422439" duration="23790000" />
+      <workItem from="1481526422439" duration="24292000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23790000" />
+    <option name="totallyTimeSpent" value="24292000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -721,24 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="37" column="28" lean-forward="false" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/app.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="25" lean-forward="true" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/app/app.template.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -762,6 +744,24 @@
         <state relative-caret-position="238">
           <caret line="14" column="91" lean-forward="true" selection-start-line="14" selection-start-column="91" selection-end-line="14" selection-end-column="91" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="25" lean-forward="true" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="19" column="14" lean-forward="false" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
