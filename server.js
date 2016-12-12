@@ -8,10 +8,6 @@ var api = require('./routes/api');
 var notFound = require('./routes/notfound');
 
 var port = 4444;
-<<<<<<< HEAD
-
-=======
->>>>>>> 68f67e944291224fe5027d550cbf03dcd350b0dd
 
 var app = express();
 
