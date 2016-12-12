@@ -9,17 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var DashboardComponent = (function () {
-    function DashboardComponent() {
+var SidenavigationComponent = (function () {
+    function SidenavigationComponent() {
+        this.Navitems = [
+            { name: "Dashboard", path: "/operator/dashboard", icon: "dashboard", isactive: true },
+            { name: "Clients", path: "/operator/clients", icon: "person", isactive: false },
+            { name: "Tickets", path: "/operator/tickets", icon: "content_paste", isactive: false },
+            { name: "Reports", path: "/operator/reports", icon: "library_books", isactive: false },
+        ];
     }
-    DashboardComponent = __decorate([
+    SidenavigationComponent = __decorate([
         core_1.Component({
-            selector: 'dashboard',
-            template: '<h1>Dashboard</h1>'
+            moduleId: module.id,
+            selector: 'sidenavbar',
+            templateUrl: 'sidenavigation.template.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], DashboardComponent);
-    return DashboardComponent;
+    ], SidenavigationComponent);
+    return SidenavigationComponent;
 }());
-exports.DashboardComponent = DashboardComponent;
-//# sourceMappingURL=dashboard.component.js.map
+exports.SidenavigationComponent = SidenavigationComponent;
+//# sourceMappingURL=sidenavigation.component.js.map

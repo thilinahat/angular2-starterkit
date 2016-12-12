@@ -1,8 +1,9 @@
 import {Component} from "@angular/core";
 
 @Component({
+    moduleId:module.id,
     selector: 'clients',
-    template: '<h1>ClientsComponent</h1>'
+    templateUrl: 'clients.template.html'
 })
 
 export class ClientsComponent { }

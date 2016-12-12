@@ -17,12 +17,14 @@ var clients_component_1 = require("./pages/clients/clients.component");
 var dashboard_component_1 = require("./pages/dashboard/dashboard.component");
 var tickets_componet_1 = require("./pages/tickets/tickets.componet");
 var reports_component_1 = require("./pages/reports/reports.component");
+var sidenavigation_component_1 = require("./shared/navigation/sidenavigation.component");
 var appRoutes = [
     { path: 'operator/clients', component: clients_component_1.ClientsComponent },
     { path: 'operator/dashboard', component: dashboard_component_1.DashboardComponent },
     { path: 'operator/tickets', component: tickets_componet_1.TicketsComponent },
     { path: 'operator/reports', component: reports_component_1.ReportsComponent },
-    { path: 'operator', component: dashboard_component_1.DashboardComponent },
+    { path: 'operator', redirectTo: 'operator/dashboard' },
+    { path: '**', redirectTo: 'operator/dashboard' },
 ];
 //when creating a component, add it here
 var AppModule = (function () {
@@ -31,7 +33,8 @@ var AppModule = (function () {
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, router_1.RouterModule.forRoot(appRoutes)],
-            declarations: [app_component_1.AppComponent, clients_component_1.ClientsComponent, dashboard_component_1.DashboardComponent, tickets_componet_1.TicketsComponent, reports_component_1.ReportsComponent],
+            declarations: [app_component_1.AppComponent, clients_component_1.ClientsComponent, dashboard_component_1.DashboardComponent, tickets_componet_1.TicketsComponent, reports_component_1.ReportsComponent,
+                sidenavigation_component_1.SidenavigationComponent,],
             bootstrap: [app_component_1.AppComponent],
         }), 
         __metadata('design:paramtypes', [])

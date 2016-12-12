@@ -1,8 +1,12 @@
 import {Component} from "@angular/core";
 
 @Component({
+    moduleId:module.id,
     selector: 'dashboard',
-    template: '<h1>Dashboard</h1>'
+    templateUrl: 'dashboard.template.html'
 })
 
-export class DashboardComponent { }
+export class DashboardComponent {
+
+    private name: String = "DashBoard"
+}

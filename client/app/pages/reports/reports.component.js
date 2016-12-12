@@ -15,8 +15,9 @@ var ReportsComponent = (function () {
     }
     ReportsComponent = __decorate([
         core_1.Component({
+            moduleId: module.id,
             selector: 'reports',
-            template: '<h1>Reports</h1>'
+            templateUrl: 'reports.template.html'
         }), 
         __metadata('design:paramtypes', [])
     ], ReportsComponent);
