@@ -13,6 +13,7 @@ import {Navitem} from "./shared/navigation/navitem.component";
 
 import { ClientService } from './services/client.service';
 import { AppRoutingModule } from './app.routing';
+import {NavbarheaderComponent} from "./shared/navigation/navbarheader/navbarheader.component";
 
 
 //when creating a component, add it here
@@ -20,7 +21,7 @@ import { AppRoutingModule } from './app.routing';
     imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule],
     declarations: [AppComponent, ClientsComponent,
         DashboardComponent, TicketsComponent,
-        ReportsComponent, SidenavigationComponent,],
+        ReportsComponent, SidenavigationComponent,NavbarheaderComponent],
     providers: [ClientService],
     bootstrap: [AppComponent],
 })

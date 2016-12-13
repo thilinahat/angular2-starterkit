@@ -1,0 +1,9 @@
+.display{
+    right: 250px !important;
+    background-color: #ddd;
+}
+
+body{
+    -webkit-transition: right 2s; /* Safari */
+    transition: right 2s;
+}
