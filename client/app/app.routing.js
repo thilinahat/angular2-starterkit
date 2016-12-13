@@ -17,8 +17,10 @@ var clients_component_1 = require("./pages/clients/clients.component");
 var dashboard_component_1 = require("./pages/dashboard/dashboard.component");
 var tickets_componet_1 = require("./pages/tickets/tickets.componet");
 var reports_component_1 = require("./pages/reports/reports.component");
+var addclients_component_1 = require("./pages/clients/addclient/addclients.component");
 var routes = [
     { path: 'operator/clients', component: clients_component_1.ClientsComponent },
+    { path: 'operator/clients/addclient', component: addclients_component_1.AddclientsComponent },
     { path: 'operator/dashboard', component: dashboard_component_1.DashboardComponent },
     { path: 'operator/tickets', component: tickets_componet_1.TicketsComponent },
     { path: 'operator/reports', component: reports_component_1.ReportsComponent },

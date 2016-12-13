@@ -1,0 +1,89 @@
+<div class="main-panel">
+    <navbarheader></navbarheader>
+    <h1>Add Client</h1>
+    <div class="form-container">
+        <form #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm.value)">
+            <!--company-->
+            <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" class="form-control" id="company" name="company" ngModel required>
+            </div>
+            <!--contact person-->
+            <div class="form-group">
+                <label for="contactPerson">Contact Person</label>
+                <input type="text" class="form-control" id="contactPerson" name="contactPerson" ngModel required>
+            </div>
+            <!--website-->
+            <div class="form-group">
+                <label for="website">Web Site</label>
+                <input type="text" class="form-control" id="website" name="website" ngModel required>
+            </div>
+            <!--status-->
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select class="form-control" id="status" required>
+                    <option *ngFor="let state of states" [value]="state">{{state}}</option>
+                </select>
+            </div>
+            <!--country-->
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select class="form-control" id="country" required>
+                    <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
+                </select>
+            </div>
+            <!--MLR Number-->
+            <div class="form-group">
+                <label for="mlr">MLR Number</label>
+                <input type="number" class="form-control" id="mlr" name="mlr" ngModel required>
+            </div>
+            <!--email-->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" ngModel required>
+            </div>
+            <!--phone-->
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" ngModel required>
+            </div>
+            <!--address-->
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" name="address" ngModel required>
+            </div>
+            <!--postal code-->
+            <div class="form-group">
+                <label for="postalCode">Postal Code</label>
+                <input type="number" class="form-control" id="postalCode" name="postalCode" ngModel required>
+            </div>
+            <!--business registration-->
+            <div class="form-group">
+                <label for="bus-registration">Business Registration</label>
+                <input type="text" class="form-control" id="bus-registration" name="businessRegistration" ngModel required>
+            </div>
+            <!--Logo-->
+            <div class="form-group is-empty is-fileinput">
+                <label for="logo">Logo</label>
+                <input type="file" class="form-control" id="logo" name="logo" ngModel required accept="image/png,,image/jpeg">
+                <input type="text" readonly="" class="form-control">
+            </div>
+            <!--submit-->
+            <button type="submit" class="btn btn-default">Add</button>
+        </form>
+    </div>
+</div>
+
+<!--company name
+contact person name
+website
+status
+MLR number
+email (multiple)
+phone (multiple)
+address
+country
+postal code
+logo png,jpg
+business registration
+-->

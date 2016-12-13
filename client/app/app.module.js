@@ -21,6 +21,7 @@ var sidenavigation_component_1 = require("./shared/navigation/sidenavigation.com
 var client_service_1 = require('./services/client.service');
 var app_routing_1 = require('./app.routing');
 var navbarheader_component_1 = require("./shared/navigation/navbarheader/navbarheader.component");
+var addclients_component_1 = require("./pages/clients/addclient/addclients.component");
 //when creating a component, add it here
 var AppModule = (function () {
     function AppModule() {
@@ -30,7 +31,7 @@ var AppModule = (function () {
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, app_routing_1.AppRoutingModule],
             declarations: [app_component_1.AppComponent, clients_component_1.ClientsComponent,
                 dashboard_component_1.DashboardComponent, tickets_componet_1.TicketsComponent,
-                reports_component_1.ReportsComponent, sidenavigation_component_1.SidenavigationComponent, navbarheader_component_1.NavbarheaderComponent],
+                reports_component_1.ReportsComponent, sidenavigation_component_1.SidenavigationComponent, navbarheader_component_1.NavbarheaderComponent, addclients_component_1.AddclientsComponent],
             providers: [client_service_1.ClientService],
             bootstrap: [app_component_1.AppComponent],
         }), 
