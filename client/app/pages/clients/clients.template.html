@@ -1,24 +1,57 @@
 <div class="main-panel">
 
     <navbarheader></navbarheader>
-    <h1>Clients Page Content</h1>
-    <a routerLink="/operator/clients/addclient">Add Client</a>
 
-    <div class="form-group">
-        <label >Client Name</label>
-        <input [(ngModel)]="searchClientName">
+    <clientsheader></clientsheader>
 
-        <label >Client Id</label>
-        <input [(ngModel)]="searchClientID">
 
+
+    <div class="row">
+
+        <div class="form-group col-md-6 col-xs-12">
+
+
+            <div class="form-group label-floating is-empty">
+                <label class="control-label">Client Name</label>
+                <input type="text" class="form-control" [(ngModel)]="searchClientName">
+                <span class="material-input"></span>
+            </div>
+
+        </div>
+
+        <div class="form-group col-md-6 col-xs-12">
+
+            <div class="form-group label-floating is-empty">
+                <label class="control-label">Client Id</label>
+                <input type="text" class="form-control" [(ngModel)]="searchClientID">
+                <span class="material-input"></span>
+            </div>
+
+        </div>
     </div>
 
+    <div class="col-xs-12">
+        <div class="card">
+            <div class="card-content table-responsive">
+                <table class="table">
+                    <thead class="text-primary">
+                        <tr>
+                            <th>Client Name</th>
+                            <th>Client Id</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let client of ( clientNameAndIds | searchByName:searchClientName |searchById:searchClientID ) ">
+                            <td><a routerLink="/operator/clients/{{client.id}}" >{{client.name}}</a></td>
+                            <td><a routerLink="/operator/clients/{{client.id}}" >{{client.id}}</a></td>
+                        </tr>
 
-    <div class="row" *ngFor="let client of ( clientNameAndIds | searchByName:searchClientName |searchById:searchClientID ) " >
-        <div class="col-md-6"><h3>{{client.name}}</h3></div>
-        <div class="col-md-6"><h3>{{client.id}}</h3></div>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </div>
-
 
 
 

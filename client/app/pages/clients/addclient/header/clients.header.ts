@@ -1,10 +1,10 @@
 import {Component} from "@angular/core";
-import { ClientService } from '../../services/client.service'
+import { ClientService } from '../../../../services/client.service'
 
 @Component({
     moduleId:module.id,
     selector: 'clientsheader',
-    templateUrl: './clientsheader.template.html',
+    templateUrl: 'clientsheader.template.html',
 
 
 })

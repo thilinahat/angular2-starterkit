@@ -12,3 +12,16 @@ body{
     position: fixed !important;
     right: 0px !important;
 }
+
+.main-panel{
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.activated-inner-link{
+    background-color: red;
+}
+
+.navbar-absolute{
+    z-index: -10 !important; /*to pull main content up*/
+}

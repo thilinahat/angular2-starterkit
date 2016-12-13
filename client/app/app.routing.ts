@@ -12,11 +12,15 @@ import {ReportsComponent} from "./pages/reports/reports.component";
 import {SidenavigationComponent} from "./shared/navigation/sidenavigation.component";
 import {Navitem} from "./shared/navigation/navitem.component";
 import {AddclientsComponent} from "./pages/clients/addclient/addclients.component";
+import {SingleClientComponent} from "./pages/clients/single-client.component";
 
 
 const routes: Routes = [
-    { path: 'operator/clients', component: ClientsComponent },
+    { path: 'operator/clients/search', component: ClientsComponent },
     { path: 'operator/clients/addclient', component: AddclientsComponent },
+    { path: 'operator/clients',redirectTo: 'operator/clients/search' },
+    { path: 'operator/clients/:clientId',component: SingleClientComponent },
+
     { path: 'operator/dashboard', component: DashboardComponent },
     { path: 'operator/tickets', component: TicketsComponent},
     { path: 'operator/reports', component: ReportsComponent},

@@ -13,6 +13,8 @@ export class ClientService {
     private headers = new Headers({'Content-Type': 'application/json'});
     private clientAPIurl = 'api/client';
 
+
+
     /*getHeroes(): Promise<Hero[]> {
      return Promise.resolve(HEROES);
      }*/
@@ -29,5 +31,19 @@ export class ClientService {
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
+    }
+
+    getClientsNameIds() : any[]{
+
+
+        return [
+            {name: "client 1", id:"C0001"},
+            {name: "james", id:"C0002"},
+            {name: "anna", id:"C0003"},
+            {name: "xtream solutions", id:"C1001"},
+            {name: "exchange plus", id:"C0201"},
+            {name: "europian double", id:"C031"},
+            {name: "american exprex", id:"C4001"},
+        ];
     }
 }

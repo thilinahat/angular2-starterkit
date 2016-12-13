@@ -21,16 +21,21 @@ import {AddclientsComponent} from "./pages/clients/addclient/addclients.componen
 
 import {SearchByNamePipe} from "./pipes/search-by-name.pipe";
 import {SearchByIdPipe} from "./pipes/search-by-id.pipe";
+import {MainPipeModule} from "./pipes/main.pipe";
+import {ClientsHeaderComponent} from "./pages/clients/addclient/header/clients.header";
+import {SingleClientComponent} from "./pages/clients/single-client.component";
 
 
 
 //when creating a component, add it here
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule],
+    imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule, MainPipeModule],
     declarations: [AppComponent, ClientsComponent,
         DashboardComponent, TicketsComponent,
-        ReportsComponent, SidenavigationComponent,NavbarheaderComponent, AddclientsComponent,
-        SearchByNamePipe,SearchByIdPipe,  ],
+        ReportsComponent, SidenavigationComponent,
+        NavbarheaderComponent, AddclientsComponent,
+        ClientsHeaderComponent,SingleClientComponent,
+         ],
     providers: [ClientService],
     bootstrap: [AppComponent],
 })

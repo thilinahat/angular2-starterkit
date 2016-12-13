@@ -13,6 +13,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 *
  *  */
 
+
+// add ignore case
+
 @Pipe({name: 'searchById'})
 
 export class SearchByIdPipe implements PipeTransform {
