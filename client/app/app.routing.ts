@@ -13,12 +13,14 @@ import {SidenavigationComponent} from "./shared/navigation/sidenavigation.compon
 import {Navitem} from "./shared/navigation/navitem.component";
 import {AddclientsComponent} from "./pages/clients/addclient/addclients.component";
 import {SingleClientComponent} from "./pages/clients/single-client.component";
+import {MailComponent} from "./pages/clients/mail/mail.component";
 
 
 const routes: Routes = [
     { path: 'operator/clients/search', component: ClientsComponent },
     { path: 'operator/clients/addclient', component: AddclientsComponent },
     { path: 'operator/clients',redirectTo: 'operator/clients/search' },
+    { path: 'operator/clients/mail',component: MailComponent },
     { path: 'operator/clients/:clientId',component: SingleClientComponent },
 
     { path: 'operator/dashboard', component: DashboardComponent },

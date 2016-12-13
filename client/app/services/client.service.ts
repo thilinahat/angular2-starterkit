@@ -42,7 +42,7 @@ export class ClientService {
             {name: "anna", id:"C0003"},
             {name: "xtream solutions", id:"C1001"},
             {name: "exchange plus", id:"C0201"},
-            {name: "europian double", id:"C031"},
+            {name: "european double", id:"C031"},
             {name: "american exprex", id:"C4001"},
         ];
     }

@@ -14,7 +14,7 @@ import { Pipe, PipeTransform } from '@angular/core';
  *  */
 
 
-// add ignore case
+
 
 @Pipe({name: 'searchById'})
 
@@ -22,6 +22,6 @@ export class SearchByIdPipe implements PipeTransform {
 
     transform(componentList:  any[], id:String): any[] {
 
-        return componentList.filter((component) => component.id.indexOf(id) != -1)
+        return componentList.filter((component) => component.id.toLocaleLowerCase().indexOf(id.toLocaleLowerCase()) != -1)
     }
 }

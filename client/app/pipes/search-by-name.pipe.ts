@@ -19,6 +19,6 @@ export class SearchByNamePipe implements PipeTransform {
 
     transform(componentList:  any[], name:String): any[] {
 
-        return componentList.filter((component) => component.name.indexOf(name) != -1)
+        return componentList.filter((component) => component.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) != -1)
     }
 }

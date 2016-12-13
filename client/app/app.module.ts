@@ -19,11 +19,10 @@ import {AddclientsComponent} from "./pages/clients/addclient/addclients.componen
 
 
 
-import {SearchByNamePipe} from "./pipes/search-by-name.pipe";
-import {SearchByIdPipe} from "./pipes/search-by-id.pipe";
 import {MainPipeModule} from "./pipes/main.pipe";
 import {ClientsHeaderComponent} from "./pages/clients/header/clients.header";
 import {SingleClientComponent} from "./pages/clients/single-client.component";
+import {MailComponent} from "./pages/clients/mail/mail.component";
 
 
 
@@ -35,6 +34,7 @@ import {SingleClientComponent} from "./pages/clients/single-client.component";
         ReportsComponent, SidenavigationComponent,
         NavbarheaderComponent, AddclientsComponent,
         ClientsHeaderComponent,SingleClientComponent,
+        MailComponent,
          ],
     providers: [ClientService],
     bootstrap: [AppComponent],
