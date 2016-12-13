@@ -7,3 +7,8 @@ body{
     -webkit-transition: right 2s; /* Safari */
     transition: right 2s;
 }
+
+.display-mobile-side-nav{
+    position: fixed !important;
+    right: 0px !important;
+}
