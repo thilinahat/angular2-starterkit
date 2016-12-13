@@ -2,19 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ff0b137-58a3-42ce-bc09-243b3efee1dc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/app/shared/navigation/navbarheader/navbarheader.component.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/app/shared/navigation/navbarheader/navbarheader.template.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/script.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/app.module.js" afterPath="$PROJECT_DIR$/client/app/app.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/app.module.js.map" afterPath="$PROJECT_DIR$/client/app/app.module.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/app.module.ts" afterPath="$PROJECT_DIR$/client/app/app.module.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/pages/clients/clients.template.html" afterPath="$PROJECT_DIR$/client/app/pages/clients/clients.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/pages/dashboard/dashboard.template.html" afterPath="$PROJECT_DIR$/client/app/pages/dashboard/dashboard.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/pages/reports/reports.template.html" afterPath="$PROJECT_DIR$/client/app/pages/reports/reports.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/pages/tickets/tickets.template.html" afterPath="$PROJECT_DIR$/client/app/pages/tickets/tickets.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles.css" afterPath="$PROJECT_DIR$/client/styles.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.html" afterPath="$PROJECT_DIR$/views/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/shared/navigation/navbarheader/navbarheader.template.html" afterPath="$PROJECT_DIR$/client/app/shared/navigation/navbarheader/navbarheader.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.component.js" afterPath="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.component.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.component.js.map" afterPath="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.component.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.component.ts" afterPath="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.template.html" afterPath="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/script.js" afterPath="$PROJECT_DIR$/client/script.js" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,7 +36,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tickets.template.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tickets.template.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/app/pages/tickets/tickets.template.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
@@ -57,7 +50,7 @@
         <entry file="file://$PROJECT_DIR$/client/script.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="3" column="31" lean-forward="false" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
+              <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -73,21 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="styles.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/styles.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="navbarheader.component.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="navbarheader.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/navbarheader/navbarheader.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="68">
+              <caret line="4" column="35" lean-forward="false" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -96,30 +79,8 @@
       <file leaf-file-name="navbarheader.template.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/navbarheader/navbarheader.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="107" lean-forward="false" selection-start-line="4" selection-start-column="81" selection-end-line="4" selection-end-column="110" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sidenavigation.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="navitem.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/navitem.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="17">
+              <caret line="1" column="55" lean-forward="false" selection-start-line="1" selection-start-column="55" selection-end-line="1" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -129,7 +90,7 @@
         <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.template.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="0" column="56" lean-forward="false" selection-start-line="0" selection-start-column="56" selection-end-line="0" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -189,7 +150,10 @@
         <option value="$PROJECT_DIR$/client/app/pages/tickets/tickets.template.html" />
         <option value="$PROJECT_DIR$/client/styles.css" />
         <option value="$PROJECT_DIR$/views/index.html" />
+        <option value="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.component.ts" />
         <option value="$PROJECT_DIR$/client/app/shared/navigation/navbarheader/navbarheader.template.html" />
+        <option value="$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.template.html" />
+        <option value="$PROJECT_DIR$/client/script.js" />
       </list>
     </option>
   </component>
@@ -450,7 +414,7 @@
       <option name="presentableId" value="Default" />
       <updated>1481526415999</updated>
       <workItem from="1481526422439" duration="17213000" />
-      <workItem from="1481616120444" duration="1026000" />
+      <workItem from="1481616120444" duration="1825000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/chamupathi1/CRM_Universal&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;">
       <created>1481558407713</created>
@@ -484,7 +448,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18239000" />
+    <option name="totallyTimeSpent" value="19038000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -885,14 +849,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/pages/tickets/tickets.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="33" lean-forward="false" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
@@ -909,45 +865,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="31" lean-forward="false" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/styles.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/navbarheader/navbarheader.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="107" lean-forward="false" selection-start-line="4" selection-start-column="81" selection-end-line="4" selection-end-column="110" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -959,10 +881,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/navbarheader/navbarheader.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="55" lean-forward="false" selection-start-line="1" selection-start-column="55" selection-end-line="1" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/navbarheader/navbarheader.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="68">
+          <caret line="4" column="35" lean-forward="false" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="31" lean-forward="false" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/shared/navigation/sidenavigation.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="56" lean-forward="false" selection-start-line="0" selection-start-column="56" selection-end-line="0" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/pages/tickets/tickets.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="33" lean-forward="false" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
           <folding />
         </state>
       </provider>

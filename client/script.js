@@ -1,6 +1,8 @@
-myFunction = function () {
+toggleSideBar = function () {
 
-     $('#sideNavBar').toggleClass("display");
-    $('body').toggleClass("display");
+      $('#sideNavBar').toggleClass("display");
+     $('body').toggleClass("display");
+
+    console.log($('#sideNavBar').html());
 
 }
