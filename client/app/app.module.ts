@@ -22,7 +22,7 @@ import {AddclientsComponent} from "./pages/clients/addclient/addclients.componen
 import {SearchByNamePipe} from "./pipes/search-by-name.pipe";
 import {SearchByIdPipe} from "./pipes/search-by-id.pipe";
 import {MainPipeModule} from "./pipes/main.pipe";
-import {ClientsHeaderComponent} from "./pages/clients/addclient/header/clients.header";
+import {ClientsHeaderComponent} from "./pages/clients/header/clients.header";
 import {SingleClientComponent} from "./pages/clients/single-client.component";
 
 
