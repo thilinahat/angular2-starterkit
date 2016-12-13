@@ -9,7 +9,7 @@ import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {TicketsComponent} from "./pages/tickets/tickets.componet";
 import {ReportsComponent} from "./pages/reports/reports.component";
 import {SidenavigationComponent} from "./shared/navigation/sidenavigation.component";
-import {Navitem} from "./shared/navigation/navitem.component";
+
 
 import { ClientService } from './services/client.service';
 import { AppRoutingModule } from './app.routing';
@@ -17,12 +17,20 @@ import {NavbarheaderComponent} from "./shared/navigation/navbarheader/navbarhead
 import {AddclientsComponent} from "./pages/clients/addclient/addclients.component";
 
 
+
+
+import {SearchByNamePipe} from "./pipes/search-by-name.pipe";
+import {SearchByIdPipe} from "./pipes/search-by-id.pipe";
+
+
+
 //when creating a component, add it here
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule],
     declarations: [AppComponent, ClientsComponent,
         DashboardComponent, TicketsComponent,
-        ReportsComponent, SidenavigationComponent,NavbarheaderComponent, AddclientsComponent],
+        ReportsComponent, SidenavigationComponent,NavbarheaderComponent, AddclientsComponent,
+        SearchByNamePipe,SearchByIdPipe,  ],
     providers: [ClientService],
     bootstrap: [AppComponent],
 })

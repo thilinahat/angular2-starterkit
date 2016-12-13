@@ -5,7 +5,8 @@ import { ClientService } from '../../services/client.service'
     moduleId:module.id,
     selector: 'clients',
     templateUrl: './clients.template.html',
-    styleUrls: ['./clients.css']
+    styleUrls: ['./clients.css'],
+
 })
 
 export class ClientsComponent {
@@ -228,11 +229,29 @@ export class ClientsComponent {
     {name: 'Zambia', code: 'ZM'},
     {name: 'Zimbabwe', code: 'ZW'},
 ];
+    clientNameAndIds: any[] = [
+        {name: "client 1", id:"C0001"},
+        {name: "james", id:"C0002"},
+        {name: "anna", id:"C0003"},
+        {name: "xtream solutions", id:"C1001"},
+        {name: "exchange plus", id:"C0201"},
+        {name: "europian double", id:"C031"},
+        {name: "american exprex", id:"C4001"},
+    ];
 
-    constructor(private clientService: ClientService) { }
+    names: String[] = [
+        "abc",
+        'Initial', 'Old', 'Terminated', 'Blocked'
+    ];
 
-    onSubmit(form: any): void {
-        console.log('you submitted value:', form);
-        this.clientService.addClient(form);
+    searchClientName:String = '';
+    searchClientID:String = '';
+
+    birthday:Date = new Date(1988, 3, 15); // April 15, 1988
+    constructor(private clientService: ClientService) {
+
     }
+
+
+
 }

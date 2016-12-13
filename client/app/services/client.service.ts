@@ -12,6 +12,7 @@ export class ClientService {
 
     private headers = new Headers({'Content-Type': 'application/json'});
     private clientAPIurl = 'api/client';
+
     /*getHeroes(): Promise<Hero[]> {
      return Promise.resolve(HEROES);
      }*/

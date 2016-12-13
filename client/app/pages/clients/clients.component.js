@@ -231,17 +231,29 @@ var ClientsComponent = (function () {
             { name: 'Zambia', code: 'ZM' },
             { name: 'Zimbabwe', code: 'ZW' },
         ];
+        this.clientNameAndIds = [
+            { name: "client 1", id: "C0001" },
+            { name: "james", id: "C0002" },
+            { name: "anna", id: "C0003" },
+            { name: "xtream solutions", id: "C1001" },
+            { name: "exchange plus", id: "C0201" },
+            { name: "europian double", id: "C031" },
+            { name: "american exprex", id: "C4001" },
+        ];
+        this.names = [
+            "abc",
+            'Initial', 'Old', 'Terminated', 'Blocked'
+        ];
+        this.searchClientName = '';
+        this.searchClientID = '';
+        this.birthday = new Date(1988, 3, 15); // April 15, 1988
     }
-    ClientsComponent.prototype.onSubmit = function (form) {
-        console.log('you submitted value:', form);
-        this.clientService.addClient(form);
-    };
     ClientsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'clients',
             templateUrl: './clients.template.html',
-            styleUrls: ['./clients.css']
+            styleUrls: ['./clients.css'],
         }), 
         __metadata('design:paramtypes', [client_service_1.ClientService])
     ], ClientsComponent);
