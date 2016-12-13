@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ff0b137-58a3-42ce-bc09-243b3efee1dc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/app/pages/clients/addclient/header/clients.header.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/app/pages/clients/addclient/header/clientsheader.template.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/app/pages/clients/single-client.component.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/app/pages/clients/single-client.template.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/app/pipes/main.pipe.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/app.module.ts" afterPath="$PROJECT_DIR$/client/app/app.module.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/app.routing.ts" afterPath="$PROJECT_DIR$/client/app/app.routing.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/pages/clients/addclient/addclients.template.html" afterPath="$PROJECT_DIR$/client/app/pages/clients/addclient/addclients.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/pages/clients/clients.component.ts" afterPath="$PROJECT_DIR$/client/app/pages/clients/clients.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/pages/clients/addclient/header/clientsheader.template.html" afterPath="$PROJECT_DIR$/client/app/pages/clients/addclient/header/clientsheader.template.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/pages/clients/clients.template.html" afterPath="$PROJECT_DIR$/client/app/pages/clients/clients.template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/pipes/search-by-id.pipe.ts" afterPath="$PROJECT_DIR$/client/app/pipes/search-by-id.pipe.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/pipes/search-by-name.pipe.ts" afterPath="$PROJECT_DIR$/client/app/pipes/search-by-name.pipe.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/app/services/client.service.ts" afterPath="$PROJECT_DIR$/client/app/services/client.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles.css" afterPath="$PROJECT_DIR$/client/styles.css" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,8 +47,8 @@
       <file leaf-file-name="clientsheader.template.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/app/pages/clients/addclient/header/clientsheader.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="73" lean-forward="false" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="73" />
+            <state relative-caret-position="323">
+              <caret line="19" column="70" lean-forward="false" selection-start-line="19" selection-start-column="70" selection-end-line="19" selection-end-column="70" />
               <folding />
             </state>
           </provider>
@@ -79,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="clients.template.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="clients.template.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/app/pages/clients/clients.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="45" column="76" lean-forward="false" selection-start-line="45" selection-start-column="76" selection-end-line="45" selection-end-column="76" />
+            <state relative-caret-position="357">
+              <caret line="24" column="56" lean-forward="false" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -111,7 +98,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search-by-id.pipe.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="search-by-id.pipe.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/app/pipes/search-by-id.pipe.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
@@ -163,7 +150,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/client/system.config.js" />
         <option value="$PROJECT_DIR$/client/app/main.ts" />
         <option value="$PROJECT_DIR$/client/main.ts" />
         <option value="$PROJECT_DIR$/.bowerrc" />
@@ -208,12 +194,13 @@
         <option value="$PROJECT_DIR$/client/app/pages/clients/addclient/single-client.component.ts" />
         <option value="$PROJECT_DIR$/client/app/app.routing.ts" />
         <option value="$PROJECT_DIR$/client/app/app.module.ts" />
-        <option value="$PROJECT_DIR$/client/app/pages/clients/clients.template.html" />
         <option value="$PROJECT_DIR$/client/app/pages/clients/singleclient.template.html" />
         <option value="$PROJECT_DIR$/client/app/pages/clients/single-client.template.html" />
         <option value="$PROJECT_DIR$/client/app/pages/clients/single-client.component.ts" />
         <option value="$PROJECT_DIR$/client/app/pipes/search-by-name.pipe.ts" />
         <option value="$PROJECT_DIR$/client/app/pipes/search-by-id.pipe.ts" />
+        <option value="$PROJECT_DIR$/client/app/pages/clients/addclient/header/clientsheader.template.html" />
+        <option value="$PROJECT_DIR$/client/app/pages/clients/clients.template.html" />
       </list>
     </option>
   </component>
@@ -343,6 +330,62 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CRM_Universal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CRM_Universal" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="clients" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CRM_Universal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CRM_Universal" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="clients" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="addclient" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -450,7 +493,7 @@
       <option name="presentableId" value="Default" />
       <updated>1481526415999</updated>
       <workItem from="1481526422439" duration="17213000" />
-      <workItem from="1481616120444" duration="21023000" />
+      <workItem from="1481616120444" duration="21354000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/chamupathi1/CRM_Universal&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;">
       <created>1481558407713</created>
@@ -484,7 +527,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38236000" />
+    <option name="totallyTimeSpent" value="38567000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -901,14 +944,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/pages/clients/addclient/header/clientsheader.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="73" lean-forward="false" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/app/pages/clients/clients.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -933,14 +968,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/app/pages/clients/clients.template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="45" column="76" lean-forward="false" selection-start-line="45" selection-start-column="76" selection-end-line="45" selection-end-column="76" />
           <folding />
         </state>
       </provider>
@@ -983,6 +1010,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/pages/clients/addclient/header/clientsheader.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="70" lean-forward="false" selection-start-line="19" selection-start-column="70" selection-end-line="19" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/app/pages/clients/clients.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="24" column="56" lean-forward="false" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
           <folding />
         </state>
       </provider>
