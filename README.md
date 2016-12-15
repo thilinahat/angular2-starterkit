@@ -27,3 +27,10 @@ cd CRM
 from CRM folder
 
 nodemon
+
+# Imported modules
+
+## Email realted
+### IMAP
+https://github.com/mscdex/node-imap
+
