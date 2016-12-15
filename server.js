@@ -5,6 +5,9 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var tasks = require('./routes/tasks');
 var api = require('./routes/api');
+var mailServerImap = require('./routes/MailServerIMAP');
+
+
 var notFound = require('./routes/notfound');
 
 var port = 4444;
@@ -28,6 +31,7 @@ app.use('/', index);
 app.use('/operator', index);
 app.use('/operator/*', index);
 app.use('/api', api);
+app.use('/mail',mailServerImap);
 app.use('/*', notFound);
 
 
