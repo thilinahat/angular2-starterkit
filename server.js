@@ -3,7 +3,6 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var tasks = require('./routes/tasks');
 var api = require('./routes/api');
 var mailServerImap = require('./routes/MailServerIMAP');
 
