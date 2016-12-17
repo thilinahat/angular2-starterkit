@@ -18,7 +18,6 @@ var dashboard_component_1 = require("./pages/dashboard/dashboard.component");
 var tickets_componet_1 = require("./pages/tickets/tickets.componet");
 var reports_component_1 = require("./pages/reports/reports.component");
 var sidenavigation_component_1 = require("./shared/navigation/sidenavigation.component");
-var tag_input_component_1 = require('./pages/clients/addclient/tag-input.component');
 var client_service_1 = require('./services/client.service');
 var app_routing_1 = require('./app.routing');
 var navbarheader_component_1 = require("./shared/navigation/navbarheader/navbarheader.component");
@@ -36,11 +35,8 @@ var AppModule = (function () {
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, app_routing_1.AppRoutingModule, main_pipe_1.MainPipeModule],
             declarations: [app_component_1.AppComponent, clients_component_1.ClientsComponent,
                 dashboard_component_1.DashboardComponent, tickets_componet_1.TicketsComponent,
-                reports_component_1.ReportsComponent, sidenavigation_component_1.SidenavigationComponent,
-                navbarheader_component_1.NavbarheaderComponent, addclients_component_1.AddclientsComponent,
-                clients_header_1.ClientsHeaderComponent, single_client_component_1.SingleClientComponent,
-                mail_component_1.MailComponent, tag_input_component_1.TagInputComponent
-            ],
+                reports_component_1.ReportsComponent, sidenavigation_component_1.SidenavigationComponent, navbarheader_component_1.NavbarheaderComponent, addclients_component_1.AddclientsComponent,
+                search_by_name_pipe_1.SearchByNamePipe, search_by_id_pipe_1.SearchByIdPipe, exponential_strength_pipe_1.ExponentialStrengthPipe,],
             providers: [client_service_1.ClientService],
             bootstrap: [app_component_1.AppComponent],
         }), 

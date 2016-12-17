@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser')
 
 
 var index = require('./routes/index');
-var tasks = require('./routes/tasks');
 var api = require('./routes/api');
 var mailServerImap = require('./routes/MailServerIMAP');
 
