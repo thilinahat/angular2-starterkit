@@ -20,9 +20,6 @@ var ClientService = (function () {
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.clientAPIurl = 'api/client';
     }
-    /*getHeroes(): Promise<Hero[]> {
-     return Promise.resolve(HEROES);
-     }*/
     ClientService.prototype.addClient = function (client) {
         var url = this.clientAPIurl + "'/add'";
         /*return this.http

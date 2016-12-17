@@ -19,13 +19,17 @@ var tickets_componet_1 = require("./pages/tickets/tickets.componet");
 var reports_component_1 = require("./pages/reports/reports.component");
 var sidenavigation_component_1 = require("./shared/navigation/sidenavigation.component");
 var client_service_1 = require('./services/client.service');
+var auth_service_1 = require('./services/auth.service');
+var auth_gaurd_1 = require('./guards/auth.gaurd');
 var app_routing_1 = require('./app.routing');
 var navbarheader_component_1 = require("./shared/navigation/navbarheader/navbarheader.component");
 var addclients_component_1 = require("./pages/clients/addclient/addclients.component");
+var login_component_1 = require('./pages/login/login.component');
 var main_pipe_1 = require("./pipes/main.pipe");
 var clients_header_1 = require("./pages/clients/header/clients.header");
 var single_client_component_1 = require("./pages/clients/single-client.component");
 var mail_component_1 = require("./pages/clients/mail/mail.component");
+var customers_component_1 = require("./pages/customers/customers.component");
 //when creating a component, add it here
 var AppModule = (function () {
     function AppModule() {
@@ -35,9 +39,12 @@ var AppModule = (function () {
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, app_routing_1.AppRoutingModule, main_pipe_1.MainPipeModule],
             declarations: [app_component_1.AppComponent, clients_component_1.ClientsComponent,
                 dashboard_component_1.DashboardComponent, tickets_componet_1.TicketsComponent,
-                reports_component_1.ReportsComponent, sidenavigation_component_1.SidenavigationComponent, navbarheader_component_1.NavbarheaderComponent, addclients_component_1.AddclientsComponent,
-                search_by_name_pipe_1.SearchByNamePipe, search_by_id_pipe_1.SearchByIdPipe, exponential_strength_pipe_1.ExponentialStrengthPipe,],
-            providers: [client_service_1.ClientService],
+                reports_component_1.ReportsComponent, sidenavigation_component_1.SidenavigationComponent,
+                navbarheader_component_1.NavbarheaderComponent, addclients_component_1.AddclientsComponent,
+                clients_header_1.ClientsHeaderComponent, single_client_component_1.SingleClientComponent,
+                mail_component_1.MailComponent, login_component_1.LoginComponent, customers_component_1.CustomersComponent
+            ],
+            providers: [client_service_1.ClientService, auth_service_1.AuthService, auth_gaurd_1.AuthGuard],
             bootstrap: [app_component_1.AppComponent],
         }), 
         __metadata('design:paramtypes', [])

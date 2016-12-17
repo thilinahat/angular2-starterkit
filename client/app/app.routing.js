@@ -20,17 +20,23 @@ var reports_component_1 = require("./pages/reports/reports.component");
 var addclients_component_1 = require("./pages/clients/addclient/addclients.component");
 var single_client_component_1 = require("./pages/clients/single-client.component");
 var mail_component_1 = require("./pages/clients/mail/mail.component");
+var login_component_1 = require("./pages/login/login.component");
+var customers_component_1 = require("./pages/customers/customers.component");
+var auth_gaurd_1 = require('./guards/auth.gaurd');
+var auth_service_1 = require('./services/auth.service');
 var routes = [
-    { path: 'operator/clients/search', component: clients_component_1.ClientsComponent },
-    { path: 'operator/clients/addclient', component: addclients_component_1.AddclientsComponent },
+    { path: 'login', component: login_component_1.LoginComponent },
+    { path: 'operator/clients/search', component: clients_component_1.ClientsComponent, canActivate: [auth_gaurd_1.AuthGuard] },
+    { path: 'operator/clients/addclient', component: addclients_component_1.AddclientsComponent, canActivate: [auth_gaurd_1.AuthGuard] },
     { path: 'operator/clients', redirectTo: 'operator/clients/search' },
-    { path: 'operator/clients/mail', component: mail_component_1.MailComponent },
-    { path: 'operator/clients/:clientId', component: single_client_component_1.SingleClientComponent },
-    { path: 'operator/dashboard', component: dashboard_component_1.DashboardComponent },
-    { path: 'operator/tickets', component: tickets_componet_1.TicketsComponent },
-    { path: 'operator/reports', component: reports_component_1.ReportsComponent },
+    { path: 'operator/clients/mail', component: mail_component_1.MailComponent, canActivate: [auth_gaurd_1.AuthGuard] },
+    { path: 'operator/clients/:clientId', component: single_client_component_1.SingleClientComponent, canActivate: [auth_gaurd_1.AuthGuard] },
+    { path: 'operator/dashboard', component: dashboard_component_1.DashboardComponent, canActivate: [auth_gaurd_1.AuthGuard] },
+    { path: 'operator/tickets', component: tickets_componet_1.TicketsComponent, canActivate: [auth_gaurd_1.AuthGuard] },
+    { path: 'operator/reports', component: reports_component_1.ReportsComponent, canActivate: [auth_gaurd_1.AuthGuard] },
     { path: 'operator', redirectTo: 'operator/dashboard' },
-    { path: '**', redirectTo: 'operator/dashboard' },
+    { path: 'customer', component: customers_component_1.CustomersComponent, canActivate: [auth_gaurd_1.AuthGuard] },
+    { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
@@ -38,7 +44,8 @@ var AppRoutingModule = (function () {
     AppRoutingModule = __decorate([
         core_1.NgModule({
             imports: [router_1.RouterModule.forRoot(routes)],
-            exports: [router_1.RouterModule]
+            exports: [router_1.RouterModule],
+            providers: [auth_service_1.AuthService, auth_gaurd_1.AuthGuard]
         }), 
         __metadata('design:paramtypes', [])
     ], AppRoutingModule);
