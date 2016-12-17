@@ -22,20 +22,24 @@ var client_service_1 = require('./services/client.service');
 var app_routing_1 = require('./app.routing');
 var navbarheader_component_1 = require("./shared/navigation/navbarheader/navbarheader.component");
 var addclients_component_1 = require("./pages/clients/addclient/addclients.component");
-var exponential_strength_pipe_1 = require("./pipes/exponential-strength.pipe");
-var search_by_name_pipe_1 = require("./pipes/search-by-name.pipe");
-var search_by_id_pipe_1 = require("./pipes/search-by-id.pipe");
+var main_pipe_1 = require("./pipes/main.pipe");
+var clients_header_1 = require("./pages/clients/header/clients.header");
+var single_client_component_1 = require("./pages/clients/single-client.component");
+var mail_component_1 = require("./pages/clients/mail/mail.component");
 //when creating a component, add it here
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, app_routing_1.AppRoutingModule],
+            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, app_routing_1.AppRoutingModule, main_pipe_1.MainPipeModule],
             declarations: [app_component_1.AppComponent, clients_component_1.ClientsComponent,
                 dashboard_component_1.DashboardComponent, tickets_componet_1.TicketsComponent,
-                reports_component_1.ReportsComponent, sidenavigation_component_1.SidenavigationComponent, navbarheader_component_1.NavbarheaderComponent, addclients_component_1.AddclientsComponent,
-                search_by_name_pipe_1.SearchByNamePipe, search_by_id_pipe_1.SearchByIdPipe, exponential_strength_pipe_1.ExponentialStrengthPipe,],
+                reports_component_1.ReportsComponent, sidenavigation_component_1.SidenavigationComponent,
+                navbarheader_component_1.NavbarheaderComponent, addclients_component_1.AddclientsComponent,
+                clients_header_1.ClientsHeaderComponent, single_client_component_1.SingleClientComponent,
+                mail_component_1.MailComponent,
+            ],
             providers: [client_service_1.ClientService],
             bootstrap: [app_component_1.AppComponent],
         }), 

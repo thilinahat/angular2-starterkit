@@ -35,6 +35,17 @@ var ClientService = (function () {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     };
+    ClientService.prototype.getClientsNameIds = function () {
+        return [
+            { name: "client 1", id: "C0001" },
+            { name: "james", id: "C0002" },
+            { name: "anna", id: "C0003" },
+            { name: "xtream solutions", id: "C1001" },
+            { name: "exchange plus", id: "C0201" },
+            { name: "european double", id: "C031" },
+            { name: "american exprex", id: "C4001" },
+        ];
+    };
     ClientService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

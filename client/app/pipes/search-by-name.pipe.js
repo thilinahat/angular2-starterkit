@@ -20,11 +20,12 @@ var core_1 = require('@angular/core');
  * *ngFor="let client of ( clientNameAndIds | searchByName:searchClientName ) "
  *
  *  */
+// add ignore case
 var SearchByNamePipe = (function () {
     function SearchByNamePipe() {
     }
     SearchByNamePipe.prototype.transform = function (componentList, name) {
-        return componentList.filter(function (component) { return component.name.indexOf(name) != -1; });
+        return componentList.filter(function (component) { return component.name.toLocaleLowerCase().indexOf(name.toLocaleLowerCase()) != -1; });
     };
     SearchByNamePipe = __decorate([
         core_1.Pipe({ name: 'searchByName' }), 

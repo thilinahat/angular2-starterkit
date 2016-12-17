@@ -18,9 +18,14 @@ var dashboard_component_1 = require("./pages/dashboard/dashboard.component");
 var tickets_componet_1 = require("./pages/tickets/tickets.componet");
 var reports_component_1 = require("./pages/reports/reports.component");
 var addclients_component_1 = require("./pages/clients/addclient/addclients.component");
+var single_client_component_1 = require("./pages/clients/single-client.component");
+var mail_component_1 = require("./pages/clients/mail/mail.component");
 var routes = [
-    { path: 'operator/clients', component: clients_component_1.ClientsComponent },
+    { path: 'operator/clients/search', component: clients_component_1.ClientsComponent },
     { path: 'operator/clients/addclient', component: addclients_component_1.AddclientsComponent },
+    { path: 'operator/clients', redirectTo: 'operator/clients/search' },
+    { path: 'operator/clients/mail', component: mail_component_1.MailComponent },
+    { path: 'operator/clients/:clientId', component: single_client_component_1.SingleClientComponent },
     { path: 'operator/dashboard', component: dashboard_component_1.DashboardComponent },
     { path: 'operator/tickets', component: tickets_componet_1.TicketsComponent },
     { path: 'operator/reports', component: reports_component_1.ReportsComponent },

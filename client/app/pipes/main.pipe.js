@@ -8,29 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-/*
-* filter an array of objects which has id field on it
-*
-* exmapla use
- * { clientNameAndIds | searchById:'a' }
-*
- * { clientNameAndIds | searchById:searchClientId }
- *
- * *ngFor="let client of ( clientNameAndIds | searchById:searchClientId ) "
-*
- *  */
-var SearchByIdPipe = (function () {
-    function SearchByIdPipe() {
+var core_1 = require("@angular/core");
+var search_by_id_pipe_1 = require("./search-by-id.pipe");
+var search_by_name_pipe_1 = require("./search-by-name.pipe");
+var MainPipeModule = (function () {
+    function MainPipeModule() {
     }
-    SearchByIdPipe.prototype.transform = function (componentList, id) {
-        return componentList.filter(function (component) { return component.id.toLocaleLowerCase().indexOf(id.toLocaleLowerCase()) != -1; });
-    };
-    SearchByIdPipe = __decorate([
-        core_1.Pipe({ name: 'searchById' }), 
+    MainPipeModule = __decorate([
+        core_1.NgModule({
+            declarations: [search_by_id_pipe_1.SearchByIdPipe, search_by_name_pipe_1.SearchByNamePipe],
+            exports: [search_by_id_pipe_1.SearchByIdPipe, search_by_name_pipe_1.SearchByNamePipe]
+        }), 
         __metadata('design:paramtypes', [])
-    ], SearchByIdPipe);
-    return SearchByIdPipe;
+    ], MainPipeModule);
+    return MainPipeModule;
 }());
-exports.SearchByIdPipe = SearchByIdPipe;
-//# sourceMappingURL=search-by-id.pipe.js.map
+exports.MainPipeModule = MainPipeModule;
+//# sourceMappingURL=main.pipe.js.map
