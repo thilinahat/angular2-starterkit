@@ -22,7 +22,8 @@ var SidenavigationComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'sidenavbar',
-            templateUrl: 'sidenavigation.template.html'
+            templateUrl: 'sidenavigation.template.html',
+            styles: ['.logo{background-color: #eee} .sidebar-wrapper{background-color: #eee}']
         }), 
         __metadata('design:paramtypes', [])
     ], SidenavigationComponent);

@@ -1,5 +1,443 @@
+<sidenavbar></sidenavbar>
 <div class="main-panel">
-    <!--<navbarheader [name]="headerName"></navbarheader>-->
+    <navbarheader></navbarheader>
 
-    <h1>DashBoard Page Content</h1>
+    <h1>DashBoard</h1>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header" data-background-color="red">
+                <i class="material-icons">info_outline</i>
+            </div>
+            <div class="card-content">
+                <p class="category">Active <br>Tickets</p>
+                <h3 class="title">75</h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">local_offer</i> <a routerLink="/operator/tickets">Go to active tickets</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header" data-background-color="orange">
+                <i class="material-icons">content_copy</i>
+            </div>
+            <div class="card-content">
+                <p class="category">Expiring <br>Tills</p>
+                <h3 class="title">4<small>Tills</small></h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons text-danger">warning</i> <a href="#">See Contracts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header" data-background-color="green">
+                <i class="material-icons">mail</i>
+            </div>
+            <div class="card-content">
+                <p class="category">Un-read <br>mails</p>
+                <h3 class="title">4</h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">mail</i> <a routerLink="/operator/clients/mail">See mails</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header" data-background-color="blue">
+                <i class="material-icons">done</i>
+            </div>
+            <div class="card-content">
+                <p class="category">Resolved <br>tickets</p>
+                <h3 class="title">41</h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">done</i> in last 7 days
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Active tickets by priority-->
+    <div class="col-lg-6 col-md-12">
+        <span class="nav-tabs-title">Active Tickets By priority:</span>
+        <div class="card card-nav-tabs">
+            <div class="card-header" data-background-color="orange">
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+
+                            <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active">
+                                <a href="#veryhigh" data-toggle="tab">
+                                    <i class="material-icons">bug_report</i>
+                                    Very High
+                                    <div class="ripple-container"></div></a>
+                            </li>
+                            <li class="">
+                                <a href="#low" data-toggle="tab">
+                                    <i class="material-icons">cloud</i>
+                                    High
+                                    <div class="ripple-container"></div></a>
+                            </li>
+                            <li class="">
+                                <a href="#veryhigh" data-toggle="tab">
+                                    <i class="material-icons">cloud</i>
+                                    Medium
+                                    <div class="ripple-container"></div></a>
+                            </li>
+                            <li class="">
+                                <a href="#low" data-toggle="tab">
+                                    <i class="material-icons">cloud</i>
+                                    Low
+                                    <div class="ripple-container"></div></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="veryhigh">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+
+                                <td>Sign contract for "What are conference organizers afraid of?" <small><a routerLink="../tickets">#TKT_530</a></small> </td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>Lines From Great Russian Literature? Or E-mails From My Boss? <small><a routerLink="../tickets">#TKT_530</a></small></td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                    <small><a routerLink="../tickets">#TKT_530</a></small>
+                                </td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>Create 4 Invisible User Experiences you Never Knew About
+                                    <small><a routerLink="../tickets">#TKT_530</a></small></td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td><i class="material-icons">keyboard_arrow_left</i> <i class="material-icons">keyboard_arrow_right</i></td>
+                                <td></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane" id="low">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>This Ticket Great Russian Literature? Or E-mails From My Boss? <small><a routerLink="../tickets">#TKT_530</a></small></td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                    <small><a routerLink="../tickets">#TKT_520</a></small></td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sign contract for "What are conference organizers afraid of?" <small><a routerLink="../tickets">#TKT_542</a></small></td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                    <small><a routerLink="../tickets">#TKT_520</a></small></td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td><i class="material-icons">keyboard_arrow_left</i> <i class="material-icons">keyboard_arrow_right</i></td>
+                                <td></td>
+                            </tr>
+                            </tfoot>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Over Due Support Tickets-->
+    <div class="col-lg-6 col-md-12">
+        <span class="nav-tabs-title">OverDue Support Tickets :</span>
+        <div class="card card-nav-tabs">
+            <div class="card-header" data-background-color="red">
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active">
+                                <a href="#overdue" data-toggle="tab">
+                                    <i class="material-icons">bug_report</i>
+                                    OverDue Support Tickets
+                                    <div class="ripple-container"></div></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="overdue">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+
+                                <td>Sign contract for "What are conference organizers afraid of?" <small><a routerLink="../tickets">#TKT_530</a></small> </td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>Lines From Great Russian Literature? Or E-mails From My Boss? <small><a routerLink="../tickets">#TKT_530</a></small></td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                    <small><a routerLink="../tickets">#TKT_530</a></small>
+                                </td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>Create 4 Invisible User Experiences you Never Knew About
+                                    <small><a routerLink="../tickets">#TKT_530</a></small></td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td><i class="material-icons">keyboard_arrow_left</i> <i class="material-icons">keyboard_arrow_right</i></td>
+                                <td></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Due contracts-->
+    <div class="col-lg-6 col-md-12">
+        <span class="nav-tabs-title">Due Contracts :</span>
+        <div class="card card-nav-tabs">
+            <div class="card-header" data-background-color="green">
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active">
+                                <a href="#duecontracts" data-toggle="tab">
+                                    <i class="material-icons">bug_report</i>
+                                    Due contracts
+                                    <div class="ripple-container"></div></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="duecontracts">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+
+                                <td><small><a routerLink="../#">xtream solutions</a></small> </td>
+                                <td>Contract C002 <small><a routerLink="../#">Contract</a></small> </td>
+                                <td>In 2 week(s)  </td>
+                                <td><a routerLink="../clients/mail"><i class="material-icons">mail</i></a></td>
+
+                            </tr>
+                            <tr>
+
+                                <td><small><a routerLink="../#">exchange plus</a></small> </td>
+                                <td>Contract C012 <small><a routerLink="../#">Contract</a></small> </td>
+                                <td>In 1 week(s)  </td>
+                                <td><a routerLink="../clients/mail"><i class="material-icons">mail</i></a></td>
+                            </tr>
+                            <tr>
+
+                                <td><small><a routerLink="../#">european double</a></small> </td>
+                                <td>Contract C102 <small><a routerLink="../#">Contract</a></small> </td>
+                                <td>In 4 day(s)  </td>
+                                <td><a routerLink="../clients/mail"><i class="material-icons">mail</i></a></td>
+                            </tr>
+                            <tr>
+
+                                <td><small><a routerLink="../#">xtream solutions</a></small> </td>
+                                <td>Contract C032 <small><a routerLink="../#">Contract</a></small> </td>
+                                <td>In 2 weeks  </td>
+                                <td><a routerLink="../clients/mail"><i class="material-icons">mail</i></a></td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td><i class="material-icons">keyboard_arrow_left</i> <i class="material-icons">keyboard_arrow_right</i></td>
+                                <td></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--due licence keys-->
+    <div class="col-lg-6 col-md-12">
+        <span class="nav-tabs-title">Due Licence keys :</span>
+        <div class="card card-nav-tabs">
+            <div class="card-header" data-background-color="red">
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active">
+                                <a href="#duelicence" data-toggle="tab">
+                                    <i class="material-icons">bug_report</i>
+                                    Due licence keys
+                                    <div class="ripple-container"></div></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="duelicence">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+
+                                <td><small><a routerLink="../#">xtream solutions</a></small> </td>
+                                <td>Contract C032 <small><a routerLink="../#">Contract</a></small> </td>
+                                <td>In 2 weeks  </td>
+                                <td><a routerLink="../clients/mail"><i class="material-icons">mail</i></a></td>
+                            </tr>
+
+                            <tr>
+
+                                <td><small><a routerLink="../#">xtream solutions</a></small> </td>
+                                <td>Contract C032 <small><a routerLink="../#">Contract</a></small> </td>
+                                <td>In 1 month(s)  </td>
+                                <td><a routerLink="../clients/mail"><i class="material-icons">mail</i></a></td>
+                            </tr>
+                            <tr>
+
+                                <td><small><a routerLink="../#">exchange plus</a></small> </td>
+                                <td>Contract C032 <small><a routerLink="../#">Contract</a></small> </td>
+                                <td>In 3 week(s)  </td>
+                                <td><a routerLink="../clients/mail"><i class="material-icons">mail</i></a></td>
+                            </tr>
+
+                            <tr>
+
+                                <td><small><a routerLink="../#">european double</a></small> </td>
+                                <td>Contract C032 <small><a routerLink="../#">Contract</a></small> </td>
+                                <td>In 1 week(s)  </td>
+                                <td><a routerLink="../clients/mail"><i class="material-icons">mail</i></a></td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td><i class="material-icons">keyboard_arrow_left</i> <i class="material-icons">keyboard_arrow_right</i></td>
+                                <td></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

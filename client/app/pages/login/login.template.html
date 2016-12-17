@@ -1,0 +1,18 @@
+<div class="login-form-container">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <!--username-->
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" ngModel required>
+            </div>
+            <!--password-->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" class="form-control" id="password" name="password" ngModel required>
+            </div>
+        </div>
+        <!--submit-->
+        <button type="submit" class="btn btn-default">Login</button>
+    </form>
+</div>

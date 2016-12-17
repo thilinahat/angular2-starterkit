@@ -1,10 +1,15 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser')
+
 
 var index = require('./routes/index');
 var tasks = require('./routes/tasks');
 var api = require('./routes/api');
+var mailServerImap = require('./routes/MailServerIMAP');
+
+
 var notFound = require('./routes/notfound');
 
 var port = 4444;
@@ -23,11 +28,15 @@ app.use(express.static(path.join(__dirname, 'client')));
 // Body Parser MW
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+// Cookie Parser MW
+app.use(cookieParser())
 
 app.use('/', index);
-app.use('/operator', index);
+app.use('/login', index);
+app.use('/customer', index);
 app.use('/operator/*', index);
 app.use('/api', api);
+app.use('/mail',mailServerImap);
 app.use('/*', notFound);
 
 
