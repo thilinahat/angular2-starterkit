@@ -3,6 +3,6 @@ npm-debug.log
 .idea/
 product.sql
 vinitcrm.sql
-dist
+dist/
 typings/
 
