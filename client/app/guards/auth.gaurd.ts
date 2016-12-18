@@ -16,11 +16,12 @@ export class AuthGuard implements CanActivate {
         "/operator/clients/search" : ["OPERATOR", "ADMIN"],
         "/operator/clients/addclient" : ["OPERATOR", "ADMIN"],
         "/operator/clients/mail" : ["OPERATOR", "ADMIN"],
-        "/operator/clients/:clientId" : ["OPERATOR", "ADMIN"],
+        "/operator/clients/C[0-9]*" : ["OPERATOR", "ADMIN"], // regular expression for client id
         "/operator/tickets" : ["OPERATOR", "ADMIN"],
         "/operator/reports" : ["OPERATOR", "ADMIN"],
         "/customer" : ["CLIENT"]
     };
+
 
     constructor(private http: Http, private router: Router) { }
 
@@ -29,7 +30,8 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) :  Promise<boolean> {
         let url: string = state.url; // url user trying to access
-        let authorizedRoles: string[] = this.acl[url]; // authorized roles for the url
+
+        let authorizedRoles =  this. getAutherizedRoles(url); // authorized roles for the url
 
         // following promise return true if the logged user has permission to access the required url, otherwise false
         return new Promise((resolve, reject) => {
@@ -49,10 +51,23 @@ export class AuthGuard implements CanActivate {
                     this.router.navigate(['/login']);
                 })
                 .catch((err) => {
-                    console.log(err);
+                    //console.log(err);
                     reject(false);
                 })
         })
+    }
+
+     getAutherizedRoles(url:String): String[] {
+        for(var key in this.acl) {
+
+
+            if(url.match(key)){ //matching for regular expressions
+
+                return this.acl[key];
+            }
+
+        }
+        return null;
     }
 
 }
