@@ -3,7 +3,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 
 var AuthService = require('../services/authService');
-var config = require('../config');
+var config = require('../../config');
 
 router.post('/authenticate', function(req, res, next){
     const user = req.body.user;

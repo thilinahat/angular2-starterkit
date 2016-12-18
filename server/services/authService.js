@@ -4,7 +4,7 @@
 
 var jwt = require('jsonwebtoken');
 var Promise = require('promise');
-var config = require('../config');
+var config = require('../../config');
 
 class AuthService {
 

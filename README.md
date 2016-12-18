@@ -1,47 +1,38 @@
 # CRM_Universal
 
-cd CRM cd clients
+## Build on Dev Mode
 
-from clients folder
+```node
+npm build-dev
+```
 
-npm install
+## Running on Dev Mode
 
-cd..
+```node
+npm start
+```
 
-from CRM folder/n
+## Build on Prod Mode
 
-npm install
+```node
+npm build-prod
+```
 
-#Running
 
-cd clients 
-
-npm start #to build the angular js files
-
-make sure to have nodemon installed by
-
-npm install -g nodemon
-
-cd CRM
-
-from CRM folder
-
-nodemon
-
-#Angular Routing Access Control
+##Angular Routing Access Control
 
 * Add "AuthGuard" to canActivate property of each protected routes
 
 * Add the correct role mapping to auth.guard.ts file
 
-# Imported modules
+## Imported modules
 
-## Email realted
-### IMAP
+### Email realted
+#### IMAP
 https://github.com/mscdex/node-imap
 
 
-#Webpack-Dev-Server Proxy Settings
+## Webpack-Dev-Server Proxy Settings
 
 * Webpack-dev-server is running on http://localhost:4444
 
