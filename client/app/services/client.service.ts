@@ -11,24 +11,29 @@ export class ClientService {
     constructor(private http: Http) { }
 
     private headers = new Headers({'Content-Type': 'application/json'});
-    private clientAPIurl = 'api/client';
+    private clientAPIurl = 'api/operator';
 
-    addClient(client: any): void {
-    const url = `${this.clientAPIurl}'/add'`;
-        /*return this.http
-            .post(url, JSON.stringify({client: client}), {headers: this.headers})
-            .toPromise()
-            .then(response => response.json().data as any)
-            .catch(this.handleError);*/
-    }
+    addClient(client: any): Promise<any> {
 
-    private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
+        const url = `${this.clientAPIurl}/add-client`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, JSON.stringify({client: client}), {headers: this.headers})
+                .toPromise()
+                .then(response => {
+                    resolve(response);
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
     }
 
     getClientsNameIds() : any[]{
-
 
         return [
             {name: "client 1", id:"C0001"},

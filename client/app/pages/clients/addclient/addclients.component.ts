@@ -235,8 +235,15 @@ export class AddclientsComponent {
     constructor(private clientService: ClientService) { }
 
     onSubmit(form: any): void {
+        form.emails = this.emails;
+        form.phones = this.phones;
+        form.faxes = this.faxes;
         console.log('you submitted value:', form);
-        this.clientService.addClient(form);
+        this.clientService.addClient(form).then(res => {
+            alert('Successfully Added Client');
+        }, error => {
+            alert(error);
+        });
     }
 
     onAddEmail(mail: string): void{

@@ -35,6 +35,10 @@ module.exports = webpackMerge(commonConfig, {
                 target: expressServer,
                 secure: false
             },
+            '/api/*': {
+                target: expressServer,
+                secure: false
+            },
             '/images/*': {
                 target: expressServer,
                 secure: false

@@ -1,3 +1,4 @@
+@import "../../../../../public/css/variables.css";
 
 .form-container{
     margin: 50px 30px;
@@ -7,7 +8,7 @@
     color: white;
     margin: 10px -20px 10px 30px;
     border-radius: 30px;
-    background: rgba(140, 45, 175, 0.58);
+    background: rgba(140, 45, 175, 0.58); /*var(--primary-green-dark);*/
     padding: 10px;
 }
 .tag-input-container{
