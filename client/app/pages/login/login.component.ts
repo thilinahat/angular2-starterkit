@@ -7,7 +7,6 @@ import { AuthService } from '../../services/auth.service';
 
 
 @Component({
-    moduleId:module.id,
     selector: 'login',
     templateUrl: 'login.template.html',
     styleUrls: ['login.css']

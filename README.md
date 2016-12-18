@@ -40,3 +40,11 @@ nodemon
 ### IMAP
 https://github.com/mscdex/node-imap
 
+
+#Webpack-Dev-Server Proxy Settings
+
+* Webpack-dev-server is running on http://localhost:4444
+
+* Express server is running on http://localhost:8080
+
+* Apply express server proxy settings to webpack.dev.js file

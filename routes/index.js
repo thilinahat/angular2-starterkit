@@ -5,8 +5,6 @@ var jwt = require('jsonwebtoken');
 var AuthService = require('../services/authService');
 var config = require('../config');
 
-var AUTHENTICATED = false;
-
 router.post('/authenticate', function(req, res, next){
     const user = req.body.user;
     AuthService.verifyUser(user).then(response => {
@@ -47,16 +45,9 @@ router.post('/verify/user', function(req, res, next){
 
 router.get('/', function(req, res, next){
 
-    authenticate(req, res, next);
-
     res.render('index.html');
 
 });
 
 module.exports = router;
 
-authenticate = function (req, res, next) {
-    if(!AUTHENTICATED){
-        //res.send('Authentication required !')
-    }
-}

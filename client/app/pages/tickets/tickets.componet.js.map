@@ -1,1 +1,0 @@
-{"version":3,"file":"tickets.componet.js","sourceRoot":"","sources":["tickets.componet.ts"],"names":[],"mappings":";;;;;;;;;;AAAA,qBAAwB,eAAe,CAAC,CAAA;AASxC;IAAA;QACI,eAAU,GAAQ,SAAS,CAAA;IAC/B,CAAC;IATD;QAAC,gBAAS,CAAC;YACP,QAAQ,EAAC,MAAM,CAAC,EAAE;YAClB,QAAQ,EAAE,SAAS;YACnB,WAAW,EAAC,uBAAuB;SAEtC,CAAC;;wBAAA;IAIF,uBAAC;AAAD,CAAC,AAFD,IAEC;AAFY,wBAAgB,mBAE5B,CAAA"}

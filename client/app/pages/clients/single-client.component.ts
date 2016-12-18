@@ -4,11 +4,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-    moduleId:module.id,
     selector: 'singleclient',
     templateUrl: './single-client.template.html',
-
-
 })
 
 export class SingleClientComponent {

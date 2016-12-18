@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot,RouterStateSnapshot,} from '@angular/router';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import forEach = ts.forEach;
 
 @Injectable()
 export class AuthGuard implements CanActivate {

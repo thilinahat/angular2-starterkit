@@ -33,8 +33,7 @@ const routes: Routes = [
     { path: 'operator/reports', component: ReportsComponent, canActivate: [AuthGuard] },
     { path: 'operator', redirectTo:'operator/dashboard' },
     { path: 'customer', component: CustomersComponent, canActivate: [AuthGuard]},
-    { path: '**', redirectTo:'login', pathMatch: 'full' },
-
+    { path: '**', redirectTo:'login', pathMatch: 'full' }
 ];
 @NgModule({
     imports: [ RouterModule.forRoot(routes) ],

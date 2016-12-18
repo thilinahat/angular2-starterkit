@@ -3,7 +3,6 @@ import {ClientService} from "../../../services/client.service";
 
 
 @Component({
-    moduleId:module.id,
     selector: 'clients',
     templateUrl: 'addclients.template.html',
     styleUrls: ['addclients.css']
@@ -231,11 +230,6 @@ export class AddclientsComponent {
 ];
 
     constructor(private clientService: ClientService) { }
-
-    public settings = {
-        recipients: [],
-        tags: ['one', 'two', 'three']
-    };
 
     onSubmit(form: any): void {
         console.log('you submitted value:', form);

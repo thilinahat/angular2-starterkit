@@ -1,10 +1,9 @@
 import {Component} from "@angular/core";
 import {Navitem} from "./navitem.component";
 @Component({
-    moduleId: module.id,
     selector:'sidenavbar',
     templateUrl:'sidenavigation.template.html',
-    styles:['.logo{background-color: #eee} .sidebar-wrapper{background-color: #eee}']
+    /*styles:[/!*'.logo{background-color: #eee} .sidebar-wrapper{background-color: #eee}'*!/]*/
 })
 
 export class SidenavigationComponent {
