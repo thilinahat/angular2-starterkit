@@ -1,4 +1,38 @@
 
 .form-container{
-    margin: 5% 0;
+    margin: 50px 30px;
+}
+.tags{
+    display: inline;
+    color: white;
+    margin: 10px -20px 10px 30px;
+    border-radius: 30px;
+    background: rgba(140, 45, 175, 0.58);
+    padding: 10px;
+}
+.tag-input-container{
+    display: flex;
+}
+.tag-input-container > input{
+    display: inline;
+    width: 70%;
+}
+.tag-input-container .add-more{
+    display: inline;
+    margin: -5px 0 0 35px;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    background: #962DAF;
+    border-color: transparent;
+}
+.add-more:focus{
+    outline: none;
+}
+
+.add-more>i{
+    font-size: 30px;
+    left: -8px;
+    top: -2px;
+
 }

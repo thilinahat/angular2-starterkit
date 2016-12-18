@@ -684,6 +684,7 @@ h2.title {
 .main-panel {
   max-height: 100%;
   height: 100%;
+  overflow-x: hidden;
 }
 
 .sidebar,
@@ -3744,6 +3745,11 @@ footer .btn {
 .card-stats .card-content {
   text-align: right;
   padding-top: 10px;
+}
+
+.card-nav-tabs{
+  background: transparent;
+  box-shadow: none;
 }
 
 .card-nav-tabs .header-raised {

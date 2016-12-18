@@ -1,7 +1,7 @@
 <sidenavbar></sidenavbar>
 
 <div class="main-panel">
-    <navbarheader></navbarheader>
+    <!--<navbarheader></navbarheader>-->
     <clientsheader></clientsheader>
 
 
@@ -52,18 +52,42 @@
             <div class="col-md-6">
                 <!--email-->
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" ngModel required>
+                    <label for="email">
+                        Email
+                        <span class="tags" *ngFor="let mail of emails">{{mail}}</span>
+                    </label>
+                    <div class="tag-input-container">
+                        <input type="email" class="form-control" id="email" name="email" ngModel required>
+                        <button type="button" class="btn btn-default add-more" (click)="onAddEmail(clientForm.value.email)">
+                            <i class="material-icons">add</i>
+                        </button>
+                    </div>
                 </div>
                 <!--phone-->
                 <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="text" class="form-control" id="phone" name="phone" ngModel required>
+                    <label for="phone">
+                        Phone
+                        <span class="tags" *ngFor="let phone of phones">{{phone}}</span>
+                    </label>
+                    <div class="tag-input-container">
+                        <input type="text" class="form-control" id="phone" name="phone" ngModel required>
+                        <button type="button" class="btn btn-default add-more" (click)="onAddPhone(clientForm.value.phone)">
+                            <i class="material-icons">add</i>
+                        </button>
+                    </div>
                 </div>
                 <!--fax-->
                 <div class="form-group">
-                    <label for="fax">Fax</label>
-                    <input type="text" class="form-control" id="fax" name="fax" ngModel required>
+                    <label for="fax">
+                        Fax
+                        <span class="tags" *ngFor="let fax of faxes">{{fax}}</span>
+                    </label>
+                    <div class="tag-input-container">
+                        <input type="text" class="form-control" id="fax" name="fax" ngModel required>
+                        <button type="button" class="btn btn-default add-more" (click)="onAddFax(clientForm.value.fax)">
+                            <i class="material-icons">add</i>
+                        </button>
+                    </div>
                 </div>
                 <!--address-->
                 <div class="form-group">

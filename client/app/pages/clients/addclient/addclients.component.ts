@@ -1,7 +1,6 @@
 import {Component} from "@angular/core";
 import {ClientService} from "../../../services/client.service";
 
-
 @Component({
     selector: 'clients',
     templateUrl: 'addclients.template.html',
@@ -229,10 +228,26 @@ export class AddclientsComponent {
     {name: 'Zimbabwe', code: 'ZW'},
 ];
 
+    emails: string[] = ['asanka@gmail.com'];
+    phones: string[] = ['0719565744'];
+    faxes: string[] = ['+94114287387'];
+
     constructor(private clientService: ClientService) { }
 
     onSubmit(form: any): void {
         console.log('you submitted value:', form);
         this.clientService.addClient(form);
+    }
+
+    onAddEmail(mail: string): void{
+        this.emails.push(mail);
+    }
+
+    onAddPhone(phone: string): void{
+        this.phones.push(phone);
+    }
+
+    onAddFax(fax: string): void{
+        this.faxes.push(fax);
     }
 }
