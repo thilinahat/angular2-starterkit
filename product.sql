@@ -34,3 +34,16 @@ FOREIGN KEY (branch_id) REFERENCES branch(branch_id),
 FOREIGN KEY (product_Id) REFERENCES products(product_Id)        
 );
 
+
+create table call_record(
+call_id int not null AUTO_INCREMENT,
+start_time DATETIME,
+end_time DATETIME,
+description varchar(1250),
+time_duration int,
+client_id int,
+
+PRIMARY KEY (call_id ),
+FOREIGN KEY (client_id) REFERENCES client(client_id)    
+
+);
