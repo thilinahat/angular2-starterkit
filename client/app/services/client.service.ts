@@ -13,6 +13,10 @@ export class ClientService {
     private headers = new Headers({'Content-Type': 'application/json'});
     private clientAPIurl = 'api/operator';
 
+    private clientDataUrl = this.clientAPIurl +"/client/data/";
+
+    private clientSearchDataUrl = this.clientAPIurl +"/client/searchdata";
+
     addClient(client: any): Promise<any> {
 
         const url = `${this.clientAPIurl}/add-client`;
@@ -33,16 +37,51 @@ export class ClientService {
         });
     }
 
-    getClientsNameIds() : any[]{
+    getClientsNameIds() : Promise<any[]>{
 
-        return [
-            {name: "client 1", id:"C0001"},
-            {name: "james", id:"C0002"},
-            {name: "anna", id:"C0003"},
-            {name: "xtream solutions", id:"C1001"},
-            {name: "exchange plus", id:"C0201"},
-            {name: "european double", id:"C031"},
-            {name: "american exprex", id:"C4001"},
-        ];
+        return this.http.get(this.clientSearchDataUrl)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+
+    }
+
+    getClientData(clientId:String):Promise<any>{
+        var url = this.clientDataUrl + clientId ;
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+
+
+    getClientMails(clientId:String):Promise<any>{
+        var url = this.clientDataUrl + clientId + '/mail';
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getClientPhones(clientId:String):Promise<any>{
+        var url = this.clientDataUrl + clientId + '/phone';
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getClientFaxes(clientId:String):Promise<any>{
+        var url = this.clientDataUrl + clientId + '/fax';
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
     }
 }

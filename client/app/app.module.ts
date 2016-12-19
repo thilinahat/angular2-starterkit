@@ -23,9 +23,13 @@ import { LoginComponent } from './pages/login/login.component';
 
 import {MainPipeModule} from "./pipes/main.pipe";
 import {ClientsHeaderComponent} from "./pages/clients/header/clients.header";
-import {SingleClientComponent} from "./pages/clients/single-client.component";
+import {SingleClientComponent} from "./pages/clients/clientSingle/single-client.component";
 import {MailComponent} from "./pages/clients/mail/mail.component";
 import {CustomersComponent } from "./pages/customers/customers.component";
+import {SingleclientheaderComponent} from "./pages/clients/clientSingle/singleclientheader/singleclientheader.component";
+import {ClientdataComponent} from "./pages/clients/clientSingle/clientdata/clientdata.component";
+import {ClienthistoryComponent} from "./pages/clients/clientSingle/clienthistory/clienthistory.component";
+import {ClientproductComponent} from "./pages/clients/clientSingle/clientproduct/clientproduct.component";
 
 
 //when creating a component, add it here
@@ -36,7 +40,9 @@ import {CustomersComponent } from "./pages/customers/customers.component";
         ReportsComponent, SidenavigationComponent,
         NavbarheaderComponent, AddclientsComponent,
         ClientsHeaderComponent,SingleClientComponent,
-        MailComponent, LoginComponent, CustomersComponent
+        MailComponent, LoginComponent, CustomersComponent,
+        SingleclientheaderComponent, ClientdataComponent,
+        ClienthistoryComponent,ClientproductComponent
          ],
     providers: [ClientService, AuthService, AuthGuard],
     bootstrap: [AppComponent],

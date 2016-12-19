@@ -12,7 +12,7 @@ import {ReportsComponent} from "./pages/reports/reports.component";
 import {SidenavigationComponent} from "./shared/navigation/sidenavigation.component";
 import {Navitem} from "./shared/navigation/navitem.component";
 import {AddclientsComponent} from "./pages/clients/addclient/addclients.component";
-import {SingleClientComponent} from "./pages/clients/single-client.component";
+import {SingleClientComponent} from "./pages/clients/clientSingle/single-client.component";
 import {MailComponent} from "./pages/clients/mail/mail.component";
 import { LoginComponent } from "./pages/login/login.component";
 import {CustomersComponent } from "./pages/customers/customers.component";
