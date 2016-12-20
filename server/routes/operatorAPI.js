@@ -11,17 +11,6 @@ var config = require('../../config');
 
 var router = express.Router();
 
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'testingUser',
-    password : '1234',
-    database : 'vinit_crm'
-});
-
-connection.connect();
-
-
 // middleware protect api routes
 router.use(function (req, res, next) {
 

@@ -12,13 +12,10 @@ export class ClientService {
 
     private headers = new Headers({'Content-Type': 'multipart/form-data'});
     private clientAPIurl = 'api/operator';
-
-    addClient(client: FormData): Promise<any> {
     private clientDataUrl = this.clientAPIurl +"/client/data/";
-
     private clientSearchDataUrl = this.clientAPIurl +"/client/searchdata";
 
-    addClient(client: any): Promise<any> {
+    addClient(client: FormData): Promise<any> {
 
         const url = `${this.clientAPIurl}/add-client`;
         return new Promise((resolve, reject) => {
@@ -40,6 +37,7 @@ export class ClientService {
 
     getClientsNameIds() : Promise<any[]>{
 
+        //noinspection TypeScriptUnresolvedFunction
         return this.http.get(this.clientSearchDataUrl)
             .toPromise()
             .then(response => response.json())
@@ -49,6 +47,7 @@ export class ClientService {
 
     getClientData(clientId:String):Promise<any>{
         var url = this.clientDataUrl + clientId ;
+        //noinspection TypeScriptUnresolvedFunction
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
@@ -59,6 +58,7 @@ export class ClientService {
 
     getClientMails(clientId:String):Promise<any>{
         var url = this.clientDataUrl + clientId + '/mail';
+        //noinspection TypeScriptUnresolvedFunction
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
@@ -67,6 +67,7 @@ export class ClientService {
 
     getClientPhones(clientId:String):Promise<any>{
         var url = this.clientDataUrl + clientId + '/phone';
+        //noinspection TypeScriptUnresolvedFunction
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
@@ -75,6 +76,7 @@ export class ClientService {
 
     getClientFaxes(clientId:String):Promise<any>{
         var url = this.clientDataUrl + clientId + '/fax';
+        //noinspection TypeScriptUnresolvedFunction
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
