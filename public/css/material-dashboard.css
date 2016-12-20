@@ -684,7 +684,6 @@ h2.title {
 .main-panel {
   max-height: 100%;
   height: 100%;
-  overflow-x: hidden;
 }
 
 .sidebar,
@@ -3331,6 +3330,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   background-color: transparent;
   box-shadow: none;
   border-bottom: 0;
+  display: none;
 }
 .navbar.navbar-transparent .logo-container .brand {
   color: #FFFFFF;
@@ -3354,6 +3354,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
     padding-top: 15px;
     padding-bottom: 15px;
   }
+
 }
 .navbar .alert {
   border-radius: 0;
@@ -3745,11 +3746,6 @@ footer .btn {
 .card-stats .card-content {
   text-align: right;
   padding-top: 10px;
-}
-
-.card-nav-tabs{
-  background: transparent;
-  box-shadow: none;
 }
 
 .card-nav-tabs .header-raised {
@@ -4717,6 +4713,7 @@ footer .btn {
   .navbar-transparent {
     padding-top: 15px;
     background-color: rgba(0, 0, 0, 0.45);
+    display: none;
   }
 
   body {

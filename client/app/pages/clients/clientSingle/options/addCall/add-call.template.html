@@ -1,0 +1,63 @@
+<sidenavbar></sidenavbar>
+<div class="main-panel">
+    <navbarheader></navbarheader>
+
+
+    <singleclientheader [client] = "client"></singleclientheader>
+
+
+    <div class="row">
+
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header" data-background-color="purple">
+                    <h4 class="title">Add Call</h4>
+
+                </div>
+                <div class="card-content">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label">{{client.company_name}}</label>
+                                    <input type="text" class="form-control" disabled="">
+                                    <span class="material-input"></span></div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label">Call Duration (min)</label>
+                                    <input type="number" class="form-control" required="true">
+                                    <span class="material-input"></span></div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Call Description</label>
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Enter a brief description about the call</label>
+                                        <textarea class="form-control" rows="5" required="true"></textarea>
+                                        <span class="material-input"></span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary pull-right">Add Call<div class="ripple-container"></div></button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

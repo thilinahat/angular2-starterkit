@@ -11,6 +11,16 @@ var config = require('../../config');
 
 var router = express.Router();
 
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'testingUser',
+    password : '1234',
+    database : 'vinit_crm'
+});
+
+connection.connect();
+
 
 // middleware protect api routes
 router.use(function (req, res, next) {
@@ -135,5 +145,172 @@ router.post('/add-client', logoUploader, function (req, res) {
     });
 });
 
+router.get('/client/data/:clientId', function (req, res, next) {
+
+    var SQL = 'SELECT * FROM `client`  WHERE client_id = ' + req.params.clientId;
+
+    connection.query(SQL,  function (error, results) {
+
+
+
+        if (error) {
+
+            console.log("error while retrieving from to db");
+            return;
+        }
+
+
+        if(results.length > 0 ){
+
+            res.json(results[0]);
+
+        }
+        else{
+
+            res.statusCode = 400; //if results are not found for this
+            res.send();
+        }
+
+    });
+
+});
+
+router.get('/client/data/:clientId/name', function (req, res, next) {
+
+    var SQL = 'SELECT company_name, client_id FROM `client` WHERE client_id =  ' + req.params.clientId;
+
+    connection.query(SQL,  function (error, results) {
+
+        if (error) {
+
+            console.log("error while retrieving from to db");
+            return;
+        }
+
+        if(results.length > 0 ){
+
+            res.json(results[0]);
+
+        }
+        else{
+
+            res.statusCode = 400; //if results are not found for this
+            res.send();
+        }
+
+    });
+
+});
+
+router.get('/client/searchdata', function (req, res,next) {
+
+    var SQL = 'SELECT `company_name`, `client_id` FROM `client`;';
+
+    connection.query(SQL, function (error, results) {
+
+        if (error) {
+
+            console.log("error while retrieving from to db");
+            return;
+        }
+
+
+        if(results.length > 0 ){
+            res.json(results);
+        }
+        res.statusCode = 400; //if results are not found for this
+        res.send();
+
+
+    });
+
+});
+
+router.get('/client/data/:clientId/mail', function (req, res, next) {
+
+    var SQL = 'SELECT * FROM `client_mail` WHERE client_id =  ' + req.params.clientId;
+
+    connection.query(SQL,  function (error, results) {
+
+        if (error) {
+
+            console.log("error while retrieving from to db");
+            return;
+        }
+
+        if(results.length > 0 ){
+
+            res.json(results);
+
+        }
+        else{
+
+            res.statusCode = 400; //if results are not found for this
+            res.send();
+        }
+
+    });
+
+});
+
+router.get('/client/data/:clientId/phone', function (req, res, next) {
+
+    var SQL = 'SELECT * FROM `client_phone` WHERE client_id =  ' + req.params.clientId;
+
+    connection.query(SQL,  function (error, results) {
+
+
+
+        if (error) {
+
+            console.log("error while retrieving from to db");
+            return;
+        }
+
+
+        if(results.length > 0 ){
+
+            res.json(results);
+
+        }
+        else{
+
+            res.statusCode = 400; //if results are not found for this
+            res.send();
+        }
+
+    });
+
+});
+
+router.get('/client/data/:clientId/fax', function (req, res, next) {
+
+    var SQL = 'SELECT * FROM `client_fax` WHERE client_id =  ' + req.params.clientId;
+
+    connection.query(SQL,  function (error, results) {
+
+
+
+        if (error) {
+
+            console.log("error while retrieving from to db");
+            return;
+        }
+
+
+        if(results.length > 0 ){
+
+            res.json(results);
+
+        }
+        else{
+
+            res.statusCode = 400; //if results are not found for this
+            res.send();
+        }
+
+    });
+
+});
 
 module.exports = router;

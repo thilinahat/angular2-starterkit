@@ -23,9 +23,18 @@ import { LoginComponent } from './pages/login/login.component';
 
 import {MainPipeModule} from "./pipes/main.pipe";
 import {ClientsHeaderComponent} from "./pages/clients/header/clients.header";
-import {SingleClientComponent} from "./pages/clients/single-client.component";
+import {SingleClientComponent} from "./pages/clients/clientSingle/single-client.component";
 import {MailComponent} from "./pages/clients/mail/mail.component";
 import {CustomersComponent } from "./pages/customers/customers.component";
+import {SingleclientheaderComponent} from "./pages/clients/clientSingle/singleclientheader/singleclientheader.component";
+import {ClientdataComponent} from "./pages/clients/clientSingle/clientdata/clientdata.component";
+import {ClienthistoryComponent} from "./pages/clients/clientSingle/clienthistory/clienthistory.component";
+import {ClientproductComponent} from "./pages/clients/clientSingle/clientproduct/clientproduct.component";
+import {AddCallComponent} from "./pages/clients/clientSingle/options/addCall/add-call.component";
+import {OptionsClientService} from "./pages/clients/clientSingle/options/options-client.service";
+import {AddNoteComponent} from "./pages/clients/clientSingle/options/addNote/add-note.component";
+import {AddProductComponent} from "./pages/clients/clientSingle/options/addProduct/add-product.component";
+import {AddTicketeComponent} from "./pages/clients/clientSingle/options/addTicket/add-ticket.component";
 
 
 //when creating a component, add it here
@@ -36,9 +45,13 @@ import {CustomersComponent } from "./pages/customers/customers.component";
         ReportsComponent, SidenavigationComponent,
         NavbarheaderComponent, AddclientsComponent,
         ClientsHeaderComponent,SingleClientComponent,
-        MailComponent, LoginComponent, CustomersComponent
+        MailComponent, LoginComponent, CustomersComponent,
+        SingleclientheaderComponent, ClientdataComponent,
+        ClienthistoryComponent,ClientproductComponent,
+        AddCallComponent, AddNoteComponent,
+        AddProductComponent, AddTicketeComponent
          ],
-    providers: [ClientService, AuthService, AuthGuard],
+    providers: [ClientService, AuthService, AuthGuard, OptionsClientService],
     bootstrap: [AppComponent],
 })
 

@@ -9,26 +9,18 @@
 
     <div class="row">
 
-        <div class="form-group col-sm-6 col-xs-12" style="margin-top: 0px">
+        <div class="form-group col-sm-12 col-xs-12" style="margin-top: 0px">
 
 
             <div class="form-group label-floating is-empty" style="padding-left: 3%; padding-right: 3%">
-                <label class="control-label"><i class="material-icons">search</i>search client Name</label>
+                <label class="control-label"><i class="material-icons">search</i>search client by name or id</label>
                 <input type="text" class="form-control" [(ngModel)]="searchClientName">
                 <span class="material-input"></span>
             </div>
 
         </div>
 
-        <div class="form-group col-sm-6 col-xs-12" style="margin-top: 0px">
 
-            <div class="form-group label-floating is-empty" style="padding-left: 3%; padding-right: 3%">
-                <label class="control-label"><i class="material-icons">search</i>search by client Id</label>
-                <input type="text" class="form-control" [(ngModel)]="searchClientID">
-                <span class="material-input"></span>
-            </div>
-
-        </div>
     </div>
 
     <div class="col-xs-12">
@@ -36,16 +28,17 @@
             <div class="card-content table-responsive">
                 <table class="table">
                     <thead class="text-primary">
-                        <tr>
-                            <th>Client Name</th>
-                            <th>Client Id</th>
-                        </tr>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Client Id</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let client of ( clientNameAndIds | searchByName:searchClientName |searchById:searchClientID ) ">
-                            <td><a routerLink="/operator/clients/{{client.id}}" >{{client.name}}</a></td>
-                            <td><a routerLink="/operator/clients/{{client.id}}" >{{client.id}}</a></td>
-                        </tr>
+                    <!--add same pipe to filter all data-->
+                    <tr *ngFor="let client of ( clientNameAndIds | searchByAll:searchClientName  ) ">
+                        <td><a routerLink="/operator/clients/{{client.client_id}}" >{{client.company_name}}</a></td>
+                        <td><a routerLink="/operator/clients/{{client.client_id}}" >{{client.client_id}}</a></td>
+                    </tr>
 
                     </tbody>
                 </table>

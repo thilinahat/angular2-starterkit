@@ -1,0 +1,81 @@
+<div class="col-lg-6 col-md-6 col-xs-12 ">
+
+    <div class="card card-nav-tabs">
+        <div class="card-header" data-background-color="orange">
+            <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper">
+
+                    <ul class="nav nav-tabs" data-tabs="tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#veryhigh" aria-expanded="true">
+                                <i class="material-icons">details</i>
+                                Details
+                                <div class="ripple-container"></div></a>
+                        </li>
+
+                        <li >
+                            <a  href="#" aria-expanded="true">
+                                <i class="material-icons">reorder</i>
+                                Edit
+                                <div class="ripple-container"></div></a>
+                        </li>
+                        <li *ngIf="client.blocked != 0" class="blocked">
+                            <a  href="#" aria-expanded="true">
+                                <i class="material-icons">block</i>
+                                Blocked
+                                <div class="ripple-container"></div></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-content">
+            <div class="tab-content">
+                <div class="tab-pane active" id="veryhigh">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Name: {{client.company_name}} </td>
+                        </tr>
+                        <tr>
+                            <td>Contact Person: {{client.contact_person_name}}</td>
+                        </tr>
+                        <tr *ngFor="let mail of mails">
+                            <td>email: {{mail.mail}}</td>
+                        </tr>
+                        <tr *ngFor="let phone of phones">
+                            <td>Phone: {{phone.phone}}</td>
+                        </tr>
+                        <tr *ngFor="let fax of faxes">
+                            <td>Fax: {{fax.fax}}</td>
+                        </tr>
+                        <tr>
+                            <td>Website: {{client.web_site}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address: {{client.address}} </td>
+                        </tr>
+                        <tr>
+                            <td>Country: {{client.country}} </td>
+                        </tr>
+                        <tr>
+                            <td>Town: {{client.town}}</td>
+                        </tr>
+                        <tr>
+                            <td>Support time left: {{client.support_time}} sec.</td>
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
