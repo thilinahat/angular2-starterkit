@@ -10,16 +10,16 @@ export class ClientService {
 
     constructor(private http: Http) { }
 
-    private headers = new Headers({'Content-Type': 'application/json'});
+    private headers = new Headers({'Content-Type': 'multipart/form-data'});
     private clientAPIurl = 'api/operator';
 
-    addClient(client: any): Promise<any> {
+    addClient(client: FormData): Promise<any> {
 
         const url = `${this.clientAPIurl}/add-client`;
         return new Promise((resolve, reject) => {
             //noinspection TypeScriptUnresolvedFunction
             this.http
-                .post(url, JSON.stringify({client: client}), {headers: this.headers})
+                .post(url, client)
                 .toPromise()
                 .then(response => {
                     resolve(response);

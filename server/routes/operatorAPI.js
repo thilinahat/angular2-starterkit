@@ -3,6 +3,10 @@
  */
 var express = require('express');
 var jwt = require('jsonwebtoken');
+var multer = require('multer');
+var path = require('path');
+var mysqlConnectionPool = require('../mysqlConnectionPool');
+var mysql = require('mysql');
 var config = require('../../config');
 
 var router = express.Router();
@@ -39,12 +43,96 @@ router.use(function (req, res, next) {
     }
 });
 
+/* logo uploading with multer middleware*/
+const logoStorage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, __dirname + '/../uploads/');
+    },
+    filename: function(req, file, cb) {
+        /*
+         * Filename format: fieldName + firstName + lastName + Timestamp
+         * */
+        const fileName = file.fieldname.toLowerCase() +
+            '_' + Date.now();
+
+        cb(null, fileName + path.extname(file.originalname));
+    }
+});
+
+const logoUpload = multer(
+    {
+        storage: logoStorage,
+        limits: {fileSize: 50000000}
+    }
+);
+
+const logoUploader = logoUpload.fields([{
+    name: 'logo',
+    maxCount: 1
+}]);
 
 // route for adding a client
-router.post('/add-client', function (req, res, next) {
-    const client = req.body.client;
-    console.log(client);
-    res.sendStatus(200);
+router.post('/add-client', logoUploader, function (req, res) {
+
+    const client = req.body;
+
+    client.logoFileName = '';
+    if (Array.isArray(req.files.logo) && req.files.logo.length > 0) {
+        client.logoFileName = req.files.logo[0].originalname;
+    }
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        // stage_id and blocked field is hard coded here
+        let sql = 'INSERT INTO client ' +
+            '(company_name, address, contact_person_name, web_site, stage_id, country, town, mlr_number, postal_code, business_registration, blocked, logo_file_name)' +
+            ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        let values = [client.company,client.address,client.contactPerson,client.website,1,client.country,client.town,client.mlr,client.postalCode,client.businessRegistration, 0,client.logoFileName];
+
+        connection.query( sql, values, function(err, rows, fields) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting client general data',
+                    message: err
+                });
+            }
+
+            client.id = rows.insertId;
+
+            if(client.emails.length > 0){
+                sql = "INSERT INTO client_mail (client_id, mail) VALUES ?";
+                values.length = 0;
+                client.emails.forEach(mail => {
+                   values.push([client.id, mail]);
+                });
+                connection.query(sql, [values], function(err) {
+                    if (err) throw err;
+                });
+            } if(client.phones.length > 0){
+                sql = "INSERT INTO client_phone (client_id, phone) VALUES ?";
+                values.length = 0;
+                client.phones.forEach(phone => {
+                    values.push([client.id, phone]);
+                });
+                connection.query(sql, [values], function(err) {
+                    if (err) throw err;
+                });
+            } if(client.faxes.length > 0){
+                sql = "INSERT INTO client_fax (client_id, fax) VALUES ?";
+                values.length = 0;
+                client.faxes.forEach(fax => {
+                    values.push([client.id, fax]);
+                });
+                connection.query(sql, [values], function(err) {
+                    if (err) throw err;
+                });
+            }
+
+            connection.release();
+            res.sendStatus(200);
+        });
+    });
 });
 
 
