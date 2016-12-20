@@ -31,6 +31,7 @@ import {ClientdataComponent} from "./pages/clients/clientSingle/clientdata/clien
 import {ClienthistoryComponent} from "./pages/clients/clientSingle/clienthistory/clienthistory.component";
 import {ClientproductComponent} from "./pages/clients/clientSingle/clientproduct/clientproduct.component";
 import {AddCallComponent} from "./pages/clients/clientSingle/options/addCall/add-call.component";
+import {CallService} from "./pages/clients/clientSingle/options/addCall/call.service";
 
 
 //when creating a component, add it here
@@ -46,7 +47,7 @@ import {AddCallComponent} from "./pages/clients/clientSingle/options/addCall/add
         ClienthistoryComponent,ClientproductComponent,
         AddCallComponent
          ],
-    providers: [ClientService, AuthService, AuthGuard],
+    providers: [ClientService, AuthService, AuthGuard, CallService],
     bootstrap: [AppComponent],
 })
 

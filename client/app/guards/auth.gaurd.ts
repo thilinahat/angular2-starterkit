@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
         "/operator/clients/search" : ["OPERATOR", "ADMIN"],
         "/operator/clients/addclient" : ["OPERATOR", "ADMIN"],
         "/operator/clients/mail" : ["OPERATOR", "ADMIN"],
+        "operator/clients/[0-9]*/addcall":["OPERATOR", "ADMIN"],
         "/operator/clients/[0-9]*" : ["OPERATOR", "ADMIN"], // regular expression for client id
         "/operator/tickets" : ["OPERATOR", "ADMIN"],
         "/operator/reports" : ["OPERATOR", "ADMIN"],

@@ -15,14 +15,14 @@
                                     Search
                                     <div class="ripple-container"></div></a>
                             </li>
-                            <li routerlinkactive="active" ng-reflect-router-link-active="active" >
-                                <a routerlink="/operator/clients/edit" ng-reflect-router-link="/operator/clients/search" ng-reflect-href="/operator/clients/search" href="/operator/clients/search">
+                            <li routerlinkactive="active" >
+                                <a routerLink="/operator/clients/{{client.client_id}}/addcall">
                                     <small>Edit</small>
                                 </a>
                             </li>
 
-                            <li routerlinkactive="active" ng-reflect-router-link-active="active">
-                                <a routerlink="/operator/clients/search" ng-reflect-router-link="/operator/clients/search" ng-reflect-href="/operator/clients/search" href="/operator/clients/search">
+                            <li routerlinkactive="active" >
+                                <a routerLink="/operator/clients/{{client.client_id}}/addcall">
                                     <small>Add Call</small>
                                 </a>
                             </li>

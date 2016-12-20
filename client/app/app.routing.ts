@@ -20,6 +20,7 @@ import {CustomersComponent } from "./pages/customers/customers.component";
 
 import { AuthGuard } from './guards/auth.gaurd';
 import { AuthService } from './services/auth.service';
+import {AddCallComponent} from "./pages/clients/clientSingle/options/addCall/add-call.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
     { path: 'operator/clients/addclient', component: AddclientsComponent, canActivate: [AuthGuard] },
     { path: 'operator/clients',redirectTo: 'operator/clients/search' },
     { path: 'operator/clients/mail',component: MailComponent, canActivate: [AuthGuard] },
+    { path: 'operator/clients/:clientId/addcall', component: AddCallComponent, canActivate: [AuthGuard] },
     { path: 'operator/clients/:clientId',component: SingleClientComponent , canActivate: [AuthGuard] },
     { path: 'operator/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'operator/tickets', component: TicketsComponent, canActivate: [AuthGuard] },
