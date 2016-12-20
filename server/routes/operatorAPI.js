@@ -87,6 +87,32 @@ router.get('/client/data/:clientId', function (req, res, next) {
 
 });
 
+router.get('/client/data/:clientId/name', function (req, res, next) {
+
+    var SQL = 'SELECT company_name, client_id FROM `client` WHERE client_id =  ' + req.params.clientId;
+
+    connection.query(SQL,  function (error, results) {
+
+        if (error) {
+
+            console.log("error while retrieving from to db");
+            return;
+        }
+
+        if(results.length > 0 ){
+
+            res.json(results[0]);
+
+        }
+        else{
+
+            res.statusCode = 400; //if results are not found for this
+            res.send();
+        }
+
+    });
+
+});
 
 router.get('/client/searchdata', function (req, res,next) {
 

@@ -15,48 +15,70 @@
                                     Search
                                     <div class="ripple-container"></div></a>
                             </li>
-                            <li routerlinkactive="active" >
+
+                            <li *ngFor="let header of headerItems" [class.active]="header.path === (currentactivepath) ">
+                                <a routerLink="{{header.path}}">
+                                    <small>{{header.name}}</small>
+                                </a>
+                            </li>
+    <!--                        <li routerLinkActive="active">
+                                <a routerLink="/operator/clients/{{client.client_id}}" >
+
+                                    <small>Details</small>
+                                    <div class="ripple-container"></div></a>
+                            </li>
+                            <li routerLinkActive="active" class="active">
+                                <a routerLink="/operator/clients/{{client.client_id}}/addcall" >
+
+                                    <small>Details</small>
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+
+                            <li routerlinkactive="active">
                                 <a routerLink="/operator/clients/{{client.client_id}}/addcall">
                                     <small>Edit</small>
                                 </a>
-                            </li>
+                            </li>-->
 
-                            <li routerlinkactive="active" >
-                                <a routerLink="/operator/clients/{{client.client_id}}/addcall">
-                                    <small>Add Call</small>
-                                </a>
-                            </li>
+                            <!--       <li routerLinkActive="active" [class.active]="true">
+                                     <a routerLink="/operator/clients/{{client.client_id}}/addcall">
+                                         <small>Add Call</small>
+                                     </a>
+                                 </li>
 
-                            <li routerlinkactive="active" ng-reflect-router-link-active="active">
-                                <a routerlink="/operator/clients/search" ng-reflect-router-link="/operator/clients/search" ng-reflect-href="/operator/clients/search" href="/operator/clients/search">
-                                    <small>Add Note</small>
-                                </a>
-                            </li>
+                               <li  [class.active]="true">
+                                     <a routerLink="/operator/clients/{{client.client_id}}/addnote">
+                                         <small>Add Note</small>
+                                     </a>
+                                 </li>
 
-                            <li routerlinkactive="active" ng-reflect-router-link-active="active">
-                                <a routerlink="/operator/clients/search" ng-reflect-router-link="/operator/clients/search" ng-reflect-href="/operator/clients/search" href="/operator/clients/search">
-                                    <small>Add Product</small>
-                                </a>
-                            </li>
 
-                            <li routerlinkactive="active" ng-reflect-router-link-active="active">
-                                <a routerlink="/operator/clients/search" ng-reflect-router-link="/operator/clients/search" ng-reflect-href="/operator/clients/search" href="/operator/clients/search">
-                                    <small>Add Ticket</small>
-                                </a>
-                            </li>
+                                 <li routerlinkactive="active-header">
+                                     <a routerlink="/operator/clients/1" >
+                                         <small>Add Product</small>
+                                         <div class="ripple-container"></div>
+                                     </a>
+                                 </li>
 
-                            <li routerlinkactive="active" ng-reflect-router-link-active="active">
-                                <a routerlink="/operator/clients/search" ng-reflect-router-link="/operator/clients/search" ng-reflect-href="/operator/clients/search" href="/operator/clients/search">
-                                    <small>Send Mail</small>
-                                </a>
-                            </li>
+                                 <li routerlinkactive="active" ng-reflect-router-link-active="active">
+                                     <a routerlink="/operator/clients/search" ng-reflect-router-link="/operator/clients/search" ng-reflect-href="/operator/clients/search" href="/operator/clients/search">
+                                         <small>Add Ticket</small>
+                                     </a>
+                                 </li>
 
-                            <li routerlinkactive="active" ng-reflect-router-link-active="active">
-                                <a routerlink="/operator/clients/search" ng-reflect-router-link="/operator/clients/search" ng-reflect-href="/operator/clients/search" href="/operator/clients/search">
-                                    <small>Block</small>
-                                </a>
-                            </li>
+                                 <li routerlinkactive="active" ng-reflect-router-link-active="active">
+                                     <a routerlink="/operator/clients/search" ng-reflect-router-link="/operator/clients/search" ng-reflect-href="/operator/clients/search" href="/operator/clients/search">
+                                         <small>Send Mail</small>
+                                     </a>
+                                 </li>
 
+                                 <li routerlinkactive="active" ng-reflect-router-link-active="active">
+                                     <a routerlink="/operator/clients/search" ng-reflect-router-link="/operator/clients/search" ng-reflect-href="/operator/clients/search" href="/operator/clients/search">
+                                         <small>Block</small>
+                                     </a>
+                                 </li>
+     -->
                         </ul>
                     </div>
                 </div>

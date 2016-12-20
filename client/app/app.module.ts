@@ -31,7 +31,10 @@ import {ClientdataComponent} from "./pages/clients/clientSingle/clientdata/clien
 import {ClienthistoryComponent} from "./pages/clients/clientSingle/clienthistory/clienthistory.component";
 import {ClientproductComponent} from "./pages/clients/clientSingle/clientproduct/clientproduct.component";
 import {AddCallComponent} from "./pages/clients/clientSingle/options/addCall/add-call.component";
-import {CallService} from "./pages/clients/clientSingle/options/addCall/call.service";
+import {OptionsClientService} from "./pages/clients/clientSingle/options/options-client.service";
+import {AddNoteComponent} from "./pages/clients/clientSingle/options/addNote/add-note.component";
+import {AddProductComponent} from "./pages/clients/clientSingle/options/addProduct/add-product.component";
+import {AddTicketeComponent} from "./pages/clients/clientSingle/options/addTicket/add-ticket.component";
 
 
 //when creating a component, add it here
@@ -45,9 +48,10 @@ import {CallService} from "./pages/clients/clientSingle/options/addCall/call.ser
         MailComponent, LoginComponent, CustomersComponent,
         SingleclientheaderComponent, ClientdataComponent,
         ClienthistoryComponent,ClientproductComponent,
-        AddCallComponent
+        AddCallComponent, AddNoteComponent,
+        AddProductComponent, AddTicketeComponent
          ],
-    providers: [ClientService, AuthService, AuthGuard, CallService],
+    providers: [ClientService, AuthService, AuthGuard, OptionsClientService],
     bootstrap: [AppComponent],
 })
 

@@ -4,7 +4,7 @@ import 'rxjs/add/operator/toPromise';
 
 
 @Injectable()
-export class CallService {
+export class OptionsClientService {
 
     constructor(private http: Http) { }
 
@@ -12,8 +12,8 @@ export class CallService {
 
     private clientDataUrl = this.clientAPIurl +"/client/data/";
 
-    getClientData(clientId:String):Promise<any>{
-        var url = this.clientDataUrl + clientId ;
+    getClientName(clientId:String):Promise<any>{
+        var url = this.clientDataUrl + clientId + "/name";
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())

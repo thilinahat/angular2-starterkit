@@ -1,16 +1,16 @@
 import {Component, Input,} from "@angular/core";
 import {  ActivatedRoute } from '@angular/router';
-import { OptionsClientService } from "../options-client.service";
+import {OptionsClientService} from "../options-client.service";
 
 
 @Component({
 
     selector:'add-call',
-    templateUrl:'add-call.template.html'
+    templateUrl:'add-note.template.html'
 
 })
 
-export class AddCallComponent {
+export class AddNoteComponent {
 
     client:any = {};
 
@@ -23,7 +23,7 @@ export class AddCallComponent {
     ngOnInit(){
         this.sub = this.route.params.subscribe(params => {
 
-                this.id = params['clientId']; // (
+            this.id = params['clientId']; // (
 
         });
 
