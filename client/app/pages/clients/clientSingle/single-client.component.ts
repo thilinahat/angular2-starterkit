@@ -8,6 +8,7 @@ import 'rxjs/add/operator/switchMap';
 
     selector: 'singleclient',
     templateUrl: 'single-client.template.html',
+    styles:['.client-header{padding-left: 4%;}']
 
 
 })

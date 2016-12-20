@@ -6,7 +6,7 @@ module.exports =  {
     db:{
         host: 'localhost',
         user: 'testingUser',
-        password: '123',
+        password: '1234',
         database: 'vinit_crm'
     }
 }
