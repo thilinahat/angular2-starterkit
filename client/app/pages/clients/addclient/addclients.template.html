@@ -12,41 +12,41 @@
                 <!--company-->
                 <div class="form-group">
                     <label for="company">Company</label>
-                    <input type="text" class="form-control" id="company" name="company" ngModel required>
+                    <input type="text" class="form-control" id="company" name="company" ngModel >
                 </div>
                 <!--contact person-->
                 <div class="form-group">
                     <label for="contactPerson">Contact Person</label>
-                    <input type="text" class="form-control" id="contactPerson" name="contactPerson" ngModel required>
+                    <input type="text" class="form-control" id="contactPerson" name="contactPerson" ngModel >
                 </div>
                 <!--website-->
                 <div class="form-group">
                     <label for="website">Web Site</label>
-                    <input type="text" class="form-control" id="website" name="website" ngModel required>
+                    <input type="text" class="form-control" id="website" name="website" ngModel >
                 </div>
                 <!--status-->
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <select class="form-control" id="status" required>
+                    <select class="form-control" id="status" name="status" ngModel>
                         <option *ngFor="let state of states" [value]="state">{{state}}</option>
                     </select>
                 </div>
                 <!--country-->
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <select class="form-control" id="country" required>
+                    <select class="form-control" id="country" name="country" ngModel>
                         <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
                     </select>
                 </div>
                 <!--MLR Number-->
                 <div class="form-group">
                     <label for="mlr">MLR Number</label>
-                    <input type="number" class="form-control" id="mlr" name="mlr" ngModel required>
+                    <input type="text" class="form-control" id="mlr" name="mlr" ngModel >
                 </div>
                 <!--business registration-->
                 <div class="form-group">
                     <label for="bus-registration">Business Registration</label>
-                    <input type="text" class="form-control" id="bus-registration" name="businessRegistration" ngModel required>
+                    <input type="text" class="form-control" id="bus-registration" name="businessRegistration" ngModel >
                 </div>
             </div>
             <div class="col-md-6">
@@ -57,7 +57,7 @@
                         <span class="tags" *ngFor="let mail of emails">{{mail}}</span>
                     </label>
                     <div class="tag-input-container">
-                        <input type="email" class="form-control" id="email" name="email" ngModel required>
+                        <input #emailInput type="email" class="form-control" id="email" name="email" ngModel >
                         <button type="button" class="btn btn-default add-more" (click)="onAddEmail(clientForm.value.email)">
                             <i class="material-icons">add</i>
                         </button>
@@ -70,7 +70,7 @@
                         <span class="tags" *ngFor="let phone of phones">{{phone}}</span>
                     </label>
                     <div class="tag-input-container">
-                        <input type="text" class="form-control" id="phone" name="phone" ngModel required>
+                        <input #phoneInput type="text" class="form-control" id="phone" name="phone" ngModel >
                         <button type="button" class="btn btn-default add-more" (click)="onAddPhone(clientForm.value.phone)">
                             <i class="material-icons">add</i>
                         </button>
@@ -83,7 +83,7 @@
                         <span class="tags" *ngFor="let fax of faxes">{{fax}}</span>
                     </label>
                     <div class="tag-input-container">
-                        <input type="text" class="form-control" id="fax" name="fax" ngModel required>
+                        <input #faxInput type="text" class="form-control" id="fax" name="fax" ngModel >
                         <button type="button" class="btn btn-default add-more" (click)="onAddFax(clientForm.value.fax)">
                             <i class="material-icons">add</i>
                         </button>
@@ -92,23 +92,23 @@
                 <!--address-->
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" ngModel required>
+                    <input type="text" class="form-control" id="address" name="address" ngModel >
                 </div>
                 <!--town-->
                 <div class="form-group">
                     <label for="town">Town</label>
-                    <input type="text" class="form-control" id="town" name="town" ngModel required>
+                    <input type="text" class="form-control" id="town" name="town" ngModel >
                 </div>
                 <!--postal code-->
                 <div class="form-group">
                     <label for="postalCode">Postal Code</label>
-                    <input type="number" class="form-control" id="postalCode" name="postalCode" ngModel required>
+                    <input type="number" class="form-control" id="postalCode" name="postalCode" ngModel >
                 </div>
                 <!--Logo-->
                 <div class="form-group is-empty is-fileinput">
                     <label for="logo">Logo</label>
-                    <input type="file" class="form-control" id="logo" name="logo" ngModel required accept="image/png,,image/jpeg">
-                    <input type="text" readonly="" class="form-control">
+                    <input type="file" class="form-control" id="logo" name="logo" ngModel  accept="image/png,,image/jpeg" (change)="addLogo($event)">
+                    <input type="text" readonly="" name="logoName" class="form-control">
                 </div>
             </div>
             <!--submit-->

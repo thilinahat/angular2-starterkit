@@ -9,13 +9,11 @@ var api = require('./routes/api');
 var mailServerImap = require('./routes/MailServerIMAP');
 var operatorAPI = require('./routes/operatorAPI');
 
-
 var notFound = require('./routes/notfound');
 
 var port = 8080;
 
 var app = express();
-
 
 //View Engine
 app.set('views', path.join(__dirname, 'views'));

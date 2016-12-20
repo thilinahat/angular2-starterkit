@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, ViewChild} from "@angular/core";
 import {ClientService} from "../../../services/client.service";
 
 @Component({
@@ -8,6 +8,15 @@ import {ClientService} from "../../../services/client.service";
 })
 
 export class AddclientsComponent {
+
+    @ViewChild('emailInput')
+    emailInput: any;
+
+    @ViewChild('phoneInput')
+    phoneInput: any;
+
+    @ViewChild('faxInput')
+    faxInput: any;
 
     states: string[] = ['Initial', 'Old', 'Terminated', 'Blocked'];
     countries: any[] = [
@@ -228,33 +237,69 @@ export class AddclientsComponent {
     {name: 'Zimbabwe', code: 'ZW'},
 ];
 
-    emails: string[] = ['asanka@gmail.com'];
-    phones: string[] = ['0719565744'];
-    faxes: string[] = ['+94114287387'];
+    emails: string[] = [];
+    phones: string[] = [];
+    faxes: string[] = [];
+    logo: any;
+    formData: FormData;
 
     constructor(private clientService: ClientService) { }
 
     onSubmit(form: any): void {
-        form.emails = this.emails;
-        form.phones = this.phones;
-        form.faxes = this.faxes;
-        console.log('you submitted value:', form);
-        this.clientService.addClient(form).then(res => {
+
+       /* if (form.email != '')
+            this.emails.push(form.email);
+        if (form.phone != '')
+            this.phones.push(form.phone);
+        if (form.fax != '')
+            this.faxes.push(form.fax);*/
+
+        let formData = new FormData();
+        formData.append("logo", this.logo);
+        formData.append("company", form.company);
+        formData.append("contactPerson", form.contactPerson);
+        formData.append("website", form.website);
+        formData.append("status", form.status);
+        formData.append("country", form.country);
+        formData.append("mlr", form.mlr);
+        formData.append("businessRegistration", form.businessRegistration);
+        formData.append("address", form.address);
+        formData.append("town", form.town);
+        formData.append("postalCode", form.postalCode);
+
+        this.emails.forEach(mail =>  {
+            formData.append('emails[]', mail);
+        });
+        this.phones.forEach(phone =>  {
+            formData.append('phones[]', phone);
+        });
+        this.faxes.forEach(fax =>  {
+            formData.append('faxes[]', fax);
+        });
+
+        this.clientService.addClient(formData).then(res => {
             alert('Successfully Added Client');
         }, error => {
             alert(error);
         });
     }
 
+    addLogo($event: any): void {
+        this.logo = $event.target.files[0];
+    }
+
     onAddEmail(mail: string): void{
         this.emails.push(mail);
+        this.emailInput.nativeElement.value = "";
     }
 
     onAddPhone(phone: string): void{
         this.phones.push(phone);
+        this.phoneInput.nativeElement.value = "";
     }
 
     onAddFax(fax: string): void{
         this.faxes.push(fax);
+        this.faxInput.nativeElement.value = "";
     }
 }
