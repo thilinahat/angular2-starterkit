@@ -5,8 +5,9 @@ import {OptionsClientService} from "../options-client.service";
 
 @Component({
 
-    selector:'add-call',
-    templateUrl:'add-product.template.html'
+    selector:'add-product',
+    templateUrl:'add-product.template.html',
+    styleUrls:['add-product.css']
 
 })
 
@@ -14,11 +15,23 @@ export class AddProductComponent {
 
     client:any = {};
 
-    call_time:number;
-    call_description:String;
+    selectedProduct:String = "Choose Product";
+    selectedBranch:String = '';
+    selectedOtherProduct:String = ''
+    newBrachName:String = '';
+
+    branches: string[] = ['london','city 2'];
+
     id:string;
-    errorMessage:string;
+    errorMessage:string = 'default error    ';
+    inputError:boolean = false;
     sub:any;
+
+    products:String[] = ['MX', 'MX Plus'];
+    otherproducts:String[] = [ 'Other Prod 1', 'Other Prod 2'];
+
+    showAddNewProduct:boolean = false;
+    showAddNewbranch:boolean = false;
 
     ngOnInit(){
         this.sub = this.route.params.subscribe(params => {
@@ -36,8 +49,40 @@ export class AddProductComponent {
         private route:ActivatedRoute,
         private clientService: OptionsClientService
 
-    ){
+    ){    }
 
+    showAddnewProduct = function () {
+        this.showAddNewProduct = !this.showAddNewProduct;
     }
 
+    showAddnewbranch = function () {
+        this.showAddNewbranch = !this.showAddNewbranch;
+    }
+
+    addProductToClient = function () {
+        if(this.selectedOtherProduct.length == 0 ){
+            this.errorMessage = "Select a Product";
+            return;
+        }
+        else {
+            //send req to server
+            this.products.push(this.selectedOtherProduct);
+            this.showAddNewProduct = !this.showAddNewProduct;
+            return;
+        }
+    }
+
+    addBranchToClient = function () {
+        if(this.newBrachName.length == 0 ){
+            this.errorMessage = "Enter a Branch";
+            return;
+        }
+        else {
+            //send req to server
+            //validate
+            this.branches.push(this.newBrachName);
+            this.showAddNewbranch = !this.showAddNewbranch;
+            return;
+        }
+    }
 }

@@ -12,41 +12,101 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header" data-background-color="purple">
-                    <h4 class="title">Add Product</h4>
+                    <h4 class="title">Add Product to : {{client.company_name}}</h4>
 
                 </div>
                 <div class="card-content">
                     <form>
                         <div class="row">
-                            <div class="col-md-5">
-                                <div class="form-group label-floating is-empty">
-                                    <label class="control-label">{{client.company_name}}</label>
-                                    <input type="text" class="form-control" disabled="">
-                                    <span class="material-input"></span></div>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="form-group label-floating is-empty">
-                                    <label class="control-label">Subject</label>
-                                    <input type="test" class="form-control" required="true">
-                                    <span class="material-input"></span></div>
+                            <div class="col-xs-12">
+                                <h3 class="btn btn-primary" (click)="showAddnewProduct()">Add New Product</h3>
+                                <h3 class="btn btn-primary" (click)="showAddnewbranch()">Add New Branch</h3>
                             </div>
 
-                        </div>
+                            <div class="col-xs-12 border" [hidden] = "!showAddNewProduct">
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <h4>Add New Product To Client</h4>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
+                                        <div class="form-group">
+                                            <label class="control-label">Select product</label>
+                                            <select class="form-control" id="newproduct" required="true"
+                                                    [(ngModel)] = "selectedOtherProduct" name="selectedOtherProduct" >
 
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Enter the note</label>
-                                        <textarea class="form-control" rows="5" required="true"></textarea>
-                                        <span class="material-input"></span></div>
+                                                <option *ngFor="let product of otherproducts" [value]="product">{{product}}</option>
+                                            </select>
+                                        </div>
+                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <h3 class="btn btn-primary pull-right" (click)="addProductToClient()">Add Product</h3>
+                                    </div>
                                 </div>
                             </div>
+
+                            <div class="col-xs-12 border" [hidden] = "!showAddNewbranch">
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <h4>Add New Branch To Client</h4>
+                                        <div class="form-group">
+                                            <label class="control-label">Enter Branch Name</label>
+                                            <input type="text" class="form-control" [(ngModel)] = "newBrachName" name="newBranchName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <h3 class="btn btn-primary pull-right" (click)="addBranchToClient()">Add Branch</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label">Select product</label>
+                                    <select class="form-control" id="product" required="true"
+                                            [(ngModel)] = "selectedProduct" name="selectedProduct" >
+                                        <option selected disabled>Choose Product</option>
+                                        <option *ngFor="let product of products" [value]="product">{{product}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="form-group ">
+                                    <label class="control-label">Select Branch</label>
+                                    <select class="form-control" id="branch" required="true"
+                                            [(ngModel)] = "selectedBranch" name="selectedBranch" >
+                                        <option selected disabled>Choose Branch</option>
+                                        <option *ngFor="let branch of branches" [value]="branch">{{branch}}</option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
                         </div>
 
-                        <button type="submit" class="btn btn-primary pull-right">Add Note<div class="ripple-container"></div></button>
-                        <div class="clearfix"></div>
+                        <div class="row" [hidden]="!inputError">
+                            <h4 class="error-msg">{{errorMessage}}</h4>
+                        </div>
+
+                        <div class="row border" >
+
+                            <add-till  [branch]="selectedBranch" [product]="selectedProduct"></add-till>
+
+                        </div>
+
+
+
+
                     </form>
                 </div>
             </div>

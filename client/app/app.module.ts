@@ -35,6 +35,7 @@ import {OptionsClientService} from "./pages/clients/clientSingle/options/options
 import {AddNoteComponent} from "./pages/clients/clientSingle/options/addNote/add-note.component";
 import {AddProductComponent} from "./pages/clients/clientSingle/options/addProduct/add-product.component";
 import {AddTicketeComponent} from "./pages/clients/clientSingle/options/addTicket/add-ticket.component";
+import {AddTillComponent} from "./pages/clients/clientSingle/options/addProduct/AddTill/add-till.component";
 
 
 //when creating a component, add it here
@@ -49,7 +50,8 @@ import {AddTicketeComponent} from "./pages/clients/clientSingle/options/addTicke
         SingleclientheaderComponent, ClientdataComponent,
         ClienthistoryComponent,ClientproductComponent,
         AddCallComponent, AddNoteComponent,
-        AddProductComponent, AddTicketeComponent
+        AddProductComponent, AddTicketeComponent,
+        AddTillComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService],
     bootstrap: [AppComponent],

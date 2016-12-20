@@ -1,0 +1,13 @@
+.display-right{float: right}
+
+.error-msg{
+    padding-left: 2%;
+    color: red;
+    font-weight: 500;
+    margin-top: 0px;
+}
+.border{padding: 2%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0;
+}

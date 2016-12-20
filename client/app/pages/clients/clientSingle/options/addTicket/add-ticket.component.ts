@@ -5,7 +5,7 @@ import {OptionsClientService} from "../options-client.service";
 
 @Component({
 
-    selector:'add-call',
+    selector:'add-ticket',
     templateUrl:'add-ticket.template.html'
 
 })
