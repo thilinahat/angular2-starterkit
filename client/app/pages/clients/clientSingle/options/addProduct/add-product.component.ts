@@ -1,6 +1,7 @@
 import {Component, Input,} from "@angular/core";
 import {  ActivatedRoute } from '@angular/router';
 import {OptionsClientService} from "../options-client.service";
+import {forEach} from "@angular/router/src/utils/collection";
 
 
 @Component({
@@ -15,34 +16,54 @@ export class AddProductComponent {
 
     client:any = {};
 
-    selectedProduct:String = "Choose Product";
-    selectedBranch:String = '';
-    selectedOtherProduct:String = ''
-    newBrachName:String = '';
+    selectedProductName:String;
+    selectedProductId:any;
 
-    branches: string[] = ['london','city 2'];
+    selectedProductindex:number;
+
+    selectedBranchName:String = '';
+    selectedBranchId:any;
+
+    selectedOtherProduct:any
+    newBranchName:String = '';
+    newBranchLocation:String = '';
+
+    branches: any[] = [];
 
     id:string;
     errorMessage:string = 'default error    ';
     inputError:boolean = false;
     sub:any;
 
-    products:String[] = ['MX', 'MX Plus'];
-    otherproducts:String[] = [ 'Other Prod 1', 'Other Prod 2'];
+    products:any[] = [];
+    otherproducts:any[] = [];
 
     showAddNewProduct:boolean = false;
     showAddNewbranch:boolean = false;
+    testarray:any[] = [];
 
     ngOnInit(){
         this.sub = this.route.params.subscribe(params => {
 
-            this.id = params['clientId']; // (
+            this.id = params['clientId'];
 
         });
 
-        this.client = this.clientService.getClientName(this.id).
+         this.clientService.getClientName(this.id).
         then(clientdata => this.client = clientdata,
             error =>  this.errorMessage = <any>error );
+
+
+        this.clientService.getClientProducts(this.id).
+        then(products => this.products = products,
+            error =>  this.errorMessage = <any>error );
+
+
+        this.clientService.getClientNotHavingProducts(this.id).
+        then(otherproducts => this.otherproducts = otherproducts,
+            error =>  this.errorMessage = <any>error );
+
+        this.getBranches();
     }
 
     constructor(
@@ -59,30 +80,89 @@ export class AddProductComponent {
         this.showAddNewbranch = !this.showAddNewbranch;
     }
 
-    addProductToClient = function () {
-        if(this.selectedOtherProduct.length == 0 ){
-            this.errorMessage = "Select a Product";
-            return;
-        }
-        else {
-            //send req to server
-            this.products.push(this.selectedOtherProduct);
-            this.showAddNewProduct = !this.showAddNewProduct;
-            return;
-        }
+
+
+    addBranchToClient  ()   {
+
+            if (!this.newBranchName || !this.newBranchLocation) { return; }
+
+        var data = {
+            branchName:this.newBranchName,
+            branchLocation:this.newBranchLocation,
+            clientId:this.id
+        };
+
+        this.clientService.addBranchToClient(data)
+            .then(
+                res  => this.handleBranchAdding(),
+                error =>  this.errorMessage = <any>error);
+
+
     }
 
-    addBranchToClient = function () {
-        if(this.newBrachName.length == 0 ){
-            this.errorMessage = "Enter a Branch";
-            return;
+    getClientData = function () {
+
+    }
+
+    addProductToClient ( ) {
+
+        if (!this.selectedOtherProduct) { return; }
+
+      var data = {
+          product:this.otherproducts[this.selectedOtherProduct],
+          clientId:this.id
+      };
+
+        this.clientService.addProductToClient(data)
+            .then(
+                res  => this.handleProductAdding(),
+                error =>  this.errorMessage = <any>error);
+    }
+
+    handleProductAdding(){
+
+            alert('Successfully Added Product');
+            this.products.push(this.otherproducts[this.selectedOtherProduct]);
+            this.otherproducts.splice(this.selectedOtherProduct,1);
+            this.showAddNewProduct = !this.showAddNewProduct;
+
+    }
+
+    handleBranchAdding(){
+        alert('Successfully Added Branch');
+        this.showAddNewbranch = !this.showAddNewbranch;
+        this.getBranches();
+    }
+
+    getBranches(){
+        this.clientService.getBranches(this.id).
+        then(branches => this.branches = branches,
+            error =>  this.errorMessage = <any>error );
+    }
+
+    onProductChanged(){
+
+        for (var product of this.products) {
+            if(this.selectedProductId == product.product_Id){
+
+                this.selectedProductName = product.name;
+            }
+
         }
-        else {
-            //send req to server
-            //validate
-            this.branches.push(this.newBrachName);
-            this.showAddNewbranch = !this.showAddNewbranch;
-            return;
+
+    }
+
+
+    onBranchChanged(){
+
+        for (var branch of this.branches) {
+            if(this.selectedBranchId == branch.branch_id){
+
+                this.selectedBranchName = branch.name;
+                console.log(branch.name)
+            }
+
         }
+
     }
 }

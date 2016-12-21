@@ -23,45 +23,47 @@
                                 <h3 class="btn btn-primary" (click)="showAddnewbranch()">Add New Branch</h3>
                             </div>
 
-                            <div class="col-xs-12 border" [hidden] = "!showAddNewProduct">
+                            <div class="col-xs-12 " [hidden] = "!showAddNewProduct">
                                 <div class="row">
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <h4>Add New Product To Client</h4>
+                                    <div class="col-md-8 border">
+                                        <h4>Add New Product To Client : {{client.company_name}}</h4>
 
                                         <div class="form-group">
                                             <label class="control-label">Select product</label>
                                             <select class="form-control" id="newproduct" required="true"
                                                     [(ngModel)] = "selectedOtherProduct" name="selectedOtherProduct" >
 
-                                                <option *ngFor="let product of otherproducts" [value]="product">{{product}}</option>
+                                                <option *ngFor="let product of otherproducts; let i = index" [value]="i">{{product.name}}</option>
                                             </select>
                                         </div>
+                                        <h3 class="btn btn-primary pull-right" (click)="addProductToClient()">Add Product</h3>
                                      </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <h3 class="btn btn-primary pull-right" (click)="addProductToClient()">Add Product</h3>
-                                    </div>
-                                </div>
+
                             </div>
 
-                            <div class="col-xs-12 border" [hidden] = "!showAddNewbranch">
+                            <div class="col-xs-12 " [hidden] = "!showAddNewbranch">
                                 <div class="row">
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <h4>Add New Branch To Client</h4>
+                                    <div class="col-md-8 border">
+                                        <h4>Add New Branch To Client : {{client.company_name}}</h4>
                                         <div class="form-group">
                                             <label class="control-label">Enter Branch Name</label>
-                                            <input type="text" class="form-control" [(ngModel)] = "newBrachName" name="newBranchName">
+                                            <input type="text" class="form-control" [(ngModel)] = "newBranchName" name="newBranchName">
                                         </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Enter Branch Location</label>
+                                            <input type="text" class="form-control" [(ngModel)] = "newBranchLocation" name="newBrachLocation">
+                                        </div>
+                                        <h3 class="btn btn-primary pull-right" (click)="addBranchToClient()">Add Branch</h3>
                                     </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2"></div>
                                     <div class="col-md-8">
-                                        <h3 class="btn btn-primary pull-right" (click)="addBranchToClient()">Add Branch</h3>
+
                                     </div>
                                 </div>
                             </div>
@@ -72,9 +74,9 @@
                                 <div class="form-group">
                                     <label class="control-label">Select product</label>
                                     <select class="form-control" id="product" required="true"
-                                            [(ngModel)] = "selectedProduct" name="selectedProduct" >
+                                            [(ngModel)] = "selectedProductId" name="selectedProductId" (change)="onProductChanged()">
                                         <option selected disabled>Choose Product</option>
-                                        <option *ngFor="let product of products" [value]="product">{{product}}</option>
+                                        <option *ngFor="let product of products" [value]="product.product_Id">{{product.name}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -82,9 +84,9 @@
                                 <div class="form-group ">
                                     <label class="control-label">Select Branch</label>
                                     <select class="form-control" id="branch" required="true"
-                                            [(ngModel)] = "selectedBranch" name="selectedBranch" >
+                                            [(ngModel)] = "selectedBranchId" name="selectedBranch" (change)="onBranchChanged()">
                                         <option selected disabled>Choose Branch</option>
-                                        <option *ngFor="let branch of branches" [value]="branch">{{branch}}</option>
+                                        <option *ngFor="let branch of branches" [value]="branch.branch_id">{{branch.name}}</option>
                                     </select>
 
                                 </div>
@@ -100,7 +102,7 @@
 
                         <div class="row border" >
 
-                            <add-till  [branch]="selectedBranch" [product]="selectedProduct"></add-till>
+                            <add-till [branch]="selectedBranchName" [productId]="selectedProductId" [product]="selectedProductName" [branchId]="selectedBranchId"></add-till>
 
                         </div>
 

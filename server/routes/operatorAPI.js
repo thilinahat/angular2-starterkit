@@ -314,14 +314,11 @@ router.get('/client/data/:clientId/fax', function (req, res, next) {
 
         connection.query(SQL,  function (error, results) {
 
-
-
             if (error) {
 
                 console.log("error while retrieving from to db");
                 return;
             }
-
 
             if(results.length > 0 ){
 
@@ -339,6 +336,206 @@ router.get('/client/data/:clientId/fax', function (req, res, next) {
         connection.release();
     });
 
+});
+
+router.get('/client/data/:clientId/products', function (req, res, next) {
+
+    const SQL = "SELECT distinct `client_id` , client_product.`product_Id`, `name` FROM `client_product` join products "
+        + "ON client_product.`product_Id`= products.product_Id\n"
+        + "WHERE client_id = " + req.params.clientId;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 400; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+router.get('/client/data/:clientId/nothavingproducts', function (req, res, next) {
+
+    const SQL = "SELECT * \n"
+        + " FROM products \n"
+        + " \n"
+        + " WHERE product_Id not IN (SELECT distinct client_product.product_Id FROM client_product join products \n"
+        + "\n"
+        + "	ON client_product.product_Id= products.product_Id\n"
+        + "\n"
+        + "	WHERE client_id = " + req.params.clientId
+        + " ) ORDER BY `product_Id` ASC ";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 400; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+
+
+//route for adding a product to a client/*
+router.post('/client/addproduct', logoUploader, function (req, res) {
+
+    const clientProduct = req.body.data;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        var SQL = "INSERT INTO `vinit_crm`.`client_product` (`client_id`, `product_Id`) " +
+            "VALUES (?, '?');";
+        var values = [clientProduct.clientId,clientProduct.product.product_Id];
+
+        SQL = mysql.format(SQL, values);
+
+        connection.query( SQL,  function(err, result) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting client general data',
+                    message: err
+                });
+            }
+            connection.release();
+            res.sendStatus(200);
+
+        });
+    });
+
+});
+
+//get client branches
+router.get('/client/data/:clientId/branches', function (req, res, next) {
+
+    const SQL = "SELECT * FROM `branch` WHERE client_id = " + req.params.clientId;;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//route for adding a branch to a client/*
+router.post('/client/addbranch', logoUploader, function (req, res) {
+
+    const clientBranch = req.body.data;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        var SQL = "INSERT INTO `vinit_crm`.`branch` (`branch_id`, `client_id`, `name`, `location`) " +
+            "VALUES (NULL, ?, ?, ?);"
+
+        var values = [clientBranch.clientId, clientBranch.branchName, clientBranch.branchLocation];
+
+        SQL = mysql.format(SQL, values);
+
+        connection.query( SQL,  function(err, result) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting client general data',
+                    message: err
+                });
+            }
+            connection.release();
+            res.sendStatus(200);
+
+        });
+    });
+
+});
+
+//route for adding a till to a client/*
+router.post('/client/addtill', logoUploader, function (req, res) {
+
+    const clientTill = req.body.data;
+
+    console.log(clientTill);
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+
+
+           var SQL = "INSERT INTO `vinit_crm`.`till` (`till_id`, `till_key`, `expiredate`, `client_id`, `branch_id`,  `product_Id`) " +
+               "VALUES (NULL, ?, ? , ?, ? , ? );";
+
+        var values = [clientTill.tillKey, clientTill.expireDate, clientTill.clientId, clientTill.branchId , clientTill.productId];
+
+        SQL = mysql.format(SQL, values);
+
+        console.log(SQL);
+
+        connection.query( SQL,  function(err, result) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting client general data',
+                    message: err
+                });
+            }
+            connection.release();
+            res.sendStatus(200);
+
+        });
+    });
 
 });
 
