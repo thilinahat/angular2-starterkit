@@ -32,6 +32,8 @@
     "mongojs": "^2.4.0",
     "multer": "^1.2.1",
     "mysql": "^2.12.0",
+    "ng2-bs3-modal": "^0.10.4",
+    "nodemailer": "^2.7.0",
     "path": "^0.12.7",
     "promise": "^7.1.1",
     "reflect-metadata": "^0.1.8",

@@ -50,6 +50,14 @@ module.exports = webpackMerge(commonConfig, {
             '/js/*': {
                 target: expressServer,
                 secure: false
+            },
+            '/mail/*':{
+                target: expressServer,
+                secure: false
+            },
+            '/mailsend/*':{
+                target: expressServer,
+                secure: false
             }
         }
     }

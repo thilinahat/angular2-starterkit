@@ -1,25 +1,53 @@
-<sidenavbar></sidenavbar>
-
+<!--model creating examples-->
+<!--https://github.com/dougludlow/ng2-bs3-modal-->
 <div class="main-panel">
 
     <navbarheader></navbarheader>
 
     <clientsheader></clientsheader>
-
-    <div class="row">
+    <div class="row addressRow">
         <div class="col-lg-4 col-md-4"></div>
         <div class="col-lg-4 col-md-4">
-            <h3>Emails</h3>
+            <a href="#"> {{clientAddress}}  <span class="badge">42</span></a>
         </div>
     </div>
-    <div class="row">
+    <div class="row messegeRow">
         <div class="col-md-1"></div>
-        <div class="col-md-4">
+        <div class="col-md-10">
             <ul class="list-group">
-                <li class="list-group-item" >Hello</li>
+                <li class="list-group-item" *ngFor="let incomingMail of incomingMails">
+                    <h4 class="list-group-item-heading">{{incomingMail.topic}}</h4>
+                    <p class="list-group-item-text" [innerHTML] =  "incomingMail.body"></p>
+                </li>
             </ul>
         </div>
     </div>
+    <div class="row sendButtonRow">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <button type="button" class="btn btn-primary" (click)="modal.open()">Send New Email</button>
+        </div>
+    </div>
+    <modal #modal>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">Send new Email to <i>{{clientAddress}}</i>  </h4>
+        </modal-header>
+        <modal-body>
+            <form (ngSubmit)="onSubmit()" #mailForm="ngForm">
+                <div class="form-group">
+                    <label for="emailTitle">Title</label>
+                    <input type="text" class="form-control" id="emailTitle" placeholder="Title" name="title"
+                    required [(ngModel)]="model.title">
+                </div>
+                <div class="form-group">
+                    <label for="emailBody">Body</label>
+                    <textarea class="form-control" rows="3" id="emailBody" placeholder="Message" name="body"
+                    required [(ngModel)]="model.body"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="!mailForm.form.valid" (click)="modal.close()"> Send </button>
+            </form>
+        </modal-body>
+    </modal>
 
 </div>
 

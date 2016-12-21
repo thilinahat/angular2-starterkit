@@ -212,6 +212,10 @@ router.get('/client/searchdata', function (req, res,next) {
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
+        if(err){
+            console.log(err);
+        }
+
         connection.query(SQL, function (error, results) {
 
             if (error) {
@@ -312,6 +316,12 @@ router.get('/client/data/:clientId/fax', function (req, res, next) {
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
+        if(err){
+            console.log("Error wihile connecting database");
+            console.log(err);
+        }
+
+
         connection.query(SQL,  function (error, results) {
 
 
@@ -337,6 +347,8 @@ router.get('/client/data/:clientId/fax', function (req, res, next) {
         });
 
         connection.release();
+
+
     });
 
 

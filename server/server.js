@@ -6,7 +6,13 @@ var cookieParser = require('cookie-parser');
 
 var index = require('./routes/index');
 var api = require('./routes/api');
+
+// mail routes
 var mailServerImap = require('./routes/MailServerIMAP');
+var mailServerSMTP = require('./routes/MailServerSMTP');
+
+
+
 var operatorAPI = require('./routes/operatorAPI');
 
 var notFound = require('./routes/notfound');
@@ -38,6 +44,7 @@ app.use('/operator/*', index);
 app.use('/api/operator', operatorAPI); //API for operator initiated actions
 app.use('/api', api);
 app.use('/mail',mailServerImap);
+app.use('/mailsend',mailServerSMTP);
 app.use('/*', notFound);
 
 

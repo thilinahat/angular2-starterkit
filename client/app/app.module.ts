@@ -37,10 +37,12 @@ import {AddProductComponent} from "./pages/clients/clientSingle/options/addProdu
 import {AddTicketeComponent} from "./pages/clients/clientSingle/options/addTicket/add-ticket.component";
 import {AddTillComponent} from "./pages/clients/clientSingle/options/addProduct/AddTill/add-till.component";
 
+import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
+
 
 //when creating a component, add it here
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule, MainPipeModule],
+    imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule, MainPipeModule,Ng2Bs3ModalModule],
     declarations: [AppComponent, ClientsComponent,
         DashboardComponent, TicketsComponent,
         ReportsComponent, SidenavigationComponent,
