@@ -12,26 +12,30 @@ class AuthService {
         return new Promise((fulfill, reject) => {
             // do the db query here once the db is setup
             var role;
+            var uid;
             var redirectURL;
 
             switch (user.username){
                 case 'operator':
                     role = 'OPERATOR';
+                    uid = '1';
                     redirectURL = '/operator/dashboard';
                     break;
                 case 'client':
                     role = 'CLIENT';
+                    uid = '2';
                     redirectURL = '/customer';
                     break;
                 default:
                     role = 'INVALID';
+                    uid = '3';
                     break;
             }
 
             if(role == 'INVALID')
                 reject('Unauthorized User');
             else{
-                const token = jwt.sign({role: role}, config.jwtSecret, {expiresIn: 3600 * 24});
+                const token = jwt.sign({role: role, uid: uid}, config.jwtSecret, {expiresIn: 3600 * 24});
                 const response = {
                     token: token,
                     redirectURL: redirectURL
