@@ -1,0 +1,17 @@
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.sumary-row{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.time-row{
+    padding-top: -35px;
+}

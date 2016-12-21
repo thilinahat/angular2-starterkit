@@ -14,6 +14,7 @@ import {SingleClientComponent} from "./pages/clients/clientSingle/single-client.
 import {MailComponent} from "./pages/clients/mail/mail.component";
 import { LoginComponent } from "./pages/login/login.component";
 import {CustomersComponent } from "./pages/customers/customers.component";
+import {CallComponent} from "./pages/clients/call/call.component";
 
 
 import { AuthGuard } from './guards/auth.gaurd';
@@ -29,6 +30,7 @@ const routes: Routes = [
     { path: 'operator/clients/addclient', component: AddclientsComponent, canActivate: [AuthGuard] },
     { path: 'operator/clients',redirectTo: 'operator/clients/search' },
     { path: 'operator/clients/mail',component: MailComponent, canActivate: [AuthGuard] },
+    { path: 'operator/clients/call',component: CallComponent, canActivate: [AuthGuard]},
     { path: 'operator/clients/:clientId/addcall', component: AddCallComponent, canActivate: [AuthGuard] },
     { path: 'operator/clients/:clientId/addnote', component: AddNoteComponent, canActivate: [AuthGuard] },
     { path: 'operator/clients/:clientId/addticket', component: AddTicketeComponent, canActivate: [AuthGuard] },

@@ -47,6 +47,10 @@ module.exports = webpackMerge(commonConfig, {
                 target: expressServer,
                 secure: false
             },
+            '/fonts/*':{
+                target: expressServer,
+                secure: false
+            },
             '/js/*': {
                 target: expressServer,
                 secure: false
