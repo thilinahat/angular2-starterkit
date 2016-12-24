@@ -23,8 +23,8 @@ router.get('/i',function (req,res,next) {
 })
 
 var imap = new Imap({
-    user: 'dilanreader@gmail.com',
-    password: 'gts5610k',
+    user: 'chamupathi2008@gmail.com',
+    password: 'Toshiba@2',
     host: 'imap.gmail.com',
     port: 993,
     tls: true
