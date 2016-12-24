@@ -3,6 +3,11 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 
+var webpack = require('webpack');
+var webpackDevMiddleWare = require('webpack-dev-middleware');
+var webpackHotMiddleWare = require('webpack-hot-middleware');
+var webpackConfig = require('../webpack/webpack.dev');
+var compiler = webpack(webpackConfig);
 
 var index = require('./routes/index');
 var api = require('./routes/api');
@@ -27,7 +32,7 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 // Set Multiple Static Folder
-app.use(express.static(path.join(__dirname, '../dist')));
+//app.use(express.static(path.join(__dirname, '../dist')));
 app.use(express.static(path.join(__dirname, '../public')));
 
 // Body Parser MW
@@ -36,6 +41,19 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // Cookie Parser MW
 app.use(cookieParser());
+
+// webpack dev middleware
+app.use(webpackDevMiddleWare(compiler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
+}));
+
+// webpack hot module reloading middleware
+app.use(webpackHotMiddleWare(compiler, {
+    log: console.log,
+    path: '/__webpack_hmr',
+    heartbeat: 10 * 1000
+}));
 
 app.use('/', index);
 app.use('/login', index);

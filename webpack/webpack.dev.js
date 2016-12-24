@@ -13,8 +13,8 @@ module.exports = webpackMerge(commonConfig, {
     devtool: 'cheap-module-eval-source-map',
 
     output: {
-        path: helpers.root('dist'),
-        publicPath: webPackServer,
+        path: '/',
+        publicPath: 'http://localhost:8080/build/',
         filename: '[name].js',
         chunkFilename: '[id].chunk.js'
     },
@@ -23,7 +23,7 @@ module.exports = webpackMerge(commonConfig, {
         new ExtractTextPlugin('[name].css')
     ],
 
-    devServer: {
+    /*devServer: {
         historyApiFallback: true,
         stats: 'minimal',
         proxy: {
@@ -35,34 +35,34 @@ module.exports = webpackMerge(commonConfig, {
                 target: expressServer,
                 secure: false
             },
-            '/api/*': {
+            '/api/!*': {
                 target: expressServer,
                 secure: false
             },
-            '/images/*': {
+            '/images/!*': {
                 target: expressServer,
                 secure: false
             },
-            '/css/*': {
+            '/css/!*': {
                 target: expressServer,
                 secure: false
             },
-            '/fonts/*':{
+            '/fonts/!*':{
                 target: expressServer,
                 secure: false
             },
-            '/js/*': {
+            '/js/!*': {
                 target: expressServer,
                 secure: false
             },
-            '/mail/*':{
+            '/mail/!*':{
                 target: expressServer,
                 secure: false
             },
-            '/mailsend/*':{
+            '/mailsend/!*':{
                 target: expressServer,
                 secure: false
             }
         }
-    }
+    }*/
 });

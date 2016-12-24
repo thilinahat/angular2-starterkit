@@ -5,12 +5,14 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
+var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
+
 
 module.exports = {
     entry: {
-        'polyfills': './client/app/polyfills.ts',
-        'vendor': './client/app/vendor.ts',
-        'app': './client/app/main.ts'
+        'polyfills': ['./client/app/polyfills.ts', hotMiddlewareScript],
+        'vendor': ['./client/app/vendor.ts', hotMiddlewareScript],
+        'app': ['./client/app/main.ts', hotMiddlewareScript]
     },
 
     resolve: {
@@ -49,8 +51,12 @@ module.exports = {
             name: ['app', 'vendor', 'polyfills']
         }),
 
-        new HtmlWebpackPlugin({
+        /*new HtmlWebpackPlugin({
             template: './views/index.html'
-        })
+        }),*/
+
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
     ]
 };
