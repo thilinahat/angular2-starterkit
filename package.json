@@ -6,7 +6,7 @@
   "scripts": {
     "build-dev": "webpack --progress --colors",
     "build-prod": "rimraf dist && webpack --config webpack.prod.js --progress --profile --bail",
-    "start": "webpack-dev-server --inline --progress --port 4444 & node server/server.js",
+    "start": "node server/server.js",
     "typings-install": "typings install",
     "postinstall": "npm run typings-install"
   },

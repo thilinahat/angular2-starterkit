@@ -7,7 +7,6 @@ var webpack = require('webpack');
 var webpackDevMiddleWare = require('webpack-dev-middleware');
 var webpackHotMiddleWare = require('webpack-hot-middleware');
 var webpackConfig = require('../webpack/webpack.dev');
-var compiler = webpack(webpackConfig);
 
 var index = require('./routes/index');
 var api = require('./routes/api');
@@ -15,7 +14,6 @@ var api = require('./routes/api');
 // mail routes
 var mailServerImap = require('./routes/MailServerIMAP');
 var mailServerSMTP = require('./routes/MailServerSMTP');
-
 
 
 var operatorAPI = require('./routes/operatorAPI');
@@ -41,6 +39,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // Cookie Parser MW
 app.use(cookieParser());
+
+var compiler = webpack(webpackConfig);
 
 // webpack dev middleware
 app.use(webpackDevMiddleWare(compiler, {
