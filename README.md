@@ -50,3 +50,17 @@ https://github.com/mscdex/node-imap
        });
  });
  ```
+ 
+ 
+ ## Create an Operator Role
+ 
+ ##### * Send a get request to localhost/api/admin/add-operator
+  
+ ##### * This will create an operator role with following credentials
+ 
+ ###### username : CRM_OPERATOR_USERNAME_1
+ ###### password : CRM_OPERATOR_PASSWORD_1
+ 
+ ##### * Now you can login with above credentials
+ 
+ ##### * Then you'll be prompted to change username and password
