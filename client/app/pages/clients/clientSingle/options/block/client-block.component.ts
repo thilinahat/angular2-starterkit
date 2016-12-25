@@ -1,28 +1,21 @@
 import {Component, Input,} from "@angular/core";
 import {  ActivatedRoute } from '@angular/router';
-import {OptionsClientService} from "../options-client.service";
-import {Subscription} from "rxjs";
+import { OptionsClientService } from "../options-client.service";
 import {ClientDataSharingService} from "../../../../../shared/data/data";
+import {Subscription} from "rxjs";
 
 
 @Component({
 
-    selector:'add-note',
-    templateUrl:'add-note.template.html'
+    selector:'client-block',
+    templateUrl:'client-block.template.html'
 
 })
 
-export class AddNoteComponent {
-
-    client:any = {};
-
-    call_time:number;
-    call_description:String;
-    id:string;
-    errorMessage:string;
-    sub:any;
+export class ClientBlockComponent {
 
     subscription:Subscription;
+    client:any;
 
     ngOnInit() {
 
@@ -41,9 +34,10 @@ export class AddNoteComponent {
         private clientService: OptionsClientService,
         private dataHolder: ClientDataSharingService
 
-
     ){
 
     }
+
+
 
 }

@@ -24,6 +24,9 @@ import {AddCallComponent} from "./pages/clients/clientSingle/options/addCall/add
 import {AddNoteComponent} from "./pages/clients/clientSingle/options/addNote/add-note.component";
 import {AddTicketeComponent} from "./pages/clients/clientSingle/options/addTicket/add-ticket.component";
 import {AddProductComponent} from "./pages/clients/clientSingle/options/addProduct/add-product.component";
+import {ClientBlockComponent} from "./pages/clients/clientSingle/options/block/client-block.component";
+import {SendMailComponent} from "./pages/clients/clientSingle/options/sendMail/send-mail.component";
+import {ClientSingleDashboardComponent} from "./pages/clients/clientSingle/dashboard/client-single-dashboard.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -38,7 +41,19 @@ const routes: Routes = [
     { path: 'operator/clients/:clientId/addticket', component: AddTicketeComponent, canActivate: [AuthGuard] },
     { path: 'operator/clients/:clientId/addproduct', component: AddProductComponent, canActivate: [AuthGuard] },
 
-    { path: 'operator/clients/:clientId',component: SingleClientComponent , canActivate: [AuthGuard] },
+    { path: 'operator/clients/:clientId',component: SingleClientComponent , canActivate: [AuthGuard],
+        children: [
+            { path: '', redirectTo: 'client-dash-board', pathMatch: 'full' },
+            { path: 'client-dash-board', component: ClientSingleDashboardComponent },
+            { path: 'add-call', component: AddCallComponent },
+            { path: 'add-note', component: AddNoteComponent },
+            { path: 'add-product', component: AddProductComponent },
+            { path: 'add-ticket', component: AddTicketeComponent },
+            { path: 'send-mail', component: SendMailComponent },
+            { path: 'client-block', component: ClientBlockComponent },
+
+        ]
+    },
     { path: 'operator/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'operator/tickets', component: TicketsComponent, canActivate: [AuthGuard] },
     { path: 'operator/reports', component: ReportsComponent, canActivate: [AuthGuard] },

@@ -28,9 +28,6 @@ import {SingleClientComponent} from "./pages/clients/clientSingle/single-client.
 import {MailComponent} from "./pages/clients/mail/mail.component";
 import {CustomersComponent } from "./pages/customers/customers.component";
 import {SingleclientheaderComponent} from "./pages/clients/clientSingle/singleclientheader/singleclientheader.component";
-import {ClientdataComponent} from "./pages/clients/clientSingle/clientdata/clientdata.component";
-import {ClienthistoryComponent} from "./pages/clients/clientSingle/clienthistory/clienthistory.component";
-import {ClientproductComponent} from "./pages/clients/clientSingle/clientproduct/clientproduct.component";
 import {AddCallComponent} from "./pages/clients/clientSingle/options/addCall/add-call.component";
 import {OptionsClientService} from "./pages/clients/clientSingle/options/options-client.service";
 import {AddNoteComponent} from "./pages/clients/clientSingle/options/addNote/add-note.component";
@@ -40,6 +37,13 @@ import {AddTillComponent} from "./pages/clients/clientSingle/options/addProduct/
 import {CallComponent} from "./pages/clients/call/call.component";
 
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
+import {ClientSingleDashboardComponent} from "./pages/clients/clientSingle/dashboard/client-single-dashboard.component";
+import {SendMailComponent} from "./pages/clients/clientSingle/options/sendMail/send-mail.component";
+import {ClientBlockComponent} from "./pages/clients/clientSingle/options/block/client-block.component";
+import {ClientdataComponent} from "./pages/clients/clientSingle/dashboard/clientdata/clientdata.component";
+import {ClienthistoryComponent} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.component";
+import {ClientproductComponent} from "./pages/clients/clientSingle/dashboard/clientproduct/clientproduct.component";
+import {ClientDataSharingService} from "./shared/data/data";
 
 
 //when creating a component, add it here
@@ -55,9 +59,10 @@ import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
         ClienthistoryComponent,ClientproductComponent,
         AddCallComponent, AddNoteComponent,
         AddProductComponent, AddTicketeComponent,
-        AddTillComponent, CallComponent, ChangeCredentialsComponent
+        AddTillComponent, CallComponent, ChangeCredentialsComponent,
+        ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent,
          ],
-    providers: [ClientService, AuthService, AuthGuard, OptionsClientService],
+    providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService],
     bootstrap: [AppComponent],
 })
 

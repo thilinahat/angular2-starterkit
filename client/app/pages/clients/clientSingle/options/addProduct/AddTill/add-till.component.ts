@@ -27,6 +27,7 @@ export class AddTillComponent {
     @Input()
     branchId:String;
 
+
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
 

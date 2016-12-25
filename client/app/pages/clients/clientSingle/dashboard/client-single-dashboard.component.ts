@@ -1,32 +1,32 @@
 import {Component} from "@angular/core";
-import {ClientService} from "../../../services/client.service";
 import {  ActivatedRoute } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
-import {ClientDataSharingService} from "../../../shared/data/data";
 import {Subscription} from "rxjs";
+import {ClientService} from "../../../../services/client.service";
+import {ClientDataSharingService} from "../../../../shared/data/data";
 
 @Component({
 
-    selector: 'singleclient',
-    templateUrl: 'single-client.template.html',
-    styles:['.nav-tabs{padding: 10px;} li:hover{background: rgba(255, 255, 255, 0.5); border-radius: 2px;}']
+    selector: 'client-dash-board',
+    templateUrl: 'client-single-dashboard.template.html',
+    styles:['.client-header{padding-left: 20px}']
+
 
 
 })
 
-export class SingleClientComponent {
+export class ClientSingleDashboardComponent {
 
     id: String;
+
     private sub: Subscription;
-    private errorMessage:any;
     subscription:Subscription;
-    client:any;
+
+    private errorMessage:any;
 
 
     ngOnInit() {
-
-        //this.dataHolder.client = "abcd";
 
         this.sub = this.route.params.subscribe(params => {
             this.id = params['clientId'];
@@ -44,6 +44,7 @@ export class SingleClientComponent {
 
     }
 
+    client:any;
 
 
     constructor(

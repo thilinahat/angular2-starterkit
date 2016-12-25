@@ -16,7 +16,7 @@
                                     <div class="ripple-container"></div></a>
                             </li>
 
-                            <li *ngFor="let header of headerItems" [class.active]="header.path === (currentactivepath) ">
+                            <li *ngFor="let header of headerItems" [class.active]="header.path === (currentactivepath) " routerLinkActive="active">
                                 <a routerLink="{{header.path}}">
                                     <small>{{header.name}}</small>
                                 </a>

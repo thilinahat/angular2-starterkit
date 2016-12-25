@@ -1,0 +1,23 @@
+
+    <h3>mail component for :{{client.company_name}}</h3>
+
+    <div class="row sendButtonRow">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <button type="button" class="btn btn-primary" (click)="modal.open()">Send New Email</button>
+        </div>
+    </div>
+    <modal #modal>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">Send new Email to <i>{{client.company_name}}</i>  </h4>
+        </modal-header>
+        <modal-body>
+            <form (ngSubmit)="onSubmit()" #mailForm="ngForm">
+                <h2>Block</h2>
+                <button type="submit" class="btn btn-primary" [disabled]="!mailForm.form.valid" (click)="modal.close()"> Send </button>
+            </form>
+        </modal-body>
+    </modal>
+
+
+

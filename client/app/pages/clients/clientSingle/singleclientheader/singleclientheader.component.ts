@@ -26,12 +26,14 @@ export class SingleclientheaderComponent {
             this.client.client_id = params['clientId'];
         });
 
+        this.route.snapshot.data['client'] = "client Name";
+
+
         this.currentactivepath = "/" + this.route.snapshot.url.join('/');
 
-        console.log("abc".indexOf("abc")==0);
        // console.log(this.route.snapshot.url.join('/'));
         this.headerItems = [
-            {name:"details",path:"/operator/clients/" + this.client.client_id , active:false},
+            {name:"details 1",path:"/operator/clients/" + this.client.client_id , active:false},
             {name:"edit",path:"/operator/clients/" + this.client.client_id +"/edit", active:false},
             {name:"add call",path:"/operator/clients/" + this.client.client_id +"/addcall", active:false},
             {name:"add note",path:"/operator/clients/" + this.client.client_id + "/addnote", active:true},

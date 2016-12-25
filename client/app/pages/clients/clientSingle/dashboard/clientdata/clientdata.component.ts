@@ -1,7 +1,7 @@
 
 import {Component, Input} from "@angular/core";
-import {ClientService} from "../../../../services/client.service";
 import {ActivatedRoute} from "@angular/router";
+import {ClientService} from "../../../../../services/client.service";
 
 @Component({
 
@@ -17,7 +17,7 @@ export class ClientdataComponent {
     id: String;
     private sub: any;
     ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
+        this.sub = this.route.parent.params.subscribe(params => {
             this.id = params['clientId']; // (+) converts string 'id' to a number
 
             // In a real app: dispatch action to load the details here.
