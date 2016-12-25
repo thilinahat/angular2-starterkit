@@ -293,13 +293,28 @@ export class AddclientsComponent {
         this.emailInput.nativeElement.value = "";
     }
 
+    onRemoveEmail(mail: string): void{
+        this.emails.splice(this.emails.indexOf(mail), 1);
+        console.log(this.emails)
+    }
+
     onAddPhone(phone: string): void{
         this.phones.push(phone);
         this.phoneInput.nativeElement.value = "";
     }
 
+    onRemovePhone(phone: string): void{
+        this.phones.splice(this.phones.indexOf(phone), 1);
+        console.log(this.phones)
+    }
+
     onAddFax(fax: string): void{
         this.faxes.push(fax);
         this.faxInput.nativeElement.value = "";
+    }
+
+    onRemoveFax(fax: string): void{
+        this.faxes.splice(this.faxes.indexOf(fax), 1);
+        console.log(this.faxes)
     }
 }

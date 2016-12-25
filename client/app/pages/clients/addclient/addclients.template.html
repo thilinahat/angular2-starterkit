@@ -54,8 +54,12 @@
                 <div class="form-group">
                     <label for="email">
                         Email
-                        <span class="tags" *ngFor="let mail of emails">{{mail}}</span>
                     </label>
+                    <div class="tag-container">
+                        <div class="tags" *ngFor="let mail of emails">
+                            {{mail}}
+                            <i class="material-icons" (click)="onRemoveEmail(mail)">close</i></div>
+                    </div>
                     <div class="tag-input-container">
                         <input #emailInput type="email" class="form-control" id="email" name="email" ngModel >
                         <button type="button" class="btn btn-default add-more" (click)="onAddEmail(clientForm.value.email)">
@@ -67,8 +71,12 @@
                 <div class="form-group">
                     <label for="phone">
                         Phone
-                        <span class="tags" *ngFor="let phone of phones">{{phone}}</span>
                     </label>
+                    <div class="tag-container">
+                        <div class="tags" *ngFor="let phone of phones">
+                            {{phone}}
+                            <i class="material-icons" (click)="onRemovePhone(phone)">close</i></div>
+                    </div>
                     <div class="tag-input-container">
                         <input #phoneInput type="text" class="form-control" id="phone" name="phone" ngModel >
                         <button type="button" class="btn btn-default add-more" (click)="onAddPhone(clientForm.value.phone)">
@@ -80,8 +88,12 @@
                 <div class="form-group">
                     <label for="fax">
                         Fax
-                        <span class="tags" *ngFor="let fax of faxes">{{fax}}</span>
                     </label>
+                    <div class="tag-container">
+                        <div class="tags" *ngFor="let fax of faxes">
+                            {{fax}}
+                            <i class="material-icons" (click)="onRemoveFax(fax)">close</i></div>
+                    </div>
                     <div class="tag-input-container">
                         <input #faxInput type="text" class="form-control" id="fax" name="fax" ngModel >
                         <button type="button" class="btn btn-default add-more" (click)="onAddFax(clientForm.value.fax)">

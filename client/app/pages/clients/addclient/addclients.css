@@ -3,14 +3,29 @@
 .form-container{
     margin: 50px 30px;
 }
-.tags{
+
+.tag-container {
     display: inline;
-    color: white;
-    margin: 10px -20px 10px 30px;
-    border-radius: 30px;
-    background: rgba(140, 45, 175, 0.58); /*var(--primary-green-dark);*/
-    padding: 10px;
 }
+
+.tags{
+    display: inline-flex;
+    color: white;
+    margin: -5px -20px 8px 25px;
+    border-radius: 30px;
+    background: rgba(140, 45, 175, 0.58);
+    padding: 5px 10px;
+}
+
+.tags  > i{
+    display: inline;
+    margin: 0 -5px 0 10px;
+    border: 2px solid white;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
 .tag-input-container{
     display: flex;
 }
@@ -19,6 +34,7 @@
     width: 70%;
 }
 .tag-input-container .add-more{
+    padding: 12px;
     display: inline;
     margin: -5px 0 0 35px;
     border-radius: 30px;
@@ -32,8 +48,8 @@
 }
 
 .add-more>i{
-    font-size: 30px;
-    left: -8px;
-    top: -2px;
+    font-size: 24px;
+    left: -4px;
+    top: -3px;
 
 }

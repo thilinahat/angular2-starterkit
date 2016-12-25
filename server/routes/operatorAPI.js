@@ -82,7 +82,7 @@ router.post('/add-client', logoUploader, function (req, res) {
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
-        // stage_id and blocked field is hard coded here
+        // TODO : stage_id and blocked field is hard coded here
         let sql = 'INSERT INTO client ' +
             '(company_name, address, contact_person_name, web_site, stage_id, country, town, mlr_number, postal_code, business_registration, blocked, logo_file_name)' +
             ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
