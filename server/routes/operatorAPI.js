@@ -8,7 +8,7 @@ var path = require('path');
 var mysqlConnectionPool = require('../mysqlConnectionPool');
 var mysql = require('mysql');
 var config = require('../../config');
-
+var UserService = require('../services/userService');
 var router = express.Router();
 
 // middleware protect api routes
@@ -92,46 +92,62 @@ router.post('/add-client', logoUploader, function (req, res) {
             if (err) {
                 return res.status(406).json({
                     success: false,
-                    status: 'Failed while inserting client general data',
+                    status: 'Failed while inserting to client table',
                     message: err
                 });
             }
 
             client.id = rows.insertId;
 
-            if(client.emails && client.emails.length > 0) {
-                sql = "INSERT INTO client_mail (client_id, mail) VALUES ?";
-                values.length = 0;
-                client.emails.forEach(mail => {
-                    values.push([client.id, mail]);
+            var user = {
+                id: client.id,
+                username: config.client.usernamePrefix + "_" + client.id,
+                password: config.client.passwordPrefix + "_" + client.id,
+                role: config.roles.client
+            };
+
+            UserService.addUser(user).then(response => {
+                if(client.emails && client.emails.length > 0) {
+                    sql = "INSERT INTO client_mail (client_id, mail) VALUES ?";
+                    values.length = 0;
+                    client.emails.forEach(mail => {
+                        values.push([client.id, mail]);
+                    });
+
+                    connection.query(sql, [values], function (err) {
+                        if (err) throw err;
+                    });
+                }
+                if(client.phones && client.phones.length > 0){
+                    sql = "INSERT INTO client_phone (client_id, phone) VALUES ?";
+                    values.length = 0;
+                    client.phones.forEach(phone => {
+                        values.push([client.id, phone]);
+                    });
+                    connection.query(sql, [values], function(err) {
+                        if (err) throw err;
+                    });
+                }
+                if(client.faxes && client.faxes.length > 0){
+                    sql = "INSERT INTO client_fax (client_id, fax) VALUES ?";
+                    values.length = 0;
+                    client.faxes.forEach(fax => {
+                        values.push([client.id, fax]);
+                    });
+                    connection.query(sql, [values], function(err) {
+                        if (err) throw err;
+                    });
+                }
+
+                connection.release();
+                res.sendStatus(200);
+            }, err => {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting to user table',
+                    message: err
+                });
             });
-
-                connection.query(sql, [values], function (err) {
-                    if (err) throw err;
-                });
-            }
-             if(client.phones && client.phones.length > 0){
-                sql = "INSERT INTO client_phone (client_id, phone) VALUES ?";
-                values.length = 0;
-                client.phones.forEach(phone => {
-                    values.push([client.id, phone]);
-                });
-                connection.query(sql, [values], function(err) {
-                    if (err) throw err;
-                });
-            } if(client.faxes && client.faxes.length > 0){
-                sql = "INSERT INTO client_fax (client_id, fax) VALUES ?";
-                values.length = 0;
-                client.faxes.forEach(fax => {
-                    values.push([client.id, fax]);
-                });
-                connection.query(sql, [values], function(err) {
-                    if (err) throw err;
-                });
-            }
-
-            connection.release();
-            res.sendStatus(200);
         });
     });
 });

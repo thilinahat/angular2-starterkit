@@ -15,6 +15,7 @@ import {MailComponent} from "./pages/clients/mail/mail.component";
 import { LoginComponent } from "./pages/login/login.component";
 import {CustomersComponent } from "./pages/customers/customers.component";
 import {CallComponent} from "./pages/clients/call/call.component";
+import {ChangeCredentialsComponent} from "./shared/changeCredentials/changeCredentials.component";
 
 
 import { AuthGuard } from './guards/auth.gaurd';
@@ -26,6 +27,7 @@ import {AddProductComponent} from "./pages/clients/clientSingle/options/addProdu
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
+    { path: 'change/credentials', component: ChangeCredentialsComponent, canActivate: [AuthGuard] },
     { path: 'operator/clients/search', component: ClientsComponent, canActivate: [AuthGuard] },
     { path: 'operator/clients/addclient', component: AddclientsComponent, canActivate: [AuthGuard] },
     { path: 'operator/clients',redirectTo: 'operator/clients/search' },

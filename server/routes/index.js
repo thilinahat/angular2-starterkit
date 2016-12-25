@@ -43,6 +43,33 @@ router.post('/verify/user', function(req, res, next){
 
 });
 
+router.post('/change-credentials', function(req, res, next){
+    const token = req.cookies['CRM_COOKIE'];
+    if (token) {
+        jwt.verify(token, config.jwtSecret, (err, decodedToken) => {
+            "use strict";
+            if (err) {
+                res.status(403).json({
+                    success: false,
+                    message: 'Failed to Authenticate Token.'
+                });
+            } else {
+                AuthService.changeCredentials(req.body.credentials, decodedToken.uid, decodedToken.role).then(response => {
+                    res.status(200).json({redirectURL: response});
+                }, err => {
+                    return res.sendStatus(406);
+                });
+            }
+        });
+    } else {
+        res.status(403).json({
+            success: false,
+            message: 'No Token Provided.'
+        });
+    }
+
+});
+
 router.get('/', function(req, res, next){
 
     res.render('index.html');

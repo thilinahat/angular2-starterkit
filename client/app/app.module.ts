@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app.routing';
 import {NavbarheaderComponent} from "./shared/navigation/navbarheader/navbarheader.component";
 import {AddclientsComponent} from "./pages/clients/addclient/addclients.component";
 import { LoginComponent } from './pages/login/login.component';
+import { ChangeCredentialsComponent } from './shared/changeCredentials/changeCredentials.component';
 
 
 
@@ -43,7 +44,7 @@ import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 //when creating a component, add it here
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule, MainPipeModule,Ng2Bs3ModalModule],
+    imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule, MainPipeModule, Ng2Bs3ModalModule],
     declarations: [AppComponent, ClientsComponent,
         DashboardComponent, TicketsComponent,
         ReportsComponent, SidenavigationComponent,
@@ -54,7 +55,7 @@ import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
         ClienthistoryComponent,ClientproductComponent,
         AddCallComponent, AddNoteComponent,
         AddProductComponent, AddTicketeComponent,
-        AddTillComponent, CallComponent
+        AddTillComponent, CallComponent, ChangeCredentialsComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService],
     bootstrap: [AppComponent],
