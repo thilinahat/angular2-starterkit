@@ -655,7 +655,8 @@ h2.title {
   position: relative;
   z-index: 2;
   float: right;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   width: calc(100% - 260px);
   min-height: 100%;
   -webkit-transform: translate3d(0px, 0, 0);

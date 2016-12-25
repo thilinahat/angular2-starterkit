@@ -18,6 +18,7 @@ export class AddclientsComponent {
     @ViewChild('faxInput')
     faxInput: any;
 
+    submitBtnText: string = 'Add';
     states: string[] = ['Initial', 'Old', 'Terminated', 'Blocked'];
     countries: any[] = [
     {name: 'Afghanistan', code: 'AF'},
@@ -236,6 +237,18 @@ export class AddclientsComponent {
     {name: 'Zambia', code: 'ZM'},
     {name: 'Zimbabwe', code: 'ZW'},
 ];
+
+    company: string = '';
+    contactPerson: string = '';
+    website: string = '';
+    status: string = 'Initial';
+    country: string = 'United Kingdom';
+    mlr: string = '';
+    businessRegistration: string = '';
+    address: string = '';
+    town: string = '';
+    postalCode: number = null;
+
 
     emails: string[] = [];
     phones: string[] = [];

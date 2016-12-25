@@ -38,6 +38,7 @@ import {AddProductComponent} from "./pages/clients/clientSingle/options/addProdu
 import {AddTicketeComponent} from "./pages/clients/clientSingle/options/addTicket/add-ticket.component";
 import {AddTillComponent} from "./pages/clients/clientSingle/options/addProduct/AddTill/add-till.component";
 import {CallComponent} from "./pages/clients/call/call.component";
+import {ClientEditComponent} from "./pages/clients/clientSingle/clientedit/clientedit.component";
 
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
@@ -55,7 +56,7 @@ import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
         ClienthistoryComponent,ClientproductComponent,
         AddCallComponent, AddNoteComponent,
         AddProductComponent, AddTicketeComponent,
-        AddTillComponent, CallComponent, ChangeCredentialsComponent
+        AddTillComponent, CallComponent, ChangeCredentialsComponent, ClientEditComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService],
     bootstrap: [AppComponent],

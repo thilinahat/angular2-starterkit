@@ -12,41 +12,41 @@
                 <!--company-->
                 <div class="form-group">
                     <label for="company">Company</label>
-                    <input type="text" class="form-control" id="company" name="company" ngModel >
+                    <input type="text" class="form-control" id="company" name="company" [(ngModel)]="company" >
                 </div>
                 <!--contact person-->
                 <div class="form-group">
                     <label for="contactPerson">Contact Person</label>
-                    <input type="text" class="form-control" id="contactPerson" name="contactPerson" ngModel >
+                    <input type="text" class="form-control" id="contactPerson" name="contactPerson" [(ngModel)]="contactPerson" >
                 </div>
                 <!--website-->
                 <div class="form-group">
                     <label for="website">Web Site</label>
-                    <input type="text" class="form-control" id="website" name="website" ngModel >
+                    <input type="text" class="form-control" id="website" name="website" [(ngModel)]="website" >
                 </div>
                 <!--status-->
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <select class="form-control" id="status" name="status" ngModel>
+                    <select class="form-control" id="status" name="status" [(ngModel)]="status">
                         <option *ngFor="let state of states" [value]="state">{{state}}</option>
                     </select>
                 </div>
                 <!--country-->
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <select class="form-control" id="country" name="country" ngModel>
+                    <select class="form-control" id="country" name="country" [(ngModel)]="country">
                         <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
                     </select>
                 </div>
                 <!--MLR Number-->
                 <div class="form-group">
                     <label for="mlr">MLR Number</label>
-                    <input type="text" class="form-control" id="mlr" name="mlr" ngModel >
+                    <input type="text" class="form-control" id="mlr" name="mlr" [(ngModel)]="mlr" >
                 </div>
                 <!--business registration-->
                 <div class="form-group">
                     <label for="bus-registration">Business Registration</label>
-                    <input type="text" class="form-control" id="bus-registration" name="businessRegistration" ngModel >
+                    <input type="text" class="form-control" id="bus-registration" name="businessRegistration" [(ngModel)]="businessRegistration" >
                 </div>
             </div>
             <div class="col-md-6">
@@ -104,17 +104,17 @@
                 <!--address-->
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" ngModel >
+                    <input type="text" class="form-control" id="address" name="address" [(ngModel)]="address" >
                 </div>
                 <!--town-->
                 <div class="form-group">
                     <label for="town">Town</label>
-                    <input type="text" class="form-control" id="town" name="town" ngModel >
+                    <input type="text" class="form-control" id="town" name="town" [(ngModel)]="town" >
                 </div>
                 <!--postal code-->
                 <div class="form-group">
                     <label for="postalCode">Postal Code</label>
-                    <input type="number" class="form-control" id="postalCode" name="postalCode" ngModel >
+                    <input type="number" class="form-control" id="postalCode" name="postalCode" [(ngModel)]="postalCode" >
                 </div>
                 <!--Logo-->
                 <div class="form-group is-empty is-fileinput">
@@ -124,7 +124,7 @@
                 </div>
             </div>
             <!--submit-->
-            <button type="submit" class="btn btn-default">Add</button>
+            <button type="submit" class="btn btn-primary">{{submitBtnText}}</button>
         </form>
     </div>
 </div>

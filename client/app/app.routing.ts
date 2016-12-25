@@ -24,6 +24,7 @@ import {AddCallComponent} from "./pages/clients/clientSingle/options/addCall/add
 import {AddNoteComponent} from "./pages/clients/clientSingle/options/addNote/add-note.component";
 import {AddTicketeComponent} from "./pages/clients/clientSingle/options/addTicket/add-ticket.component";
 import {AddProductComponent} from "./pages/clients/clientSingle/options/addProduct/add-product.component";
+import {ClientEditComponent} from "./pages/clients/clientSingle/clientedit/clientedit.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
     { path: 'operator/clients/:clientId/addnote', component: AddNoteComponent, canActivate: [AuthGuard] },
     { path: 'operator/clients/:clientId/addticket', component: AddTicketeComponent, canActivate: [AuthGuard] },
     { path: 'operator/clients/:clientId/addproduct', component: AddProductComponent, canActivate: [AuthGuard] },
+    { path: 'operator/clients/:clientId/edit', component: ClientEditComponent, canActivate: [AuthGuard] },
 
     { path: 'operator/clients/:clientId',component: SingleClientComponent , canActivate: [AuthGuard] },
     { path: 'operator/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
