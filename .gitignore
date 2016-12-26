@@ -5,4 +5,5 @@ product.sql
 vinitcrm.sql
 dist/
 typings/
-
+server/uploads/logos/*
+server/uploads/contracts/*
