@@ -9,7 +9,7 @@ export class ClientDataSharingService {
     // Observable navItem stream
     clientData$ = this._navItemSource.asObservable();
     // service command
-    changeNav(client:any) {
+    changeClient(client:any) {
         this._navItemSource.next(client);
     }
 }

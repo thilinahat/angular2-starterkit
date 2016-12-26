@@ -5,6 +5,8 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var multer = require('multer');
 var path = require('path');
+var datetime = require('node-datetime');
+
 var mysqlConnectionPool = require('../mysqlConnectionPool');
 var mysql = require('mysql');
 var config = require('../../config');
@@ -334,7 +336,6 @@ router.get('/client/data/:clientId/fax', function (req, res, next) {
 
         if(err){
             console.log("Error wihile connecting database");
-            console.log(err);
         }
 
 
@@ -502,7 +503,7 @@ router.get('/client/data/:clientId/branches', function (req, res, next) {
 });
 
 //route for adding a branch to a client/*
-router.post('/client/addbranch', logoUploader, function (req, res) {
+router.post('/client/addbranch',  function (req, res) {
 
     const clientBranch = req.body.data;
 
@@ -536,20 +537,17 @@ router.post('/client/addtill', logoUploader, function (req, res) {
 
     const clientTill = req.body.data;
 
-    console.log(clientTill);
-
     mysqlConnectionPool.getConnection(function(err, connection) {
 
 
 
-           var SQL = "INSERT INTO `vinit_crm`.`till` (`till_id`, `till_key`, `expiredate`, `client_id`, `branch_id`,  `product_Id`) " +
-               "VALUES (NULL, ?, ? , ?, ? , ? );";
+           var SQL = "INSERT INTO `vinit_crm`.`till` (`till_id`, `till_key`, `expiredate`, `client_id`, `branch_id`,  `product_Id`) "
+               + "VALUES (NULL, ?, ? , ?, ? , ? );";
 
         var values = [clientTill.tillKey, clientTill.expireDate, clientTill.clientId, clientTill.branchId , clientTill.productId];
 
         SQL = mysql.format(SQL, values);
 
-        console.log(SQL);
 
         connection.query( SQL,  function(err, result) {
             if (err) {
@@ -563,6 +561,167 @@ router.post('/client/addtill', logoUploader, function (req, res) {
             res.sendStatus(200);
 
         });
+    });
+
+});
+
+//route for block a client/*
+router.post('/client/block',  function (req, res) {
+
+    const data = req.body.data;
+
+    if(!data || !data.clientId || !data.note ) { res.sendStatus(406); return;}
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        var dt = datetime.create();
+
+        //format to insert to the data base 2016-12-26 00:07:18
+        var formatted = dt.format('Y-m-d H:M:S');
+
+        var logSQL = "INSERT INTO `vinit_crm`.`block_unblock_client_note` (`client_id`, `user_id`, `note`, `loggedTime`) "
+            + "VALUES ('?', '?', ?, ?);"
+
+        var logValues = [data.clientId, req.decoded.uid , data.note, formatted];
+
+        logSQL = mysql.format(logSQL, logValues);
+
+        var updateSQL = "UPDATE `vinit_crm`.`client` SET `blocked` = \'1\' WHERE `client`.`client_id` = '?';";
+
+        var updateValues = [data.clientId];
+
+        updateSQL = mysql.format(updateSQL, updateValues);
+
+        //transaction for adding data to both log and updating client
+        connection.beginTransaction(function(err) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting client general data',
+                    message: err
+                });
+            }
+            connection.query( logSQL, function(err, result) {
+                if (err) {
+                    return connection.rollback(function() {
+                        res.status(406).json({
+                            success: false,
+                            status: 'Failed while inserting client general data',
+                            message: err
+                        });
+                    });
+                }
+
+
+                connection.query(updateSQL, function(err, result) {
+                    if (err) {
+                        return connection.rollback(function() {
+                             res.status(406).json({
+                                success: false,
+                                status: 'Failed while inserting client general data',
+                                message: err
+                            });
+                        });
+                    }
+                    connection.commit(function(err) {
+                        if (err) {
+                            return connection.rollback(function() {
+                                res.status(406).json({
+                                    success: false,
+                                    status: 'Failed while inserting client general data',
+                                    message: err
+                                });
+                            });
+                        }
+                        res.sendStatus(200);
+                    });
+                });
+            });
+        });
+        connection.release();
+
+
+    });
+
+});
+
+
+//route for UNblock a client/*
+router.post('/client/unblock',  function (req, res) {
+
+    const data = req.body.data;
+
+    if(!data || !data.clientId || !data.note ) { res.sendStatus(406); return;}
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        var dt = datetime.create();
+
+        //format to insert to the data base 2016-12-26 00:07:18
+        var formatted = dt.format('Y-m-d H:M:S');
+
+        var logSQL = "INSERT INTO `vinit_crm`.`block_unblock_client_note` (`client_id`, `user_id`, `note`, `loggedTime`) "
+            + "VALUES ('?', '?', ?, ?);"
+
+        var logValues = [data.clientId, req.decoded.uid , data.note, formatted];
+
+        logSQL = mysql.format(logSQL, logValues);
+
+        var updateSQL = "UPDATE `vinit_crm`.`client` SET `blocked` = \'0\' WHERE `client`.`client_id` = '?';";
+
+        var updateValues = [data.clientId];
+
+        updateSQL = mysql.format(updateSQL, updateValues);
+
+        //transaction for adding data to both log and updating client
+        connection.beginTransaction(function(err) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting client general data',
+                    message: err
+                });
+            }
+            connection.query( logSQL, function(err, result) {
+                if (err) {
+                    return connection.rollback(function() {
+                        res.status(406).json({
+                            success: false,
+                            status: 'Failed while inserting client general data',
+                            message: err
+                        });
+                    });
+                }
+
+
+                connection.query(updateSQL, function(err, result) {
+                    if (err) {
+                        return connection.rollback(function() {
+                            res.status(406).json({
+                                success: false,
+                                status: 'Failed while inserting client general data',
+                                message: err
+                            });
+                        });
+                    }
+                    connection.commit(function(err) {
+                        if (err) {
+                            return connection.rollback(function() {
+                                res.status(406).json({
+                                    success: false,
+                                    status: 'Failed while inserting client general data',
+                                    message: err
+                                });
+                            });
+                        }
+                        res.sendStatus(200);
+                    });
+                });
+            });
+        });
+        connection.release();
+
+
     });
 
 });

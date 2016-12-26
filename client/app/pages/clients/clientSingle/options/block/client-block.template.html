@@ -24,13 +24,13 @@
 
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label">Add a note</label>
-                                        <textarea class="form-control" rows="5" required="true"></textarea>
+                                        <textarea class="form-control" rows="5" required="true" [(ngModel)]="note" name="note"></textarea>
                                         <span class="material-input"></span></div>
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-danger pull-right">Block<div class="ripple-container"></div></button>
+                        <button type="submit" class="btn btn-danger pull-right" (click)="blockClient()">Block<div class="ripple-container"></div></button>
                         <div class="clearfix"></div>
                     </form>
 
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-facebook pull-right">Un-Block<div class="ripple-container"></div></button>
+                            <button type="submit" class="btn btn-facebook pull-right" (click)="unBlockClient()">Un-Block<div class="ripple-container"></div></button>
                             <div class="clearfix"></div>
                         </form>
 

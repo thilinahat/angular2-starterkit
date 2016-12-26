@@ -3,6 +3,7 @@ import {  ActivatedRoute } from '@angular/router';
 import { OptionsClientService } from "../options-client.service";
 import {ClientDataSharingService} from "../../../../../shared/data/data";
 import {Subscription} from "rxjs";
+import {ClientService} from "../../../../../services/client.service";
 
 
 @Component({
@@ -16,6 +17,8 @@ export class ClientBlockComponent {
 
     subscription:Subscription;
     client:any;
+    note:String; // to keep why block, unblock
+    errorMessage:String;
 
     ngOnInit() {
 
@@ -31,13 +34,54 @@ export class ClientBlockComponent {
 
     constructor(
         private route:ActivatedRoute,
-        private clientService: OptionsClientService,
-        private dataHolder: ClientDataSharingService
+        private optionsClientService: OptionsClientService,
+        private dataHolder: ClientDataSharingService,
+        private clientService: ClientService
 
-    ){
+    ){    }
+
+    blockClient (){
+        var data = {
+            note:this.note,
+            clientId:this.client.client_id
+        };
+
+        this.optionsClientService.blockClient(data)
+            .then(
+                res  => this.handleBlockClient(),
+                error =>  this.errorMessage = <any>error);
 
     }
 
+    handleBlockClient(){
+        this.reloadClientData();
+        this.note = '';
+        alert("blocked");
+    }
 
+    unBlockClient (){
+        var data = {
+            note:this.note,
+            clientId:this.client.client_id
+        };
+
+        this.optionsClientService.unBlockClient(data)
+            .then(
+                res  => this.handleUnBlockClient(),
+                error =>  this.errorMessage = <any>error);
+
+    }
+
+    handleUnBlockClient(){
+        this.reloadClientData();
+        this.note = '';
+        alert("un blocked");
+    }
+
+    reloadClientData(){
+        this.clientService.getClientData(this.client.client_id).
+        then(clientdata => this.dataHolder.changeClient(clientdata),
+            error =>  this.errorMessage = <any>error );
+    }
 
 }

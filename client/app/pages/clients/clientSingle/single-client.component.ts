@@ -33,7 +33,7 @@ export class SingleClientComponent {
         });
 
         this.clientService.getClientData(this.id).
-        then(clientdata => this.dataHolder.changeNav(clientdata),
+        then(clientdata => this.dataHolder.changeClient(clientdata),
             error =>  this.errorMessage = <any>error );
 
 

@@ -12,6 +12,8 @@ export class OptionsClientService {
     private clientAddProducturl = 'api/operator/client/addproduct';
     private clientAddBranchurl = 'api/operator/client/addbranch';
     private clientAddTillurl = 'api/operator/client/addtill';
+    private clientBlockUrl =  'api/operator/client/block';
+    private clientUnBlockUrl =  'api/operator/client/unblock';
 
 
 
@@ -71,6 +73,22 @@ export class OptionsClientService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.clientAddTillurl, { data })
+            .toPromise()
+            .catch(this.handleError);
+    }
+
+    blockClient (data: any): Promise<any> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.clientBlockUrl, { data })
+            .toPromise()
+            .catch(this.handleError);
+    }
+
+    unBlockClient (data: any): Promise<any> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.clientUnBlockUrl, { data })
             .toPromise()
             .catch(this.handleError);
     }
