@@ -1,6 +1,8 @@
 import {Component, Input,} from "@angular/core";
 import {  ActivatedRoute } from '@angular/router';
 import {OptionsClientService} from "../options-client.service";
+import {ClientDataSharingService} from "../../../../../shared/data/data";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -20,24 +22,25 @@ export class AddTicketeComponent {
     errorMessage:string;
     sub:any;
 
-    ngOnInit(){
-        this.sub = this.route.params.subscribe(params => {
+    subscription:Subscription;
 
-            this.id = params['clientId']; // (
+    ngOnInit() {
 
-        });
+        this.subscription = this.dataHolder.clientData$.subscribe(
+            client => this.client = client
+        )
 
-        this.client = this.clientService.getClientName(this.id).
-        then(clientdata => this.client = clientdata,
-            error =>  this.errorMessage = <any>error );
+    }
+    ngOnDestroy() {
+        // prevent memory leak when component is destroyed
+        this.subscription.unsubscribe();
     }
 
     constructor(
         private route:ActivatedRoute,
-        private clientService: OptionsClientService
+        private clientService: OptionsClientService,
+        private dataHolder: ClientDataSharingService
 
-    ){
-
-    }
+    ){    }
 
 }

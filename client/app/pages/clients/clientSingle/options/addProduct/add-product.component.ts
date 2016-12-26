@@ -2,6 +2,8 @@ import {Component, Input,} from "@angular/core";
 import {  ActivatedRoute } from '@angular/router';
 import {OptionsClientService} from "../options-client.service";
 import {forEach} from "@angular/router/src/utils/collection";
+import {Subscription} from "rxjs";
+import {ClientDataSharingService} from "../../../../../shared/data/data";
 
 
 @Component({
@@ -33,25 +35,34 @@ export class AddProductComponent {
     id:string;
     errorMessage:string = 'default error    ';
     inputError:boolean = false;
-    sub:any;
+    sub:Subscription;
 
     products:any[] = [];
     otherproducts:any[] = [];
 
     showAddNewProduct:boolean = false;
     showAddNewbranch:boolean = false;
-    testarray:any[] = [];
+
+    subscription:Subscription;
+
+    ngOnDestroy() {
+        // prevent memory leak when component is destroyed
+        this.subscription.unsubscribe();
+        this.sub.unsubscribe();
+    }
+
 
     ngOnInit(){
-        this.sub = this.route.params.subscribe(params => {
+
+        this.subscription = this.dataHolder.clientData$.subscribe(
+            client => this.client = client
+        )
+
+        this.sub = this.route.parent.params.subscribe(params => {
 
             this.id = params['clientId'];
 
         });
-
-         this.clientService.getClientName(this.id).
-        then(clientdata => this.client = clientdata,
-            error =>  this.errorMessage = <any>error );
 
 
         this.clientService.getClientProducts(this.id).
@@ -68,7 +79,8 @@ export class AddProductComponent {
 
     constructor(
         private route:ActivatedRoute,
-        private clientService: OptionsClientService
+        private clientService: OptionsClientService,
+        private dataHolder: ClientDataSharingService
 
     ){    }
 
@@ -163,6 +175,10 @@ export class AddProductComponent {
             }
 
         }
+
+    }
+
+    getInitialData(client:any){
 
     }
 }

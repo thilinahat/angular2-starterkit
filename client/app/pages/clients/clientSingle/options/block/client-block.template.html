@@ -1,0 +1,64 @@
+
+
+
+    <div class="row">
+
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header" data-background-color="purple">
+                    <h4 class="title" *ngIf="client.blocked != 1">Block Client : {{client.company_name}}</h4>
+                    <h4 class="title" *ngIf="client.blocked != 0">Un Block Client : {{client.company_name}}</h4>
+
+                </div>
+                <div class="card-content" >
+                    <h4 class="title" *ngIf="client.blocked != 1">Client : {{client.company_name}} will be blocked !</h4>
+                    <h4 class="title" *ngIf="client.blocked != 0">Client : {{client.company_name}} will be un blocked</h4>
+
+                    <form *ngIf="client.blocked != 1">
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Add a note</label>
+                                        <textarea class="form-control" rows="5" required="true" [(ngModel)]="note" name="note"></textarea>
+                                        <span class="material-input"></span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-danger pull-right" (click)="blockClient()">Block<div class="ripple-container"></div></button>
+                        <div class="clearfix"></div>
+                    </form>
+
+
+                    <!--if the client is already blocked-->
+                        <form *ngIf="client.blocked != 0">
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Add a note</label>
+                                            <textarea class="form-control" rows="5" required="true" [(ngModel)]="note" name="note"></textarea>
+                                            <span class="material-input"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-facebook pull-right" (click)="unBlockClient()">Un-Block<div class="ripple-container"></div></button>
+                            <div class="clearfix"></div>
+                        </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+

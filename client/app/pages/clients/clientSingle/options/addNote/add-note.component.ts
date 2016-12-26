@@ -1,11 +1,13 @@
 import {Component, Input,} from "@angular/core";
 import {  ActivatedRoute } from '@angular/router';
 import {OptionsClientService} from "../options-client.service";
+import {Subscription} from "rxjs";
+import {ClientDataSharingService} from "../../../../../shared/data/data";
 
 
 @Component({
 
-    selector:'add-call',
+    selector:'add-note',
     templateUrl:'add-note.template.html'
 
 })
@@ -13,31 +15,58 @@ import {OptionsClientService} from "../options-client.service";
 export class AddNoteComponent {
 
     client:any = {};
+    subject:String;
+    note:String;
 
-    call_time:number;
-    call_description:String;
-    id:string;
     errorMessage:string;
-    sub:any;
 
-    ngOnInit(){
-        this.sub = this.route.params.subscribe(params => {
+    subscription:Subscription;
 
-            this.id = params['clientId']; // (
+    ngOnInit() {
 
-        });
+        this.subscription = this.dataHolder.clientData$.subscribe(
+            client => this.client = client
+        )
 
-        this.client = this.clientService.getClientName(this.id).
-        then(clientdata => this.client = clientdata,
-            error =>  this.errorMessage = <any>error );
+    }
+    ngOnDestroy() {
+        // prevent memory leak when component is destroyed
+        this.subscription.unsubscribe();
     }
 
     constructor(
         private route:ActivatedRoute,
-        private clientService: OptionsClientService
+        private optionsClientService: OptionsClientService,
+        private dataHolder: ClientDataSharingService
 
-    ){
+
+    ){ }
+
+    addNote (){
+
+            if(!this.validateNote()){ return ; }
+
+        var data = {
+            subject: this.subject,
+            note:this.note,
+            clientId:this.client.client_id
+        };
+
+        this.optionsClientService.addNoteToClient(data)
+            .then(
+                res  => this.handleAddNoteClient(),
+                error =>  this.errorMessage = <any>error);
 
     }
 
+    handleAddNoteClient(){
+        this.subject = '';
+        this.note = '';
+        alert("note successfully added");
+    }
+
+    validateNote():boolean
+    {
+        return this.subject && this.subject.length != 0 && this.note && this.note.length != 0;
+    }
 }
