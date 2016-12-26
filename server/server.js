@@ -31,8 +31,8 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 // Set Multiple Static Folder
-//app.use(express.static(path.join(__dirname, '../dist')));
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, './uploads/logos')));
 
 // Body Parser MW
 app.use(bodyParser.json());
@@ -64,8 +64,8 @@ app.use('/change/credentials', index);
 app.use('/api/operator', operatorAPI); //API for operator initiated actions
 app.use('/api/admin', adminAPI); //API for admin initiated actions
 app.use('/api', api);
-app.use('/mail',mailServerImap);
-app.use('/mailsend',mailServerSMTP);
+//app.use('/mail',mailServerImap);
+//app.use('/mailsend',mailServerSMTP);
 app.use('/*', notFound);
 
 

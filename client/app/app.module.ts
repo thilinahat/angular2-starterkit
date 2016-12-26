@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app.routing';
 
 import {NavbarheaderComponent} from "./shared/navigation/navbarheader/navbarheader.component";
 import {AddclientsComponent} from "./pages/clients/addclient/addclients.component";
+import {SearchClientComponent} from "./pages/clients/searchclient/searchclient.component";
 import { LoginComponent } from './pages/login/login.component';
 import { ChangeCredentialsComponent } from './shared/changeCredentials/changeCredentials.component';
 
@@ -61,8 +62,7 @@ import {ClientDataSharingService} from "./shared/data/data";
         AddCallComponent, AddNoteComponent,
         AddProductComponent, AddTicketeComponent,
         AddTillComponent, CallComponent, ChangeCredentialsComponent,
-        ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent,
-        AddTillComponent, CallComponent, ChangeCredentialsComponent, ClientEditComponent
+        ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent, ClientEditComponent, SearchClientComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService],
     bootstrap: [AppComponent],

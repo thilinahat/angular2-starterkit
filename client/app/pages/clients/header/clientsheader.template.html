@@ -9,7 +9,7 @@
                         <span class="nav-tabs-title">Clients:</span>
                         <ul class="nav nav-tabs" data-tabs="tabs">
                             <li routerLinkActive="active">
-                                <a routerLink="/operator/clients/search" >
+                                <a [routerLink]="['search']">
                                     <i class="material-icons">search
                                     </i>
                                     Search
@@ -17,16 +17,22 @@
                             </li>
 
                             <li routerLinkActive="active">
-                                <a routerLink="/operator/clients/addclient" >
+                                <a [routerLink]="['add']" >
                                     <i class="material-icons">add</i>
                                     Add Client
                                     <div class="ripple-container"></div></a>
                             </li>
 
                             <li routerLinkActive="active">
-                                <a routerLink="/operator/clients/mail" >
+                                <a [routerLink]="['mail']" >
                                     <i class="material-icons">email</i>
                                     E-Mail
+                                    <div class="ripple-container"></div></a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['call']" >
+                                    <i class="material-icons">call</i>
+                                    Call
                                     <div class="ripple-container"></div></a>
                             </li>
                         </ul>

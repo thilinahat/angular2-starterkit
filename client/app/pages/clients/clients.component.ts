@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import { ClientService } from '../../services/client.service'
+import {  ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'clients',
@@ -9,25 +9,5 @@ import { ClientService } from '../../services/client.service'
 
 export class ClientsComponent {
 
-    clientNameAndIds: any[] = [];
-
-    searchClientName:String = '';
-    searchClientID:String = '';
-    errorMessage: any;
-
-    ngOnInit(){
-        this.clientService.getClientsNameIds().then(clientNameAndIds => this.clientNameAndIds = clientNameAndIds,
-            error =>  this.errorMessage = <any>error );
-    }
-
-
-
-
-    constructor(private clientService: ClientService) {
-
-    }
-
-
-
-
+    constructor( private route: ActivatedRoute ) {}
 }

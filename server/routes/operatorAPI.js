@@ -47,7 +47,7 @@ router.use(function (req, res, next) {
 /* logo uploading with multer middleware*/
 const logoStorage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, __dirname + '/../uploads/');
+        cb(null, __dirname + '/../uploads/logos/');
     },
     filename: function(req, file, cb) {
         /*
@@ -76,10 +76,9 @@ const logoUploader = logoUpload.fields([{
 router.post('/add-client', logoUploader, function (req, res) {
 
     const client = req.body;
-
     client.logoFileName = '';
     if (Array.isArray(req.files.logo) && req.files.logo.length > 0) {
-        client.logoFileName = req.files.logo[0].originalname;
+        client.logoFileName = req.headers.host + "/" + req.files.logo[0].filename;
     }
 
     mysqlConnectionPool.getConnection(function(err, connection) {

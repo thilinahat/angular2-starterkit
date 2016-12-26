@@ -1,81 +1,69 @@
-<div class="main-panel">
-    <navbarheader></navbarheader>
-
-    <clientsheader></clientsheader>
-
-    <!--<div class="row user_row">
-        <div class="col-md-2 col-lg-2"></div>
-        <div class="col-md-8 col-lg-8">
-            <h3><div class="center-block"> Dilan Tharaka  +94713056011 </div></h3>
-        </div>
-    </div>-->
-    <div class="row sumary-row">
-        <div class="col-lg-2 col-md-2"></div>
-        <div class="col-lg-8 col-md-8">
-                    <table class="table table-bordered">
-                        <tr>
-                            <td>Total Incoming Calls This Week</td>
-                            <td><b>23:00:00 h</b></td>
-                            <td>Total OutGoing This Week</td>
-                            <td><b>23:00:00 h</b></td>
-                        </tr>
-                        <tr>
-                            <td>Total Incoming Calls This Month</td>
-                            <td><b>23:00:00 h</b></td>
-                            <td>Total OutGoing This Month</td>
-                            <td><b>23:00:00 h</b></td>
-                        </tr>
-                        <tr>
-                            <td>Total Incoming Calls</td>
-                            <td><b>23:00:00 h</b></td>
-                            <td>Total OutGoing</td>
-                            <td><b>23:00:00 h</b></td>
-                        </tr>
-                    </table>
-        </div>
+<div class="row sumary-row">
+    <div class="col-lg-2 col-md-2"></div>
+    <div class="col-lg-8 col-md-8">
+        <table class="table table-bordered">
+            <tr>
+                <td>Total Incoming Calls This Week</td>
+                <td><b>23:00:00 h</b></td>
+                <td>Total OutGoing This Week</td>
+                <td><b>23:00:00 h</b></td>
+            </tr>
+            <tr>
+                <td>Total Incoming Calls This Month</td>
+                <td><b>23:00:00 h</b></td>
+                <td>Total OutGoing This Month</td>
+                <td><b>23:00:00 h</b></td>
+            </tr>
+            <tr>
+                <td>Total Incoming Calls</td>
+                <td><b>23:00:00 h</b></td>
+                <td>Total OutGoing</td>
+                <td><b>23:00:00 h</b></td>
+            </tr>
+        </table>
     </div>
-    <div class="row button-row">
-        <div class="col-lg 4 col-md-4"></div>
-        <div class="col-lg-2 col-md-2">
-            <button class="btn btn-success btn-lg" aria-label="Left Align" type="submit" (click)="modalIncoming.open()">
-                <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
-                Incomming
-            </button>
-        </div>
-        <div class="col-lg-2 col-md-2">
-            <button class="btn btn-success btn-lg" aria-label="Left Align" type="submit">
-                <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-                Outgoing
-            </button>
-        </div>
-    </div>
-
-    <modal #modalIncoming>
-        <modal-header>
-            <h4 class="modal-title">Incoming Call</h4>
-        </modal-header>
-        <modal-body>
-            <div class="row time-row">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4">
-                    <h1>{{timer_time}}</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3"></div>
-                <div class="col-lg-3">
-                    <button class= "{{play_btn_class}}" aria-label="Left Align" type="submit" (click)="playButtonClick()">
-                        <span class="{{play_btn_icon}}" aria-hidden="true"></span>
-                        {{play_btn_text}}
-                    </button>
-                </div>
-                <div class="col-lg-3">
-                    <button class="btn btn-danger" aria-label="Left Align" type="submit" (click)="modalIncoming.close();stopButtonClick()">
-                        <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
-                        Stop
-                    </button>
-                </div>
-            </div>
-        </modal-body>
-    </modal>
 </div>
+<div class="row button-row">
+    <div class="col-lg 4 col-md-4"></div>
+    <div class="col-lg-2 col-md-2">
+        <button class="btn btn-success btn-lg" aria-label="Left Align" type="submit" (click)="modalIncoming.open()">
+            <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+            Incomming
+        </button>
+    </div>
+    <div class="col-lg-2 col-md-2">
+        <button class="btn btn-success btn-lg" aria-label="Left Align" type="submit">
+            <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+            Outgoing
+        </button>
+    </div>
+</div>
+
+<modal #modalIncoming>
+    <modal-header>
+        <h4 class="modal-title">Incoming Call</h4>
+    </modal-header>
+    <modal-body>
+        <div class="row time-row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <h1>{{timer_time}}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-3">
+                <button class= "{{play_btn_class}}" aria-label="Left Align" type="submit" (click)="playButtonClick()">
+                    <span class="{{play_btn_icon}}" aria-hidden="true"></span>
+                    {{play_btn_text}}
+                </button>
+            </div>
+            <div class="col-lg-3">
+                <button class="btn btn-danger" aria-label="Left Align" type="submit" (click)="modalIncoming.close();stopButtonClick()">
+                    <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+                    Stop
+                </button>
+            </div>
+        </div>
+    </modal-body>
+</modal>

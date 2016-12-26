@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
     private acl: any = {
         "/operator/dashboard" : ["OPERATOR", "ADMIN"],
         "/operator/clients/search" : ["OPERATOR", "ADMIN"],
-        "/operator/clients/addclient" : ["OPERATOR", "ADMIN"],
+        "/operator/clients/add" : ["OPERATOR", "ADMIN"],
         "/operator/clients/mail" : ["OPERATOR", "ADMIN"],
         "operator/clients/[0-9]*/addcall":["OPERATOR", "ADMIN"],
         "operator/clients/[0-9]*/addnote":["OPERATOR", "ADMIN"],

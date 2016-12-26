@@ -15,6 +15,7 @@ import {MailComponent} from "./pages/clients/mail/mail.component";
 import { LoginComponent } from "./pages/login/login.component";
 import {CustomersComponent } from "./pages/customers/customers.component";
 import {CallComponent} from "./pages/clients/call/call.component";
+import {SearchClientComponent} from "./pages/clients/searchclient/searchclient.component";
 import {ChangeCredentialsComponent} from "./shared/changeCredentials/changeCredentials.component";
 
 
@@ -32,17 +33,16 @@ import {ClientSingleDashboardComponent} from "./pages/clients/clientSingle/dashb
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'change/credentials', component: ChangeCredentialsComponent, canActivate: [AuthGuard] },
-    { path: 'operator/clients/search', component: ClientsComponent, canActivate: [AuthGuard] },
-    { path: 'operator/clients/addclient', component: AddclientsComponent, canActivate: [AuthGuard] },
-    { path: 'operator/clients',redirectTo: 'operator/clients/search' },
-    { path: 'operator/clients/mail',component: MailComponent, canActivate: [AuthGuard] },
-    { path: 'operator/clients/call',component: CallComponent, canActivate: [AuthGuard]},
-    { path: 'operator/clients/:clientId/addcall', component: AddCallComponent, canActivate: [AuthGuard] },
-    { path: 'operator/clients/:clientId/addnote', component: AddNoteComponent, canActivate: [AuthGuard] },
-    { path: 'operator/clients/:clientId/addticket', component: AddTicketeComponent, canActivate: [AuthGuard] },
-    { path: 'operator/clients/:clientId/addproduct', component: AddProductComponent, canActivate: [AuthGuard] },
-    { path: 'operator/clients/:clientId/edit', component: ClientEditComponent, canActivate: [AuthGuard] },
 
+    { path: 'operator/clients',component: ClientsComponent , canActivate: [AuthGuard],
+        children: [
+            { path: '', redirectTo: 'search', pathMatch: 'full' },
+            { path: 'search', component: SearchClientComponent },
+            { path: 'add', component: AddclientsComponent },
+            { path: 'mail', component: MailComponent },
+            { path: 'call', component: CallComponent }
+        ]
+    },
     { path: 'operator/clients/:clientId',component: SingleClientComponent , canActivate: [AuthGuard],
         children: [
             { path: '', redirectTo: 'client-dash-board', pathMatch: 'full' },
@@ -53,7 +53,7 @@ const routes: Routes = [
             { path: 'add-ticket', component: AddTicketeComponent },
             { path: 'send-mail', component: SendMailComponent },
             { path: 'client-block', component: ClientBlockComponent },
-
+            { path: 'edit', component: ClientEditComponent },
         ]
     },
     { path: 'operator/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
