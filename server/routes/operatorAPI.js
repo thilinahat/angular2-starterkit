@@ -726,4 +726,41 @@ router.post('/client/unblock',  function (req, res) {
 
 });
 
+//route for adding a note to a client/*
+router.post('/client/addnote', logoUploader, function (req, res) {
+
+    const data = req.body.data;
+
+    var dt = datetime.create();
+
+    //format to insert to the data base 2016-12-26 00:07:18
+    var formatted = dt.format('Y-m-d H:M:S');
+
+
+    var SQL = "INSERT INTO `vinit_crm`.`client_note` (`client_id`, `user_id`, `subject`, `note`, `loggedTime`) " +
+        "VALUES ('?', '?', ? , ?, ? );";
+
+    var values = [data.clientId, req.decoded.uid ,data.subject, data.note, formatted];
+
+    SQL = mysql.format(SQL, values);
+
+        mysqlConnectionPool.getConnection(function(err, connection) {
+
+            connection.query( SQL,  function(err, result) {
+                if (err) {
+                    return res.status(406).json({
+                        success: false,
+                        status: 'Failed while inserting client general data',
+                        message: err
+                    });
+                }
+                connection.release();
+                res.sendStatus(200);
+
+            });
+        });
+
+});
+
+
 module.exports = router;

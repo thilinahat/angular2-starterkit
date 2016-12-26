@@ -22,7 +22,7 @@
                             <div class="col-md-7">
                                 <div class="form-group label-floating is-empty">
                                     <label class="control-label">Subject</label>
-                                    <input type="test" class="form-control" required="true">
+                                    <input type="text" class="form-control" required="true" [(ngModel)]="subject" name="subject">
                                     <span class="material-input"></span></div>
                             </div>
 
@@ -34,13 +34,13 @@
 
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label">Enter the note</label>
-                                        <textarea class="form-control" rows="5" required="true"></textarea>
+                                        <textarea class="form-control" rows="5" required="true" [(ngModel)]="note" name="note"></textarea>
                                         <span class="material-input"></span></div>
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary pull-right">Add Note<div class="ripple-container"></div></button>
+                        <button type="submit" class="btn btn-primary pull-right" (click)="addNote()">Add Note<div class="ripple-container"></div></button>
                         <div class="clearfix"></div>
                     </form>
                 </div>

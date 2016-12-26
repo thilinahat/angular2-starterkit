@@ -14,6 +14,7 @@ export class OptionsClientService {
     private clientAddTillurl = 'api/operator/client/addtill';
     private clientBlockUrl =  'api/operator/client/block';
     private clientUnBlockUrl =  'api/operator/client/unblock';
+    private clientAddNoteUrl = 'api/operator/client/addnote';
 
 
 
@@ -92,6 +93,16 @@ export class OptionsClientService {
             .toPromise()
             .catch(this.handleError);
     }
+
+    addNoteToClient (data: any): Promise<any> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.clientAddNoteUrl, { data })
+            .toPromise()
+            .catch(this.handleError);
+    }
+
+
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
