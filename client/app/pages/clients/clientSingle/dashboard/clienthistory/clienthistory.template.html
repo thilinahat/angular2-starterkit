@@ -7,7 +7,7 @@
 
                     <ul class="nav nav-tabs" data-tabs="tabs">
                         <li class="active">
-                            <a data-toggle="tab" href="#veryhigh" aria-expanded="true">
+                            <a data-toggle="tab" href="#history" aria-expanded="true">
                                 <i class="material-icons">history</i>
                                 History
                                 <div class="ripple-container"></div></a>
@@ -16,7 +16,8 @@
                         <li >
                             <a  href="#" aria-expanded="true">
                                 <i class="material-icons">list</i>
-                                Show all
+                                Show all ({{clientHistory.length}})
+
                                 <div class="ripple-container"></div></a>
                         </li>
 
@@ -27,49 +28,41 @@
 
         <div class="card-content">
             <div class="tab-content">
-                <div class="tab-pane active" id="veryhigh">
+                <div class="tab-pane active" id="history">
                     <table class="table">
                         <tbody>
-                        <tr>
+                        <tr *ngFor="let history of clientHistory">
 
-                            <td>Sign contract for "What are conference organizers afraid of?" <small><a routerlink="../tickets" ng-reflect-router-link="../tickets" ng-reflect-href="/operator/tickets" href="/operator/tickets">#TKT_530</a></small> </td>
+                            <td *ngIf="history.type == 'note'" style="width: 100%">
+                                 <!--<tr *ngIf="history.type == 'note'">note</tr>-->
+                                <tr class="subject">
+                            <small>{{history.loggedDate}}</small>  :{{history.subject}}
+                                </tr>
+                                <tr class="col-xs-12" style="font-size: smaller">{{history.content}}</tr>
+                        <tr><small> Note added at :{{history.loggedTime }} </small> </tr>
+
+                            </td>
+
+                        <td *ngIf="history.type == 'till add'">
+                            <tr class="subject"><small>  :{{history.loggedDate}} </small>{{history.subject}} </tr>
+                            <tr class="col-xs-12" style="font-size: smaller">Branch : {{history.branchName}}</tr>
+                            <tr class="col-xs-12" style="font-size: smaller">Product : {{history.productName}}</tr>
+                            <tr class="col-xs-12" style="font-size: smaller">Expire date : {{history.expireDate}}</tr>
+
+                        </td>
+
+                        <!--
                             <td class="td-actions text-right">
                                 <button class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task" rel="tooltip" title="" type="button">
                                     <i class="material-icons">edit</i>
                                 </button>
                             </td>
+-->
                         </tr>
-                        <tr>
 
-                            <td>Lines From Great Russian Literature? Or E-mails From My Boss? <small><a routerlink="../tickets" ng-reflect-router-link="../tickets" ng-reflect-href="/operator/tickets" href="/operator/tickets">#TKT_530</a></small></td>
-                            <td class="td-actions text-right">
-                                <button class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task" rel="tooltip" title="" type="button">
-                                    <i class="material-icons">edit</i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
 
-                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                <small><a routerlink="../tickets" ng-reflect-router-link="../tickets" ng-reflect-href="/operator/tickets" href="/operator/tickets">#TKT_530</a></small>
-                            </td>
-                            <td class="td-actions text-right">
-                                <button class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task" rel="tooltip" title="" type="button">
-                                    <i class="material-icons">edit</i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td>Create 4 Invisible User Experiences you Never Knew About
-                                <small><a routerlink="../tickets" ng-reflect-router-link="../tickets" ng-reflect-href="/operator/tickets" href="/operator/tickets">#TKT_530</a></small></td>
-                            <td class="td-actions text-right">
-                                <button class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task" rel="tooltip" title="" type="button">
-                                    <i class="material-icons">edit</i>
-                                </button>
-                            </td>
-                        </tr>
                         </tbody>
+
 
                     </table>
                 </div>

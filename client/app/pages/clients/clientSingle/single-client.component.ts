@@ -3,7 +3,7 @@ import {ClientService} from "../../../services/client.service";
 import {  ActivatedRoute } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
-import {ClientDataSharingService} from "../../../shared/data/data";
+import {ClientDataSharingService} from "../../../shared/data/client-data-sharing.service";
 import {Subscription} from "rxjs";
 
 @Component({

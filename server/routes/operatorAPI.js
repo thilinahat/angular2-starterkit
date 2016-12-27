@@ -153,6 +153,7 @@ router.post('/add-client', logoUploader, function (req, res) {
     });
 });
 
+//route for get client all data
 router.get('/client/data/:clientId', function (req, res, next) {
 
     const SQL = 'SELECT * FROM `client`  WHERE client_id = ' + req.params.clientId;
@@ -188,6 +189,7 @@ router.get('/client/data/:clientId', function (req, res, next) {
 
 });
 
+//route for get client name
 router.get('/client/data/:clientId/name', function (req, res, next) {
 
 
@@ -223,6 +225,7 @@ router.get('/client/data/:clientId/name', function (req, res, next) {
 
 });
 
+//route to get client company names and ids
 router.get('/client/searchdata', function (req, res,next) {
 
     const SQL = 'SELECT `company_name`, `client_id` FROM `client`;';
@@ -257,6 +260,7 @@ router.get('/client/searchdata', function (req, res,next) {
 
 });
 
+//route to get client e-mail addresses
 router.get('/client/data/:clientId/mail', function (req, res, next) {
 
     const SQL = 'SELECT * FROM `client_mail` WHERE client_id =  ' + req.params.clientId;
@@ -290,6 +294,7 @@ router.get('/client/data/:clientId/mail', function (req, res, next) {
 
 });
 
+//route to get clients phone numbers
 router.get('/client/data/:clientId/phone', function (req, res, next) {
 
     const SQL = 'SELECT * FROM `client_phone` WHERE client_id =  ' + req.params.clientId;
@@ -326,6 +331,7 @@ router.get('/client/data/:clientId/phone', function (req, res, next) {
 
 });
 
+//route to get clients fax numbers
 router.get('/client/data/:clientId/fax', function (req, res, next) {
 
 
@@ -364,6 +370,7 @@ router.get('/client/data/:clientId/fax', function (req, res, next) {
 
 });
 
+//route to get clients products
 router.get('/client/data/:clientId/products', function (req, res, next) {
 
     const SQL = "SELECT distinct `client_id` , client_product.`product_Id`, `name` FROM `client_product` join products "
@@ -397,6 +404,7 @@ router.get('/client/data/:clientId/products', function (req, res, next) {
     });
 });
 
+//get products which the client do not have
 router.get('/client/data/:clientId/nothavingproducts', function (req, res, next) {
 
     const SQL = "SELECT * \n"
@@ -438,9 +446,7 @@ router.get('/client/data/:clientId/nothavingproducts', function (req, res, next)
     });
 });
 
-
-
-//route for adding a product to a client/*
+//route for add a product to a client/*
 router.post('/client/addproduct', logoUploader, function (req, res) {
 
     const clientProduct = req.body.data;
@@ -461,6 +467,31 @@ router.post('/client/addproduct', logoUploader, function (req, res) {
                     message: err
                 });
             }
+
+            var dt = datetime.create();
+
+            //format to insert to the data base 2016-12-26 00:07:18
+            var formatted = dt.format('Y-m-d H:M:S');
+
+            //product added => 1 if product added
+            //product added => 0 if product removed
+            var logSQL = "INSERT INTO `vinit_crm`.`client_product_log` (`client_id`, `product_id`, `product_added`, `user_id`, `loggedTime`)"
+                + " VALUES (?, '?', '1', '?', ?);";
+            var logvalues = [clientProduct.clientId,clientProduct.product.product_Id, req.decoded.uid, formatted];
+
+            logSQL = mysql.format(logSQL, logvalues);
+
+            connection.query( logSQL,  function(err, result) {
+                if (err) {
+                    return res.status(406).json({
+                        success: false,
+                        status: 'Failed while inserting client general data',
+                        message: err
+                    });
+                }
+
+            });
+
             connection.release();
             res.sendStatus(200);
 
@@ -468,6 +499,7 @@ router.post('/client/addproduct', logoUploader, function (req, res) {
     });
 
 });
+
 
 //get client branches
 router.get('/client/data/:clientId/branches', function (req, res, next) {
@@ -515,7 +547,7 @@ router.post('/client/addbranch',  function (req, res) {
 
         SQL = mysql.format(SQL, values);
 
-        connection.query( SQL,  function(err, result) {
+        connection.query( SQL,  function(err, rows, result) {
             if (err) {
                 return res.status(406).json({
                     success: false,
@@ -523,6 +555,34 @@ router.post('/client/addbranch',  function (req, res) {
                     message: err
                 });
             }
+
+            clientBranch.branchId = rows.insertId;
+
+            var dt = datetime.create();
+
+            //format to insert to the data base 2016-12-26 00:07:18
+            var formatted = dt.format('Y-m-d H:M:S');
+
+
+            //branch added => 1 if branch added
+            //branch added => 0 if branch removed
+            var logSQL = "INSERT INTO `vinit_crm`.`client_branch_log` (`client_id`, `branch_id`, `branch_added`, `user_id`, `loggedTime`) "
+                + " VALUES (?, '?', '1', '?', ?);";
+            var logvalues = [clientBranch.clientId,clientBranch.branchId, req.decoded.uid, formatted];
+
+            logSQL = mysql.format(logSQL, logvalues);
+
+            connection.query( logSQL,  function(err, result) {
+                if (err) {
+                    return res.status(406).json({
+                        success: false,
+                        status: 'Failed while inserting client general data',
+                        message: err
+                    });
+                }
+
+            });
+
             connection.release();
             res.sendStatus(200);
 
@@ -540,15 +600,15 @@ router.post('/client/addtill', logoUploader, function (req, res) {
 
 
 
-           var SQL = "INSERT INTO `vinit_crm`.`till` (`till_id`, `till_key`, `expiredate`, `client_id`, `branch_id`,  `product_Id`) "
-               + "VALUES (NULL, ?, ? , ?, ? , ? );";
+        var SQL = "INSERT INTO `vinit_crm`.`till` (`till_id`, `till_key`, `expiredate`, `client_id`, `branch_id`,  `product_Id`) "
+            + "VALUES (NULL, ?, ? , ?, ? , ? );";
 
         var values = [clientTill.tillKey, clientTill.expireDate, clientTill.clientId, clientTill.branchId , clientTill.productId];
 
         SQL = mysql.format(SQL, values);
 
 
-        connection.query( SQL,  function(err, result) {
+        connection.query( SQL,  function(err, rows, result) {
             if (err) {
                 return res.status(406).json({
                     success: false,
@@ -556,6 +616,35 @@ router.post('/client/addtill', logoUploader, function (req, res) {
                     message: err
                 });
             }
+
+            clientTill.tillId = rows.insertId;
+
+            var dt = datetime.create();
+
+            //format to insert to the data base 2016-12-26 00:07:18
+            var formatted = dt.format('Y-m-d H:M:S');
+
+
+            //branch added => 1 if branch added
+            //branch added => 0 if branch removed
+            var logSQL = "INSERT INTO `vinit_crm`.`client_till_log` (`client_id`, `till_id`, `till_added`, `user_id`, `loggedTime`) "
+                + " VALUES (?, '?', '1', '?', ?);";
+            var logvalues = [clientTill.clientId,clientTill.tillId, req.decoded.uid, formatted];
+
+            logSQL = mysql.format(logSQL, logvalues);
+
+            connection.query( logSQL,  function(err, result) {
+                if (err) {
+                    return res.status(406).json({
+                        success: false,
+                        status: 'Failed while inserting client general data',
+                        message: err
+                    });
+                }
+
+            });
+
+
             connection.release();
             res.sendStatus(200);
 
@@ -760,6 +849,43 @@ router.post('/client/addnote', logoUploader, function (req, res) {
         });
 
 });
+
+//get client history limited - last 20
+router.get('/client/data/:clientId/history', function (req, res, next) {
+
+    const SQL = "select * from note_history"  + " WHERE client_id = " + req.params.clientId
+    + " union select * from till_history "  + " WHERE client_id = " + req.params.clientId
+    + " ORDER BY `loggedTime` DESC"
+    + " LIMIT 20";
+
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db view");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
 
 
 module.exports = router;

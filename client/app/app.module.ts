@@ -45,7 +45,8 @@ import {ClientBlockComponent} from "./pages/clients/clientSingle/options/block/c
 import {ClientdataComponent} from "./pages/clients/clientSingle/dashboard/clientdata/clientdata.component";
 import {ClienthistoryComponent} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.component";
 import {ClientproductComponent} from "./pages/clients/clientSingle/dashboard/clientproduct/clientproduct.component";
-import {ClientDataSharingService} from "./shared/data/data";
+import {ClientDataSharingService} from "./shared/data/client-data-sharing.service";
+import {ClienthistoryService} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.servece";
 
 
 //when creating a component, add it here
@@ -64,7 +65,7 @@ import {ClientDataSharingService} from "./shared/data/data";
         AddTillComponent, CallComponent, ChangeCredentialsComponent,
         ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent, ClientEditComponent, SearchClientComponent
          ],
-    providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService],
+    providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService, ClienthistoryService],
     bootstrap: [AppComponent],
 })
 

@@ -1,7 +1,7 @@
 import {Component, Input,} from "@angular/core";
 import {  ActivatedRoute } from '@angular/router';
 import {OptionsClientService} from "../options-client.service";
-import {ClientDataSharingService} from "../../../../../shared/data/data";
+import {ClientDataSharingService} from "../../../../../shared/data/client-data-sharing.service";
 import {Subscription} from "rxjs";
 
 
