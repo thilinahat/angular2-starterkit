@@ -36,7 +36,7 @@
                             <td *ngIf="history.type == 'note'" style="width: 100%">
                                  <!--<tr *ngIf="history.type == 'note'">note</tr>-->
                                 <tr class="subject">
-                            <small>{{history.loggedDate}}</small>  :{{history.subject}}
+                            <small>{{history.loggedDate}}</small>  : {{history.subject}}
                                 </tr>
                                 <tr class="col-xs-12" style="font-size: smaller">{{history.content}}</tr>
                         <tr><small> Note added at :{{history.loggedTime }} </small> </tr>
@@ -44,10 +44,52 @@
                             </td>
 
                         <td *ngIf="history.type == 'till add'">
-                            <tr class="subject"><small>  :{{history.loggedDate}} </small>{{history.subject}} </tr>
+                            <tr class="subject"><small>  {{history.loggedDate}} </small> : {{history.subject}} </tr>
                             <tr class="col-xs-12" style="font-size: smaller">Branch : {{history.branchName}}</tr>
                             <tr class="col-xs-12" style="font-size: smaller">Product : {{history.productName}}</tr>
                             <tr class="col-xs-12" style="font-size: smaller">Expire date : {{history.expireDate}}</tr>
+
+                        </td>
+
+                        <td *ngIf="history.type == 'blocked'">
+                            <tr class="subject" style="color: red"><small >  {{history.loggedDate}} </small> : {{history.subject}} </tr>
+                            <tr class="col-xs-12" style="font-size: smaller"> {{history.content}}</tr>
+                            <tr><small> Client blocked at :{{history.loggedTime }} </small> </tr>
+
+                        </td>
+
+                        <td *ngIf="history.type == 'unblocked'">
+                            <tr class="subject" style="color: green"><small >  {{history.loggedDate}} </small> : {{history.subject}} </tr>
+                            <tr class="col-xs-12" style="font-size: smaller"> {{history.content}}</tr>
+                            <tr><small> Client unblocked at :{{history.loggedTime }} </small> </tr>
+
+                        </td>
+
+                        <td *ngIf="history.type == 'branch-added'">
+                            <tr class="subject" style="color: green"><small >  {{history.loggedDate}} </small> : {{history.subject}} </tr>
+                            <tr class="col-xs-12" style="font-size: smaller"> branch {{history.branchName}} added to client : {{client.company_name}} </tr>
+                            <tr><small> Branch added at :{{history.loggedTime }} </small> </tr>
+
+                        </td>
+
+                        <td *ngIf="history.type == 'branch-removed'">
+                            <tr class="subject" style="color: red"><small >  {{history.loggedDate}} </small> : {{history.subject}} </tr>
+                            <tr class="col-xs-12" style="font-size: smaller"> branch {{history.branchName}} removed from client : {{client.company_name}} </tr>
+                            <tr><small> Branch removed at :{{history.loggedTime }} </small> </tr>
+
+                        </td>
+
+                        <td *ngIf="history.type == 'product-added'">
+                            <tr class="subject" style="color: green"><small >  {{history.loggedDate}} </small> : {{history.subject}} </tr>
+                            <tr class="col-xs-12" style="font-size: smaller"> product {{history.productName}} added to client : {{client.company_name}} </tr>
+                            <tr><small> Product added at :{{history.loggedTime }} </small> </tr>
+
+                        </td>
+
+                        <td *ngIf="history.type == 'product-removed'">
+                            <tr class="subject" style="color: red"><small >  {{history.loggedDate}} </small> : {{history.subject}} </tr>
+                            <tr class="col-xs-12" style="font-size: smaller"> branch {{history.productName}} removed from client : {{client.company_name}} </tr>
+                            <tr><small> Product removed at :{{history.loggedTime }} </small> </tr>
 
                         </td>
 

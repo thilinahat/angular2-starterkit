@@ -667,8 +667,8 @@ router.post('/client/block',  function (req, res) {
         //format to insert to the data base 2016-12-26 00:07:18
         var formatted = dt.format('Y-m-d H:M:S');
 
-        var logSQL = "INSERT INTO `vinit_crm`.`block_unblock_client_note` (`client_id`, `user_id`, `note`, `loggedTime`) "
-            + "VALUES ('?', '?', ?, ?);"
+        var logSQL = "INSERT INTO `vinit_crm`.`block_unblock_client_note` (`client_id`, `user_id`, `note`, `loggedTime`, `blocked`) "
+            + "VALUES ('?', '?', ?, ?, '1');"
 
         var logValues = [data.clientId, req.decoded.uid , data.note, formatted];
 
@@ -735,7 +735,8 @@ router.post('/client/block',  function (req, res) {
 
 
 //route for UNblock a client/*
-router.post('/client/unblock',  function (req, res) {
+router.post('/client/unblock',  function (req, res)
+{
 
     const data = req.body.data;
 
@@ -748,8 +749,8 @@ router.post('/client/unblock',  function (req, res) {
         //format to insert to the data base 2016-12-26 00:07:18
         var formatted = dt.format('Y-m-d H:M:S');
 
-        var logSQL = "INSERT INTO `vinit_crm`.`block_unblock_client_note` (`client_id`, `user_id`, `note`, `loggedTime`) "
-            + "VALUES ('?', '?', ?, ?);"
+        var logSQL = "INSERT INTO `vinit_crm`.`block_unblock_client_note` (`client_id`, `user_id`, `note`, `loggedTime`, `blocked`) "
+            + "VALUES ('?', '?', ?, ?, '0');"
 
         var logValues = [data.clientId, req.decoded.uid , data.note, formatted];
 
@@ -854,9 +855,16 @@ router.post('/client/addnote', logoUploader, function (req, res) {
 router.get('/client/data/:clientId/history', function (req, res, next) {
 
     const SQL = "select * from note_history"  + " WHERE client_id = " + req.params.clientId
-    + " union select * from till_history "  + " WHERE client_id = " + req.params.clientId
-    + " ORDER BY `loggedTime` DESC"
-    + " LIMIT 20";
+        + " union select * from till_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from client_blocked_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from client_unblocked_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from client_branch_add_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from client_branch_remove_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from client_product_added_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from client_product_removed_history "  + " WHERE client_id = " + req.params.clientId
+
+        + " ORDER BY `loggedTimeStamp` DESC"
+        + " LIMIT 20";
 
 
     mysqlConnectionPool.getConnection(function(err, connection) {
