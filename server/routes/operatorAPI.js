@@ -600,13 +600,12 @@ router.post('/client/addtill', logoUploader, function (req, res) {
 
 
 
-        var SQL = "INSERT INTO `vinit_crm`.`till` (`till_id`, `till_key`, `expiredate`, `client_id`, `branch_id`,  `product_Id`) "
-            + "VALUES (NULL, ?, ? , ?, ? , ? );";
+        var SQL = "INSERT INTO `vinit_crm`.`till` (`till_id`, `till_key`, `till_name`, `expiredate`, `client_id`, `branch_id`,  `product_Id`) "
+            + "VALUES (NULL, ?, ? , ?, ? , ?, ? );";
 
-        var values = [clientTill.tillKey, clientTill.expireDate, clientTill.clientId, clientTill.branchId , clientTill.productId];
+        var values = [clientTill.tillKey, clientTill.tillName, clientTill.expireDate, clientTill.clientId, clientTill.branchId , clientTill.productId];
 
         SQL = mysql.format(SQL, values);
-
 
         connection.query( SQL,  function(err, rows, result) {
             if (err) {

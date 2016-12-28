@@ -16,10 +16,12 @@ export class AddTillComponent {
     client:any = {};
     expireDate:any;
     productKey:String;
+    tillName:any;
+    isdataValid:boolean;
 
     subscription:Subscription;
 
-    errorMessage:string = 'default error';
+    errorMessage:string = '';
 
     @Input()
     product:any;
@@ -61,6 +63,7 @@ export class AddTillComponent {
             productId:this.productId,
             clientId:this.client.client_id,
             tillKey:this.productKey,
+            tillName:this.tillName,
             expireDate:this.expireDate
         };
 
@@ -72,13 +75,24 @@ export class AddTillComponent {
     }
 
     tillDataValid (): boolean {
-        //stab
-        return (this.branchId && this.productId && this.productKey && this.expireDate);
+
+        this.isdataValid = (this.branchId && this.productId && this.productKey && this.productKey.length > 0 && this.expireDate && this.tillName);
+
+        if(!this.isdataValid)
+        {
+            this.errorMessage = 'data is invalid';
+            alert(this.errorMessage);
+        }
+        else{
+            this.errorMessage = '';
+        }
+        return this.isdataValid;
     }
 
     handleTillAdding(){
         alert('till was successfully added');
-        this.productKey = '';
-        this.expireDate = '';
+        this.productKey = null;
+        this.expireDate = null;
+        this.tillName = null;
     }
 }
