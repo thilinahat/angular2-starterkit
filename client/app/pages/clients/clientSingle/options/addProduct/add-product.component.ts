@@ -21,7 +21,6 @@ export class AddProductComponent {
     selectedProductName:String;
     selectedProductId:any;
 
-    selectedProductindex:number;
 
     selectedBranchName:String = '';
     selectedBranchId:any;

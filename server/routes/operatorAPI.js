@@ -76,9 +76,9 @@ const logoUploader = logoUpload.fields([{
 router.post('/add-client', logoUploader, function (req, res) {
 
     const client = req.body;
-    client.logoFileName = '';
+    client.screenShotFileName = '';
     if (Array.isArray(req.files.logo) && req.files.logo.length > 0) {
-        client.logoFileName = req.headers.host + "/" + req.files.logo[0].filename;
+        client.screenShotFileName = req.headers.host + "/" + req.files.logo[0].filename;
     }
 
     mysqlConnectionPool.getConnection(function(err, connection) {
@@ -87,7 +87,7 @@ router.post('/add-client', logoUploader, function (req, res) {
         let sql = 'INSERT INTO client ' +
             '(company_name, address, contact_person_name, web_site, stage_id, country, town, mlr_number, postal_code, business_registration, blocked, logo_file_name)' +
             ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        let values = [client.company,client.address,client.contactPerson,client.website,1,client.country,client.town,client.mlr,client.postalCode,client.businessRegistration, 0,client.logoFileName];
+        let values = [client.company,client.address,client.contactPerson,client.website,1,client.country,client.town,client.mlr,client.postalCode,client.businessRegistration, 0,client.screenShotFileName];
 
         connection.query( sql, values, function(err, rows, fields) {
             if (err) {
@@ -652,6 +652,39 @@ router.post('/client/addtill', logoUploader, function (req, res) {
 
 });
 
+//get client tills
+router.get('/client/data/:clientId/tills', function (req, res, next) {
+
+    const SQL = "SELECT * FROM `till` WHERE client_id = " + req.params.clientId;;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+
 //route for block a client/*
 router.post('/client/block',  function (req, res) {
 
@@ -815,7 +848,7 @@ router.post('/client/unblock',  function (req, res)
 });
 
 //route for adding a note to a client/*
-router.post('/client/addnote', logoUploader, function (req, res) {
+router.post('/client/addnote',  function (req, res) {
 
     const data = req.body.data;
 
@@ -893,6 +926,202 @@ router.get('/client/data/:clientId/history', function (req, res, next) {
     });
 });
 
+//get ticket problem types
+router.get('/tickets/problemtypes', function (req, res, next) {
 
+    const SQL = "select * from problem_types" ;
+
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db view");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+
+//get ticket priorities
+router.get('/tickets/priorities', function (req, res, next) {
+
+    const SQL = "select * from priorities" ;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db view");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get developers
+router.get('/developers', function (req, res, next) {
+
+    const SQL = "select * from developers" ;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db view");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+/* screanshot uploading with multer middleware*/
+const screenshotStorage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, __dirname + '/../uploads/screenshots/');
+    },
+    filename: function(req, file, cb) {
+        /*
+         * Filename format: fieldName + firstName + lastName + Timestamp
+         * */
+        const fileName = file.fieldname.toLowerCase() +
+            '_' + Date.now();
+
+        cb(null, fileName + path.extname(file.originalname));
+    }
+});
+
+const screenshotUpload = multer(
+    {
+        storage: screenshotStorage,
+        limits: {fileSize: 50000000}
+    }
+);
+
+const screenshotUploader = screenshotUpload.fields([{
+    name: 'screenshot',
+    maxCount: 1
+}]);
+
+// route for adding a ticket
+router.post('/add-ticket', screenshotUploader, function (req, res) {
+
+    const ticket = req.body;
+
+    if (Array.isArray(req.files.screenshot) && req.files.screenshot.length > 0) {
+        ticket.screenShotFileName =  req.files.screenshot[0].filename;
+        console.log(ticket.screenShotFileName);
+    }
+
+    var dt = datetime.create();
+
+    //format to insert to the data base 2016-12-26 00:07:18
+    var formatted = dt.format('Y-m-d H:M:S');
+
+
+    //swimlane status id = 1 (OPEN) is hardcoded.
+    var SQL = "INSERT INTO `vinit_crm`.`tickets` (`ticket_id`, `swimlane_status_id`, `client_id`, `summary`, `description`, `problem_type_id`, `priority_id`, `assignee_id`, `sceenshot_name`, `due_date`)"
+        + " VALUES (NULL, '1', ?, ?, ?, ?, ?, ?, ?, ? ); ";
+    var values = [ticket.clientId, ticket.summary, ticket.problemDescription, ticket.selectedProblemTypeId, ticket.selectedPriority, ticket.selectedAssigneeId, ticket.screenShotFileName,  ticket.dueDate];
+    // var values = [ticket.clientId, ticket.summary, ticket.problemDescription, ticket.selectedProblemTypeId, ticket.selectedPriority, ticket.selectedAssigneeId, ticket.screenShotFileName, req.decoded.uid ,data.subject, data.note, formatted];
+
+    SQL = mysql.format(SQL, values);
+
+
+
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query( SQL,  function(err,rows, result) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting ticket',
+                    message: err
+                });
+            }
+
+            ticket.id = rows.insertId;
+
+            // swimlane status is hard coded for the initial loging
+            var LogSQL = "INSERT INTO `vinit_crm`.`ticket_swimlane_log` (`ticket_id`, `swimlane_status_id`, `loggedTime`) "
+                + "VALUES ('?', '1', ?);";
+
+            var LogValues = [ticket.id, formatted];
+
+            LogSQL = mysql.format(LogSQL, LogValues);
+
+
+            console.log(LogSQL);
+
+            connection.query( LogSQL,  function(err, result) {
+                if (err) {
+                    return res.status(406).json({
+                        success: false,
+                        status: 'Failed while inserting ticket',
+                        message: err
+                    });
+                }
+                connection.release();
+                res.sendStatus(200);
+
+            });
+        });
+
+
+
+
+
+    });
+});
 
 module.exports = router;

@@ -19,6 +19,7 @@ export class OptionsClientService {
 
 
     private clientDataUrl = this.clientAPIurl +"/client/data/";
+    private ticketsUrl = this.clientAPIurl +"/tickets";
 
     getClientName(clientId:String):Promise<any>{
         var url = this.clientDataUrl + clientId + "/name";
@@ -52,6 +53,37 @@ export class OptionsClientService {
             .catch(this.handleError);
     }
 
+    getTills(clientId:String):Promise<any>{
+        var url = this.clientDataUrl + clientId + "/tills";
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getProblemTypes():Promise<any>{
+        var url = this.ticketsUrl +   "/problemtypes";
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getPriorities():Promise<any>{
+        var url = this.ticketsUrl +   "/priorities";
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getDevelopers():Promise<any>{
+        var url = this.clientAPIurl +   "/developers";
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
 
     addProductToClient (data: any): Promise<any> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -100,6 +132,27 @@ export class OptionsClientService {
         return this.http.post(this.clientAddNoteUrl, { data })
             .toPromise()
             .catch(this.handleError);
+    }
+
+
+    addTicket(client: FormData): Promise<any> {
+
+        const url = `${this.clientAPIurl}/add-ticket`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, client)
+                .toPromise()
+                .then(response => {
+                    resolve(response);
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
     }
 
 
