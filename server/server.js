@@ -64,8 +64,8 @@ app.use('/change/credentials', index);
 app.use('/api/operator', operatorAPI); //API for operator initiated actions
 app.use('/api/admin', adminAPI); //API for admin initiated actions
 app.use('/api', api);
-//app.use('/mail',mailServerImap);
-//app.use('/mailsend',mailServerSMTP);
+app.use('/mail',mailServerImap);
+app.use('/mailsend',mailServerSMTP);
 app.use('/*', notFound);
 
 
