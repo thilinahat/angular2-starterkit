@@ -24,7 +24,9 @@ export class SingleClientTicketsComponent {
     priorities:any[] = [];
     ticketswimlaneTypes:any[] = [];
     tickets:any[] = [];
+    noTickets:boolean = false;
     selectedTicket:any = {};
+    screanshotavilable:boolean  = false;
 
     selectedPriorityId:string = '';
     selectedSwimlaneStatusId:string = '';
@@ -54,10 +56,8 @@ export class SingleClientTicketsComponent {
     }
 
     constructor(
-        private route:ActivatedRoute,
         private optionsClientService: OptionsClientService,
         private dataHolder: ClientDataSharingService,
-        private clientService: ClientService
 
     ){    }
 
@@ -69,6 +69,10 @@ export class SingleClientTicketsComponent {
         this.optionsClientService.getClientTicktsAllData(ticketId).
         then(selectedTicket => {
             this.selectedTicket = selectedTicket;
+            if(this.selectedTicket.sceenshot_name && this.selectedTicket.sceenshot_name.length > 0){
+                this.screanshotavilable = true;
+            }
+            else{ this.screanshotavilable = false; }
         },
             error =>  this.errorMessage = <any>error );
     }
@@ -113,8 +117,14 @@ export class SingleClientTicketsComponent {
 
     loadClientTickets(){
         this.optionsClientService.getClientTickets(this.client.client_id).
-        then(tickets => this.tickets = tickets,
-            error =>  this.errorMessage = <any>error );
+        then(tickets => {
+            this.tickets = tickets;
+              this.noTickets = false;
+            },
+            error => {
+            this.errorMessage = <any>error;
+            this.noTickets = true;
+        } );
 
     }
     //selectedSwimlaneStatusId

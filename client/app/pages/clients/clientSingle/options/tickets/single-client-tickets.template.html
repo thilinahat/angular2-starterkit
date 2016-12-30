@@ -23,6 +23,9 @@
                             <col span="1" style="width: 10%;">
                         </colgroup>
                         <tbody>
+                        <tr *ngIf="noTickets">
+                            <h3 style="text-align: center">No Tickets For This Client</h3>
+                        </tr>
                         <tr *ngFor="let ticket of tickets" class="ticket-summary" >
                             <td (click)="ticketData.open(); changeSelectedClientId(ticket.ticket_id)"><h4 class="swimlane-status" [style.background]="ticket.swimlane_color">{{ticket.swimlane_status}}</h4></td>
                             <td (click)="ticketData.open(); changeSelectedClientId(ticket.ticket_id)">{{ticket.summary}}</td>
@@ -82,6 +85,12 @@
             <tr>
                 <td>Status</td>
                 <td>{{selectedTicket.swimlane_status}}<i class="change-button" (click)="ticketStatus.open()">change</i>
+                </td>
+            </tr>
+
+            <tr *ngIf="screanshotavilable">
+                <td>Screenshot</td>
+                <td><i class="change-button" (click)="selectedscreenshot.open()">see screen shot</i>
                 </td>
             </tr>
 
@@ -193,3 +202,23 @@
 
     </modal-body>
 </modal>
+
+<modal #selectedscreenshot style="background-color: rgba(142, 157, 166, 0.39);">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title"><b>Screenshot of #{{selectedTicket.ticket_id}}</b>
+
+        </h4>
+
+        <hr>
+    </modal-header>
+    <modal-body>
+        <div class="row">
+            <div class="col-xs-12">
+                <img src="{{selectedTicket.sceenshot_name}}" style="width: 100%">
+            </div>
+        </div>
+
+        
+    </modal-body>
+</modal>
+

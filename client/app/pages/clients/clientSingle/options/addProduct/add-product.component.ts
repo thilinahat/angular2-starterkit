@@ -38,6 +38,7 @@ export class AddProductComponent {
 
     products:any[] = [];
     otherproducts:any[] = [];
+    noProducts:boolean;
 
     showAddNewProduct:boolean = false;
     showAddNewbranch:boolean = false;
@@ -53,6 +54,8 @@ export class AddProductComponent {
 
     ngOnInit(){
 
+        this.noProducts = false;
+
         this.subscription = this.dataHolder.clientData$.subscribe(
             client => this.client = client
         )
@@ -66,7 +69,10 @@ export class AddProductComponent {
 
         this.clientService.getClientProducts(this.id).
         then(products => this.products = products,
-            error =>  this.errorMessage = <any>error );
+            error =>  {
+            this.errorMessage = <any>error;
+            this.noProducts = true;
+        } );
 
 
         this.clientService.getClientNotHavingProducts(this.id).

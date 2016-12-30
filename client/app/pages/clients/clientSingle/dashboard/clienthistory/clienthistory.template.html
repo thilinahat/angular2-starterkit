@@ -31,6 +31,9 @@
                 <div class="tab-pane active" id="history">
                     <table class="table">
                         <tbody>
+                        <tr *ngIf="noHistory">
+                            <h2 style="text-align: center">No History With This Client</h2>
+                        </tr>
                         <tr *ngFor="let history of clientHistory">
 
                             <td *ngIf="history.type == 'note'" style="width: 100%">

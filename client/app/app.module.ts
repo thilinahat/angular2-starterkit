@@ -46,7 +46,7 @@ import {ClientdataComponent} from "./pages/clients/clientSingle/dashboard/client
 import {ClienthistoryComponent} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.component";
 import {ClientproductComponent} from "./pages/clients/clientSingle/dashboard/clientproduct/clientproduct.component";
 import {ClientDataSharingService} from "./shared/data/client-data-sharing.service";
-import {ClienthistoryService} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.servece";
+import {ClienthistoryService} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.service";
 import {SingleClientTicketsComponent} from "./pages/clients/clientSingle/options/tickets/single-client-tickets.component";
 import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSingle/options/addProduct/AddTill/purchasedTills/purchased-products.component";
 

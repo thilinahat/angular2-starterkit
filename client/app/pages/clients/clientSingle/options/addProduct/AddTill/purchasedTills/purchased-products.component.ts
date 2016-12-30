@@ -19,6 +19,8 @@ export class SingleClientPurchasedProductsComponent {
     errorMessage:String;
 
     purchasedList:any[] = [];
+    @Input()
+    noPurchases:boolean;
 
 
     ngOnInit() {
@@ -45,8 +47,15 @@ export class SingleClientPurchasedProductsComponent {
 
     loadPurchasedProducts(){
         this.optionsClientService.getClientPurchasedItems(this.client.client_id).
-        then(purchasedList => this.purchasedList = purchasedList,
-            error =>  this.errorMessage = <any>error );
+        then(purchasedList => {
+            this.purchasedList = purchasedList;
+            this.noPurchases = false;
+            }
+            ,
+            error =>  {
+            this.errorMessage = <any>error;
+            this.noPurchases = true;
+        });
 
     }
 }

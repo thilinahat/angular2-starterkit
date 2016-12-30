@@ -33,6 +33,7 @@ app.engine('html', require('ejs').renderFile);
 // Set Multiple Static Folder
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, './uploads/logos')));
+app.use(express.static(path.join(__dirname, './uploads/screenshots')));
 
 // Body Parser MW
 app.use(bodyParser.json());

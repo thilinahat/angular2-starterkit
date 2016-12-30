@@ -282,7 +282,7 @@ router.get('/client/data/:clientId/mail', function (req, res, next) {
             }
             else{
 
-                res.statusCode = 400; //if results are not found for this
+                res.statusCode = 200; //if results are not found for this
                 res.send();
             }
 
@@ -319,7 +319,7 @@ router.get('/client/data/:clientId/phone', function (req, res, next) {
             }
             else{
 
-                res.statusCode = 400; //if results are not found for this
+                res.statusCode = 200; //if results are not found for this
                 res.send();
             }
 
@@ -340,7 +340,7 @@ router.get('/client/data/:clientId/fax', function (req, res, next) {
     mysqlConnectionPool.getConnection(function(err, connection) {
 
         if(err){
-            console.log("Error wihile connecting database");
+            console.log("Error while connecting database");
         }
 
 
@@ -359,7 +359,7 @@ router.get('/client/data/:clientId/fax', function (req, res, next) {
             }
             else{
 
-                res.statusCode = 400; //if results are not found for this
+                res.statusCode = 200; //if results are not found for this
                 res.send();
             }
 
@@ -383,7 +383,7 @@ router.get('/client/data/:clientId/products', function (req, res, next) {
 
             if (error) {
 
-                console.log("error while retrieving from to db");
+                console.log("error while retrieving products for client from db");
                 return;
             }
 
@@ -394,7 +394,7 @@ router.get('/client/data/:clientId/products', function (req, res, next) {
             }
             else {
 
-                res.statusCode = 400; //if results are not found for this
+                res.statusCode = 200; //if results are not found for this
                 res.send();
             }
 
