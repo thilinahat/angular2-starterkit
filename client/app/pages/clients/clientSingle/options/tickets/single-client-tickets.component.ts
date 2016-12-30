@@ -112,7 +112,7 @@ export class SingleClientTicketsComponent {
     }
 
     loadClientTickets(){
-        this.optionsClientService.getClientTickts(this.client.client_id).
+        this.optionsClientService.getClientTickets(this.client.client_id).
         then(tickets => this.tickets = tickets,
             error =>  this.errorMessage = <any>error );
 

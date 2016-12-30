@@ -166,8 +166,16 @@ export class OptionsClientService {
         });
     }
 
-    getClientTickts(clientId:String):Promise<any>{
+    getClientTickets(clientId:String):Promise<any>{
         var url = this.clientDataUrl + clientId + "/tickets";
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getClientPurchasedItems(clientId:String):Promise<any>{
+        var url = this.clientDataUrl + clientId + "/purchased-items";
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())

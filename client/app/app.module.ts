@@ -48,6 +48,7 @@ import {ClientproductComponent} from "./pages/clients/clientSingle/dashboard/cli
 import {ClientDataSharingService} from "./shared/data/client-data-sharing.service";
 import {ClienthistoryService} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.servece";
 import {SingleClientTicketsComponent} from "./pages/clients/clientSingle/options/tickets/single-client-tickets.component";
+import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSingle/options/addProduct/AddTill/purchasedTills/purchased-products.component";
 
 
 //when creating a component, add it here
@@ -65,7 +66,7 @@ import {SingleClientTicketsComponent} from "./pages/clients/clientSingle/options
         AddProductComponent, AddTicketeComponent,
         AddTillComponent, CallComponent, ChangeCredentialsComponent,
         ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent, ClientEditComponent, SearchClientComponent,
-        SingleClientTicketsComponent
+        SingleClientTicketsComponent, SingleClientPurchasedProductsComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService, ClienthistoryService],
     bootstrap: [AppComponent],

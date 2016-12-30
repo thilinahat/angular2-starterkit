@@ -1179,7 +1179,6 @@ router.get('/client/data/:clientId/tickets', function (req, res, next) {
 });
 
 //get ticket data
-
 router.get('/ticket/data/:ticketId', function (req, res, next) {
 
     //To do: reduce this joins by calling seperately for swimlane, priorities, problem types
@@ -1293,6 +1292,42 @@ router.post('/ticket/change-status', screenshotUploader, function (req, res) {
     });
 });
 
-//UPDATE `vinit_crm`.`tickets` SET `swimlane_status_id` = '2' WHERE `tickets`.`ticket_id` = 1;
+//get till data
+router.get('/client/data/:clientId/purchased-items', function (req, res, next) {
 
+
+    const SQL = "SELECT * FROM till "
+        + "inner join `client_till_log` on till.till_id = client_till_log.till_id "
+        + "inner join branch on till.branch_id = branch.branch_id "
+        + "inner join products on till.product_Id = products.product_Id"
+        + " WHERE till.client_id = " + req.params.clientId;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//
 module.exports = router;

@@ -109,6 +109,7 @@ export class AddTicketeComponent {
 
         this.optionsClientService.addTicket(formData).then(res => {
             alert('Successfully Added Ticket');
+            this.refreshFields();
         }, error => {
             alert(error);
         });
@@ -124,5 +125,17 @@ export class AddTicketeComponent {
         private dataHolder: ClientDataSharingService,
 
     ){    }
+
+    refreshFields(){
+        this.selectedProductId = '';
+        this.selectedBranchId = '';
+        this.selectedTillId = '';
+        this.selectedProblemTypeId = '';
+        this.selectedPriority = '';
+        this.problemDescription = '';
+        this.selectedAssigneeId = '';
+        this.summary = '';
+        this.dueDate = null;
+        }
 
 }
