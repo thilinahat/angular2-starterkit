@@ -16,9 +16,11 @@ export class OptionsClientService {
     private clientUnBlockUrl =  'api/operator/client/unblock';
     private clientAddNoteUrl = 'api/operator/client/addnote';
 
-
-
     private clientDataUrl = this.clientAPIurl +"/client/data/";
+    private ticketsDataUrl = this.clientAPIurl +"/ticket/data/";
+    private ticketsChangePriorityUrl = this.clientAPIurl + "/ticket/change-priority";
+    private ticketsChangeStatusUrl = this.clientAPIurl + "/ticket/change-status";
+
     private ticketsUrl = this.clientAPIurl +"/tickets";
 
     getClientName(clientId:String):Promise<any>{
@@ -76,6 +78,15 @@ export class OptionsClientService {
             .then(response => response.json())
             .catch(this.handleError);
     }
+
+    getTicketswimlaneTypes():Promise<any>{
+        var url = this.ticketsUrl +   "/status-types";
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
 
     getDevelopers():Promise<any>{
         var url = this.clientAPIurl +   "/developers";
@@ -155,6 +166,62 @@ export class OptionsClientService {
         });
     }
 
+    getClientTickts(clientId:String):Promise<any>{
+        var url = this.clientDataUrl + clientId + "/tickets";
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getClientTicktsAllData(ticketId:String):Promise<any>{
+        var url = this.ticketsDataUrl + ticketId;
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    changeTicketPriority(ticket: FormData): Promise<any> {
+
+        const url = this.ticketsChangePriorityUrl;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, ticket)
+                .toPromise()
+                .then(response => {
+                    resolve(response);
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
+
+
+    changeTicketStatus(ticket: FormData): Promise<any> {
+
+        const url = this.ticketsChangeStatusUrl;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, ticket)
+                .toPromise()
+                .then(response => {
+                    resolve(response);
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
 
 
     private handleError(error: any): Promise<any> {

@@ -107,21 +107,6 @@ export class AddTicketeComponent {
         formData.append("selectedAssigneeId", this.selectedAssigneeId);
         formData.append("dueDate", this.dueDate);
 
-
-
-
-
-/*        formData.append("contactPerson", form.contactPerson);
-        formData.append("website", form.website);
-        formData.append("status", form.status);
-        formData.append("country", form.country);
-        formData.append("mlr", form.mlr);
-        formData.append("businessRegistration", form.businessRegistration);
-        formData.append("address", form.address);
-        formData.append("town", form.town);
-        formData.append("postalCode", form.postalCode);
-*/
-
         this.optionsClientService.addTicket(formData).then(res => {
             alert('Successfully Added Ticket');
         }, error => {

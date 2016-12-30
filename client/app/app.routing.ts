@@ -29,6 +29,7 @@ import {ClientEditComponent} from "./pages/clients/clientSingle/clientedit/clien
 import {ClientBlockComponent} from "./pages/clients/clientSingle/options/block/client-block.component";
 import {SendMailComponent} from "./pages/clients/clientSingle/options/sendMail/send-mail.component";
 import {ClientSingleDashboardComponent} from "./pages/clients/clientSingle/dashboard/client-single-dashboard.component";
+import {SingleClientTicketsComponent} from "./pages/clients/clientSingle/options/tickets/single-client-tickets.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -54,6 +55,8 @@ const routes: Routes = [
             { path: 'send-mail', component: SendMailComponent },
             { path: 'client-block', component: ClientBlockComponent },
             { path: 'edit', component: ClientEditComponent },
+            { path: 'tickets', component: SingleClientTicketsComponent },
+
         ]
     },
     { path: 'operator/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },

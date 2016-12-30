@@ -47,6 +47,7 @@ import {ClienthistoryComponent} from "./pages/clients/clientSingle/dashboard/cli
 import {ClientproductComponent} from "./pages/clients/clientSingle/dashboard/clientproduct/clientproduct.component";
 import {ClientDataSharingService} from "./shared/data/client-data-sharing.service";
 import {ClienthistoryService} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.servece";
+import {SingleClientTicketsComponent} from "./pages/clients/clientSingle/options/tickets/single-client-tickets.component";
 
 
 //when creating a component, add it here
@@ -63,7 +64,8 @@ import {ClienthistoryService} from "./pages/clients/clientSingle/dashboard/clien
         AddCallComponent, AddNoteComponent,
         AddProductComponent, AddTicketeComponent,
         AddTillComponent, CallComponent, ChangeCredentialsComponent,
-        ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent, ClientEditComponent, SearchClientComponent
+        ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent, ClientEditComponent, SearchClientComponent,
+        SingleClientTicketsComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService, ClienthistoryService],
     bootstrap: [AppComponent],
