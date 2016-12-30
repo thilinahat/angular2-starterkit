@@ -1100,11 +1100,12 @@ router.post('/add-ticket', screenshotUploader, function (req, res) {
 
 
     //swimlane status id = 1 (OPEN) is hardcoded.
-    var SQL = "INSERT INTO `vinit_crm`.`tickets` (`ticket_id`, `swimlane_status_id`, `client_id`, `summary`, `description`, `problem_type_id`, `priority_id`, `assignee_id`, `sceenshot_name`, `due_date`, `user_id`)"
-        + " VALUES (NULL, '1', ?, ?, ?, ?, ?, ?, ?, ? , '?'); ";
-    var values = [ticket.clientId, ticket.summary, ticket.problemDescription, ticket.selectedProblemTypeId, ticket.selectedPriority, ticket.selectedAssigneeId, ticket.screenShotFileName,  ticket.dueDate, req.decoded.uid];
+    var SQL = "INSERT INTO `vinit_crm`.`tickets` (`ticket_id`, `swimlane_status_id`, `client_id`, `summary`, `description`, `problem_type_id`, `priority_id`, `assignee_id`, `sceenshot_name`, `due_date`, `user_id`,  `till_id`)"
+        + " VALUES (NULL, '1', ?, ?, ?, ?, ?, ?, ?, ? , '?' , ? ); ";
+    var values = [ticket.clientId, ticket.summary, ticket.problemDescription, ticket.selectedProblemTypeId, ticket.selectedPriority, ticket.selectedAssigneeId, ticket.screenShotFileName,  ticket.dueDate, req.decoded.uid, ticket.selectedTillId];
 
     SQL = mysql.format(SQL, values);
+
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
@@ -1182,11 +1183,7 @@ router.get('/client/data/:clientId/tickets', function (req, res, next) {
 router.get('/ticket/data/:ticketId', function (req, res, next) {
 
     //To do: reduce this joins by calling seperately for swimlane, priorities, problem types
-    const SQL = "SELECT * FROM `tickets`"
-        + " inner join ticketSwimlane on tickets.`swimlane_status_id` = ticketSwimlane.swimlane_id"
-        + " inner join priorities on tickets.`priority_id` = priorities.priority_id "
-        + " inner join problem_types on tickets.`problem_type_id` = problem_types.problem_type_id "
-        + " inner join developers on tickets.`assignee_id` = developers.developer_id"
+    const SQL = "SELECT * FROM ticket_data_view "
         + " WHERE ticket_id = " + req.params.ticketId;
 
     mysqlConnectionPool.getConnection(function(err, connection) {

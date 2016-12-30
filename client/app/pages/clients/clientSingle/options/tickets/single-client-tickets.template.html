@@ -48,8 +48,6 @@
                 {{selectedTicket.swimlane_status}}
             </i>
         </h4>
-
-        <hr>
     </modal-header>
     <modal-body>
         <table class="table">
@@ -80,11 +78,38 @@
                 <td>Priority</td>
                 <td>{{selectedTicket.priority_name}} <i class="change-button" (click)="changePriority.open()">change</i></td>
             </tr>
+
             <tr>
                 <td>Status</td>
                 <td>{{selectedTicket.swimlane_status}}<i class="change-button" (click)="ticketStatus.open()">change</i>
                 </td>
             </tr>
+
+            <tr>
+                <td>Till ID</td>
+                <td>{{selectedTicket.till_id}}</td>
+            </tr>
+
+            <tr>
+                <td>Till Name</td>
+                <td>{{selectedTicket.till_name}} </td>
+            </tr>
+
+            <tr>
+                <td>Till expiredate</td>
+                <td>{{selectedTicket.expiredate | date:'mediumDate'}} </td>
+            </tr>
+
+            <tr>
+                <td>Product</td>
+                <td>{{selectedTicket.name}}</td>
+            </tr>
+
+            <tr>
+                <td>Branch</td>
+                <td>{{selectedTicket.location}}</td>
+            </tr>
+
             <tr>
                 <td>Assignee</td>
                 <td>{{selectedTicket.developer_name}}</td>
@@ -103,10 +128,7 @@
 <modal #changePriority style="background-color: rgba(142, 157, 166, 0.39);">
     <modal-header [show-close]="true">
         <h4 class="modal-title"><b>Change Prrority of #{{selectedTicket.ticket_id}}</b>
-
         </h4>
-
-        <hr>
     </modal-header>
     <modal-body>
 
