@@ -4,6 +4,8 @@
 import {Component, ViewChild} from "@angular/core";
 import {ClientService} from "../../../../services/client.service";
 import {  ActivatedRoute } from '@angular/router';
+import {ClientDataSharingService} from "../../../../shared/data/client-data-sharing.service";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'clients',
@@ -23,7 +25,13 @@ export class ClientEditComponent {
     faxInput: any;
 
     submitBtnText: string = 'Update';
-    states: string[];
+    states: string[] = ['Potential', 'Pre-Sale', 'Existing', 'Old'];
+    statesMap = {
+        1: this.states[0],
+        2: this.states[1],
+        3: this.states[2],
+        4: this.states[3]
+    };
     countries: any[] = [
         {name: 'Afghanistan', code: 'AF'},
         {name: 'Åland Islands', code: 'AX'},
@@ -253,42 +261,43 @@ export class ClientEditComponent {
     town: string = '';
     postalCode: number = null;
 
-
     emails: string[] = [];
     phones: string[] = [];
     faxes: string[] = [];
     logo: any;
-    formData: FormData;
+    logoURL: string = "";
 
     id: String;
-    private sub: any;
+    subscription: Subscription;
+    client:any = {};
 
     ngOnInit() {
 
-        this.sub = this.route.params.subscribe(params => {
-            this.id = params['clientId']; // (+) converts string 'id' to a number
-
-            this.company = 'abc';
-            this.contactPerson = 'xyz';
-            this.website = 'abc.com';
-            this.status = 'Old';
-            this.country = 'United Kingdom';
-            this.mlr = 'mlr-1212';
-            this.businessRegistration = 'bbb-121212';
-            this.address = '323/3, Jaya Uyana';
-            this.town = 'abcd';
-            this.postalCode = 2222222;
-
-        });
-
-        /*this.client = this.clientService.getClientData(this.id).
-        then(clientdata => this.client = clientdata,
-            error =>  this.errorMessage = <any>error );*/
-
-
+        this.subscription = this.dataHolder.clientData$.subscribe(
+            client => {
+                console.log(client);
+                this.client = client;
+                this.id = client.client_id;
+                this.company = client.company_name;
+                this.contactPerson = client.contact_person_name;
+                this.website = client.web_site;
+                this.status = this.statesMap[client.stage_id];
+                this.country = client.country;
+                this.mlr = client.mlr_number;
+                this.businessRegistration = client.business_registration;
+                this.address = client.address;
+                this.town = client.town;
+                this.postalCode = client.postal_code;
+                this.logoURL = client.logo_file_name;
+            }
+        );
     }
 
-    constructor(private route: ActivatedRoute, private clientService: ClientService) { }
+    constructor(
+        private route: ActivatedRoute,
+        private clientService: ClientService,
+        private dataHolder: ClientDataSharingService
+    ) { }
 
     onSubmit(form: any): void {
 
@@ -331,6 +340,13 @@ export class ClientEditComponent {
 
     addLogo($event: any): void {
         this.logo = $event.target.files[0];
+        let reader: FileReader = new FileReader();
+        reader.onloadend = (e => {
+            let data: any = e.target;
+            this.logoURL = data.result;
+        });
+
+        reader.readAsDataURL(this.logo);
     }
 
     onAddEmail(mail: string): void{

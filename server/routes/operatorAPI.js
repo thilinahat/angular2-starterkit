@@ -3,6 +3,8 @@
  */
 var express = require('express');
 var jwt = require('jsonwebtoken');
+var Promise = require('promise');
+var async = require('async');
 var multer = require('multer');
 var path = require('path');
 var datetime = require('node-datetime');
@@ -44,6 +46,62 @@ router.use(function (req, res, next) {
     }
 });
 
+const emailHandler = function (req, res) {
+    return new Promise((fulfill, reject) => {
+        const SQL = 'SELECT * FROM `client_mail` WHERE client_id =  ' + req.params.clientId;
+
+        mysqlConnectionPool.getConnection(function(err, connection) {
+
+            connection.query(SQL,  function (error, results) {
+                if (error)
+                    reject(error);
+                else
+                    fulfill(results);
+            });
+
+            connection.release();
+        });
+    });
+};
+
+const faxHandler = function (req, res) {
+    return new Promise((fulfill, reject) => {
+        var SQL = 'SELECT * FROM `client_fax` WHERE client_id =  ' + req.params.clientId;
+
+        mysqlConnectionPool.getConnection(function(err, connection) {
+
+            connection.query(SQL,  function (error, results) {
+
+                if (error)
+                    reject(error);
+                else
+                    fulfill(results);
+            });
+            connection.release();
+        });
+    });
+};
+
+const phoneHandler = function (req, res) {
+
+    return new Promise((fulfill, reject) => {
+        const SQL = 'SELECT * FROM `client_phone` WHERE client_id =  ' + req.params.clientId;
+
+        mysqlConnectionPool.getConnection(function(err, connection) {
+
+            connection.query(SQL,  function (error, results) {
+
+                if (error)
+                    reject(error);
+                else
+                    fulfill(results);
+            });
+
+            connection.release();
+        });
+    });
+};
+
 /* logo uploading with multer middleware*/
 const logoStorage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -78,7 +136,7 @@ router.post('/add-client', logoUploader, function (req, res) {
     const client = req.body;
     client.screenShotFileName = '';
     if (Array.isArray(req.files.logo) && req.files.logo.length > 0) {
-        client.screenShotFileName = req.headers.host + "/" + req.files.logo[0].filename;
+        client.screenShotFileName = "/" + req.files.logo[0].filename;
     }
 
     mysqlConnectionPool.getConnection(function(err, connection) {
@@ -162,21 +220,57 @@ router.get('/client/data/:clientId', function (req, res, next) {
 
         connection.query(SQL,  function (error, results) {
 
-
-
             if (error) {
 
-                console.log("error while retrieving from to db");
-                return;
-            }
+                res.status(400).send(error);
 
-
-            if(results.length > 0 ){
-
-                res.json(results[0]);
-
-            }
-            else{
+            } else if(results.length > 0 ){
+                let client = results[0];
+                async.parallel({
+                    emails: function(callback) {
+                        emailHandler(req, res).then(results => {
+                            let emails = [];
+                            results.forEach(result => {
+                                emails.push(result.mail);
+                            });
+                            callback(null, emails);
+                        }, error => {
+                            callback(error, null);
+                        });
+                    },
+                    phones: function(callback) {
+                        phoneHandler(req, res).then(results => {
+                            let phones = [];
+                            results.forEach(result => {
+                                phones.push(result.phone);
+                            });
+                            callback(null, phones);
+                        }, error => {
+                            callback(error, null);
+                        });
+                    },
+                    faxes: function(callback) {
+                        faxHandler(req, res).then(results => {
+                            let faxes = [];
+                            results.forEach(result => {
+                                faxes.push(result.fax);
+                            });
+                            callback(null, faxes);
+                        }, error => {
+                            callback(error, null);
+                        });
+                    }
+                }, function(err, results) {
+                    if (err)
+                        console.log(err);
+                    else {
+                        client.emails = results.emails;
+                        client.phones = results.phones;
+                        client.faxes = results.faxes;
+                        res.json(client);
+                    }
+                });
+            } else{
 
                 res.statusCode = 400; //if results are not found for this
                 res.send();
@@ -261,113 +355,30 @@ router.get('/client/searchdata', function (req, res,next) {
 });
 
 //route to get client e-mail addresses
-router.get('/client/data/:clientId/mail', function (req, res, next) {
-
-    const SQL = 'SELECT * FROM `client_mail` WHERE client_id =  ' + req.params.clientId;
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        connection.query(SQL,  function (error, results) {
-
-            if (error) {
-
-                console.log("error while retrieving from to db");
-                return;
-            }
-
-            if(results.length > 0 ){
-
-                res.json(results);
-
-            }
-            else{
-
-                res.statusCode = 200; //if results are not found for this
-                res.send();
-            }
-
-        });
-
-        connection.release();
+router.get('/client/data/:clientId/mail', function(req, res, next) {
+    emailHandler(req, res).then(results => {
+        res.json(results);
+    }, error => {
+        res.status(400).send(error);
     });
-
-
 });
 
 //route to get clients phone numbers
-router.get('/client/data/:clientId/phone', function (req, res, next) {
-
-    const SQL = 'SELECT * FROM `client_phone` WHERE client_id =  ' + req.params.clientId;
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        connection.query(SQL,  function (error, results) {
-
-
-
-            if (error) {
-
-                console.log("error while retrieving from to db");
-                return;
-            }
-
-
-            if(results.length > 0 ){
-
-                res.json(results);
-
-            }
-            else{
-
-                res.statusCode = 200; //if results are not found for this
-                res.send();
-            }
-
-        });
-
-        connection.release();
+router.get('/client/data/:clientId/phone', function(req, res){
+    phoneHandler(req, res).then(results => {
+        res.json(results);
+    }, error => {
+        res.status(400).send(error);
     });
-
-
 });
 
 //route to get clients fax numbers
-router.get('/client/data/:clientId/fax', function (req, res, next) {
-
-
-    var SQL = 'SELECT * FROM `client_fax` WHERE client_id =  ' + req.params.clientId;
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        if(err){
-            console.log("Error while connecting database");
-        }
-
-
-        connection.query(SQL,  function (error, results) {
-
-            if (error) {
-
-                console.log("error while retrieving from to db");
-                return;
-            }
-
-            if(results.length > 0 ){
-
-                res.json(results);
-
-            }
-            else{
-
-                res.statusCode = 200; //if results are not found for this
-                res.send();
-            }
-
-        });
-
-        connection.release();
+router.get('/client/data/:clientId/fax', function(req, res){
+    faxHandler(req, res).then(results => {
+        res.json(results);
+    }, error => {
+        res.status(400).send(error);
     });
-
 });
 
 //route to get clients products
