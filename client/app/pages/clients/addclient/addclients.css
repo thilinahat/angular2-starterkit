@@ -2,7 +2,12 @@
 
 .form-container{
     margin: 50px 30px;
-    width: 95%
+    width: 95%;
+    padding: 10px;
+}
+
+.form-container .btn-primary{
+    margin-left: 15px;
 }
 
 .tag-container {
@@ -68,10 +73,11 @@
     width: 50%;
 }
 
-.logo-input-container img{
+.logo-input-container .logo-preview{
     width: 150px;
     height: auto;
     display: inline-flex;
     margin-top: -60px;
     margin-left: 20px;
+    border: 2px dashed #962DAF;
 }

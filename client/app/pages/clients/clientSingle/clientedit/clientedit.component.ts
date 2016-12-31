@@ -25,13 +25,12 @@ export class ClientEditComponent {
     faxInput: any;
 
     submitBtnText: string = 'Update';
-    states: string[] = ['Potential', 'Pre-Sale', 'Existing', 'Old'];
-    statesMap = {
-        1: this.states[0],
-        2: this.states[1],
-        3: this.states[2],
-        4: this.states[3]
-    };
+    states: any[] = [
+            { value: 1, option: 'Potential'},
+            { value: 2, option: 'Pre-Sale'},
+            { value: 3, option: 'Existing'},
+            { value: 4, option: 'Old'}
+        ];
     countries: any[] = [
         {name: 'Afghanistan', code: 'AF'},
         {name: 'Åland Islands', code: 'AX'},
@@ -266,6 +265,7 @@ export class ClientEditComponent {
     faxes: string[] = [];
     logo: any;
     logoURL: string = "";
+    originalURL: string = "";
 
     id: String;
     subscription: Subscription;
@@ -275,13 +275,12 @@ export class ClientEditComponent {
 
         this.subscription = this.dataHolder.clientData$.subscribe(
             client => {
-                console.log(client);
                 this.client = client;
                 this.id = client.client_id;
                 this.company = client.company_name;
                 this.contactPerson = client.contact_person_name;
                 this.website = client.web_site;
-                this.status = this.statesMap[client.stage_id];
+                this.status = client.stage_id;
                 this.country = client.country;
                 this.mlr = client.mlr_number;
                 this.businessRegistration = client.business_registration;
@@ -289,6 +288,10 @@ export class ClientEditComponent {
                 this.town = client.town;
                 this.postalCode = client.postal_code;
                 this.logoURL = client.logo_file_name;
+                this.originalURL = client.logo_file_name;
+                this.emails = client.emails;
+                this.phones = client.phones;
+                this.faxes = client.faxes;
             }
         );
     }
@@ -310,6 +313,7 @@ export class ClientEditComponent {
 
         let formData = new FormData();
         formData.append("logo", this.logo);
+        formData.append("originalURL", this.originalURL);
         formData.append("company", form.company);
         formData.append("contactPerson", form.contactPerson);
         formData.append("website", form.website);
@@ -331,8 +335,8 @@ export class ClientEditComponent {
             formData.append('faxes[]', fax);
         });
 
-        this.clientService.addClient(formData).then(res => {
-            alert('Successfully Added Client');
+        this.clientService.editClient(formData, this.id).then(res => {
+            alert('Successfully Updated Client');
         }, error => {
             alert(error);
         });

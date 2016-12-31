@@ -19,7 +19,12 @@ export class AddclientsComponent {
     faxInput: any;
 
     submitBtnText: string = 'Add';
-    states: string[] = ['Potential', 'Pre-Sale', 'Existing', 'Old'];
+    states: any[] = [
+        { value: 1, option: 'Potential'},
+        { value: 2, option: 'Pre-Sale'},
+        { value: 3, option: 'Existing'},
+        { value: 4, option: 'Old'}
+    ];
     countries: any[] = [
     {name: 'Afghanistan', code: 'AF'},
     {name: 'Åland Islands', code: 'AX'},
@@ -241,7 +246,7 @@ export class AddclientsComponent {
     company: string = '';
     contactPerson: string = '';
     website: string = '';
-    status: string = 'Existing';
+    status: number = 1;
     country: string = 'United Kingdom';
     mlr: string = '';
     businessRegistration: string = '';

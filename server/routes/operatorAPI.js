@@ -131,21 +131,21 @@ const logoUploader = logoUpload.fields([{
 }]);
 
 // route for adding a client
-router.post('/add-client', logoUploader, function (req, res) {
+router.post('/client/add', logoUploader, function (req, res) {
 
     const client = req.body;
-    client.screenShotFileName = '';
+    client.logoFileName = '';
     if (Array.isArray(req.files.logo) && req.files.logo.length > 0) {
-        client.screenShotFileName = "/" + req.files.logo[0].filename;
+        client.logoFileName = "/" + req.files.logo[0].filename;
     }
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
-        // TODO : stage_id and blocked field is hard coded here
+        // blocked field is hard coded here
         let sql = 'INSERT INTO client ' +
             '(company_name, address, contact_person_name, web_site, stage_id, country, town, mlr_number, postal_code, business_registration, blocked, logo_file_name)' +
             ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        let values = [client.company,client.address,client.contactPerson,client.website,1,client.country,client.town,client.mlr,client.postalCode,client.businessRegistration, 0,client.screenShotFileName];
+        let values = [client.company,client.address,client.contactPerson,client.website,client.status,client.country,client.town,client.mlr,client.postalCode,client.businessRegistration, 0,client.logoFileName];
 
         connection.query( sql, values, function(err, rows, fields) {
             if (err) {
@@ -207,6 +207,106 @@ router.post('/add-client', logoUploader, function (req, res) {
                     message: err
                 });
             });
+        });
+    });
+});
+
+// route for editing a client
+router.post('/client/edit/:clientId', logoUploader, function (req, res) {
+
+    const client = req.body;
+    client.logoFileName = client.originalURL;
+    if (Array.isArray(req.files.logo) && req.files.logo.length > 0) {
+        client.logoFileName = "/" + req.files.logo[0].filename;
+    }
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        let sql = 'UPDATE client SET' +
+            ' company_name = ?, address = ?, contact_person_name = ?, web_site = ?, stage_id = ?, country = ?, town = ?, mlr_number = ?, postal_code = ?, business_registration = ?, logo_file_name = ? ' +
+            ' WHERE client_id = ' + connection.escape(req.params.clientId);
+        let values = [client.company,client.address,client.contactPerson,client.website,client.status,client.country,client.town,client.mlr,client.postalCode,client.businessRegistration,client.logoFileName];
+
+        connection.query( sql, values, function(err, results) {
+            if (err) {
+                console.log(err)
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while updating client table',
+                    message: err
+                });
+            } else {
+                async.parallel({
+                    emails: function (callback) {
+                        let sql = 'DELETE FROM client_mail  WHERE client_id = ' + req.params.clientId;
+                        connection.query(sql, function (err, results) {
+                            if (err) {
+                                //console.log(err);
+                                callback(err, null);
+                            }
+                            else if (client.emails && client.emails.length > 0) {
+                                sql = "INSERT INTO client_mail (client_id, mail) VALUES ?";
+                                const values = [];
+                                client.emails.forEach(mail => {
+                                    values.push([req.params.clientId, mail]);
+                                });
+
+                                connection.query(sql, [values], function (err) {
+                                    if (err) {
+                                        callback(err, null);
+                                        //console.log(err);
+                                    }
+                                    else
+                                        callback(null, null);
+                                });
+                            }
+                        });
+                    },
+                    phones: function (callback) {
+                        let sql = 'DELETE FROM client_phone  WHERE client_id = ' + req.params.clientId;
+                        connection.query(sql, function (err, results) {
+                            if (err)
+                                callback(err, null);
+                            else if (client.phones && client.phones.length > 0) {
+                                sql = "INSERT INTO client_phone (client_id, phone) VALUES ?";
+                                const values = [];
+                                client.phones.forEach(phone => {
+                                    values.push([req.params.clientId, phone]);
+                                });
+                                connection.query(sql, [values], function (err) {
+                                    if (err)
+                                        callback(err, null);
+                                    else
+                                        callback(null, null);
+                                });
+                            }
+                        });
+                    },
+                    faxes: function (callback) {
+                        let sql = 'DELETE FROM client_fax  WHERE client_id = ' + req.params.clientId;
+                        connection.query(sql, function (err, results) {
+                            if (err)
+                                callback(err, null);
+                            else if (client.faxes && client.faxes.length > 0) {
+                                sql = "INSERT INTO client_fax (client_id, fax) VALUES ?";
+                                const values = [];
+                                client.faxes.forEach(fax => {
+                                    values.push([req.params.clientId, fax]);
+                                });
+                                connection.query(sql, [values], function (err) {
+                                    if (err)
+                                        callback(err, null);
+                                    else
+                                        callback(null, null);
+                                });
+                            }
+                        });
+                    }
+                }, function (err, results) {
+                    res.sendStatus(200);
+                    connection.release();
+                });
+            }
         });
     });
 });

@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label for="status">Status</label>
                 <select class="form-control" id="status" name="status" [(ngModel)]="status">
-                    <option *ngFor="let state of states" [value]="state">{{state}}</option>
+                    <option *ngFor="let state of states" [value]="state.value">{{state.option}}</option>
                 </select>
             </div>
             <!--country-->
@@ -113,7 +113,7 @@
                 <label for="logo">Logo</label>
                 <input type="file" class="form-control" id="logo" name="logo" ngModel  accept="image/png,,image/jpeg" (change)="addLogo($event)">
                 <input type="text" readonly="" name="logoName" class="form-control logo-name">
-                <img src="{{logoURL}}" alt="" width="200" height="200"/>
+                <img src="{{logoURL}}" alt="" [ngClass]="{'logo-preview': logoURL != ''}"/>
             </div>
         </div>
         <!--submit-->

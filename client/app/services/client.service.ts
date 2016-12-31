@@ -17,7 +17,27 @@ export class ClientService {
 
     addClient(client: FormData): Promise<any> {
 
-        const url = `${this.clientAPIurl}/add-client`;
+        const url = `${this.clientAPIurl}/client/add`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, client)
+                .toPromise()
+                .then(response => {
+                    resolve(response);
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
+
+    editClient(client: FormData, id: String): Promise<any> {
+
+        const url = `${this.clientAPIurl}/client/edit/${id}`;
         return new Promise((resolve, reject) => {
             //noinspection TypeScriptUnresolvedFunction
             this.http
