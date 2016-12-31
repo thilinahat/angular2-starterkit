@@ -2,6 +2,7 @@
 
 .form-container{
     margin: 50px 30px;
+    width: 95%
 }
 
 .tag-container {
@@ -52,4 +53,25 @@
     left: -4px;
     top: -3px;
 
+}
+
+.logo-input-container{
+
+}
+
+.logo-input-container label{
+    display: block;
+}
+
+.logo-input-container .logo-name{
+    display: inline-flex;
+    width: 50%;
+}
+
+.logo-input-container img{
+    width: 150px;
+    height: auto;
+    display: inline-flex;
+    margin-top: -60px;
+    margin-left: 20px;
 }

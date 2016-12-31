@@ -254,6 +254,7 @@ export class AddclientsComponent {
     phones: string[] = [];
     faxes: string[] = [];
     logo: any;
+    logoURL: string = "";
     formData: FormData;
 
     constructor(private clientService: ClientService) { }
@@ -299,6 +300,13 @@ export class AddclientsComponent {
 
     addLogo($event: any): void {
         this.logo = $event.target.files[0];
+        let reader: FileReader = new FileReader();
+        reader.onloadend = (e => {
+            let data: any = e.target;
+            this.logoURL = data.result;
+        });
+
+        reader.readAsDataURL(this.logo);
     }
 
     onAddEmail(mail: string): void{
