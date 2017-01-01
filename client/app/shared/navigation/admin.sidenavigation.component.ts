@@ -11,10 +11,10 @@ import {Navitem} from "./navitem.component";
 export class AdminSidenavigationComponent {
 
     private Navitems: Navitem[] = [
-        {name:"Dashboard",  path:"/operator/dashboard", icon:"dashboard",isactive:true},
-        {name:"Clients",  path:"/operator/clients", icon:"person" ,isactive:false},
-        {name:"Tickets",  path:"/operator/tickets", icon:"content_paste",isactive:false},
-        {name:"Reports",  path:"/operator/reports", icon:"library_books", isactive:false},
-        {name:"Roles",  path:"/admin/manage/roles", icon:"group", isactive:false},
+        {name:"Dashboard",  path:"dashboard", icon:"dashboard",isactive:true},
+        {name:"Clients",  path:"clients", icon:"person" ,isactive:false},
+        {name:"Tickets",  path:"tickets", icon:"content_paste",isactive:false},
+        {name:"Reports",  path:"reports", icon:"library_books", isactive:false},
+        {name:"Roles",  path:"manage/roles", icon:"group", isactive:false},
     ];
 }

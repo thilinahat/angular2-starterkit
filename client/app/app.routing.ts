@@ -73,7 +73,33 @@ const routes: Routes = [
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-            { path: 'dashboard', component: DashboardComponent },
+            { path: 'dashboard', component: DashboardComponent},
+            { path: 'tickets', component: TicketsComponent },
+            { path: 'reports', component: ReportsComponent },
+            { path: 'clients',component: ClientsComponent , canActivate: [AuthGuard],
+                children: [
+                    { path: '', redirectTo: 'search', pathMatch: 'full' },
+                    { path: 'search', component: SearchClientComponent },
+                    { path: 'add', component: AddclientsComponent },
+                    { path: 'mail', component: MailComponent },
+                    { path: 'call', component: CallComponent },
+                ]
+            },
+            {
+                path: 'clients/:clientId', component: SingleClientComponent, canActivate: [AuthGuard],
+                children: [
+                    {path: '', redirectTo: 'client-dash-board', pathMatch: 'full'},
+                    {path: 'client-dash-board', component: ClientSingleDashboardComponent},
+                    {path: 'add-call', component: AddCallComponent},
+                    {path: 'add-note', component: AddNoteComponent},
+                    {path: 'add-product', component: AddProductComponent},
+                    {path: 'add-ticket', component: AddTicketeComponent},
+                    {path: 'send-mail', component: SendMailComponent},
+                    {path: 'client-block', component: ClientBlockComponent},
+                    {path: 'edit', component: ClientEditComponent},
+                    {path: 'tickets', component: SingleClientTicketsComponent},
+                ]
+            },
         ]
     },
     { path: 'customer', component: CustomersComponent, canActivate: [AuthGuard]},
@@ -85,3 +111,12 @@ const routes: Routes = [
     providers: [ AuthService, AuthGuard ]
 })
 export class AppRoutingModule {}
+
+
+/*
+* [routerLink]="['/absolute']"
+ [routerLink]="['../../parent']"
+ [routerLink]="['../sibling']"
+ [routerLink]="['./child']"
+ [routerLink]="['child']"
+* */

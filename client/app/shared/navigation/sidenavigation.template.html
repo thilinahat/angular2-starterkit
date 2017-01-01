@@ -13,7 +13,7 @@
             <!--"-->
 
             <li *ngFor="let nav of Navitems"  class="main-nav-item"  routerLinkActive="active">
-                <a routerLink="{{nav.path}}" >
+                <a [routerLink]="[nav.path]">
                     <i class="material-icons">{{nav.icon}}</i>
                     <p>{{nav.name}}</p>
                 </a>
