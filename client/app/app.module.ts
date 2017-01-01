@@ -5,10 +5,13 @@ import { HttpModule }    from '@angular/http';
 
 import {AppComponent} from "./app.component";
 import {ClientsComponent} from "./pages/clients/clients.component";
+import {OperatorComponent} from "./pages/operator/operator.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {TicketsComponent} from "./pages/tickets/tickets.componet";
 import {ReportsComponent} from "./pages/reports/reports.component";
 import {SidenavigationComponent} from "./shared/navigation/sidenavigation.component";
+import {AdminSidenavigationComponent} from "./shared/navigation/admin.sidenavigation.component";
+
 
 import { ClientService } from './services/client.service';
 import { AuthService } from './services/auth.service';
@@ -66,7 +69,7 @@ import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSing
         AddProductComponent, AddTicketeComponent,
         AddTillComponent, CallComponent, ChangeCredentialsComponent,
         ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent, ClientEditComponent, SearchClientComponent,
-        SingleClientTicketsComponent, SingleClientPurchasedProductsComponent
+        SingleClientTicketsComponent, SingleClientPurchasedProductsComponent, AdminSidenavigationComponent, OperatorComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService, ClienthistoryService],
     bootstrap: [AppComponent],

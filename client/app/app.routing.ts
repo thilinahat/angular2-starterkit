@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {AppComponent} from "./app.component";
 import {ClientsComponent} from "./pages/clients/clients.component";
+import {OperatorComponent} from "./pages/operator/operator.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {TicketsComponent} from "./pages/tickets/tickets.componet";
 import {ReportsComponent} from "./pages/reports/reports.component";
@@ -35,34 +36,38 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'change/credentials', component: ChangeCredentialsComponent, canActivate: [AuthGuard] },
 
-    { path: 'operator/clients',component: ClientsComponent , canActivate: [AuthGuard],
+    { path: 'operator', component: OperatorComponent, canActivate: [AuthGuard],
         children: [
-            { path: '', redirectTo: 'search', pathMatch: 'full' },
-            { path: 'search', component: SearchClientComponent },
-            { path: 'add', component: AddclientsComponent },
-            { path: 'mail', component: MailComponent },
-            { path: 'call', component: CallComponent }
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+            { path: 'dashboard', component: DashboardComponent},
+            { path: 'tickets', component: TicketsComponent },
+            { path: 'reports', component: ReportsComponent },
+            { path: 'clients',component: ClientsComponent , canActivate: [AuthGuard],
+                children: [
+                    { path: '', redirectTo: 'search', pathMatch: 'full' },
+                    { path: 'search', component: SearchClientComponent },
+                    { path: 'add', component: AddclientsComponent },
+                    { path: 'mail', component: MailComponent },
+                    { path: 'call', component: CallComponent },
+                    { path: ':clientId',component: SingleClientComponent , canActivate: [AuthGuard],
+                        children: [
+                            { path: '', redirectTo: 'client-dash-board', pathMatch: 'full' },
+                            { path: 'client-dash-board', component: ClientSingleDashboardComponent },
+                            { path: 'add-call', component: AddCallComponent },
+                            { path: 'add-note', component: AddNoteComponent },
+                            { path: 'add-product', component: AddProductComponent },
+                            { path: 'add-ticket', component: AddTicketeComponent },
+                            { path: 'send-mail', component: SendMailComponent },
+                            { path: 'client-block', component: ClientBlockComponent },
+                            { path: 'edit', component: ClientEditComponent },
+                            { path: 'tickets', component: SingleClientTicketsComponent },
+                        ]
+                    },
+                ]
+            },
         ]
     },
-    { path: 'operator/clients/:clientId',component: SingleClientComponent , canActivate: [AuthGuard],
-        children: [
-            { path: '', redirectTo: 'client-dash-board', pathMatch: 'full' },
-            { path: 'client-dash-board', component: ClientSingleDashboardComponent },
-            { path: 'add-call', component: AddCallComponent },
-            { path: 'add-note', component: AddNoteComponent },
-            { path: 'add-product', component: AddProductComponent },
-            { path: 'add-ticket', component: AddTicketeComponent },
-            { path: 'send-mail', component: SendMailComponent },
-            { path: 'client-block', component: ClientBlockComponent },
-            { path: 'edit', component: ClientEditComponent },
-            { path: 'tickets', component: SingleClientTicketsComponent },
 
-        ]
-    },
-    { path: 'operator/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-    { path: 'operator/tickets', component: TicketsComponent, canActivate: [AuthGuard] },
-    { path: 'operator/reports', component: ReportsComponent, canActivate: [AuthGuard] },
-    { path: 'operator', redirectTo:'operator/dashboard' },
     { path: 'customer', component: CustomersComponent, canActivate: [AuthGuard]},
     { path: '**', redirectTo:'login', pathMatch: 'full' }
 ];
