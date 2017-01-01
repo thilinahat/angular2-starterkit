@@ -27,7 +27,7 @@ router.use(function (req, res, next) {
                     success: false,
                     message: 'failed to authenticate token.'
                 });
-            } else if(decoded.role == 'OPERATOR'){
+            } else if(decoded.role == 'OPERATOR' || decoded.role == 'ADMIN'){ // both admin and operator can use these routes
                 req.decoded = decoded;
                 next();
             } else

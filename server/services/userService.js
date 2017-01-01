@@ -14,16 +14,30 @@ class UserService {
     addUser(user) {
         return new Promise((fulfill, reject) => {
             mysqlConnectionPool.getConnection(function (err, connection) {
-                let sql = 'INSERT INTO users ' +
-                    '(user_id, username, password, role, has_logged_in)' +
-                    ' VALUES (?, ?, ?, ?, ?)';
-                let values = [user.id, user.username, passwordHash.generate(user.password), user.role, false];
-
+                const role = user.role == 'OPERATOR' ? 'operator' : 'developer';
+                let sql = 'INSERT INTO ' + role + 's' +
+                    '  (' + role+ '_name, '+ role + '_company_id)' +
+                    ' VALUES (?, ?)';
+                let values = [user.name, user.companyId];
                 connection.query(sql, values, function (err, rows, fields) {
-                    if (err) {
+                    if (err)
                         reject(err);
-                    }
-                    fulfill();
+
+                    user.id = rows.insertId;
+                    user.username = config[role].usernamePrefix + '_' + user.id;
+                    user.password = config[role].passwordPrefix + '_' + user.id;
+
+                    sql = 'INSERT INTO users ' +
+                        '(user_id, username, password, role, has_logged_in)' +
+                        ' VALUES (?, ?, ?, ?, ?)';
+                    values = [user.id, user.username, passwordHash.generate(user.password), user.role, false];
+
+                    connection.query(sql, values, function (err, rows, fields) {
+                        if (err) {
+                            reject(err);
+                        }
+                        fulfill(user);
+                    });
                 });
             });
 

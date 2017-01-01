@@ -11,8 +11,8 @@ export class AuthGuard implements CanActivate {
 
     // mapping of role based route access
     private acl: any = {
-        "/admin/" : ["OPERATOR", "ADMIN"],
-        "/admin/dashboard" : ["OPERATOR", "ADMIN"],
+        "/admin/" : ["ADMIN"],
+        "/admin/dashboard" : ["ADMIN"],
         "/operator/" : ["OPERATOR", "ADMIN"],
         "/operator/dashboard" : ["OPERATOR", "ADMIN"],
         "/operator/clients/search" : ["OPERATOR", "ADMIN"],

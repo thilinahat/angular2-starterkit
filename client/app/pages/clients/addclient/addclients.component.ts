@@ -260,7 +260,6 @@ export class AddclientsComponent {
     faxes: string[] = [];
     logo: any;
     logoURL: string = "";
-    formData: FormData;
 
     constructor(private clientService: ClientService) { }
 
@@ -321,7 +320,6 @@ export class AddclientsComponent {
 
     onRemoveEmail(mail: string): void{
         this.emails.splice(this.emails.indexOf(mail), 1);
-        console.log(this.emails)
     }
 
     onAddPhone(phone: string): void{
@@ -331,7 +329,6 @@ export class AddclientsComponent {
 
     onRemovePhone(phone: string): void{
         this.phones.splice(this.phones.indexOf(phone), 1);
-        console.log(this.phones)
     }
 
     onAddFax(fax: string): void{
@@ -341,6 +338,5 @@ export class AddclientsComponent {
 
     onRemoveFax(fax: string): void{
         this.faxes.splice(this.faxes.indexOf(fax), 1);
-        console.log(this.faxes)
     }
 }

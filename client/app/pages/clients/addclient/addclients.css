@@ -1,15 +1,5 @@
 @import "../../../../../public/css/variables.css";
 
-.form-container{
-    margin: 50px 30px;
-    width: 95%;
-    padding: 10px;
-}
-
-.form-container .btn-primary{
-    margin-left: 15px;
-}
-
 .tag-container {
     display: inline;
 }

@@ -11,9 +11,31 @@ var config = require('../../config');
 var UserService = require('../services/userService');
 var router = express.Router();
 
+
+router.get('/add-admin',  function (req, res) {
+
+    var user = {
+        id: 1,
+        username: config.admin.usernamePrefix,
+        password: config.admin.passwordPrefix,
+        role: config.roles.admin
+    };
+
+    UserService.addUser(user).then(response => {
+        res.status(200).json({
+            message: 'Admin Created',
+            username: 'CRM_ADMIN',
+            password: 'CRM_ADMIN'
+        });
+    }, err => {
+        return res.status(406).json({
+            status: 'Failed to create admin',
+            message: err
+        });
+    });
+});
+
 // middleware protect api routes
-// TODO : this need to be protected
-/*
 router.use(function (req, res, next) {
 
     const token = req.cookies['CRM_COOKIE'];
@@ -25,7 +47,7 @@ router.use(function (req, res, next) {
                     success: false,
                     message: 'failed to authenticate token.'
                 });
-            } else if(decoded.role == 'OPERATOR'){
+            } else if(decoded.role == 'ADMIN'){
                 req.decoded = decoded;
                 next();
             } else
@@ -42,7 +64,25 @@ router.use(function (req, res, next) {
             message: 'no token provided.'
         });
     }
-});*/
+});
+
+router.post('/user/add',  function (req, res) {
+
+    const user = req.body.user;
+
+    UserService.addUser(user).then(response => {
+        res.status(200).json({
+            message: user.role + ' Created Successfully',
+            username: response.username,
+            password: response.password
+        });
+    }, err => {
+        return res.status(406).json({
+            status: 'Failed to create ' + user.role,
+            message: err
+        });
+    });
+});
 
 router.get('/add-operator',  function (req, res) {
 

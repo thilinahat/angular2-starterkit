@@ -7,6 +7,9 @@ import {AppComponent} from "./app.component";
 import {ClientsComponent} from "./pages/clients/clients.component";
 import {OperatorComponent} from "./pages/operator/operator.component";
 import {AdminComponent} from "./pages/admin/admin.component";
+import {RoleManagementComponent} from "./pages/admin/roleManagement/roleManagement.component";
+import {RoleManagementHeaderComponent} from "./pages/admin/roleManagementHeader/roleManagementHeader.component";
+import {AddUserComponent} from "./pages/admin/addUser/addUser.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {TicketsComponent} from "./pages/tickets/tickets.componet";
 import {ReportsComponent} from "./pages/reports/reports.component";
@@ -16,6 +19,7 @@ import {AdminSidenavigationComponent} from "./shared/navigation/admin.sidenaviga
 
 import { ClientService } from './services/client.service';
 import { AuthService } from './services/auth.service';
+import { RoleManagementService } from './services/roleManagement.service';
 import { AuthGuard } from './guards/auth.gaurd';
 import { AppRoutingModule } from './app.routing';
 
@@ -69,10 +73,12 @@ import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSing
         AddCallComponent, AddNoteComponent,
         AddProductComponent, AddTicketeComponent,
         AddTillComponent, CallComponent, ChangeCredentialsComponent,
-        ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent, ClientEditComponent, SearchClientComponent,
-        SingleClientTicketsComponent, SingleClientPurchasedProductsComponent, AdminSidenavigationComponent, OperatorComponent, AdminComponent
+        ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent,
+        ClientEditComponent, SearchClientComponent, SingleClientTicketsComponent,
+        SingleClientPurchasedProductsComponent, AdminSidenavigationComponent, OperatorComponent,
+        AdminComponent, RoleManagementComponent, RoleManagementHeaderComponent, AddUserComponent
          ],
-    providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService, ClienthistoryService],
+    providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService, ClienthistoryService, RoleManagementService],
     bootstrap: [AppComponent],
 })
 

@@ -8,6 +8,8 @@ import {AppComponent} from "./app.component";
 import {ClientsComponent} from "./pages/clients/clients.component";
 import {OperatorComponent} from "./pages/operator/operator.component";
 import {AdminComponent} from "./pages/admin/admin.component";
+import {RoleManagementComponent} from "./pages/admin/roleManagement/roleManagement.component";
+import {AddUserComponent} from "./pages/admin/addUser/addUser.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {TicketsComponent} from "./pages/tickets/tickets.componet";
 import {ReportsComponent} from "./pages/reports/reports.component";
@@ -76,6 +78,13 @@ const routes: Routes = [
             { path: 'dashboard', component: DashboardComponent},
             { path: 'tickets', component: TicketsComponent },
             { path: 'reports', component: ReportsComponent },
+            { path: 'roles', component: RoleManagementComponent,
+                children: [
+                    { path: '', redirectTo: 'add', pathMatch: 'full' },
+                    { path: 'add', component: AddUserComponent },
+                    { path: 'remove', component: AddclientsComponent },
+                ]
+            },
             { path: 'clients',component: ClientsComponent , canActivate: [AuthGuard],
                 children: [
                     { path: '', redirectTo: 'search', pathMatch: 'full' },

@@ -15,6 +15,6 @@ export class AdminSidenavigationComponent {
         {name:"Clients",  path:"clients", icon:"person" ,isactive:false},
         {name:"Tickets",  path:"tickets", icon:"content_paste",isactive:false},
         {name:"Reports",  path:"reports", icon:"library_books", isactive:false},
-        {name:"Roles",  path:"manage/roles", icon:"group", isactive:false},
+        {name:"Roles",  path:"roles", icon:"group", isactive:false},
     ];
 }
