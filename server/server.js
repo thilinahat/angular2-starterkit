@@ -12,8 +12,8 @@ var index = require('./routes/index');
 var api = require('./routes/api');
 
 // mail routes
-//var mailServerImap = require('./routes/MailServerIMAP');
-//var mailServerSMTP = require('./routes/MailServerSMTP');
+var mailServerImap = require('./routes/MailServerIMAP');
+var mailServerSMTP = require('./routes/MailServerSMTP');
 
 
 var operatorAPI = require('./routes/operatorAPI');
@@ -65,8 +65,8 @@ app.use('/change/credentials', index);
 app.use('/api/operator', operatorAPI); //API for operator initiated actions
 app.use('/api/admin', adminAPI); //API for admin initiated actions
 app.use('/api', api);
-//app.use('/mail',mailServerImap);
-//app.use('/mailsend',mailServerSMTP);
+app.use('/mail',mailServerImap);
+app.use('/mailsend',mailServerSMTP);
 app.use('/*', notFound);
 
 

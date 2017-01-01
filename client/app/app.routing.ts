@@ -49,25 +49,26 @@ const routes: Routes = [
                     { path: 'add', component: AddclientsComponent },
                     { path: 'mail', component: MailComponent },
                     { path: 'call', component: CallComponent },
-                    { path: ':clientId',component: SingleClientComponent , canActivate: [AuthGuard],
-                        children: [
-                            { path: '', redirectTo: 'client-dash-board', pathMatch: 'full' },
-                            { path: 'client-dash-board', component: ClientSingleDashboardComponent },
-                            { path: 'add-call', component: AddCallComponent },
-                            { path: 'add-note', component: AddNoteComponent },
-                            { path: 'add-product', component: AddProductComponent },
-                            { path: 'add-ticket', component: AddTicketeComponent },
-                            { path: 'send-mail', component: SendMailComponent },
-                            { path: 'client-block', component: ClientBlockComponent },
-                            { path: 'edit', component: ClientEditComponent },
-                            { path: 'tickets', component: SingleClientTicketsComponent },
-                        ]
-                    },
                 ]
             },
+            {
+                path: 'clients/:clientId', component: SingleClientComponent, canActivate: [AuthGuard],
+                children: [
+                    {path: '', redirectTo: 'client-dash-board', pathMatch: 'full'},
+                    {path: 'client-dash-board', component: ClientSingleDashboardComponent},
+                    {path: 'add-call', component: AddCallComponent},
+                    {path: 'add-note', component: AddNoteComponent},
+                    {path: 'add-product', component: AddProductComponent},
+                    {path: 'add-ticket', component: AddTicketeComponent},
+                    {path: 'send-mail', component: SendMailComponent},
+                    {path: 'client-block', component: ClientBlockComponent},
+                    {path: 'edit', component: ClientEditComponent},
+                    {path: 'tickets', component: SingleClientTicketsComponent},
+                ]
+            },
+
         ]
     },
-
     { path: 'customer', component: CustomersComponent, canActivate: [AuthGuard]},
     { path: '**', redirectTo:'login', pathMatch: 'full' }
 ];
