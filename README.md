@@ -52,9 +52,9 @@ https://github.com/mscdex/node-imap
  ```
  
  
- ## Create an Admin Role
+## Create an Admin Role
  
- * Send a get request to localhost/api/admin/add-admin
+ * Send a get request to localhost:8080/api/admin/add-admin
   
  * This will create an operator role with following credentials
  
