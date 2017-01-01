@@ -113,7 +113,7 @@
                 <label for="logo">Logo</label>
                 <input type="file" class="form-control" id="logo" name="logo" ngModel  accept="image/png,,image/jpeg" (change)="addLogo($event)">
                 <input type="text" readonly="" name="logoName" class="form-control logo-name">
-                <img src="{{logoURL}}" alt="" [ngClass]="{'logo-preview': logoURL != ''}"/>
+                <img src="{{logoURL}}" alt="" [ngClass]="{'logo-preview': logoURL != '', 'hide': logoURL == ''}"/>
             </div>
         </div>
         <!--submit-->
