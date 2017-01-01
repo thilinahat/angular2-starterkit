@@ -61,6 +61,7 @@ app.use('/', index);
 app.use('/login', index);
 app.use('/customer', index);
 app.use('/operator/*', index);
+app.use('/admin/*', index);
 app.use('/change/credentials', index);
 app.use('/api/operator', operatorAPI); //API for operator initiated actions
 app.use('/api/admin', adminAPI); //API for admin initiated actions

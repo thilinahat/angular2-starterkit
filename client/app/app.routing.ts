@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {AppComponent} from "./app.component";
 import {ClientsComponent} from "./pages/clients/clients.component";
 import {OperatorComponent} from "./pages/operator/operator.component";
+import {AdminComponent} from "./pages/admin/admin.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {TicketsComponent} from "./pages/tickets/tickets.componet";
 import {ReportsComponent} from "./pages/reports/reports.component";
@@ -67,6 +68,12 @@ const routes: Routes = [
                 ]
             },
 
+        ]
+    },
+    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
+        children: [
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+            { path: 'dashboard', component: DashboardComponent },
         ]
     },
     { path: 'customer', component: CustomersComponent, canActivate: [AuthGuard]},
