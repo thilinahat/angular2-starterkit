@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
 import { HttpModule }    from '@angular/http';
+import {SimpleNotificationsModule} from 'angular2-notifications';
 
 import {AppComponent} from "./app.component";
 import {ClientsComponent} from "./pages/clients/clients.component";
@@ -70,7 +71,7 @@ import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSing
 
 //when creating a component, add it here
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule, MainPipeModule, Ng2Bs3ModalModule],
+    imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule, MainPipeModule, Ng2Bs3ModalModule,SimpleNotificationsModule],
     declarations: [AppComponent, ClientsComponent,
         DashboardComponent, TicketsComponent,
         ReportsComponent, SidenavigationComponent,

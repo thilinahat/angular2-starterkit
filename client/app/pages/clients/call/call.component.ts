@@ -1,16 +1,36 @@
 /**
  * Created by tharakamd on 12/18/16.
  */
-import {Component} from "@angular/core"
+import {Component, OnInit} from "@angular/core";
+import {NotificationsService} from 'angular2-notifications';
 import Timer = NodeJS.Timer;
+import {CallModel} from "./call.model";
+import {CallService} from '../../../services/call.service';
 
 @Component({
     selector:'call',
     templateUrl:'call.template.html',
-    styleUrls: ['call.css']
+    styleUrls: ['call.css'],
+    providers: [CallService]
 })
 
-export class CallComponent {
+export class CallComponent implements OnInit{
+
+    // binding for summary
+    public summary = {
+        incomingThisWeek: 0
+    }
+
+    ngOnInit(): void {
+        this.getCallSummory();
+    }
+
+    // for nitifications
+    public notif_options = {
+        position: ["bottom", "left"],
+        timeOut: 5000,
+        lastOnBottom: true
+    }
 
     timer_time : String;
     timer_seconds: number;
@@ -22,7 +42,7 @@ export class CallComponent {
     play_btn_icon: String;
     play_btn_text: String;
 
-    constructor(){
+    constructor(private callService: CallService,private notif_service: NotificationsService){
         this.timer_seconds = 0;
         this.timer_minutes = 0;
         this.timer_time = "00 : 00";
@@ -90,4 +110,28 @@ export class CallComponent {
         clearInterval(this.timer_token);
     }
 
+    // new call form
+    newCallModel = new CallModel(new Date(2010, 11, 28, 14, 57),new Date(2010, 11, 28, 14, 57),"","",0,1);
+
+    onCallFormSubmit(){
+        //this.newCallModel.time_duration = (this.newCallModel.end_time.getTime() - this.newCallModel.start_time.getTime())/1000;
+        // console.log(this.newCallModel.time_duration);
+        this.callService.storeNewCall(this.newCallModel).then(
+            data  => this.notif_service.success("Success","Your call stored successfully"),
+            error => this.notif_service.error("Error","We couldn't store your data")
+        );
+        this.newCallModel = new CallModel(new Date(2010, 11, 28, 14, 57),new Date(2010, 11, 28, 14, 57),"","",0,1);
+    }
+
+    getCallSummory(){
+        this.callService.getCallSummary().then(
+            data => {
+                data = JSON.parse(data._body);
+                this.summary = data;
+                console.log(data);
+
+            },
+            error => this.notif_service.error("Error","Error fetching data from server")
+        );
+    }
 }
