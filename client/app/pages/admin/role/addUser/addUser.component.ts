@@ -2,11 +2,11 @@
  * Created by thilina on 1/1/17.
  */
 import {Component} from "@angular/core";
-import {RoleManagementService} from './../../../services/roleManagement.service';
+import {RoleManagementService} from '../../../../services/role.service';
 
 @Component({
     selector: 'add-user',
-    templateUrl: './addUser.template.html',
+    templateUrl: 'addUser.template.html',
     styleUrls: [],
 })
 

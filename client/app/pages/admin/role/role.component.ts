@@ -5,7 +5,7 @@ import {Component} from "@angular/core";
 
 @Component({
     selector: 'role-management',
-    templateUrl: './roleManagement.template.html',
+    templateUrl: 'role.template.html',
     styleUrls: [],
 })
 

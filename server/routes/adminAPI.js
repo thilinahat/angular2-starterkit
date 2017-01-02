@@ -66,6 +66,7 @@ router.use(function (req, res, next) {
     }
 });
 
+// route to add operators, developers
 router.post('/user/add',  function (req, res) {
 
     const user = req.body.user;
@@ -84,28 +85,67 @@ router.post('/user/add',  function (req, res) {
     });
 });
 
-router.get('/add-operator',  function (req, res) {
+// route to get all products
+router.get('/products',  function (req, res) {
 
-    var user = {
-        id: 1,
-        username: config.operator.usernamePrefix + "_" + 1,
-        password: config.operator.passwordPrefix + "_" + 1,
-        role: config.roles.operator
-    };
-
-    UserService.addUser(user).then(response => {
-        res.status(200).json({
-            message: 'Operator Created',
-            username: 'CRM_OPERATOR_USERNAME_1',
-            password: 'CRM_OPERATOR_PASSWORD_1'
-        });
-    }, err => {
-        return res.status(406).json({
-            status: 'Failed to create operator',
-            message: err
+    mysqlConnectionPool.getConnection(function (err, connection) {
+        let sql = 'SELECT * FROM products';
+        connection.query(sql, function (err, results) {
+            if (err) {
+                return res.sendStatus(400);
+            } else {
+                res.json(results);
+            }
         });
     });
 });
 
+// route to add products
+router.post('/product/add',  function (req, res) {
+
+    const product = req.body.product;
+
+    mysqlConnectionPool.getConnection(function (err, connection) {
+        let sql = 'INSERT INTO products' +
+            '  ( name, description )' +
+            ' VALUES (?, ?)';
+        let values = [product.name, product.description];
+        connection.query(sql, values, function (err, rows, fields) {
+            if (err) {
+                return res.status(406).json({
+                    status: 'Failed to create Product',
+                    message: err
+                });
+            } else {
+                res.status(200).json({
+                    message: ' Product Created Successfully'
+                });
+            }
+        });
+    });
+});
+
+// route to edit products
+router.post('/product/edit',  function (req, res) {
+
+    const product = req.body.product;
+
+    mysqlConnectionPool.getConnection(function (err, connection) {
+        let sql = 'UPDATE products SET description = ? WHERE name = ?';
+        let values = [product.description, product.product];
+        connection.query(sql, values, function (err, results) {
+            if (err) {
+                return res.status(406).json({
+                    status: 'Failed to update Product',
+                    message: err
+                });
+            } else {
+                res.status(200).json({
+                    message: ' Product Updated Successfully'
+                });
+            }
+        });
+    });
+});
 
 module.exports = router;

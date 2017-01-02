@@ -6,7 +6,7 @@ import {Component} from "@angular/core";
 
 @Component({
     selector: 'role-management-header',
-    templateUrl: 'roleManagementHeader.template.html',
+    templateUrl: 'header.template.html',
 })
 
 export class RoleManagementHeaderComponent { }

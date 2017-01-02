@@ -16,5 +16,6 @@ export class AdminSidenavigationComponent {
         {name:"Tickets",  path:"tickets", icon:"content_paste",isactive:false},
         {name:"Reports",  path:"reports", icon:"library_books", isactive:false},
         {name:"Roles",  path:"roles", icon:"group", isactive:false},
+        {name:"Products",  path:"products", icon:"shopping_cart", isactive:false},
     ];
 }

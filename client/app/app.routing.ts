@@ -8,8 +8,11 @@ import {AppComponent} from "./app.component";
 import {ClientsComponent} from "./pages/clients/clients.component";
 import {OperatorComponent} from "./pages/operator/operator.component";
 import {AdminComponent} from "./pages/admin/admin.component";
-import {RoleManagementComponent} from "./pages/admin/roleManagement/roleManagement.component";
-import {AddUserComponent} from "./pages/admin/addUser/addUser.component";
+import {RoleManagementComponent} from "./pages/admin/role/role.component";
+import {AddUserComponent} from "./pages/admin/role/addUser/addUser.component";
+import {ProductComponent} from "./pages/admin/product/product.component";
+import {AddMainProductComponent} from "./pages/admin/product/addProduct/addProduct.component";
+import {EditProductComponent} from "./pages/admin/product/editProduct/editProduct.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {TicketsComponent} from "./pages/tickets/tickets.componet";
 import {ReportsComponent} from "./pages/reports/reports.component";
@@ -82,7 +85,14 @@ const routes: Routes = [
                 children: [
                     { path: '', redirectTo: 'add', pathMatch: 'full' },
                     { path: 'add', component: AddUserComponent },
-                    { path: 'remove', component: AddclientsComponent },
+                    //{ path: 'remove', component: AddclientsComponent },
+                ]
+            },
+            { path: 'products', component: ProductComponent,
+                children: [
+                    { path: '', redirectTo: 'add', pathMatch: 'full' },
+                    { path: 'add', component: AddMainProductComponent },
+                    { path: 'edit', component: EditProductComponent },
                 ]
             },
             { path: 'clients',component: ClientsComponent , canActivate: [AuthGuard],

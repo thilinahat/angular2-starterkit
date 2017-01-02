@@ -611,7 +611,6 @@ router.post('/client/addproduct', logoUploader, function (req, res) {
 
 });
 
-
 //get client branches
 router.get('/client/data/:clientId/branches', function (req, res, next) {
 
@@ -794,7 +793,6 @@ router.get('/client/data/:clientId/tills', function (req, res, next) {
         connection.release();
     });
 });
-
 
 //route for block a client/*
 router.post('/client/block',  function (req, res) {
@@ -1070,7 +1068,6 @@ router.get('/tickets/problemtypes', function (req, res, next) {
     });
 });
 
-
 //get ticket priorities
 router.get('/tickets/priorities', function (req, res, next) {
 
@@ -1322,7 +1319,6 @@ router.get('/ticket/data/:ticketId', function (req, res, next) {
         connection.release();
     });
 });
-
 
 // route for change ticket priority
 router.post('/ticket/change-priority', screenshotUploader, function (req, res) {

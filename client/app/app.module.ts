@@ -7,9 +7,13 @@ import {AppComponent} from "./app.component";
 import {ClientsComponent} from "./pages/clients/clients.component";
 import {OperatorComponent} from "./pages/operator/operator.component";
 import {AdminComponent} from "./pages/admin/admin.component";
-import {RoleManagementComponent} from "./pages/admin/roleManagement/roleManagement.component";
-import {RoleManagementHeaderComponent} from "./pages/admin/roleManagementHeader/roleManagementHeader.component";
-import {AddUserComponent} from "./pages/admin/addUser/addUser.component";
+import {RoleManagementComponent} from "./pages/admin/role/role.component";
+import {RoleManagementHeaderComponent} from "./pages/admin/role/header/header.component";
+import {AddUserComponent} from "./pages/admin/role/addUser/addUser.component";
+import {ProductComponent} from "./pages/admin/product/product.component";
+import {ProductHeaderComponent} from "./pages/admin/product/header/header.component";
+import {AddMainProductComponent} from "./pages/admin/product/addProduct/addProduct.component";
+import {EditProductComponent} from "./pages/admin/product/editProduct/editProduct.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {TicketsComponent} from "./pages/tickets/tickets.componet";
 import {ReportsComponent} from "./pages/reports/reports.component";
@@ -19,7 +23,8 @@ import {AdminSidenavigationComponent} from "./shared/navigation/admin.sidenaviga
 
 import { ClientService } from './services/client.service';
 import { AuthService } from './services/auth.service';
-import { RoleManagementService } from './services/roleManagement.service';
+import { RoleManagementService } from './services/role.service';
+import { ProductManagementService } from './services/product.service';
 import { AuthGuard } from './guards/auth.gaurd';
 import { AppRoutingModule } from './app.routing';
 
@@ -76,9 +81,12 @@ import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSing
         ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent,
         ClientEditComponent, SearchClientComponent, SingleClientTicketsComponent,
         SingleClientPurchasedProductsComponent, AdminSidenavigationComponent, OperatorComponent,
-        AdminComponent, RoleManagementComponent, RoleManagementHeaderComponent, AddUserComponent
+        AdminComponent, RoleManagementComponent, RoleManagementHeaderComponent, AddUserComponent,
+        ProductComponent, ProductHeaderComponent, AddMainProductComponent, EditProductComponent
          ],
-    providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService, ClienthistoryService, RoleManagementService],
+    providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
+        ClienthistoryService, RoleManagementService, ProductManagementService
+    ],
     bootstrap: [AppComponent],
 })
 
