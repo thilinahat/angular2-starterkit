@@ -9,6 +9,10 @@ module.exports =  {
         password: '1234',
         database: 'vinit_crm'
     },
+    admin: {
+        usernamePrefix: 'CRM_ADMIN',
+        passwordPrefix: 'CRM_ADMIN'
+    },
     client: {
             usernamePrefix: 'CRM_CLIENT_USERNAME',
             passwordPrefix: 'CRM_CLIENT_PASSWORD'
@@ -17,6 +21,10 @@ module.exports =  {
         usernamePrefix: 'CRM_OPERATOR_USERNAME',
         passwordPrefix: 'CRM_OPERATOR_PASSWORD'
     },
+    developer: {
+        usernamePrefix: 'CRM_DEVELOPER_USERNAME',
+        passwordPrefix: 'CRM_DEVELOPER_PASSWORD'
+    },
     roles: {
         client: 'CLIENT',
         operator: 'OPERATOR',
@@ -24,9 +32,10 @@ module.exports =  {
     },
     // users will be redirected to following urls when they login based on their role
     redirectURL: {
-        OPERATOR: '/operator/dashboard',
-        CLIENT: '',
-        ADMIN: ''
+        OPERATOR: '/operator/',
+        CLIENT: '/client/',
+        ADMIN: '/admin/',
+        DEVELOPER: '/developer/'
     }
 
 };

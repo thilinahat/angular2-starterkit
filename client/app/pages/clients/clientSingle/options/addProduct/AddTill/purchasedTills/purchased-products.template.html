@@ -1,0 +1,27 @@
+<h3 *ngIf="!noPurchases"> purchasing history </h3>
+<h3 *ngIf="noPurchases"> No Purchasing History For This Customer ({{client.company_name}})</h3>
+<table class="table" *ngIf="!noPurchases">
+    <colgroup>
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 20%;">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Branch</th>
+            <th>Product</th>
+            <th>Installation</th>
+            <th>Key</th>
+            <th>Expire Date</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let purchasedItem of purchasedList">
+        <td>{{purchasedItem.location}}</td>
+        <td>{{purchasedItem.name}}</td>
+        <td>{{purchasedItem.loggedTime | date:'mediumDate'}}</td>
+        <td>{{purchasedItem.till_key}}</td>
+        <td>{{purchasedItem.expiredate |  date:'mediumDate'}}</td>
+    </tr>
+</table>

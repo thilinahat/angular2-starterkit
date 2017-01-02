@@ -1,6 +1,6 @@
 
 import {Component, Input} from "@angular/core";
-import {ClienthistoryService} from "./clienthistory.servece";
+import {ClienthistoryService} from "./clienthistory.service";
 import {ClientDataSharingService} from "../../../../../shared/data/client-data-sharing.service";
 import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
@@ -17,6 +17,7 @@ import {ActivatedRoute} from "@angular/router";
 
 export class ClienthistoryComponent {
     clientHistory:any[]  = [];
+    noHistory:boolean;
     id:any;
     subscription: Subscription;
     errorMessage:String;
@@ -25,17 +26,33 @@ export class ClienthistoryComponent {
 
 
     ngOnInit() {
+
+        this.noHistory = false;
+
         this.subscription = this.route.parent.params.subscribe(params => {
             this.id = params['clientId'];
         });
 
-        this.clienthistoryService.getClientHistory(this.id).then(clientHistory => this.clientHistory = clientHistory,
-            error => this.errorMessage = <any>error);
+        this.clienthistoryService.getClientHistory(this.id).then(clientHistory => {
+            this.clientHistory = clientHistory;
+
+        },
+            error => {
+            this.errorMessage = <any>error;
+                this.handleClientHistory();
+        });
     }
 
     ngOnDestroy() {
         // prevent memory leak when component is destroyed
         this.subscription.unsubscribe();
+    }
+
+    handleClientHistory(){
+        if(this.clientHistory.length == 0)
+        {
+            this.noHistory = true;
+        }
     }
 
     constructor(

@@ -3,6 +3,8 @@
  */
 var express = require('express');
 var jwt = require('jsonwebtoken');
+var Promise = require('promise');
+var async = require('async');
 var multer = require('multer');
 var path = require('path');
 var datetime = require('node-datetime');
@@ -25,7 +27,7 @@ router.use(function (req, res, next) {
                     success: false,
                     message: 'failed to authenticate token.'
                 });
-            } else if(decoded.role == 'OPERATOR'){
+            } else if(decoded.role == 'OPERATOR' || decoded.role == 'ADMIN'){ // both admin and operator can use these routes
                 req.decoded = decoded;
                 next();
             } else
@@ -43,6 +45,62 @@ router.use(function (req, res, next) {
         });
     }
 });
+
+const emailHandler = function (req, res) {
+    return new Promise((fulfill, reject) => {
+        const SQL = 'SELECT * FROM `client_mail` WHERE client_id =  ' + req.params.clientId;
+
+        mysqlConnectionPool.getConnection(function(err, connection) {
+
+            connection.query(SQL,  function (error, results) {
+                if (error)
+                    reject(error);
+                else
+                    fulfill(results);
+            });
+
+            connection.release();
+        });
+    });
+};
+
+const faxHandler = function (req, res) {
+    return new Promise((fulfill, reject) => {
+        var SQL = 'SELECT * FROM `client_fax` WHERE client_id =  ' + req.params.clientId;
+
+        mysqlConnectionPool.getConnection(function(err, connection) {
+
+            connection.query(SQL,  function (error, results) {
+
+                if (error)
+                    reject(error);
+                else
+                    fulfill(results);
+            });
+            connection.release();
+        });
+    });
+};
+
+const phoneHandler = function (req, res) {
+
+    return new Promise((fulfill, reject) => {
+        const SQL = 'SELECT * FROM `client_phone` WHERE client_id =  ' + req.params.clientId;
+
+        mysqlConnectionPool.getConnection(function(err, connection) {
+
+            connection.query(SQL,  function (error, results) {
+
+                if (error)
+                    reject(error);
+                else
+                    fulfill(results);
+            });
+
+            connection.release();
+        });
+    });
+};
 
 /* logo uploading with multer middleware*/
 const logoStorage = multer.diskStorage({
@@ -73,21 +131,21 @@ const logoUploader = logoUpload.fields([{
 }]);
 
 // route for adding a client
-router.post('/add-client', logoUploader, function (req, res) {
+router.post('/client/add', logoUploader, function (req, res) {
 
     const client = req.body;
     client.logoFileName = '';
     if (Array.isArray(req.files.logo) && req.files.logo.length > 0) {
-        client.logoFileName = req.headers.host + "/" + req.files.logo[0].filename;
+        client.logoFileName = "/" + req.files.logo[0].filename;
     }
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
-        // TODO : stage_id and blocked field is hard coded here
+        // blocked field is hard coded here
         let sql = 'INSERT INTO client ' +
             '(company_name, address, contact_person_name, web_site, stage_id, country, town, mlr_number, postal_code, business_registration, blocked, logo_file_name)' +
             ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        let values = [client.company,client.address,client.contactPerson,client.website,1,client.country,client.town,client.mlr,client.postalCode,client.businessRegistration, 0,client.logoFileName];
+        let values = [client.company,client.address,client.contactPerson,client.website,client.status,client.country,client.town,client.mlr,client.postalCode,client.businessRegistration, 0,client.logoFileName];
 
         connection.query( sql, values, function(err, rows, fields) {
             if (err) {
@@ -153,6 +211,106 @@ router.post('/add-client', logoUploader, function (req, res) {
     });
 });
 
+// route for editing a client
+router.post('/client/edit/:clientId', logoUploader, function (req, res) {
+
+    const client = req.body;
+    client.logoFileName = client.originalURL;
+    if (Array.isArray(req.files.logo) && req.files.logo.length > 0) {
+        client.logoFileName = "/" + req.files.logo[0].filename;
+    }
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        let sql = 'UPDATE client SET' +
+            ' company_name = ?, address = ?, contact_person_name = ?, web_site = ?, stage_id = ?, country = ?, town = ?, mlr_number = ?, postal_code = ?, business_registration = ?, logo_file_name = ? ' +
+            ' WHERE client_id = ' + connection.escape(req.params.clientId);
+        let values = [client.company,client.address,client.contactPerson,client.website,client.status,client.country,client.town,client.mlr,client.postalCode,client.businessRegistration,client.logoFileName];
+
+        connection.query( sql, values, function(err, results) {
+            if (err) {
+                console.log(err)
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while updating client table',
+                    message: err
+                });
+            } else {
+                async.parallel({
+                    emails: function (callback) {
+                        let sql = 'DELETE FROM client_mail  WHERE client_id = ' + req.params.clientId;
+                        connection.query(sql, function (err, results) {
+                            if (err) {
+                                //console.log(err);
+                                callback(err, null);
+                            }
+                            else if (client.emails && client.emails.length > 0) {
+                                sql = "INSERT INTO client_mail (client_id, mail) VALUES ?";
+                                const values = [];
+                                client.emails.forEach(mail => {
+                                    values.push([req.params.clientId, mail]);
+                                });
+
+                                connection.query(sql, [values], function (err) {
+                                    if (err) {
+                                        callback(err, null);
+                                        //console.log(err);
+                                    }
+                                    else
+                                        callback(null, null);
+                                });
+                            }
+                        });
+                    },
+                    phones: function (callback) {
+                        let sql = 'DELETE FROM client_phone  WHERE client_id = ' + req.params.clientId;
+                        connection.query(sql, function (err, results) {
+                            if (err)
+                                callback(err, null);
+                            else if (client.phones && client.phones.length > 0) {
+                                sql = "INSERT INTO client_phone (client_id, phone) VALUES ?";
+                                const values = [];
+                                client.phones.forEach(phone => {
+                                    values.push([req.params.clientId, phone]);
+                                });
+                                connection.query(sql, [values], function (err) {
+                                    if (err)
+                                        callback(err, null);
+                                    else
+                                        callback(null, null);
+                                });
+                            }
+                        });
+                    },
+                    faxes: function (callback) {
+                        let sql = 'DELETE FROM client_fax  WHERE client_id = ' + req.params.clientId;
+                        connection.query(sql, function (err, results) {
+                            if (err)
+                                callback(err, null);
+                            else if (client.faxes && client.faxes.length > 0) {
+                                sql = "INSERT INTO client_fax (client_id, fax) VALUES ?";
+                                const values = [];
+                                client.faxes.forEach(fax => {
+                                    values.push([req.params.clientId, fax]);
+                                });
+                                connection.query(sql, [values], function (err) {
+                                    if (err)
+                                        callback(err, null);
+                                    else
+                                        callback(null, null);
+                                });
+                            }
+                        });
+                    }
+                }, function (err, results) {
+                    res.sendStatus(200);
+                    connection.release();
+                });
+            }
+        });
+    });
+});
+
 //route for get client all data
 router.get('/client/data/:clientId', function (req, res, next) {
 
@@ -162,21 +320,57 @@ router.get('/client/data/:clientId', function (req, res, next) {
 
         connection.query(SQL,  function (error, results) {
 
-
-
             if (error) {
 
-                console.log("error while retrieving from to db");
-                return;
-            }
+                res.status(400).send(error);
 
-
-            if(results.length > 0 ){
-
-                res.json(results[0]);
-
-            }
-            else{
+            } else if(results.length > 0 ){
+                let client = results[0];
+                async.parallel({
+                    emails: function(callback) {
+                        emailHandler(req, res).then(results => {
+                            let emails = [];
+                            results.forEach(result => {
+                                emails.push(result.mail);
+                            });
+                            callback(null, emails);
+                        }, error => {
+                            callback(error, null);
+                        });
+                    },
+                    phones: function(callback) {
+                        phoneHandler(req, res).then(results => {
+                            let phones = [];
+                            results.forEach(result => {
+                                phones.push(result.phone);
+                            });
+                            callback(null, phones);
+                        }, error => {
+                            callback(error, null);
+                        });
+                    },
+                    faxes: function(callback) {
+                        faxHandler(req, res).then(results => {
+                            let faxes = [];
+                            results.forEach(result => {
+                                faxes.push(result.fax);
+                            });
+                            callback(null, faxes);
+                        }, error => {
+                            callback(error, null);
+                        });
+                    }
+                }, function(err, results) {
+                    if (err)
+                        console.log(err);
+                    else {
+                        client.emails = results.emails;
+                        client.phones = results.phones;
+                        client.faxes = results.faxes;
+                        res.json(client);
+                    }
+                });
+            } else{
 
                 res.statusCode = 400; //if results are not found for this
                 res.send();
@@ -261,113 +455,30 @@ router.get('/client/searchdata', function (req, res,next) {
 });
 
 //route to get client e-mail addresses
-router.get('/client/data/:clientId/mail', function (req, res, next) {
-
-    const SQL = 'SELECT * FROM `client_mail` WHERE client_id =  ' + req.params.clientId;
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        connection.query(SQL,  function (error, results) {
-
-            if (error) {
-
-                console.log("error while retrieving from to db");
-                return;
-            }
-
-            if(results.length > 0 ){
-
-                res.json(results);
-
-            }
-            else{
-
-                res.statusCode = 400; //if results are not found for this
-                res.send();
-            }
-
-        });
-
-        connection.release();
+router.get('/client/data/:clientId/mail', function(req, res, next) {
+    emailHandler(req, res).then(results => {
+        res.json(results);
+    }, error => {
+        res.status(400).send(error);
     });
-
-
 });
 
 //route to get clients phone numbers
-router.get('/client/data/:clientId/phone', function (req, res, next) {
-
-    const SQL = 'SELECT * FROM `client_phone` WHERE client_id =  ' + req.params.clientId;
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        connection.query(SQL,  function (error, results) {
-
-
-
-            if (error) {
-
-                console.log("error while retrieving from to db");
-                return;
-            }
-
-
-            if(results.length > 0 ){
-
-                res.json(results);
-
-            }
-            else{
-
-                res.statusCode = 400; //if results are not found for this
-                res.send();
-            }
-
-        });
-
-        connection.release();
+router.get('/client/data/:clientId/phone', function(req, res){
+    phoneHandler(req, res).then(results => {
+        res.json(results);
+    }, error => {
+        res.status(400).send(error);
     });
-
-
 });
 
 //route to get clients fax numbers
-router.get('/client/data/:clientId/fax', function (req, res, next) {
-
-
-    var SQL = 'SELECT * FROM `client_fax` WHERE client_id =  ' + req.params.clientId;
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        if(err){
-            console.log("Error wihile connecting database");
-        }
-
-
-        connection.query(SQL,  function (error, results) {
-
-            if (error) {
-
-                console.log("error while retrieving from to db");
-                return;
-            }
-
-            if(results.length > 0 ){
-
-                res.json(results);
-
-            }
-            else{
-
-                res.statusCode = 400; //if results are not found for this
-                res.send();
-            }
-
-        });
-
-        connection.release();
+router.get('/client/data/:clientId/fax', function(req, res){
+    faxHandler(req, res).then(results => {
+        res.json(results);
+    }, error => {
+        res.status(400).send(error);
     });
-
 });
 
 //route to get clients products
@@ -383,7 +494,7 @@ router.get('/client/data/:clientId/products', function (req, res, next) {
 
             if (error) {
 
-                console.log("error while retrieving from to db");
+                console.log("error while retrieving products for client from db");
                 return;
             }
 
@@ -394,7 +505,7 @@ router.get('/client/data/:clientId/products', function (req, res, next) {
             }
             else {
 
-                res.statusCode = 400; //if results are not found for this
+                res.statusCode = 200; //if results are not found for this
                 res.send();
             }
 
@@ -500,7 +611,6 @@ router.post('/client/addproduct', logoUploader, function (req, res) {
 
 });
 
-
 //get client branches
 router.get('/client/data/:clientId/branches', function (req, res, next) {
 
@@ -592,7 +702,7 @@ router.post('/client/addbranch',  function (req, res) {
 });
 
 //route for adding a till to a client/*
-router.post('/client/addtill', logoUploader, function (req, res) {
+router.post('/client/addtill',  function (req, res) {
 
     const clientTill = req.body.data;
 
@@ -650,6 +760,38 @@ router.post('/client/addtill', logoUploader, function (req, res) {
         });
     });
 
+});
+
+//get client tills
+router.get('/client/data/:clientId/tills', function (req, res, next) {
+
+    const SQL = "SELECT * FROM `till` WHERE client_id = " + req.params.clientId;;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
 });
 
 //route for block a client/*
@@ -815,7 +957,7 @@ router.post('/client/unblock',  function (req, res)
 });
 
 //route for adding a note to a client/*
-router.post('/client/addnote', logoUploader, function (req, res) {
+router.post('/client/addnote',  function (req, res) {
 
     const data = req.body.data;
 
@@ -893,6 +1035,406 @@ router.get('/client/data/:clientId/history', function (req, res, next) {
     });
 });
 
+//get ticket problem types
+router.get('/tickets/problemtypes', function (req, res, next) {
+
+    const SQL = "select * from problem_types" ;
 
 
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db view");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get ticket priorities
+router.get('/tickets/priorities', function (req, res, next) {
+
+    const SQL = "select * from priorities" ;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db view");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get ticket ticket swim lane status typs
+router.get('/tickets/status-types', function (req, res, next) {
+
+    const SQL = "select * from ticketSwimlane" ;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db view");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get developers
+router.get('/developers', function (req, res, next) {
+
+    const SQL = "select * from developers" ;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db view");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+/* screanshot uploading with multer middleware*/
+const screenshotStorage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, __dirname + '/../uploads/screenshots/');
+    },
+    filename: function(req, file, cb) {
+        /*
+         * Filename format: fieldName + firstName + lastName + Timestamp
+         * */
+        const fileName = file.fieldname.toLowerCase() +
+            '_' + Date.now();
+
+        cb(null, fileName + path.extname(file.originalname));
+    }
+});
+
+const screenshotUpload = multer(
+    {
+        storage: screenshotStorage,
+        limits: {fileSize: 50000000}
+    }
+);
+
+const screenshotUploader = screenshotUpload.fields([{
+    name: 'screenshot',
+    maxCount: 1
+}]);
+
+// route for adding a ticket
+router.post('/add-ticket', screenshotUploader, function (req, res) {
+
+    const ticket = req.body;
+
+    if (Array.isArray(req.files.screenshot) && req.files.screenshot.length > 0) {
+        ticket.screenShotFileName =  req.files.screenshot[0].filename;
+    }
+
+    var dt = datetime.create();
+
+    //format to insert to the data base 2016-12-26 00:07:18
+    var formatted = dt.format('Y-m-d H:M:S');
+
+
+    //swimlane status id = 1 (OPEN) is hardcoded.
+    var SQL = "INSERT INTO `vinit_crm`.`tickets` (`ticket_id`, `swimlane_status_id`, `client_id`, `summary`, `description`, `problem_type_id`, `priority_id`, `assignee_id`, `sceenshot_name`, `due_date`, `user_id`,  `till_id`)"
+        + " VALUES (NULL, '1', ?, ?, ?, ?, ?, ?, ?, ? , '?' , ? ); ";
+    var values = [ticket.clientId, ticket.summary, ticket.problemDescription, ticket.selectedProblemTypeId, ticket.selectedPriority, ticket.selectedAssigneeId, ticket.screenShotFileName,  ticket.dueDate, req.decoded.uid, ticket.selectedTillId];
+
+    SQL = mysql.format(SQL, values);
+
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query( SQL,  function(err,rows, result) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting ticket',
+                    message: err
+                });
+            }
+
+            ticket.id = rows.insertId;
+
+            // swimlane status is hard coded for the initial loging
+            var LogSQL = "INSERT INTO `vinit_crm`.`ticket_swimlane_log` (`ticket_id`, `swimlane_status_id`, `loggedTime`,  `user_id` ) "
+                + "VALUES ('?', '1', ?, '?');";
+
+            var LogValues = [ticket.id, formatted, req.decoded.uid];
+
+            LogSQL = mysql.format(LogSQL, LogValues);
+
+            connection.query( LogSQL,  function(err, result) {
+                if (err) {
+                    return res.status(406).json({
+                        success: false,
+                        status: 'Failed while inserting ticket log',
+                        message: err
+                    });
+                }
+                connection.release();
+                res.sendStatus(200);
+
+            });
+        });
+    });
+});
+
+//get client tickets
+router.get('/client/data/:clientId/tickets', function (req, res, next) {
+
+    const SQL = "SELECT ticket_id, summary, swimlane_status, swimlane_color, due_date FROM `tickets`" +
+        "inner join ticketSwimlane on tickets.`swimlane_status_id` = ticketSwimlane.swimlane_id" +
+        " WHERE client_id = " + req.params.clientId + " ORDER BY `tickets`.`ticket_id` DESC";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get ticket data
+router.get('/ticket/data/:ticketId', function (req, res, next) {
+
+    //To do: reduce this joins by calling seperately for swimlane, priorities, problem types
+    const SQL = "SELECT * FROM ticket_data_view "
+        + " WHERE ticket_id = " + req.params.ticketId;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results[0]);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+// route for change ticket priority
+router.post('/ticket/change-priority', screenshotUploader, function (req, res) {
+
+    const ticket = req.body;
+
+    var dt = datetime.create();
+
+    //format to insert to the data base 2016-12-26 00:07:18
+    var formatted = dt.format('Y-m-d H:M:S');
+
+    var SQL = "UPDATE `vinit_crm`.`tickets` SET `priority_id` = '" + ticket.selectedPriorityId + "'"
+        + " WHERE `tickets`.`ticket_id` = '" + ticket.ticketId + "';";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query( SQL,  function(err,rows, result) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting ticket',
+                    message: err
+                });
+            }
+
+            connection.release();
+            res.sendStatus(200);
+
+        });
+    });
+});
+
+// route for change ticket priority
+router.post('/ticket/change-status', screenshotUploader, function (req, res) {
+
+    const ticket = req.body;
+
+    var dt = datetime.create();
+
+    //format to insert to the data base 2016-12-26 00:07:18
+    var formatted = dt.format('Y-m-d H:M:S');
+
+    var SQL = "UPDATE `vinit_crm`.`tickets` SET `swimlane_status_id` = '" + ticket.selectedSwimlaneStatusId + "'"
+        + " WHERE `tickets`.`ticket_id` = '" + ticket.ticketId + "';";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query( SQL,  function(err,rows, result) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting ticket',
+                    message: err
+                });
+            }
+
+
+            var LogSQL = "INSERT INTO `vinit_crm`.`ticket_swimlane_log` (`ticket_id`, `swimlane_status_id`, `loggedTime`, `user_id` ) "
+                + "VALUES (?, ?, ?, '?');";
+
+            var LogValues = [ticket.ticketId, ticket.selectedSwimlaneStatusId, formatted, req.decoded.uid];
+
+            LogSQL = mysql.format(LogSQL, LogValues);
+
+            connection.query( LogSQL,  function(err, result) {
+                if (err) {
+                    return res.status(406).json({
+                        success: false,
+                        status: 'Failed while inserting priority ticket log',
+                        message: err
+                    });
+                }
+                connection.release();
+                res.sendStatus(200);
+
+            });
+        });
+    });
+});
+
+//get till data
+router.get('/client/data/:clientId/purchased-items', function (req, res, next) {
+
+
+    const SQL = "SELECT * FROM till "
+        + "inner join `client_till_log` on till.till_id = client_till_log.till_id "
+        + "inner join branch on till.branch_id = branch.branch_id "
+        + "inner join products on till.product_Id = products.product_Id"
+        + " WHERE till.client_id = " + req.params.clientId;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//
 module.exports = router;

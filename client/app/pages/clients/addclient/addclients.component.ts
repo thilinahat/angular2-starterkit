@@ -19,7 +19,12 @@ export class AddclientsComponent {
     faxInput: any;
 
     submitBtnText: string = 'Add';
-    states: string[] = ['Initial', 'Old', 'Terminated', 'Blocked'];
+    states: any[] = [
+        { value: 1, option: 'Potential'},
+        { value: 2, option: 'Pre-Sale'},
+        { value: 3, option: 'Existing'},
+        { value: 4, option: 'Old'}
+    ];
     countries: any[] = [
     {name: 'Afghanistan', code: 'AF'},
     {name: 'Åland Islands', code: 'AX'},
@@ -241,7 +246,7 @@ export class AddclientsComponent {
     company: string = '';
     contactPerson: string = '';
     website: string = '';
-    status: string = 'Initial';
+    status: number = 1;
     country: string = 'United Kingdom';
     mlr: string = '';
     businessRegistration: string = '';
@@ -254,7 +259,7 @@ export class AddclientsComponent {
     phones: string[] = [];
     faxes: string[] = [];
     logo: any;
-    formData: FormData;
+    logoURL: string = "";
 
     constructor(private clientService: ClientService) { }
 
@@ -299,6 +304,13 @@ export class AddclientsComponent {
 
     addLogo($event: any): void {
         this.logo = $event.target.files[0];
+        let reader: FileReader = new FileReader();
+        reader.onloadend = (e => {
+            let data: any = e.target;
+            this.logoURL = data.result;
+        });
+
+        reader.readAsDataURL(this.logo);
     }
 
     onAddEmail(mail: string): void{
@@ -308,7 +320,6 @@ export class AddclientsComponent {
 
     onRemoveEmail(mail: string): void{
         this.emails.splice(this.emails.indexOf(mail), 1);
-        console.log(this.emails)
     }
 
     onAddPhone(phone: string): void{
@@ -318,7 +329,6 @@ export class AddclientsComponent {
 
     onRemovePhone(phone: string): void{
         this.phones.splice(this.phones.indexOf(phone), 1);
-        console.log(this.phones)
     }
 
     onAddFax(fax: string): void{
@@ -328,6 +338,5 @@ export class AddclientsComponent {
 
     onRemoveFax(fax: string): void{
         this.faxes.splice(this.faxes.indexOf(fax), 1);
-        console.log(this.faxes)
     }
 }

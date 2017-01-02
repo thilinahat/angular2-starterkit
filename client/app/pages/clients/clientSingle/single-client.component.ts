@@ -26,8 +26,6 @@ export class SingleClientComponent {
 
     ngOnInit() {
 
-        //this.dataHolder.client = "abcd";
-
         this.sub = this.route.params.subscribe(params => {
             this.id = params['clientId'];
         });

@@ -66,7 +66,7 @@ class AuthService {
     changeCredentials(credentials, userID, userRole){
         return new Promise((fulfill, reject) => {
             mysqlConnectionPool.getConnection(function (err, connection) {
-                let sql = 'SELECT username,password,has_logged_in FROM users  WHERE user_id = ' + connection.escape(userID) + ' AND  role = ' + connection.escape(userRole);
+                let sql = 'SELECT username,password,has_logged_in FROM users  WHERE user_id = ' + connection.escape(userID) + ' AND  role = ' + connection.escape(userRole) + ' AND username = ' + connection.escape(credentials.oldUsername);
                 connection.query(sql, function (err, results) {
                     if (err || results.length == 0)
                         reject();

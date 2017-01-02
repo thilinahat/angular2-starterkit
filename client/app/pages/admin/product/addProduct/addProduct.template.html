@@ -1,0 +1,18 @@
+<div class="col-md-offset-3 col-md-6 col-sm-6 col-xs-6">
+    <div class="card form-container">
+        <form #addProductForm="ngForm" (ngSubmit)="onSubmit(addProductForm.value)">
+            <!--name-->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" ngModel required>
+            </div>
+            <!--description-->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" placeholder="" id="description" name="description" rows="5" ngModel required></textarea>
+            </div>
+            <!--submit-->
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>

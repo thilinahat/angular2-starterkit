@@ -1,75 +1,83 @@
 
+<!--
 <sidenavbar></sidenavbar>
 <div class="main-panel">
     <navbarheader></navbarheader>
 
-    <ul class="nav nav-tabs" data-tabs="tabs">
-
-        <li routerLinkActive="active">
-            <a routerLink="/operator/clients/search" >
-                <i class="material-icons">search
-                </i>
-                Search
-                <div class="ripple-container"></div></a>
-        </li>
-
-        <li   routerLinkActive="active">
-            <a [routerLink]="['client-dash-board']">
-                <small>Details</small>
-            </a>
-        </li>
-        <li   routerLinkActive="active">
-            <a [routerLink]="['edit']">
-                <small>Edit</small>
-            </a>
-        </li>
-        <li   routerLinkActive="active">
-            <a [routerLink]="['add-call']">
-                <small>Add Call</small>
-            </a>
-        </li>
-
-        <li   routerLinkActive="active">
-            <a [routerLink]="['add-note']">
-                <small>Add Note</small>
-            </a>
-        </li>
-
-        <li   routerLinkActive="active">
-            <a [routerLink]="['add-product']">
-                <small>Add Product</small>
-            </a>
-        </li>
 
 
-        <li   routerLinkActive="active">
-            <a [routerLink]="['add-ticket']">
-                <small>Add Ticket</small>
-            </a>
-        </li>
 
-        <li   routerLinkActive="active">
-            <a [routerLink]="['send-mail']">
-                <small>Send Mail</small>
-            </a>
-        </li>
-
-        <li   routerLinkActive="active">
-            <a [routerLink]="['client-block']">
-                <small>Block client</small>
-            </a>
-        </li>
-
-    </ul>
-
-    <router-outlet ></router-outlet>
-
-
-    <!--<singleclientheader [client] = "client"></singleclientheader>
+    &lt;!&ndash;<singleclientheader [client] = "client"></singleclientheader>
     <h3 class="client-header"> {{client.company_name}}</h3>
     <clientdata [client] = "client" ></clientdata>
     <clienthistory [client] = "client" ></clienthistory>
-    <clientproduct [client] = "client" ></clientproduct>-->
+    <clientproduct [client] = "client" ></clientproduct>&ndash;&gt;
 
 </div>
+-->
+<ul class="nav nav-tabs" data-tabs="tabs">
 
+    <li routerLinkActive="active">
+        <a routerLink="/operator/clients/search" >
+            <i class="material-icons">search
+            </i>
+            Search
+            <div class="ripple-container"></div></a>
+    </li>
+
+    <li   routerLinkActive="active">
+        <a [routerLink]="['client-dash-board']">
+            <small>Details</small>
+        </a>
+    </li>
+    <li   routerLinkActive="active">
+        <a [routerLink]="['edit']">
+            <small>Edit</small>
+        </a>
+    </li>
+    <li   routerLinkActive="active">
+        <a [routerLink]="['add-call']">
+            <small>Add Call</small>
+        </a>
+    </li>
+
+    <li   routerLinkActive="active">
+        <a [routerLink]="['add-note']">
+            <small>Add Note</small>
+        </a>
+    </li>
+
+    <li   routerLinkActive="active">
+        <a [routerLink]="['add-product']">
+            <small>Add Product</small>
+        </a>
+    </li>
+
+
+    <li   routerLinkActive="active">
+        <a [routerLink]="['add-ticket']">
+            <small>Add Ticket</small>
+        </a>
+    </li>
+
+    <li   routerLinkActive="active">
+        <a [routerLink]="['send-mail']">
+            <small>Send Mail</small>
+        </a>
+    </li>
+
+    <li   routerLinkActive="active">
+        <a [routerLink]="['client-block']">
+            <small>Block client</small>
+        </a>
+    </li>
+
+    <li   routerLinkActive="active">
+        <a [routerLink]="['tickets']">
+            <small>Tickets</small>
+        </a>
+    </li>
+
+</ul>
+
+<router-outlet ></router-outlet>

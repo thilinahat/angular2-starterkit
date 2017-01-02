@@ -1,9 +1,5 @@
 @import "../../../../../public/css/variables.css";
 
-.form-container{
-    margin: 50px 30px;
-}
-
 .tag-container {
     display: inline;
 }
@@ -52,4 +48,26 @@
     left: -4px;
     top: -3px;
 
+}
+
+.logo-input-container{
+
+}
+
+.logo-input-container label{
+    display: block;
+}
+
+.logo-input-container .logo-name{
+    display: inline-flex;
+    width: 50%;
+}
+
+.logo-input-container .logo-preview{
+    width: 150px;
+    height: auto;
+    display: inline-flex;
+    margin-top: -60px;
+    margin-left: 20px;
+    border: 2px dashed #962DAF;
 }

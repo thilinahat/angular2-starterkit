@@ -33,6 +33,7 @@ app.engine('html', require('ejs').renderFile);
 // Set Multiple Static Folder
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, './uploads/logos')));
+app.use(express.static(path.join(__dirname, './uploads/screenshots')));
 
 // Body Parser MW
 app.use(bodyParser.json());
@@ -60,6 +61,7 @@ app.use('/', index);
 app.use('/login', index);
 app.use('/customer', index);
 app.use('/operator/*', index);
+app.use('/admin/*', index);
 app.use('/change/credentials', index);
 app.use('/api/operator', operatorAPI); //API for operator initiated actions
 app.use('/api/admin', adminAPI); //API for admin initiated actions

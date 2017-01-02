@@ -32,6 +32,8 @@ export class AddTillComponent {
     @Input()
     branchId:String;
 
+    noPurchases:boolean = false;
+
 
 
     ngOnInit() {
@@ -91,6 +93,7 @@ export class AddTillComponent {
 
     handleTillAdding(){
         alert('till was successfully added');
+        this.noPurchases = false;
         this.productKey = null;
         this.expireDate = null;
         this.tillName = null;

@@ -5,13 +5,26 @@ import { HttpModule }    from '@angular/http';
 
 import {AppComponent} from "./app.component";
 import {ClientsComponent} from "./pages/clients/clients.component";
+import {OperatorComponent} from "./pages/operator/operator.component";
+import {AdminComponent} from "./pages/admin/admin.component";
+import {RoleManagementComponent} from "./pages/admin/role/role.component";
+import {RoleManagementHeaderComponent} from "./pages/admin/role/header/header.component";
+import {AddUserComponent} from "./pages/admin/role/addUser/addUser.component";
+import {ProductComponent} from "./pages/admin/product/product.component";
+import {ProductHeaderComponent} from "./pages/admin/product/header/header.component";
+import {AddMainProductComponent} from "./pages/admin/product/addProduct/addProduct.component";
+import {EditProductComponent} from "./pages/admin/product/editProduct/editProduct.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {TicketsComponent} from "./pages/tickets/tickets.componet";
 import {ReportsComponent} from "./pages/reports/reports.component";
 import {SidenavigationComponent} from "./shared/navigation/sidenavigation.component";
+import {AdminSidenavigationComponent} from "./shared/navigation/admin.sidenavigation.component";
+
 
 import { ClientService } from './services/client.service';
 import { AuthService } from './services/auth.service';
+import { RoleManagementService } from './services/role.service';
+import { ProductManagementService } from './services/product.service';
 import { AuthGuard } from './guards/auth.gaurd';
 import { AppRoutingModule } from './app.routing';
 
@@ -46,7 +59,9 @@ import {ClientdataComponent} from "./pages/clients/clientSingle/dashboard/client
 import {ClienthistoryComponent} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.component";
 import {ClientproductComponent} from "./pages/clients/clientSingle/dashboard/clientproduct/clientproduct.component";
 import {ClientDataSharingService} from "./shared/data/client-data-sharing.service";
-import {ClienthistoryService} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.servece";
+import {ClienthistoryService} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.service";
+import {SingleClientTicketsComponent} from "./pages/clients/clientSingle/options/tickets/single-client-tickets.component";
+import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSingle/options/addProduct/AddTill/purchasedTills/purchased-products.component";
 
 
 //when creating a component, add it here
@@ -63,9 +78,15 @@ import {ClienthistoryService} from "./pages/clients/clientSingle/dashboard/clien
         AddCallComponent, AddNoteComponent,
         AddProductComponent, AddTicketeComponent,
         AddTillComponent, CallComponent, ChangeCredentialsComponent,
-        ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent, ClientEditComponent, SearchClientComponent
+        ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent,
+        ClientEditComponent, SearchClientComponent, SingleClientTicketsComponent,
+        SingleClientPurchasedProductsComponent, AdminSidenavigationComponent, OperatorComponent,
+        AdminComponent, RoleManagementComponent, RoleManagementHeaderComponent, AddUserComponent,
+        ProductComponent, ProductHeaderComponent, AddMainProductComponent, EditProductComponent
          ],
-    providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService, ClienthistoryService],
+    providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
+        ClienthistoryService, RoleManagementService, ProductManagementService
+    ],
     bootstrap: [AppComponent],
 })
 

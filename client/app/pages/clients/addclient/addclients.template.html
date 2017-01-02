@@ -1,4 +1,4 @@
-<div class="form-container">
+<div class="card form-container">
     <form #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm.value)">
         <div class="col-md-6">
             <!--company-->
@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label for="status">Status</label>
                 <select class="form-control" id="status" name="status" [(ngModel)]="status">
-                    <option *ngFor="let state of states" [value]="state">{{state}}</option>
+                    <option *ngFor="let state of states" [value]="state.value">{{state.option}}</option>
                 </select>
             </div>
             <!--country-->
@@ -109,10 +109,11 @@
                 <input type="number" class="form-control" id="postalCode" name="postalCode" [(ngModel)]="postalCode" >
             </div>
             <!--Logo-->
-            <div class="form-group is-empty is-fileinput">
+            <div class="form-group is-empty is-fileinput logo-input-container">
                 <label for="logo">Logo</label>
                 <input type="file" class="form-control" id="logo" name="logo" ngModel  accept="image/png,,image/jpeg" (change)="addLogo($event)">
-                <input type="text" readonly="" name="logoName" class="form-control">
+                <input type="text" readonly="" name="logoName" class="form-control logo-name">
+                <img src="{{logoURL}}" alt="" [ngClass]="{'logo-preview': logoURL != '', 'hide': logoURL == ''}"/>
             </div>
         </div>
         <!--submit-->

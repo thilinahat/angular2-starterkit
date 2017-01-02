@@ -1,0 +1,20 @@
+<div class="col-md-offset-3 col-md-6 col-sm-6 col-xs-6">
+    <div class="card form-container">
+        <form #editProductForm="ngForm" (ngSubmit)="onSubmit(editProductForm.value)">
+            <!--product-->
+            <div class="form-group">
+                <label for="products">Product</label>
+                <select class="form-control" id="products" name="product" ngModel (change)="onSelect($event.target.value)">
+                    <option *ngFor="let product of products" [value]="product.name">{{product.name}}</option>
+                </select>
+            </div>
+            <!--description-->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" placeholder="" id="description" name="description" rows="5" [ngModel]="description" required></textarea>
+            </div>
+            <!--submit-->
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>

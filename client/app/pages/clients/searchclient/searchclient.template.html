@@ -1,3 +1,4 @@
+
 <div class="row">
 
     <div class="form-group col-sm-12 col-xs-12" style="margin-top: 0px">
@@ -14,6 +15,7 @@
 
 </div>
 
+
 <div class="col-xs-12">
     <div class="card">
         <div class="card-content table-responsive">
@@ -27,8 +29,8 @@
                 <tbody>
                 <!--add same pipe to filter all data-->
                 <tr *ngFor="let client of ( clientNameAndIds | searchByAll:searchClientName  ) ">
-                    <td><a routerLink="/operator/clients/{{client.client_id}}" >{{client.company_name}}</a></td>
-                    <td><a routerLink="/operator/clients/{{client.client_id}}" >{{client.client_id}}</a></td>
+                    <td><a [routerLink]="['../', client.client_id]" >{{client.company_name}}</a></td>
+                    <td><a [routerLink]="['../', client.client_id]" >{{client.client_id}}</a></td>
                 </tr>
 
                 </tbody>
