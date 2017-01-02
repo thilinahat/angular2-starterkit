@@ -13,7 +13,7 @@ export class CallService{
 
     constructor (private http: Http) {}
 
-    getCallSummary(client_id: number): Promise<any>{
+    getCallSummary(): Promise<any>{
         const url_complete = this.url + "summary";
         return this.http.get(url_complete)
             .toPromise()
