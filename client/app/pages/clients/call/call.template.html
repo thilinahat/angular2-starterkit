@@ -1,24 +1,25 @@
+<simple-notifications></simple-notifications>
 <div class="row sumary-row">
     <div class="col-lg-2 col-md-2"></div>
     <div class="col-lg-8 col-md-8">
         <table class="table table-bordered">
             <tr>
                 <td>Total Incoming Calls This Week</td>
-                <td><b>23:00:00 h</b></td>
+                <td><b>{{summary.incomingThisWeek}} h</b></td>
                 <td>Total OutGoing This Week</td>
-                <td><b>23:00:00 h</b></td>
+                <td><b>{{summary.outgoingThisWeek}} h</b></td>
             </tr>
             <tr>
                 <td>Total Incoming Calls This Month</td>
-                <td><b>23:00:00 h</b></td>
+                <td><b>{{summary.incomingThisMonth}} h</b></td>
                 <td>Total OutGoing This Month</td>
-                <td><b>23:00:00 h</b></td>
+                <td><b>{{summary.outgoingThisMonth}} h</b></td>
             </tr>
             <tr>
                 <td>Total Incoming Calls</td>
-                <td><b>23:00:00 h</b></td>
+                <td><b>{{summary.incomingFull}} h</b></td>
                 <td>Total OutGoing</td>
-                <td><b>23:00:00 h</b></td>
+                <td><b>{{summary.outgoingFull}} h</b></td>
             </tr>
         </table>
     </div>
@@ -77,18 +78,30 @@
     </modal-body>
 </modal>
 <modal #modelAddNew>
-    <form #modalForm="ngForm">
+    <form (ngSubmit)="onCallFormSubmit()" #newCallForm="ngForm">
         <modal-header [show-close]="true">
             <h4 class="modal-title">Add new call</h4>
         </modal-header>
         <modal-body>
             <div class="form-group">
+                <label for="callStartTime"> Start Time</label>
+                <input type="datetime-local" class="form-control" id="callStartTime" name="callStartTime" required [(ngModel)]="newCallModel.start_time">
+            </div>
+            <div class="form-group">
+                <label for="callEndTime">End Time</label>
+                <input type="datetime-local" class="form-control" id="callEndTime" name="callEndTime" required [(ngModel)]="newCallModel.end_time">
+            </div>
+            <div class="form-group">
                 <label for="callTime">Call Time</label>
-                <input type="text" class="form-control" required [(ngModel)]="callTime" name="callTime" id="callTime" placeholder="mm:ss">
+                <input type="text" class="form-control" required [(ngModel)]="newCallModel.time_duration" name="callTime" id="callTime" placeholder="mm:ss">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea type="text" class="form-control" required [(ngModel)]="newCallModel.description" name="description" id="description"></textarea>
             </div>
             <div class="form-group">
                 <label for="callType">Call Type</label>
-                <select class="form-control" required [(ngModel)]="callType" name="callType" id="callType">
+                <select class="form-control" name="callType" id="callType" required [(ngModel)]="newCallModel.type">
                     <option>Incoming</option>
                     <option>Outgoing</option>
                 </select>
@@ -96,7 +109,7 @@
         </modal-body>
         <modal-footer>
             <button type="button" class="btn btn-default" data-dismiss="modal" (click)="validationModal.dismiss()">Cancel</button>
-            <button type="button" class="btn btn-primary" [disabled]="!modalForm.valid" (click)="validationModal.close()">Save</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!newCallForm.form.valid" (click)="modelAddNew.close()">Save</button>
         </modal-footer>
     </form>
 </modal>

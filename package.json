@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~2.3.0",
     "@angular/router": "~3.3.0",
     "angular-in-memory-web-api": "~0.1.17",
+    "angular2-notifications": "^0.4.49",
     "async": "^2.1.4",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",

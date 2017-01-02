@@ -31,6 +31,11 @@ npm build-prod
 #### IMAP
 https://github.com/mscdex/node-imap
 
+
+#### Notifications
+
+https://github.com/flauc/angular2-notifications
+
 ## MySQL Connection Handling
 
 * configure the mysql connection pool as required (mysqlConnectionPool.js)
