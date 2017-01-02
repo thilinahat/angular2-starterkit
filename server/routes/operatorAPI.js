@@ -199,7 +199,7 @@ router.post('/client/add', logoUploader, function (req, res) {
                 }
 
                 connection.release();
-                res.sendStatus(200);
+                res.json({client: client.company});
             }, err => {
                 return res.status(406).json({
                     success: false,

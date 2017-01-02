@@ -260,6 +260,10 @@ export class AddclientsComponent {
     faxes: string[] = [];
     logo: any;
     logoURL: string = "";
+    displayNotification: boolean = false;
+    notification: string = "";
+    notificationType: string = "";
+    notificationSymbol: string = "";
 
     constructor(private clientService: ClientService) { }
 
@@ -296,9 +300,19 @@ export class AddclientsComponent {
         });
 
         this.clientService.addClient(formData).then(res => {
-            alert('Successfully Added Client');
+            this.notificationType = "success";
+            this.notificationSymbol = "check";
+            this.notification = "Successfully Added " + res.client;
+            this.displayNotification = true;
+            const mainPanel = document.getElementsByClassName('main-panel')[0];
+            mainPanel.scrollTop = 0;
         }, error => {
-            alert(error);
+            this.notificationType = "danger";
+            this.notificationSymbol = "error_outline";
+            this.notification = error.status + '\n' + error.message;
+            this.displayNotification = true;
+            const mainPanel = document.getElementsByClassName('main-panel')[0];
+            mainPanel.scrollTop = 0;
         });
     }
 
@@ -338,5 +352,9 @@ export class AddclientsComponent {
 
     onRemoveFax(fax: string): void{
         this.faxes.splice(this.faxes.indexOf(fax), 1);
+    }
+
+    onNotificationClose(){
+        this.displayNotification = false;
     }
 }

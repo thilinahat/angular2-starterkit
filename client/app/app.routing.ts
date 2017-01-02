@@ -13,6 +13,8 @@ import {AddUserComponent} from "./pages/admin/role/addUser/addUser.component";
 import {ProductComponent} from "./pages/admin/product/product.component";
 import {AddMainProductComponent} from "./pages/admin/product/addProduct/addProduct.component";
 import {EditProductComponent} from "./pages/admin/product/editProduct/editProduct.component";
+import {MailTemplatesComponent} from "./pages/admin/mailTemplates/mailTemplates.component";
+import {AddMailTemplateComponent} from "./pages/admin/mailTemplates/addTemplate/addTemplate.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {TicketsComponent} from "./pages/tickets/tickets.componet";
 import {ReportsComponent} from "./pages/reports/reports.component";
@@ -93,6 +95,13 @@ const routes: Routes = [
                     { path: '', redirectTo: 'add', pathMatch: 'full' },
                     { path: 'add', component: AddMainProductComponent },
                     { path: 'edit', component: EditProductComponent },
+                ]
+            },
+            { path: 'mail-templates', component: MailTemplatesComponent,
+                children: [
+                    { path: '', redirectTo: 'add', pathMatch: 'full' },
+                    { path: 'add', component: AddMailTemplateComponent },
+                    //{ path: 'edit', component: EditProductComponent },
                 ]
             },
             { path: 'clients',component: ClientsComponent , canActivate: [AuthGuard],

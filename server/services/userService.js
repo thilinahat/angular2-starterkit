@@ -11,7 +11,7 @@ var passwordHash = require('password-hash');
 
 class UserService {
 
-    addUser(user) {
+    addOperatorOrDeveloper(user) {
         return new Promise((fulfill, reject) => {
             mysqlConnectionPool.getConnection(function (err, connection) {
                 const role = user.role == 'OPERATOR' ? 'operator' : 'developer';
@@ -42,7 +42,25 @@ class UserService {
             });
 
         });
+    }
 
+    addUser(user) {
+        return new Promise((fulfill, reject) => {
+            mysqlConnectionPool.getConnection(function (err, connection) {
+                const sql = 'INSERT INTO users ' +
+                    '(user_id, username, password, role, has_logged_in)' +
+                    ' VALUES (?, ?, ?, ?, ?)';
+                const values = [user.id, user.username, passwordHash.generate(user.password), user.role, false];
+
+                connection.query(sql, values, function (err, rows, fields) {
+                    if (err) {
+                        reject(err);
+                    }
+                    fulfill(user);
+                });
+            });
+
+        });
     }
 
 }

@@ -1,0 +1,11 @@
+<div *ngIf="display" class="alert alert-{{notificationType}} notification">
+    <div class="container-fluid">
+        <div class="alert-icon">
+            <i class="material-icons">{{notificationSymbol}}</i>
+        </div>
+        <button type="button" class="close" aria-label="Close" (click)="onClose()">
+            <span aria-hidden="true"><i class="material-icons">clear</i></span>
+        </button>
+        <b>{{notification}}</b>
+    </div>
+</div>

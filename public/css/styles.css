@@ -8,3 +8,11 @@
 .form-container .btn-primary{
     margin-left: 15px;
 }
+
+.notification{
+    width: 60%;
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    z-index: 10;
+}

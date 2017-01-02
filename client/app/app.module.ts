@@ -14,6 +14,9 @@ import {ProductComponent} from "./pages/admin/product/product.component";
 import {ProductHeaderComponent} from "./pages/admin/product/header/header.component";
 import {AddMainProductComponent} from "./pages/admin/product/addProduct/addProduct.component";
 import {EditProductComponent} from "./pages/admin/product/editProduct/editProduct.component";
+import {MailTemplatesComponent} from "./pages/admin/mailTemplates/mailTemplates.component";
+import {MailTemplateHeaderComponent} from "./pages/admin/mailTemplates/header/header.component";
+import {AddMailTemplateComponent} from "./pages/admin/mailTemplates/addTemplate/addTemplate.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {TicketsComponent} from "./pages/tickets/tickets.componet";
 import {ReportsComponent} from "./pages/reports/reports.component";
@@ -33,6 +36,7 @@ import {AddclientsComponent} from "./pages/clients/addclient/addclients.componen
 import {SearchClientComponent} from "./pages/clients/searchclient/searchclient.component";
 import { LoginComponent } from './pages/login/login.component';
 import { ChangeCredentialsComponent } from './shared/changeCredentials/changeCredentials.component';
+import { NotificationComponent } from './shared/notification/notification.component';
 
 
 
@@ -82,7 +86,8 @@ import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSing
         ClientEditComponent, SearchClientComponent, SingleClientTicketsComponent,
         SingleClientPurchasedProductsComponent, AdminSidenavigationComponent, OperatorComponent,
         AdminComponent, RoleManagementComponent, RoleManagementHeaderComponent, AddUserComponent,
-        ProductComponent, ProductHeaderComponent, AddMainProductComponent, EditProductComponent
+        ProductComponent, ProductHeaderComponent, AddMainProductComponent, EditProductComponent,
+        MailTemplatesComponent, MailTemplateHeaderComponent, AddMailTemplateComponent, NotificationComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
         ClienthistoryService, RoleManagementService, ProductManagementService

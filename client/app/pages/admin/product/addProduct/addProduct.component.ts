@@ -12,11 +12,6 @@ import {ProductManagementService} from '../../../../services/product.service';
 
 export class AddMainProductComponent {
 
-    roles: any = [
-        {value: 'OPERATOR', option: 'Operator'},
-        {value: 'DEVELOPER', option: 'Developer'}
-    ];
-
     constructor(private productManagementService: ProductManagementService ) {}
 
     onSubmit(form: any): void{

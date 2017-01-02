@@ -24,7 +24,7 @@ export class ClientService {
                 .post(url, client)
                 .toPromise()
                 .then(response => {
-                    resolve(response);
+                    resolve(response.json());
                 },error => {
                     reject(error);
                 })

@@ -71,7 +71,7 @@ router.post('/user/add',  function (req, res) {
 
     const user = req.body.user;
 
-    UserService.addUser(user).then(response => {
+    UserService.addOperatorOrDeveloper(user).then(response => {
         res.status(200).json({
             message: user.role + ' Created Successfully',
             username: response.username,
