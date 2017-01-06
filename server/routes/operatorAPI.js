@@ -1256,7 +1256,7 @@ router.post('/add-ticket', screenshotUploader, function (req, res) {
 router.get('/client/data/:clientId/tickets', function (req, res, next) {
 
     const SQL = "SELECT ticket_id, summary, swimlane_status, swimlane_color, due_date FROM `tickets`" +
-        "inner join ticketSwimlane on tickets.`swimlane_status_id` = ticketSwimlane.swimlane_id" +
+        "inner join ticketswimlane on tickets.`swimlane_status_id` = ticketswimlane.swimlane_id" +
         " WHERE client_id = " + req.params.clientId + " ORDER BY `tickets`.`ticket_id` DESC";
 
     mysqlConnectionPool.getConnection(function(err, connection) {
@@ -1293,6 +1293,7 @@ router.get('/ticket/data/:ticketId', function (req, res, next) {
     const SQL = "SELECT * FROM ticket_data_view "
         + " WHERE ticket_id = " + req.params.ticketId;
 
+    //console.log(SQL);
     mysqlConnectionPool.getConnection(function(err, connection) {
 
         connection.query(SQL, function (error, results) {

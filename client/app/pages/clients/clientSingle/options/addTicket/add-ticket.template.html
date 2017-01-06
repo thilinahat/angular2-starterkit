@@ -116,12 +116,13 @@
                             </div>
 
                             <div class="col-md-4 col-xs-12">
+                                <!--developers-->
                                 <div class="form-group">
                                     <label class="control-label">Select Assignee</label>
                                     <select class="form-control" id="assignee" required="true"
                                             [(ngModel)] = "selectedAssigneeId" name="selectedAssigneeId" >
                                         <option selected disabled>Choose Priority</option>
-                                        <option *ngFor="let asignee of asignees " [value]="asignee.developer_id" >{{asignee.developer_name}}</option>
+                                        <option *ngFor="let asignee of asignees " [value]="asignee.id" >{{asignee.name}}</option>
                                     </select>
                                 </div>
                             </div>

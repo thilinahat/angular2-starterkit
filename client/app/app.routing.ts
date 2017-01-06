@@ -8,6 +8,8 @@ import {AppComponent} from "./app.component";
 import {ClientsComponent} from "./pages/clients/clients.component";
 import {OperatorComponent} from "./pages/operator/operator.component";
 import {AdminComponent} from "./pages/admin/admin.component";
+import {DeveloperComponent} from "./pages/developer/developer.component";
+import {DeveloperTicketsComponent} from "./pages/developer/tickets/tickets.component";
 import {RoleManagementComponent} from "./pages/admin/role/role.component";
 import {AddUserComponent} from "./pages/admin/role/addUser/addUser.component";
 import {BlockUserComponent} from "./pages/admin/role/blockUser/blockUser.component";
@@ -132,6 +134,15 @@ const routes: Routes = [
         ]
     },
     { path: 'customer', component: CustomersComponent, canActivate: [AuthGuard]},
+    { path: 'developer',component: DeveloperComponent , canActivate: [],
+        /*children: [
+            { path: '', redirectTo: 'search', pathMatch: 'full' },
+            { path: 'search', component: SearchClientComponent },
+            { path: 'add', component: AddclientsComponent },
+            { path: 'mail', component: MailComponent },
+            { path: 'call', component: CallComponent },
+        ]*/
+    },
     { path: '**', redirectTo:'login', pathMatch: 'full' }
 ];
 @NgModule({
