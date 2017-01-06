@@ -1,0 +1,15 @@
+.product-item{
+    padding: 10px 15px;
+}
+.product-item:hover{
+    cursor: pointer;
+    background: #9C27B0;
+}
+
+.product-item:hover > p{
+    color: white;
+}
+
+.product-item>p{
+    font-size: 20px;
+}

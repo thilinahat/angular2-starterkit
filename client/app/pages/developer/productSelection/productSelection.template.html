@@ -1,0 +1,24 @@
+<div class="sidebar" data-color="purple" id="sideNavBar">
+
+
+    <div class="logo">
+        <a routerLink="/operator/dashboard" class="simple-text">
+            VinIT CRM
+        </a>
+    </div>
+
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+
+            <!--"-->
+
+            <li *ngFor="let product of products"  class="product-item" (click)="onSelect(product.product_Id)">
+                <!--<i class="material-icons">{{nav.icon}}</i>-->
+                <p>{{product.name}}</p>
+            </li>
+
+        </ul>
+
+
+    </div>
+</div>
