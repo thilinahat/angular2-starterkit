@@ -11,6 +11,7 @@ import {AdminComponent} from "./pages/admin/admin.component";
 import {RoleManagementComponent} from "./pages/admin/role/role.component";
 import {RoleManagementHeaderComponent} from "./pages/admin/role/header/header.component";
 import {AddUserComponent} from "./pages/admin/role/addUser/addUser.component";
+import {BlockUserComponent} from "./pages/admin/role/blockUser/blockUser.component";
 import {ProductComponent} from "./pages/admin/product/product.component";
 import {ProductHeaderComponent} from "./pages/admin/product/header/header.component";
 import {AddMainProductComponent} from "./pages/admin/product/addProduct/addProduct.component";
@@ -88,7 +89,8 @@ import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSing
         SingleClientPurchasedProductsComponent, AdminSidenavigationComponent, OperatorComponent,
         AdminComponent, RoleManagementComponent, RoleManagementHeaderComponent, AddUserComponent,
         ProductComponent, ProductHeaderComponent, AddMainProductComponent, EditProductComponent,
-        MailTemplatesComponent, MailTemplateHeaderComponent, AddMailTemplateComponent, NotificationComponent
+        MailTemplatesComponent, MailTemplateHeaderComponent, AddMailTemplateComponent, NotificationComponent,
+        BlockUserComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
         ClienthistoryService, RoleManagementService, ProductManagementService

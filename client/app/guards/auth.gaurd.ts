@@ -12,20 +12,20 @@ export class AuthGuard implements CanActivate {
     // mapping of role based route access
     private acl: any = {
         "/admin/" : ["ADMIN"],
-        "/admin/dashboard" : ["ADMIN"],
-        "/operator/" : ["OPERATOR", "ADMIN"],
-        "/operator/dashboard" : ["OPERATOR", "ADMIN"],
-        "/operator/clients/search" : ["OPERATOR", "ADMIN"],
-        "/operator/clients/add" : ["OPERATOR", "ADMIN"],
-        "/operator/clients/mail" : ["OPERATOR", "ADMIN"],
-        "operator/clients/[0-9]*/addcall":["OPERATOR", "ADMIN"],
-        "operator/clients/[0-9]*/addnote":["OPERATOR", "ADMIN"],
-        "operator/clients/[0-9]*/addticket":["OPERATOR", "ADMIN"],
-        "operator/clients/[0-9]*/addproduct":["OPERATOR", "ADMIN"],
-        "operator/clients/[0-9]*/edit":["OPERATOR", "ADMIN"],
-        "/operator/clients/[0-9]*" : ["OPERATOR", "ADMIN"], // regular expression for client id
-        "/operator/tickets" : ["OPERATOR", "ADMIN"],
-        "/operator/reports" : ["OPERATOR", "ADMIN"],
+        //"/admin/dashboard" : ["ADMIN"],
+        "/operator/" : ["OPERATOR"],
+        //"/operator/dashboard" : ["OPERATOR", "ADMIN"],
+        //"/operator/clients/search" : ["OPERATOR", "ADMIN"],
+        //"/operator/clients/add" : ["OPERATOR", "ADMIN"],
+        //"/operator/clients/mail" : ["OPERATOR", "ADMIN"],
+        //"operator/clients/[0-9]*/addcall":["OPERATOR", "ADMIN"],
+        //"operator/clients/[0-9]*/addnote":["OPERATOR", "ADMIN"],
+        //"operator/clients/[0-9]*/addticket":["OPERATOR", "ADMIN"],
+        //"operator/clients/[0-9]*/addproduct":["OPERATOR", "ADMIN"],
+        //"operator/clients/[0-9]*/edit":["OPERATOR", "ADMIN"],
+        //"/operator/clients/[0-9]*" : ["OPERATOR", "ADMIN"], // regular expression for client id
+        //"/operator/tickets" : ["OPERATOR", "ADMIN"],
+        //"/operator/reports" : ["OPERATOR", "ADMIN"], */
         "/customer" : ["CLIENT"],
         "/change/credentials" : ["OPERATOR", "ADMIN", "CLIENT"],
     };
@@ -38,7 +38,6 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) :  Promise<boolean> {
         let url: string = state.url; // url user trying to access
-
         let authorizedRoles =  this. getAutherizedRoles(url); // authorized roles for the url
 
         // following promise return true if the logged user has permission to access the required url, otherwise false

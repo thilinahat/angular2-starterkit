@@ -1,0 +1,22 @@
+<div class="col-md-offset-3 col-md-6 col-sm-6 col-xs-6">
+    <div class="card form-container">
+        <form #blockUserForm="ngForm" (ngSubmit)="onSubmit(blockUserForm.value)">
+            <!--user-->
+            <div class="form-group">
+                <label for="roles">Role</label>
+                <select class="form-control" id="roles" name="role" ngModel (change)="onRoleSelect($event.target.value)">
+                    <option *ngFor="let role of roles" [value]="role.value">{{role.option}}</option>
+                </select>
+            </div>
+            <!--name-->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <select class="form-control" id="name" name="name" ngModel>
+                    <option *ngFor="let user of users" [value]="user.name">{{user.name}}</option>
+                </select>
+            </div>
+            <!--submit-->
+            <button type="submit" class="btn btn-danger">Block</button>
+        </form>
+    </div>
+</div>

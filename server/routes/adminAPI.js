@@ -15,17 +15,16 @@ var router = express.Router();
 router.get('/add-admin',  function (req, res) {
 
     var user = {
-        id: 1,
-        username: config.admin.usernamePrefix,
-        password: config.admin.passwordPrefix,
+        companyId: 1,
+        name: 'admin',
         role: config.roles.admin
     };
 
-    UserService.addUser(user).then(response => {
+    UserService.addOperatorOrDeveloperOrAdmin(user).then(response => {
         res.status(200).json({
             message: 'Admin Created',
-            username: 'CRM_ADMIN',
-            password: 'CRM_ADMIN'
+            username: response.username,
+            password: response.password
         });
     }, err => {
         return res.status(406).json({
@@ -71,7 +70,7 @@ router.post('/user/add',  function (req, res) {
 
     const user = req.body.user;
 
-    UserService.addOperatorOrDeveloper(user).then(response => {
+    UserService.addOperatorOrDeveloperOrAdmin(user).then(response => {
         res.status(200).json({
             message: user.role + ' Created Successfully',
             username: response.username,
@@ -84,6 +83,36 @@ router.post('/user/add',  function (req, res) {
         });
     });
 });
+
+// route to get all unblocked users of a specific role
+router.get('/users/unblocked/:role',  function (req, res) {
+    const table = req.params.role;
+    mysqlConnectionPool.getConnection(function (err, connection) {
+        const sql = 'SELECT name FROM ' + table + ' WHERE blocked=false';
+        connection.query(sql, function (err, results) {
+            if (err) {
+                return res.sendStatus(400);
+            } else {
+                res.json(results);
+            }
+        });
+    });
+});
+
+// route to block operators, developers
+router.post('/user/block',  function (req, res) {
+    const user = req.body.user;
+    UserService.blockOperatorOrDeveloperOrAdmin(user).then(response => {
+        res.status(200).json({
+            message: user.name + ' Blocked Successfully'});
+    }, err => {
+        return res.status(406).json({
+            status: 'Failed to block ' + user.name,
+            message: err
+        });
+    });
+});
+
 
 // route to get all products
 router.get('/products',  function (req, res) {

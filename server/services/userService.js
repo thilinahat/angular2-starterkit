@@ -11,18 +11,19 @@ var passwordHash = require('password-hash');
 
 class UserService {
 
-    addOperatorOrDeveloper(user) {
+    addOperatorOrDeveloperOrAdmin(user) {
         return new Promise((fulfill, reject) => {
             mysqlConnectionPool.getConnection(function (err, connection) {
-                const role = user.role == 'OPERATOR' ? 'operator' : 'developer';
-                let sql = 'INSERT INTO ' + role + 's' +
-                    '  (' + role+ '_name, '+ role + '_company_id)' +
+                const table = user.role == 'OPERATOR' ? 'operators' : user.role == 'DEVELOPER' ? 'developers' : 'admins';
+                let sql = 'INSERT INTO ' + table +
+                    '  ( name, company_id)' +
                     ' VALUES (?, ?)';
                 let values = [user.name, user.companyId];
                 connection.query(sql, values, function (err, rows, fields) {
                     if (err)
                         reject(err);
 
+                    const role = user.role == 'OPERATOR' ? 'operator' : 'developer';
                     user.id = rows.insertId;
                     user.username = config[role].usernamePrefix + '_' + user.id;
                     user.password = config[role].passwordPrefix + '_' + user.id;
@@ -57,6 +58,23 @@ class UserService {
                         reject(err);
                     }
                     fulfill(user);
+                });
+            });
+
+        });
+    }
+
+    blockOperatorOrDeveloperOrAdmin(user) {
+        return new Promise((fulfill, reject) => {
+            mysqlConnectionPool.getConnection(function (err, connection) {
+                const sql = 'UPDATE ' + user.role + ' SET blocked = true WHERE name = ?';
+                const values = [user.name];
+
+                connection.query(sql, values, function (err, results) {
+                    if (err) {
+                        reject(err);
+                    }
+                    fulfill();
                 });
             });
 

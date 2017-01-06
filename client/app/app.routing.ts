@@ -10,6 +10,7 @@ import {OperatorComponent} from "./pages/operator/operator.component";
 import {AdminComponent} from "./pages/admin/admin.component";
 import {RoleManagementComponent} from "./pages/admin/role/role.component";
 import {AddUserComponent} from "./pages/admin/role/addUser/addUser.component";
+import {BlockUserComponent} from "./pages/admin/role/blockUser/blockUser.component";
 import {ProductComponent} from "./pages/admin/product/product.component";
 import {AddMainProductComponent} from "./pages/admin/product/addProduct/addProduct.component";
 import {EditProductComponent} from "./pages/admin/product/editProduct/editProduct.component";
@@ -87,7 +88,7 @@ const routes: Routes = [
                 children: [
                     { path: '', redirectTo: 'add', pathMatch: 'full' },
                     { path: 'add', component: AddUserComponent },
-                    //{ path: 'remove', component: AddclientsComponent },
+                    { path: 'block', component: BlockUserComponent },
                 ]
             },
             { path: 'products', component: ProductComponent,
