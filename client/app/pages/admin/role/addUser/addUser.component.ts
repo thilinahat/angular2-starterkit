@@ -22,7 +22,7 @@ export class AddUserComponent {
     onSubmit(form: any): void{
         this.roleManagementService.addUser(form).then(
             response => {
-                alert(response.message + '\n' + response.username + '\n' + response.password);
+                alert(response.message);
             }, error => {
                 alert(error);
             }

@@ -10,7 +10,7 @@ var mysql = require('mysql');
 var config = require('../../config');
 var UserService = require('../services/userService');
 var router = express.Router();
-
+var request = require('request');
 
 router.get('/add-admin',  function (req, res) {
 
@@ -71,10 +71,25 @@ router.post('/user/add',  function (req, res) {
     const user = req.body.user;
 
     UserService.addOperatorOrDeveloperOrAdmin(user).then(response => {
+        const mail = {
+            to: user.email,
+            title: "VinIT CRM Login Credentials",
+            body: "Your Username is " + response.username + '.\n Your Password is ' + response.password
+        };
+        request({  // mailing
+            method: 'POST',
+            url: "http://localhost:8080/mailsend",
+            body: mail,
+            json: true,
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }, (error, profiles, body) => {
+            if (error)
+                console.log(error);
+        });
         res.status(200).json({
-            message: user.role + ' Created Successfully',
-            username: response.username,
-            password: response.password
+            message: user.role + ' ' + user.name + ' Created Successfully',
         });
     }, err => {
         return res.status(406).json({
