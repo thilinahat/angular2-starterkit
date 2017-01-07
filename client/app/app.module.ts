@@ -10,6 +10,7 @@ import {OperatorComponent} from "./pages/operator/operator.component";
 import {AdminComponent} from "./pages/admin/admin.component";
 import {DeveloperComponent} from "./pages/developer/developer.component";
 import {ProductSelectionComponent} from "./pages/developer/productSelection/productSelection.component";
+import {TicketFilterComponent} from "./pages/developer/ticketFilter/ticketFilter.component";
 import {DeveloperTicketsComponent} from "./pages/developer/tickets/tickets.component";
 import {RoleManagementComponent} from "./pages/admin/role/role.component";
 import {RoleManagementHeaderComponent} from "./pages/admin/role/header/header.component";
@@ -33,6 +34,7 @@ import { ClientService } from './services/client.service';
 import { AuthService } from './services/auth.service';
 import { RoleManagementService } from './services/role.service';
 import { ProductManagementService } from './services/product.service';
+import { TicketService } from './services/ticket.service';
 import { AuthGuard } from './guards/auth.gaurd';
 import { AppRoutingModule } from './app.routing';
 
@@ -93,10 +95,11 @@ import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSing
         AdminComponent, RoleManagementComponent, RoleManagementHeaderComponent, AddUserComponent,
         ProductComponent, ProductHeaderComponent, AddMainProductComponent, EditProductComponent,
         MailTemplatesComponent, MailTemplateHeaderComponent, AddMailTemplateComponent, NotificationComponent,
-        BlockUserComponent, DeveloperComponent, ProductSelectionComponent, DeveloperTicketsComponent
+        BlockUserComponent, DeveloperComponent, ProductSelectionComponent, DeveloperTicketsComponent,
+        TicketFilterComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
-        ClienthistoryService, RoleManagementService, ProductManagementService
+        ClienthistoryService, RoleManagementService, ProductManagementService, TicketService
     ],
     bootstrap: [AppComponent],
 })

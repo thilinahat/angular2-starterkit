@@ -28,14 +28,15 @@ module.exports =  {
     roles: {
         client: 'CLIENT',
         operator: 'OPERATOR',
-        admin: 'ADMIN'
+        admin: 'ADMIN',
+        developer: 'DEVELOPER'
     },
     // users will be redirected to following urls when they login based on their role
     redirectURL: {
         OPERATOR: '/operator/',
         CLIENT: '/client/',
         ADMIN: '/admin/',
-        DEVELOPER: '/developer/'
+        DEVELOPER: '/developer'
     }
 
 };

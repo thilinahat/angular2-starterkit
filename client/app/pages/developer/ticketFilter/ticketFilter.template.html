@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="product">Product</label>
+            <select class="form-control" id="product" name="product" ngModel (change)="onProductChange($event.target.value)">
+                <option *ngFor="let product of products" [value]="product.product_Id">{{product.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="priority">Priority</label>
+            <select class="form-control" id="priority" name="priority" ngModel (change)="onPriorityChange($event.target.value)">
+                <option *ngFor="let priority of priorities" [value]="priority.priority_id">{{priority.priority_name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select class="form-control" id="status" name="status" ngModel (change)="onStatusChange($event.target.value)">
+                <option *ngFor="let status of statuses" [value]="status.swimlane_id">{{status.swimlane_status}}</option>
+            </select>
+        </div>
+    </div>
+</div>

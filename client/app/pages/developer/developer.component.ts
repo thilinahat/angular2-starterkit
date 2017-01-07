@@ -3,6 +3,8 @@
  */
 import {Component} from "@angular/core";
 import {ProductManagementService} from '../../services/product.service';
+import {OptionsClientService} from '../clients/clientSingle/options/options-client.service';
+import {TicketService} from '../../services/ticket.service';
 
 @Component({
     selector: 'developer',
@@ -13,39 +15,44 @@ import {ProductManagementService} from '../../services/product.service';
 export class DeveloperComponent {
 
     products: any[] = [];
-    productDescriptionMap: any = {};
-    description: string = "";
+    priorities: any[] = [];
+    statuses: any[] = [];
     tickets: any[];
+
+    constructor(
+        private productManagementService: ProductManagementService,
+        private optionsClientService: OptionsClientService,
+        private ticketService: TicketService
+    ) {}
 
     ngOnInit(){
         this.productManagementService.getAllProducts().then(results => {
             this.products = results;
-            for(let product of this.products) {
-                this.productDescriptionMap[product.name] = product.description;
-            }
         }, error => {
             alert(error);
         });
-    }
 
-    constructor(private productManagementService: ProductManagementService ) {}
+        this.optionsClientService.getPriorities().then(results => {
+                this.priorities = results;
+        }, error =>  {
+            alert(error);
+        });
+
+        this.optionsClientService.getTicketswimlaneTypes().then(results => {
+            this.statuses = results;
+        }, error =>  {
+            alert(error);
+        });
+
+    }
 
     onSubmit(form: any): void{
-        this.productManagementService.editProduct(form).then(
-            response => {
-                alert(response.message);
-            }, error => {
-                alert(error.message + '\n' + error.status);
-            }
-        );
+
     }
 
-    onProductSelect(productID: any): void{
-        // get tickets related to this developer and this product id
-        this.tickets = [
-            {
+    onStateChange(state: string[]): void{
+        console.log(state);
+        this.ticketService.getTicketsRelatedToDeveloper(state).then();
 
-            }
-        ];
     }
 }

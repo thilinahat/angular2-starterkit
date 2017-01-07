@@ -1,5 +1,6 @@
 .tickets-component{
-    padding: 0 30px;
+    /*padding: 0 30px;*/
+    margin-top: 50px;
 }
 
 .ticket-container{
