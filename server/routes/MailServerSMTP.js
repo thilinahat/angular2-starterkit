@@ -7,10 +7,12 @@
 var nodemailer = require('nodemailer');
 var express = require('express');
 var router = express.Router();
+var config = require('../../config');
 
 
 // create reusable transporter object using the default SMTP transport
-var transporter = nodemailer.createTransport('smtps://dilanreader@gmail.com:gts5610k@smtp.gmail.com');
+var transporter = nodemailer.createTransport('smtps://'+ config.email.smtp_un
+     +':'+ config.email.smtp_pw +'@' + config.email.smtp_server);
 
 /**
  * routing
@@ -20,7 +22,7 @@ router.post('/', function (req, res, next) {
 
     // setup e-mail data with unicode symbols
     var mailOptions = {
-        from: '"Dilan Tharaka" <dilanreader@gmail.com>', // sender address
+        from: '"Dilan Tharaka" <dilantharakamd6@yahoo.com>', // sender address
         to: 'tharakamd6@gmail.com', // list of receivers
         subject: reqBody.title, // Subject line
         text: reqBody.body, // plaintext body
