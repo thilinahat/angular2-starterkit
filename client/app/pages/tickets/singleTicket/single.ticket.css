@@ -1,0 +1,63 @@
+.status{
+    display: inline-flex;
+    color: white;
+    margin: 5px 0 8px 5px;
+    border-radius: 30px;
+    background: rgba(140, 45, 175, 0.58);
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.header-title{
+    display: inline-flex;
+    color: white;
+    padding: 5px 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.header-title-date{
+
+    display: inline-flex;
+    color: white;
+    padding: 5px 10px;
+    font-size: 20px;
+    float: right;
+    padding-top: 12px;
+}
+
+.priority-high{
+    background: rgba(255, 0, 0, 0.67);
+}
+.priority-low{
+    background: #19a219;
+}
+.priority-medium{
+    background: #ff9900;
+}
+
+.problem-bug{
+    background: rgba(255, 0, 0, 0.67);
+}
+.problem-task{
+    background: #ff9900;
+}
+
+.status-open{
+    background: rgb(49, 112, 143);
+}
+.status-closed{
+    background: #19a219;
+}
+
+.ticket-comments-container{
+    border-top: 2px solid rgba(128, 0, 128, 0.68);
+}
+
+.swimlane-status{border-radius: 4px;  padding: 0px 10px 3px 10px; color: white; text-align: center;}
+
+.ticket-summary:hover{background-color: #e8e8e8; cursor: pointer}
+
+.change-button{border-radius: 4px;  padding: 0px 10px 3px 10px; color: white; background-color: #3b5998; cursor: pointer }

@@ -10,9 +10,7 @@ import {ClientService} from "../../../../../services/client.service";
 
     selector:'single-client-tickets',
     templateUrl:'single-client-tickets.template.html',
-    styles:['.swimlane-status{border-radius: 4px;  padding: 0px 10px 3px 10px; color: white; text-align: center;} ' +
-    '.ticket-summary:hover{background-color: #e8e8e8; cursor: pointer}' +
-    '.change-button{border-radius: 4px;  padding: 0px 10px 3px 10px; color: white; background-color: #3b5998; cursor: pointer }']
+    styleUrls:['singleTicketStyles.css']
 
 })
 
@@ -84,6 +82,7 @@ export class SingleClientTicketsComponent {
         formData.append("selectedPriorityId", this.selectedPriorityId);
 
         this.optionsClientService.changeTicketPriority(formData).then(res => {
+            this.loadClientTickets();
             alert('Successfully Added Changed Ticket Priority');
         }, error => {
             alert(error);
@@ -91,7 +90,6 @@ export class SingleClientTicketsComponent {
 
         this.selectedPriorityId = null;
         this.changeSelectedClientId(this.selectedTicket.ticket_id);
-        this.loadClientTickets();
 
     }
 
@@ -102,6 +100,7 @@ export class SingleClientTicketsComponent {
         formData.append("selectedSwimlaneStatusId", this.selectedSwimlaneStatusId);
 
         this.optionsClientService.changeTicketStatus(formData).then(res => {
+            this.loadClientTickets();
             alert('Successfully Added Changed Ticket Status');
         }, error => {
             alert(error);
@@ -109,7 +108,6 @@ export class SingleClientTicketsComponent {
 
         this.selectedSwimlaneStatusId = null;
         this.changeSelectedClientId(this.selectedTicket.ticket_id);
-        this.loadClientTickets();
 
 
 

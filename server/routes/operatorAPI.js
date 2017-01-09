@@ -1208,12 +1208,13 @@ router.post('/add-ticket', screenshotUploader, function (req, res) {
 
 
     //swimlane status id = 1 (OPEN) is hardcoded.
-    var SQL = "INSERT INTO `vinit_crm`.`tickets` (`ticket_id`, `swimlane_status_id`, `client_id`, `summary`, `description`, `problem_type_id`, `priority_id`, `assignee_id`, `sceenshot_name`, `due_date`, `user_id`,  `till_id`)"
-        + " VALUES (NULL, '1', ?, ?, ?, ?, ?, ?, ?, ? , '?' , ? ); ";
-    var values = [ticket.clientId, ticket.summary, ticket.problemDescription, ticket.selectedProblemTypeId, ticket.selectedPriority, ticket.selectedAssigneeId, ticket.screenShotFileName,  ticket.dueDate, req.decoded.uid, ticket.selectedTillId];
+    var SQL = "INSERT INTO `vinit_crm`.`tickets` (`ticket_id`, `swimlane_status_id`, `client_id`, `summary`, `description`, `problem_type_id`, `priority_id`, `assignee_id`, `sceenshot_name`, `due_date`, `user_id`,  `till_id`, `added_date_time`)"
+        + " VALUES (NULL, '1', ?, ?, ?, ?, ?, ?, ?, ? , '?' , ? , ?); ";
+    var values = [ticket.clientId, ticket.summary, ticket.problemDescription, ticket.selectedProblemTypeId, ticket.selectedPriority, ticket.selectedAssigneeId, ticket.screenShotFileName,  ticket.dueDate, req.decoded.uid, ticket.selectedTillId, formatted];
 
     SQL = mysql.format(SQL, values);
 
+    //console.log(SQL);
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
@@ -1255,10 +1256,26 @@ router.post('/add-ticket', screenshotUploader, function (req, res) {
 //get client tickets
 router.get('/client/data/:clientId/tickets', function (req, res, next) {
 
-    const SQL = "SELECT ticket_id, summary, swimlane_status, swimlane_color, due_date FROM `tickets`" +
+    const SQL = "SELECT     ticket_id,        client_id,        summary," +
+        "        description,        concat(date(`tickets`.`added_date_time`),\"\") AS `added_date_time` ," +
+    " `swimlane_status_id`,        swimlane_status, swimlane_color, tickets.priority_id, " +
+    " problem_type_color," +
+    " priority_name," +
+    " priorities.color as priority_color, problem_type_name " +
+    " FROM `tickets` " +
+    " join ticketswimlane " +
+    " on tickets.swimlane_status_id = ticketswimlane.swimlane_id " +
+    " join priorities " +
+    " on tickets.priority_id = priorities.priority_id" +
+    " join problem_types" +
+    " on tickets.problem_type_id = problem_types.problem_type_id" +
+    " WHERE client_id = " + req.params.clientId + " ORDER BY `tickets`.`ticket_id` DESC";
+
+
+        /*"SELECT ticket_id, summary, swimlane_status, swimlane_color, due_date FROM `tickets`" +
         "inner join ticketswimlane on tickets.`swimlane_status_id` = ticketswimlane.swimlane_id" +
         " WHERE client_id = " + req.params.clientId + " ORDER BY `tickets`.`ticket_id` DESC";
-
+*/
     mysqlConnectionPool.getConnection(function(err, connection) {
 
         connection.query(SQL, function (error, results) {
@@ -1364,6 +1381,7 @@ router.post('/ticket/change-status', screenshotUploader, function (req, res) {
 
     var SQL = "UPDATE `vinit_crm`.`tickets` SET `swimlane_status_id` = '" + ticket.selectedSwimlaneStatusId + "'"
         + " WHERE `tickets`.`ticket_id` = '" + ticket.ticketId + "';";
+
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
