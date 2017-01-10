@@ -30,6 +30,16 @@ module.exports =  {
         operator: 'OPERATOR',
         admin: 'ADMIN'
     },
+    email: {
+        smtp_un:'dilantharakamd6@yahoo.com',
+        smtp_pw: 'gts5610k',
+        smtp_server: 'smtp.mail.yahoo.com',
+        imap_un: 'dilantharakamd6@yahoo.com',
+        imap_pw: 'gts5610ka',
+        imap_server: 'imap.mail.yahoo.com',
+        imap_port: 993
+
+    },
     // users will be redirected to following urls when they login based on their role
     redirectURL: {
         OPERATOR: '/operator/',

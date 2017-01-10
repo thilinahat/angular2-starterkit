@@ -6,6 +6,7 @@ var Imap = require('imap');
 var inspect = require('util').inspect;
 var express = require('express');
 var router = express.Router();
+var config = require('../../config');
 
 
 var data = {
@@ -22,11 +23,15 @@ router.get('/i',function (req,res,next) {
     });
 })
 
+process.on('uncaughtException', function (err) {
+    console.log("internal error : " + err);
+});
+
 var imap = new Imap({
-    user: 'dilantharakamd6@yahoo.com',
-    password: 'gts5610k',
-    host: 'imap.mail.yahoo.com',
-    port: 993,
+    user: config.email.imap_un,
+    password: config.email.imap_pw,
+    host: config.email.imap_server,
+    port: config.email.imap_port,
     tls: true
 });
 
@@ -35,8 +40,9 @@ function openInbox(cb) {
 }
 
 imap.once('error', function(err) {
-    console.log(err);
+    console.log("sdf " + err);
 });
+
 
 imap.once('end', function() {
     console.log('Connection ended');
