@@ -20,8 +20,9 @@
                             <!--summary-->
                             <div class="col-md-6 col-xs-12">
                                 <div class="form-group label-floating is-empty">
-                                    <label class="control-label">Summary</label>
-                                    <input type="test" class="form-control" required="true" [(ngModel)]="summary" name="summary">
+                                    <label class="control-label" [hidden]="!editMode">Summary</label>
+                                    <input type="test" class="form-control" required="true"
+                                           [(ngModel)]="summary" name="summary" value="{{summary}}">
                                     <span class="material-input"></span></div>
                             </div>
 
@@ -97,9 +98,10 @@
                                 <div class="form-group">
 
                                     <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Description</label>
-                                        <textarea class="form-control" rows="5" required="true" [(ngModel)]="problemDescription"
-                                                  name="description" maxlength="1000"></textarea>
+                                        <label class="control-label" [hidden]="!editMode">Description</label>
+                                        <textarea class="form-control " rows="5" required="true" [(ngModel)]="problemDescription"
+                                                  name="description" maxlength="1000"  placeholder="Description"></textarea>
+
                                         <span class="material-input"></span></div>
                                 </div>
                             </div>

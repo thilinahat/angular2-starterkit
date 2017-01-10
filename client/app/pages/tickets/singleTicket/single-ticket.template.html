@@ -1,0 +1,170 @@
+
+
+<div class="row">
+
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header" data-background-color="purple">
+                <div class="title">
+                    <div class="header-title">Ticket {{id}}</div>
+
+                    <div class="status priority-{{selectedTicket.priority_name}}" (click)="changePriority.open()">{{selectedTicket.priority_name}}  </div>
+                    <div class="status problem-{{selectedTicket.problem_type_name}}">{{selectedTicket.problem_type_name}}</div>
+                    <div class="status status-{{selectedTicket.swimlane_status}}" (click)="ticketStatus.open()">{{selectedTicket.swimlane_status}}</div>
+                    <div class="stats"><a routerLink="edit">Edit</a></div>
+                    <div class="header-title-date">Added On: {{selectedTicket.added_date_time |date:'mediumDate'}}</div>
+
+                </div>
+
+            </div>
+            <div class="card-content">
+                <table class="table">
+                    <colgroup>
+                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 80%;">
+                    </colgroup>
+                    <tr>
+                        <td>Summary</td>
+                        <td>{{selectedTicket.summary}}</td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>{{selectedTicket.description}}</td>
+                    </tr>
+
+
+
+                    <tr *ngIf="screanshotavilable">
+                        <td>Screenshot</td>
+                        <td><i class="change-button" (click)="selectedscreenshot.open()">see screen shot</i>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Till ID</td>
+                        <td>{{selectedTicket.till_id}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Till Name</td>
+                        <td>{{selectedTicket.till_name}} </td>
+                    </tr>
+
+                    <tr>
+                        <td>Till expiredate</td>
+                        <td>{{selectedTicket.expiredate | date:'mediumDate'}} </td>
+                    </tr>
+
+                    <tr>
+                        <td>Product</td>
+                        <td>{{selectedTicket.product_name}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Branch</td>
+                        <td>{{selectedTicket.location}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Assignee</td>
+                        <td>{{selectedTicket.developer_name}}</td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<modal #changePriority style="background-color: rgba(142, 157, 166, 0.39);">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title"><b>Change Priority of #{{selectedTicket.ticket_id}}</b>
+        </h4>
+    </modal-header>
+    <modal-body>
+
+        <form #ticketPriorityForm="ngForm" (ngSubmit)="onPrioritySubmit(); changePriority.close()">
+
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Select Priority</label>
+                        <select class="form-control" id="assignee" required="true"
+                                [(ngModel)] = "selectedPriorityId" name="selectedPriorityId" >
+                            <option selected disabled>Choose Priority </option>
+                            <option *ngFor="let priority of priorities " [value]="priority.priority_id" >{{priority.priority_name}}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary pull-right">Change Ticket<div class="ripple-container"></div></button>
+            <div class="clearfix"></div>
+        </form>
+
+    </modal-body>
+</modal>
+
+<modal #ticketStatus style="background-color: rgba(142, 157, 166, 0.39);">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title"><b>Change status of #{{selectedTicket.ticket_id}}</b>
+
+        </h4>
+
+        <hr>
+    </modal-header>
+    <modal-body>
+
+        <form #ticketStatusForm="ngForm" (ngSubmit)="onTicketStatusFormSubmit(); ticketStatus.close()">
+
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Select Status</label>
+                        <select class="form-control" id="selectedSwimlaneStatusId" required="true"
+                                [(ngModel)] = "selectedSwimlaneStatusId" name="selectedSwimlaneStatusId" >
+                            <option selected disabled>Choose Priority </option>
+                            <option *ngFor="let type of ticketswimlaneTypes " [value]="type.swimlane_id" >{{type.swimlane_status}}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary pull-right">Change Ticket Status<div class="ripple-container"></div></button>
+            <div class="clearfix"></div>
+        </form>
+
+    </modal-body>
+</modal>
+
+<modal #selectedscreenshot style="background-color: rgba(142, 157, 166, 0.39);">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title"><b>Screenshot of #{{selectedTicket.ticket_id}}</b>
+
+        </h4>
+
+        <hr>
+    </modal-header>
+    <modal-body>
+        <div class="row">
+            <div class="col-xs-12">
+                <img src="{{selectedTicket.sceenshot_name}}" style="width: 100%">
+            </div>
+        </div>
+
+
+    </modal-body>
+</modal>
+
+

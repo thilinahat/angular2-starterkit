@@ -73,6 +73,9 @@ import {ClientDataSharingService} from "./shared/data/client-data-sharing.servic
 import {ClienthistoryService} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.service";
 import {SingleClientTicketsComponent} from "./pages/clients/clientSingle/options/tickets/single-client-tickets.component";
 import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSingle/options/addProduct/AddTill/purchasedTills/purchased-products.component";
+import {SingleTicketComponent} from "./pages/tickets/singleTicket/single-ticket.component";
+import {SingleTicketService} from "./pages/tickets/singleTicket/single-ticket.service";
+import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/ticket-edit.component";
 
 
 //when creating a component, add it here
@@ -96,10 +99,10 @@ import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSing
         ProductComponent, ProductHeaderComponent, AddMainProductComponent, EditProductComponent,
         MailTemplatesComponent, MailTemplateHeaderComponent, AddMailTemplateComponent, NotificationComponent,
         BlockUserComponent, DeveloperComponent, ProductSelectionComponent, DeveloperTicketsComponent,
-        TicketFilterComponent
+        TicketFilterComponent,SingleTicketComponent, EditTicketsComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
-        ClienthistoryService, RoleManagementService, ProductManagementService, TicketService
+        ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService, TicketService
     ],
     bootstrap: [AppComponent],
 })
