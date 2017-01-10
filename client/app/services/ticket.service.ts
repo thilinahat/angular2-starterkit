@@ -11,7 +11,6 @@ export class TicketService {
     constructor(private http: Http) { }
 
     private developerAPIurl = 'api/developer';
-    private commonAPIurl = 'api/common'
 
     getTicketsRelatedToDeveloper(state: any): Promise<any> {
 

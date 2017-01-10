@@ -44,6 +44,12 @@ export class DeveloperComponent {
             alert(error);
         });
 
+        this.ticketService.getTicketsRelatedToDeveloper({productID: "Any", priorityID: "Any", statusID: "Any"}).then(tickets => {
+            this.tickets = tickets;
+        }, error => {
+
+        });
+
     }
 
     onSubmit(form: any): void{
@@ -51,8 +57,11 @@ export class DeveloperComponent {
     }
 
     onStateChange(state: string[]): void{
-        console.log(state);
-        this.ticketService.getTicketsRelatedToDeveloper(state).then();
+        this.ticketService.getTicketsRelatedToDeveloper(state).then(tickets => {
+            this.tickets = tickets;
+        }, error => {
+
+        });
 
     }
 }

@@ -24,6 +24,7 @@
     padding: 5px 10px;
     font-size: 15px;
     font-weight: 700;
+    text-transform: capitalize;
 }
 
 .status>i{
