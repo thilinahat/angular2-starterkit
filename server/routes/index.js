@@ -5,6 +5,17 @@ var jwt = require('jsonwebtoken');
 var AuthService = require('../services/authService');
 var config = require('../../config');
 
+
+router.post('/test/siplo', function(req, res, next){
+    const user = req.body;
+    console.log(req.body.amount);
+    //console.log(req);
+    res.json({
+        status: 200,
+        message: "OK"
+    });
+});
+
 router.post('/authenticate', function(req, res, next){
     const user = req.body.user;
     AuthService.verifyUser(user).then(response => {

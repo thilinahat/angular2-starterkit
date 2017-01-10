@@ -1068,69 +1068,9 @@ router.get('/tickets/problemtypes', function (req, res, next) {
     });
 });
 
-//get ticket priorities
-router.get('/tickets/priorities', function (req, res, next) {
+// get ticket priorities moved to common api
 
-    const SQL = "select * from priorities" ;
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        connection.query(SQL, function (error, results) {
-
-            if (error) {
-
-                console.log("error while retrieving from to db view");
-                return;
-            }
-
-            if (results.length > 0) {
-
-                res.json(results);
-
-            }
-            else {
-
-                res.statusCode = 200; //if results are not found for this
-                res.send();
-            }
-
-        });
-
-        connection.release();
-    });
-});
-
-//get ticket ticket swim lane status typs
-router.get('/tickets/status-types', function (req, res, next) {
-
-    const SQL = "select * from ticketswimlane" ;
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        connection.query(SQL, function (error, results) {
-
-            if (error) {
-
-                console.log("error while retrieving from to db view");
-                return;
-            }
-
-            if (results.length > 0) {
-
-                res.json(results);
-
-            }
-            else {
-
-                res.statusCode = 200; //if results are not found for this
-                res.send();
-            }
-
-        });
-
-        connection.release();
-    });
-});
+// get ticket swim lane status types
 
 //get developers
 router.get('/developers', function (req, res, next) {

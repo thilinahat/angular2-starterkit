@@ -129,20 +129,7 @@ router.post('/user/block',  function (req, res) {
 });
 
 
-// route to get all products
-router.get('/products',  function (req, res) {
-
-    mysqlConnectionPool.getConnection(function (err, connection) {
-        let sql = 'SELECT * FROM products';
-        connection.query(sql, function (err, results) {
-            if (err) {
-                return res.sendStatus(400);
-            } else {
-                res.json(results);
-            }
-        });
-    });
-});
+// route to get all products moved to common api
 
 // route to add products
 router.post('/product/add',  function (req, res) {
