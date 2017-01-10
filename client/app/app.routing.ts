@@ -43,6 +43,7 @@ import {SendMailComponent} from "./pages/clients/clientSingle/options/sendMail/s
 import {ClientSingleDashboardComponent} from "./pages/clients/clientSingle/dashboard/client-single-dashboard.component";
 import {SingleClientTicketsComponent} from "./pages/clients/clientSingle/options/tickets/single-client-tickets.component";
 import {SingleTicketComponent} from "./pages/tickets/singleTicket/single-ticket.component";
+import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/ticket-edit.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -54,6 +55,8 @@ const routes: Routes = [
             { path: 'dashboard', component: DashboardComponent},
             { path: 'tickets', component: TicketsComponent },
             { path: 'tickets/:ticketId', component: SingleTicketComponent },
+            { path: 'tickets/:ticketId/edit', component: EditTicketsComponent },
+
 
             { path: 'reports', component: ReportsComponent },
             { path: 'clients',component: ClientsComponent , canActivate: [AuthGuard],

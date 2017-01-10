@@ -1256,20 +1256,8 @@ router.post('/add-ticket', screenshotUploader, function (req, res) {
 //get client tickets
 router.get('/client/data/:clientId/tickets', function (req, res, next) {
 
-    const SQL = "SELECT     ticket_id,        client_id,        summary," +
-        "        description,        concat(date(`tickets`.`added_date_time`),\"\") AS `added_date_time` ," +
-    " `swimlane_status_id`,        swimlane_status, swimlane_color, tickets.priority_id, " +
-    " problem_type_color," +
-    " priority_name," +
-    " priorities.color as priority_color, problem_type_name " +
-    " FROM `tickets` " +
-    " join ticketswimlane " +
-    " on tickets.swimlane_status_id = ticketswimlane.swimlane_id " +
-    " join priorities " +
-    " on tickets.priority_id = priorities.priority_id" +
-    " join problem_types" +
-    " on tickets.problem_type_id = problem_types.problem_type_id" +
-    " WHERE client_id = " + req.params.clientId + " ORDER BY `tickets`.`ticket_id` DESC";
+    const SQL = "SELECT * FROM single_ticket_data_view  " +
+    " WHERE client_id = " + req.params.clientId + " ORDER BY `added_date_time` DESC";
 
 
         /*"SELECT ticket_id, summary, swimlane_status, swimlane_color, due_date FROM `tickets`" +
@@ -1282,7 +1270,7 @@ router.get('/client/data/:clientId/tickets', function (req, res, next) {
 
             if (error) {
 
-                console.log("error while retrieving from to db");
+                console.log("error while retrieving from to db: "+ error);
                 return;
             }
 
@@ -1309,6 +1297,13 @@ router.get('/ticket/data/:ticketId', function (req, res, next) {
     //To do: reduce this joins by calling seperately for swimlane, priorities, problem types
     const SQL = "SELECT * FROM ticket_data_view "
         + " WHERE ticket_id = " + req.params.ticketId;
+
+    ""
+
+    // " client_id, problem_type_id," +
+    // " priority_id," +
+    // " swimlane_status_id" +
+
 
     //console.log(SQL);
     mysqlConnectionPool.getConnection(function(err, connection) {

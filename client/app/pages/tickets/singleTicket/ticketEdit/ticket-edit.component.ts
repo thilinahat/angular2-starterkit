@@ -1,19 +1,20 @@
 import {Component, Input,} from "@angular/core";
 import {  ActivatedRoute } from '@angular/router';
-import {OptionsClientService} from "../options-client.service";
-import {ClientDataSharingService} from "../../../../../shared/data/client-data-sharing.service";
 import {Subscription} from "rxjs";
-import {FormControl} from "@angular/forms";
+import {OptionsClientService} from "../../../clients/clientSingle/options/options-client.service";
+import {ClientDataSharingService} from "../../../../shared/data/client-data-sharing.service";
+import {SingleTicketService} from "../single-ticket.service";
+import {FormControl, FormBuilder} from "@angular/forms";
 
 
 @Component({
 
     selector:'add-ticket',
-    templateUrl:'add-ticket.template.html'
+    templateUrl:'../../../clients/clientSingle/options/addTicket/add-ticket.template.html'
 
 })
 
-export class AddTicketeComponent {
+export class EditTicketsComponent {
 
     client:any = {};
     products:any[] = [];
@@ -32,35 +33,24 @@ export class AddTicketeComponent {
     selectedAssigneeId:string = '';
     summary:string = '';
     dueDate:string = '';
-    editMode:boolean = true;
-
+    editMode:boolean = false;
 
     screenshot:any;
 
     errorMessage:string;
 
     subscription:Subscription;
+    sub:Subscription;
+
+    selectedTicket:any = {};
+    screanshotavilable:any;
+
+    ticketsFormGroup:any;
+
+    id:string;
 
     ngOnInit() {
 
-        this.subscription = this.dataHolder.clientData$.subscribe(
-            client => {
-                this.client = client;
-
-                this.optionsClientService.getClientProducts(client.client_id).
-                then(products => this.products = products,
-                    error =>  this.errorMessage = <any>error );
-
-                this.optionsClientService.getBranches(client.client_id).
-                then(branches => this.branches = branches,
-                    error =>  this.errorMessage = <any>error );
-
-                this.optionsClientService.getTills(client.client_id).
-                then(tills => this.tills = tills,
-                    error =>  this.errorMessage = <any>error );
-
-            }
-        )
 
         this.optionsClientService.getProblemTypes().
         then(problemTypes => this.problemTypes = problemTypes,
@@ -74,6 +64,13 @@ export class AddTicketeComponent {
         then(asignees => this.asignees = asignees,
             error =>  this.errorMessage = <any>error );
 
+        this.sub = this.route.params.subscribe(params => {
+            this.id = params['ticketId'];
+
+            this.loadTicketData();
+
+
+        });
 
     }
 
@@ -120,15 +117,17 @@ export class AddTicketeComponent {
     }
     ngOnDestroy() {
         // prevent memory leak when component is destroyed
-        this.subscription.unsubscribe();
+        //this.subscription.unsubscribe();
     }
 
     constructor(
         private route:ActivatedRoute,
         private optionsClientService: OptionsClientService,
         private dataHolder: ClientDataSharingService,
+        private singleTicketService:SingleTicketService,
 
-    ){    }
+
+    ){ }
 
     refreshFields(){
         this.selectedProductId = '';
@@ -140,6 +139,24 @@ export class AddTicketeComponent {
         this.selectedAssigneeId = '';
         this.summary = '';
         this.dueDate = null;
-        }
+    }
+
+    loadTicketData(){
+        this.singleTicketService.getClientTicktsAllData(this.id).
+        then(selectedTicket => {
+                this.selectedTicket = selectedTicket;
+                this.summary = this.selectedTicket.summary;
+                this.problemDescription = this.selectedTicket.description;
+
+                //alert(this.selectedTicket.client_id);
+
+                if(this.selectedTicket.sceenshot_name && this.selectedTicket.sceenshot_name.length > 0){
+                    this.screanshotavilable = true;
+                }
+                else{ this.screanshotavilable = false; }
+            },
+            error =>  this.errorMessage = <any>error );
+    }
+
 
 }

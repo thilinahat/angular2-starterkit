@@ -44,7 +44,6 @@ export class SingleTicketComponent {
         then(ticketswimlaneTypes => this.ticketswimlaneTypes = ticketswimlaneTypes,
             error =>  this.errorMessage = <any>error );
 
-
     }
 
 
@@ -95,7 +94,6 @@ export class SingleTicketComponent {
     constructor(
         private route: ActivatedRoute,
         private singleTicketService:SingleTicketService
-
 
     ) {}
 
