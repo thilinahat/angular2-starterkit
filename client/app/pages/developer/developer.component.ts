@@ -27,18 +27,21 @@ export class DeveloperComponent {
 
     ngOnInit(){
         this.productManagementService.getAllProducts().then(results => {
+            results.unshift({product_Id: "Any", name: "All"});
             this.products = results;
         }, error => {
             alert(error);
         });
 
         this.optionsClientService.getPriorities().then(results => {
-                this.priorities = results;
+            results.unshift({priority_id: "Any", priority_name: "All"});
+            this.priorities = results;
         }, error =>  {
             alert(error);
         });
 
         this.optionsClientService.getTicketswimlaneTypes().then(results => {
+            results.unshift({swimlane_id: "Any", swimlane_status: "All"});
             this.statuses = results;
         }, error =>  {
             alert(error);
@@ -49,10 +52,6 @@ export class DeveloperComponent {
         }, error => {
 
         });
-
-    }
-
-    onSubmit(form: any): void{
 
     }
 
