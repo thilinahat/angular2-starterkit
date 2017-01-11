@@ -10,6 +10,17 @@
     cursor: pointer;
 }
 
+.edit-button{
+    display: inline-flex;
+    color: white;
+    margin: 5px 0 8px 5px;
+    background: rgba(140, 45, 175, 0.58);
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
 .header-title{
     display: inline-flex;
     color: white;

@@ -15,6 +15,9 @@ import {FormControl} from "@angular/forms";
 
 export class AddTicketeComponent {
 
+    title:string = "Add Ticket to ";
+    functionalaty:string = "Add ticket";
+
     client:any = {};
     products:any[] = [];
     branches:any[] = [];
@@ -36,6 +39,7 @@ export class AddTicketeComponent {
 
 
     screenshot:any;
+    screenshotURL:string="";
 
     errorMessage:string;
 
@@ -77,24 +81,18 @@ export class AddTicketeComponent {
 
     }
 
-    onProductChanged(){
 
-    }
-
-    onBranchChanged(){
-
-    }
-
-    onTillChanged(){
-
-    }
-
-    onPriorityChanged(){
-
-    }
 
     addAddScrenShot($event: any): void {
         this.screenshot = $event.target.files[0];
+        let reader: FileReader = new FileReader();
+        reader.onloadend = (e => {
+            let data: any = e.target;
+            this.screenshotURL = data.result;
+        });
+
+        reader.readAsDataURL(this.screenshot);
+
     }
 
     onSubmit(form: any): void {

@@ -74,6 +74,8 @@ import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSing
 import {SingleTicketComponent} from "./pages/tickets/singleTicket/single-ticket.component";
 import {SingleTicketService} from "./pages/tickets/singleTicket/single-ticket.service";
 import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/ticket-edit.component";
+import {TicketService} from "./services/ticket.service";
+import {ProductService} from "./services/products.service";
 
 
 //when creating a component, add it here
@@ -100,7 +102,7 @@ import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/tick
         ,SingleTicketComponent, EditTicketsComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
-        ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService
+        ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService, TicketService, ProductService
     ],
     bootstrap: [AppComponent],
 })

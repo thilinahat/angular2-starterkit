@@ -9,74 +9,75 @@
 </div>-->
 <h1>DashBoard</h1>
 
-<div class="col-lg-3 col-md-6 col-sm-6">
-    <div class="card card-stats">
-        <div class="card-header" data-background-color="red">
-            <i class="material-icons">info_outline</i>
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header" data-background-color="red">
+                <i class="material-icons">info_outline</i>
+            </div>
+            <div class="card-content">
+                <p class="category">Active <br>Tickets</p>
+                <h3 class="title">{{numberOfActiveTickets.active_tickets}}</h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">local_offer</i> <a routerLink="/operator/tickets">Go to active tickets</a>
+                </div>
+            </div>
         </div>
-        <div class="card-content">
-            <p class="category">Active <br>Tickets</p>
-            <h3 class="title">75</h3>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header" data-background-color="orange">
+                <i class="material-icons">content_copy</i>
+            </div>
+            <div class="card-content">
+                <p class="category">Expiring <br>Tills</p>
+                <h3 class="title">{{numberOfExpiringTills.number_of_expiring_tills}}<small>Tills</small></h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons text-danger">warning</i> <a href="#">See Contracts</a>
+                </div>
+            </div>
         </div>
-        <div class="card-footer">
-            <div class="stats">
-                <i class="material-icons">local_offer</i> <a routerLink="/operator/tickets">Go to active tickets</a>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header" data-background-color="green">
+                <i class="material-icons">mail</i>
+            </div>
+            <div class="card-content">
+                <p class="category">Un-read <br>mails</p>
+                <h3 class="title">4</h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">mail</i> <a routerLink="/operator/clients/mail">See mails</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header" data-background-color="blue">
+                <i class="material-icons">done</i>
+            </div>
+            <div class="card-content">
+                <p class="category">Resolved <br>tickets</p>
+                <h3 class="title">41</h3>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <i class="material-icons">done</i> in last 7 days
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<div class="col-lg-3 col-md-6 col-sm-6">
-    <div class="card card-stats">
-        <div class="card-header" data-background-color="orange">
-            <i class="material-icons">content_copy</i>
-        </div>
-        <div class="card-content">
-            <p class="category">Expiring <br>Tills</p>
-            <h3 class="title">4<small>Tills</small></h3>
-        </div>
-        <div class="card-footer">
-            <div class="stats">
-                <i class="material-icons text-danger">warning</i> <a href="#">See Contracts</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col-lg-3 col-md-6 col-sm-6">
-    <div class="card card-stats">
-        <div class="card-header" data-background-color="green">
-            <i class="material-icons">mail</i>
-        </div>
-        <div class="card-content">
-            <p class="category">Un-read <br>mails</p>
-            <h3 class="title">4</h3>
-        </div>
-        <div class="card-footer">
-            <div class="stats">
-                <i class="material-icons">mail</i> <a routerLink="/operator/clients/mail">See mails</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col-lg-3 col-md-6 col-sm-6">
-    <div class="card card-stats">
-        <div class="card-header" data-background-color="blue">
-            <i class="material-icons">done</i>
-        </div>
-        <div class="card-content">
-            <p class="category">Resolved <br>tickets</p>
-            <h3 class="title">41</h3>
-        </div>
-        <div class="card-footer">
-            <div class="stats">
-                <i class="material-icons">done</i> in last 7 days
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="row">
 
     <!--Active tickets by priority-->
@@ -89,21 +90,15 @@
 
                         <ul class="nav nav-tabs" data-tabs="tabs">
                             <li class="active">
-                                <a href="#veryhigh" data-toggle="tab">
+                                <a href="#high" data-toggle="tab">
                                     <i class="material-icons">bug_report</i>
-                                    Very High
-                                    <div class="ripple-container"></div></a>
-                            </li>
-                            <li class="">
-                                <a href="#low" data-toggle="tab">
-                                    <i class="material-icons">cloud</i>
                                     High
                                     <div class="ripple-container"></div></a>
                             </li>
                             <li class="">
-                                <a href="#veryhigh" data-toggle="tab">
+                                <a href="#medium" data-toggle="tab">
                                     <i class="material-icons">cloud</i>
-                                    Medium
+                                    High
                                     <div class="ripple-container"></div></a>
                             </li>
                             <li class="">
@@ -119,7 +114,58 @@
 
             <div class="card-content">
                 <div class="tab-content">
-                    <div class="tab-pane active" id="veryhigh">
+                    <div class="tab-pane active" id="high">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+
+                                <td>Sign contract for "What are conference organizers afraid of?" <small><a routerLink="../tickets">#TKT_530</a></small> </td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>Lines From Great Russian Literature? Or E-mails From My Boss? <small><a routerLink="../tickets">#TKT_530</a></small></td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                    <small><a routerLink="../tickets">#TKT_530</a></small>
+                                </td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>Create 4 Invisible User Experiences you Never Knew About
+                                    <small><a routerLink="../tickets">#TKT_530</a></small></td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td><i class="material-icons">keyboard_arrow_left</i> <i class="material-icons">keyboard_arrow_right</i></td>
+                                <td></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="tab-pane " id="medium">
                         <table class="table">
                             <tbody>
                             <tr>

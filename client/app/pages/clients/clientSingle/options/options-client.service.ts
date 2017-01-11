@@ -166,6 +166,26 @@ export class OptionsClientService {
         });
     }
 
+    updateTicket(client: FormData): Promise<any> {
+
+        const url = `${this.clientAPIurl}/update-ticket`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, client)
+                .toPromise()
+                .then(response => {
+                    resolve(response);
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
+
     getClientTickets(clientId:String):Promise<any>{
         var url = this.clientDataUrl + clientId + "/tickets";
         return this.http.get(url)
