@@ -1,7 +1,7 @@
-<product-selection (onProductSelect)="onProductSelect($event)"></product-selection>
-<div class="main-panel">
-
-    <navbarheader></navbarheader>
-    <developer-tickets [tickets]="tickets"></developer-tickets>
-
+<div class="container">
+    <!--<product-selection (onProductSelect)="onProductSelect($event)"></product-selection>-->
+    <ticket-filter [products]="products" [priorities]="priorities" [statuses]="statuses" (onStateChange)="onStateChange($event)"></ticket-filter>
+    <div class="">
+        <developer-tickets [tickets]="tickets"></developer-tickets>
+    </div>
 </div>

@@ -21,10 +21,10 @@ class AuthService {
                     if (err || results.length == 0)
                         reject();
                     else if (passwordHash.verify(user.password, results[0].password)){  // verify the password
-                        const table = results[0].password == 'OPERATOR' ? 'operators' : results[0].password == 'DEVELOPER' ? 'developers' : 'admins';
+                        const table = results[0].role == 'OPERATOR' ? 'operators' : results[0].role == 'DEVELOPER' ? 'developers' : 'admins';
                         sql = 'SELECT blocked FROM ' + table + ' WHERE  id = '+ connection.escape(results[0].user_id);
                         connection.query(sql, function(err, blockedResult){
-                            if (err || results.length == 0) {
+                            if (err || blockedResult.length == 0) {
                                 console.log(err)
                                 reject();
                             }

@@ -22,6 +22,7 @@ export class OptionsClientService {
     private ticketsChangeStatusUrl = this.clientAPIurl + "/ticket/change-status";
 
     private ticketsUrl = this.clientAPIurl +"/tickets";
+    private commonAPIurl = 'api/common';
 
     getClientName(clientId:String):Promise<any>{
         var url = this.clientDataUrl + clientId + "/name";
@@ -72,7 +73,7 @@ export class OptionsClientService {
     }
 
     getPriorities():Promise<any>{
-        var url = this.ticketsUrl +   "/priorities";
+        var url = this.commonAPIurl +   "/priorities";
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
@@ -80,7 +81,7 @@ export class OptionsClientService {
     }
 
     getTicketswimlaneTypes():Promise<any>{
-        var url = this.ticketsUrl +   "/status-types";
+        var url = this.commonAPIurl +   "/status-types";
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())

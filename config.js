@@ -28,7 +28,8 @@ module.exports =  {
     roles: {
         client: 'CLIENT',
         operator: 'OPERATOR',
-        admin: 'ADMIN'
+        admin: 'ADMIN',
+        developer: 'DEVELOPER'
     },
     email: {
         smtp_un:'dilantharakamd6@yahoo.com',
@@ -45,7 +46,7 @@ module.exports =  {
         OPERATOR: '/operator/',
         CLIENT: '/client/',
         ADMIN: '/admin/',
-        DEVELOPER: '/developer/'
+        DEVELOPER: '/developer'
     }
 
 };

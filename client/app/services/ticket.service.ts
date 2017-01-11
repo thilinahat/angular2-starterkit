@@ -12,6 +12,7 @@ export class TicketService {
     private ticketAPIurl = 'api/operator';
     private numberOfActiveTicketsURL = this.ticketAPIurl +"/tickets/number-of-active-tickets";
     private overdueTicketsURL = this.ticketAPIurl + "/tickets/overdue-tickets"
+ private developerAPIurl = 'api/developer';
 
 
     getNumberOfActiveTickets() : Promise<any[]>{
@@ -32,6 +33,26 @@ export class TicketService {
             .then(response => response.json())
             .catch(this.handleError);
 
+    }
+getTicketsRelatedToDeveloper(state: any): Promise<any> {
+
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const url = `${this.developerAPIurl}/tickets`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, JSON.stringify({state: state}), {headers: headers})
+                .toPromise()
+                .then(response => {
+                    resolve(response.json());
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
     }
 
     private handleError(error: any): Promise<any> {

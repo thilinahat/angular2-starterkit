@@ -18,6 +18,8 @@ var mailServerSMTP = require('./routes/MailServerSMTP');
 
 var operatorAPI = require('./routes/operatorAPI');
 var adminAPI = require('./routes/adminAPI');
+var developerAPI = require('./routes/developerAPI');
+var commonAPI = require('./routes/commonAPI');
 
 var notFound = require('./routes/notfound');
 
@@ -66,6 +68,8 @@ app.use('/developer', index);
 app.use('/change/credentials', index);
 app.use('/api/operator', operatorAPI); //API for operator initiated actions
 app.use('/api/admin', adminAPI); //API for admin initiated actions
+app.use('/api/developer', developerAPI); //API for developer initiated actions
+app.use('/api/common', commonAPI); // common utilities for ADMIN , DEVELOPER. OPERATOR
 app.use('/api', api);
 app.use('/mail',mailServerImap);
 app.use('/mailsend',mailServerSMTP);
