@@ -12,6 +12,27 @@ export class TicketService {
 
     private developerAPIurl = 'api/developer';
 
+    getTicketsRelatedToDeveloperWithCount(state: any): Promise<any> {
+
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const url = `${this.developerAPIurl}/tickets/with-count`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, JSON.stringify({state: state}), {headers: headers})
+                .toPromise()
+                .then(response => {
+                    resolve(response.json());
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
+
     getTicketsRelatedToDeveloper(state: any): Promise<any> {
 
         const headers = new Headers({'Content-Type': 'application/json'});

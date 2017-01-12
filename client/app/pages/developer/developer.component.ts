@@ -18,6 +18,10 @@ export class DeveloperComponent {
     priorities: any[] = [];
     statuses: any[] = [];
     tickets: any[];
+    totalPages: number = 1;
+    currentPage: number = 1;
+
+    state = {productID: "Any", priorityID: "Any", statusID: "Any"};
 
     constructor(
         private productManagementService: ProductManagementService,
@@ -47,8 +51,10 @@ export class DeveloperComponent {
             alert(error);
         });
 
-        this.ticketService.getTicketsRelatedToDeveloper({productID: "Any", priorityID: "Any", statusID: "Any", pageNo: 1}).then(tickets => {
-            this.tickets = tickets;
+        this.ticketService.getTicketsRelatedToDeveloperWithCount(this.state).then(results => {
+            this.tickets = results.tickets;
+            this.totalPages = results.count;
+            this.currentPage = 1;
         }, error => {
 
         });
@@ -56,21 +62,26 @@ export class DeveloperComponent {
     }
 
     onStateChange(state: any): void{
-        this.ticketService.getTicketsRelatedToDeveloper(state).then(tickets => {
-            this.tickets = tickets;
+        this.state = state;
+        this.ticketService.getTicketsRelatedToDeveloperWithCount(state).then(results => {
+            this.tickets = results.tickets;
+            this.totalPages = results.count;
+            this.currentPage = 1;
         }, error => {
 
         });
 
     }
 
-    onPageChange(page: number): void{
-        console.log(page);
-        /*this.ticketService.getTicketsRelatedToDeveloper(state).then(tickets => {
+    onPageChange(state: any): void{
+        const currentState = this.state;
+        currentState['page'] = state.page;
+        this.ticketService.getTicketsRelatedToDeveloper(currentState).then(tickets => {
             this.tickets = tickets;
+            this.currentPage = state.page;
         }, error => {
 
-        });*/
+        });
 
     }
 }

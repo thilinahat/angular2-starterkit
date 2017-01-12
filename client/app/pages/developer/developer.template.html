@@ -4,5 +4,5 @@
     <div class="">
         <developer-tickets [tickets]="tickets"></developer-tickets>
     </div>
-    <pagination [totalPages]="10" [currentPage]="5" (onPageChange)="onPageChange($event)"></pagination>
+    <pagination [totalPages]="totalPages" [currentPage]="currentPage" (onPageChange)="onPageChange($event)"></pagination>
 </div>
