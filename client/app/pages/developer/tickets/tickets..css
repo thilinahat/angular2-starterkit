@@ -36,27 +36,33 @@
     font-weight: 700;
 }
 
-.priority-high{
+.priority-red{
     background: rgba(255, 0, 0, 0.67);
 }
-.priority-low{
+.priority-green{
     background: #19a219;
 }
-.priority-medium{
+.priority-yellow{
     background: #ff9900;
 }
 
-.problem-bug{
+.problem-red{
     background: rgba(255, 0, 0, 0.67);
 }
-.problem-task{
+.problem-yellow{
     background: #ff9900;
 }
 
-.status-open{
+.status-red{
     background: rgb(49, 112, 143);
 }
-.status-closed{
+.status-yellow{
+    background: #beff0a;
+}
+.status-orange{
+    background: #ff9900;
+}
+.status-green{
     background: #19a219;
 }
 

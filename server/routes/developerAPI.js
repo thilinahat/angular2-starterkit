@@ -46,7 +46,7 @@ router.use(function (req, res, next) {
 router.post('/tickets/with-count',  function (req, res) {
 
     const state = req.body.state;  // state of product, priority, status
-    const TICKETS_PER_PAGE = 1;
+    const TICKETS_PER_PAGE = 2;
 
     let productFilter = 1;
     let priorityFilter = 1;
@@ -64,7 +64,7 @@ router.post('/tickets/with-count',  function (req, res) {
     async.parallel({
         tickets: function(callback) {
 
-            const sql = 'SELECT `tickets`.`summary`, `tickets`.`description`, `tickets`.`ticket_id`, `priorities`.`priority_name`,`ticketswimlane`.`swimlane_status`, `problem_types`.`problem_type_name`' +
+            const sql = 'SELECT `tickets`.`summary`, `tickets`.`description`, `tickets`.`ticket_id`, `priorities`.`priority_name`, `priorities`.`color`, `ticketswimlane`.`swimlane_status`, `ticketswimlane`.`swimlane_color`, `problem_types`.`problem_type_name`, `problem_types`.`problem_type_color` ' +
                 ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
                 ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
                 ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
@@ -102,7 +102,7 @@ router.post('/tickets/with-count',  function (req, res) {
                         console.log(error);
                         callback(error, null);
                     } else
-                        callback(null, results[0].count);
+                        callback(null, Math.ceil(results[0].count/TICKETS_PER_PAGE));
 
                 });
 
@@ -121,7 +121,7 @@ router.post('/tickets/with-count',  function (req, res) {
 router.post('/tickets',  function (req, res) {
 
     const state = req.body.state;  // state of product, priority, status
-    const TICKETS_PER_PAGE = 1;
+    const TICKETS_PER_PAGE = 2;
 
     let productFilter = 1;
     let priorityFilter = 1;
@@ -136,7 +136,7 @@ router.post('/tickets',  function (req, res) {
 
     const offset = (state.page - 1) * TICKETS_PER_PAGE;
 
-    const sql = 'SELECT `tickets`.`summary`, `tickets`.`description`, `tickets`.`ticket_id`, `priorities`.`priority_name`,`ticketswimlane`.`swimlane_status`, `problem_types`.`problem_type_name`' +
+    const sql = 'SELECT `tickets`.`summary`, `tickets`.`description`, `tickets`.`ticket_id`, `priorities`.`priority_name`,`priorities`.`color`, `ticketswimlane`.`swimlane_status`, `ticketswimlane`.`swimlane_color`, `problem_types`.`problem_type_name`, `problem_types`.`problem_type_color` ' +
         ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
         ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
         ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
