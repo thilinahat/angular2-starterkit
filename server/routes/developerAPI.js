@@ -45,6 +45,7 @@ router.use(function (req, res, next) {
 router.post('/tickets',  function (req, res) {
 
     const state = req.body.state;  // state of product, priority, status
+    const TICKETS_PER_PAGE = 1;
 
     let productFilter = 1;
     let priorityFilter = 1;
@@ -57,13 +58,16 @@ router.post('/tickets',  function (req, res) {
     if(state.statusID != "Any")
         statusFilter = '`tickets`.`swimlane_status_id`=' + state.statusID;
 
+    const offset = (state.pageNo - 1) * TICKETS_PER_PAGE;
+
     const sql = 'SELECT `tickets`.`summary`, `tickets`.`description`, `tickets`.`ticket_id`, `priorities`.`priority_name`,`ticketswimlane`.`swimlane_status`, `problem_types`.`problem_type_name`' +
         ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
         ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
         ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
         ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
         ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
-        ' WHERE `tickets`.`assignee_id`=1 AND ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter;
+        ' WHERE `tickets`.`assignee_id`=1 AND ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter +
+        ' LIMIT ' + offset + ',' + TICKETS_PER_PAGE;
 
     mysqlConnectionPool.getConnection(function(err, connection) {
         connection.query(sql, function (error, results) {

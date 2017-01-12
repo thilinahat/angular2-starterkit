@@ -12,6 +12,7 @@ import {DeveloperComponent} from "./pages/developer/developer.component";
 import {ProductSelectionComponent} from "./pages/developer/productSelection/productSelection.component";
 import {TicketFilterComponent} from "./pages/developer/ticketFilter/ticketFilter.component";
 import {DeveloperTicketsComponent} from "./pages/developer/tickets/tickets.component";
+import {PaginationComponent} from "./pages/developer/pagination/pagination.component";
 import {RoleManagementComponent} from "./pages/admin/role/role.component";
 import {RoleManagementHeaderComponent} from "./pages/admin/role/header/header.component";
 import {AddUserComponent} from "./pages/admin/role/addUser/addUser.component";
@@ -99,7 +100,7 @@ import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/tick
         ProductComponent, ProductHeaderComponent, AddMainProductComponent, EditProductComponent,
         MailTemplatesComponent, MailTemplateHeaderComponent, AddMailTemplateComponent, NotificationComponent,
         BlockUserComponent, DeveloperComponent, ProductSelectionComponent, DeveloperTicketsComponent,
-        TicketFilterComponent,SingleTicketComponent, EditTicketsComponent
+        TicketFilterComponent,SingleTicketComponent, EditTicketsComponent, PaginationComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
         ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService, TicketService

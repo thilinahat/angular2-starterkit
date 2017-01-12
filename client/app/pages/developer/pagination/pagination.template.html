@@ -1,0 +1,7 @@
+<ul class="pagination">
+    <li><a href="#"><</a></li>
+    <li *ngFor="let page of createPageIndexes(totalPages)" [ngClass]="{'active': page == currentPage}" (click)="onPageClick(page)">
+        <a>{{page}}</a>
+    </li>
+    <li><a href="#">></a></li>
+</ul>

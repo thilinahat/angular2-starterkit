@@ -47,7 +47,7 @@ export class DeveloperComponent {
             alert(error);
         });
 
-        this.ticketService.getTicketsRelatedToDeveloper({productID: "Any", priorityID: "Any", statusID: "Any"}).then(tickets => {
+        this.ticketService.getTicketsRelatedToDeveloper({productID: "Any", priorityID: "Any", statusID: "Any", pageNo: 1}).then(tickets => {
             this.tickets = tickets;
         }, error => {
 
@@ -55,12 +55,22 @@ export class DeveloperComponent {
 
     }
 
-    onStateChange(state: string[]): void{
+    onStateChange(state: any): void{
         this.ticketService.getTicketsRelatedToDeveloper(state).then(tickets => {
             this.tickets = tickets;
         }, error => {
 
         });
+
+    }
+
+    onPageChange(page: number): void{
+        console.log(page);
+        /*this.ticketService.getTicketsRelatedToDeveloper(state).then(tickets => {
+            this.tickets = tickets;
+        }, error => {
+
+        });*/
 
     }
 }
