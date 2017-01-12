@@ -214,6 +214,7 @@ router.post('/client/add', logoUploader, function (req, res) {
 // route for editing a client
 router.post('/client/edit/:clientId', logoUploader, function (req, res) {
 
+    console.log("in client edit");
     const client = req.body;
     client.logoFileName = client.originalURL;
     if (Array.isArray(req.files.logo) && req.files.logo.length > 0) {
@@ -221,6 +222,8 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
     }
 
     mysqlConnectionPool.getConnection(function(err, connection) {
+
+        console.log("got connection")
 
         let sql = 'UPDATE client SET' +
             ' company_name = ?, address = ?, contact_person_name = ?, web_site = ?, stage_id = ?, country = ?, town = ?, mlr_number = ?, postal_code = ?, business_registration = ?, logo_file_name = ? ' +
@@ -236,15 +239,20 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                     message: err
                 });
             } else {
+                console.log("no error client table updated")
+
                 async.parallel({
                     emails: function (callback) {
                         let sql = 'DELETE FROM client_mail  WHERE client_id = ' + req.params.clientId;
                         connection.query(sql, function (err, results) {
                             if (err) {
-                                //console.log(err);
+                                console.log(err);
                                 callback(err, null);
                             }
                             else if (client.emails && client.emails.length > 0) {
+
+                                console.log("email deleted")
+
                                 sql = "INSERT INTO client_mail (client_id, mail) VALUES ?";
                                 const values = [];
                                 client.emails.forEach(mail => {
@@ -254,10 +262,13 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                                 connection.query(sql, [values], function (err) {
                                     if (err) {
                                         callback(err, null);
-                                        //console.log(err);
+                                        console.log(err);
                                     }
-                                    else
+                                    else {
+                                        console.log("mail added")
+
                                         callback(null, null);
+                                    }
                                 });
                             }
                         });
@@ -276,8 +287,11 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                                 connection.query(sql, [values], function (err) {
                                     if (err)
                                         callback(err, null);
-                                    else
+                                    else {
+                                        console.log("phones added")
+
                                         callback(null, null);
+                                    }
                                 });
                             }
                         });
@@ -296,8 +310,11 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                                 connection.query(sql, [values], function (err) {
                                     if (err)
                                         callback(err, null);
-                                    else
+                                    else {
+                                        console.log("fax added")
+
                                         callback(null, null);
+                                    }
                                 });
                             }
                         });
@@ -423,6 +440,7 @@ router.get('/client/data/:clientId/name', function (req, res, next) {
 router.get('/client/searchdata', function (req, res,next) {
 
     const SQL = 'SELECT `company_name`, `client_id` FROM `client`;';
+    console.log("working :" +SQL);
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
@@ -1556,7 +1574,7 @@ router.get('/tickets/number-of-expiring-tills', function (req, res, next) {
 router.get('/tickets/overdue-tickets', function (req, res, next) {
 
 
-    const SQL = "SELECT ticket_id, summary, added_date_time swimlane_status ,	swimlane_color FROM `tickets` " +
+    const SQL = "SELECT ticket_id, summary, added_date_time, swimlane_status ,	swimlane_color FROM `tickets` " +
         " join ticketswimlane on tickets.swimlane_status_id = ticketswimlane.swimlane_id" +
         " WHERE due_date < now() AND swimlane_status_id != 7 ";
 
@@ -1587,5 +1605,152 @@ router.get('/tickets/overdue-tickets', function (req, res, next) {
     });
 });
 
+//get overdue support tickets only 4 oldest first
+//To do: move this to commen
+router.get('/tickets/overdue-tickets-for-dashboard', function (req, res, next) {
+
+
+    const SQL = "SELECT ticket_id, summary, added_date_time, swimlane_status ,	swimlane_color FROM `tickets` " +
+        " join ticketswimlane on tickets.swimlane_status_id = ticketswimlane.swimlane_id" +
+        " WHERE due_date < now() AND swimlane_status_id != 7 " +
+        " ORDER BY `tickets`.`ticket_id` ASC LIMIT 5";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving overdue-tickets from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get Medium Priority support tickets only 4 newest first
+//To do: move this to commen
+router.get('/tickets/medium-priority-tickets-for-dashboard', function (req, res, next) {
+
+
+    const SQL = "SELECT ticket_id, summary, added_date_time, swimlane_status ,	swimlane_color FROM `tickets` " +
+        " join ticketswimlane on tickets.swimlane_status_id = ticketswimlane.swimlane_id" +
+        " WHERE priority_id = 2 " +
+        " ORDER BY `tickets`.`ticket_id` ASC LIMIT 5";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving overdue-tickets from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get High Priority support tickets only 4 newest first
+//To do: move this to commen
+router.get('/tickets/low-priority-tickets-for-dashboard', function (req, res, next) {
+
+
+    const SQL = "SELECT ticket_id, summary, added_date_time, swimlane_status ,	swimlane_color FROM `tickets` " +
+        " join ticketswimlane on tickets.swimlane_status_id = ticketswimlane.swimlane_id" +
+        " WHERE priority_id = 1 " +
+        " ORDER BY `tickets`.`ticket_id` ASC LIMIT 5";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving overdue-tickets from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get High Priority support tickets only 4 newest first
+//To do: move this to commen
+router.get('/tickets/high-priority-tickets-for-dashboard', function (req, res, next) {
+
+
+    const SQL = "SELECT ticket_id, summary, added_date_time, swimlane_status ,	swimlane_color FROM `tickets` " +
+        " join ticketswimlane on tickets.swimlane_status_id = ticketswimlane.swimlane_id" +
+        " WHERE priority_id = 3 " +
+        " ORDER BY `tickets`.`ticket_id` ASC LIMIT 5";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving overdue-tickets from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
 
 module.exports = router;

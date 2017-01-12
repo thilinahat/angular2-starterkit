@@ -12,7 +12,13 @@ export class TicketService {
     private ticketAPIurl = 'api/operator';
     private numberOfActiveTicketsURL = this.ticketAPIurl +"/tickets/number-of-active-tickets";
     private overdueTicketsURL = this.ticketAPIurl + "/tickets/overdue-tickets"
- private developerAPIurl = 'api/developer';
+    private overdueTicketsDashboardURL = this.ticketAPIurl + "/tickets/overdue-tickets-for-dashboard"
+    private highPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/high-priority-tickets-for-dashboard"
+    private mediumPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/medium-priority-tickets-for-dashboard"
+    private lowPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/low-priority-tickets-for-dashboard"
+
+
+     private developerAPIurl = 'api/developer';
 
 
     getNumberOfActiveTickets() : Promise<any[]>{
@@ -34,7 +40,48 @@ export class TicketService {
             .catch(this.handleError);
 
     }
-getTicketsRelatedToDeveloper(state: any): Promise<any> {
+
+    getOverDueTicketsForDashBoard() : Promise<any[]>{
+
+        //noinspection TypeScriptUnresolvedFunction
+        return this.http.get(this.overdueTicketsDashboardURL)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+
+    }
+
+    getHighPriorityTicketsForDashBoard() : Promise<any[]>{
+
+        //noinspection TypeScriptUnresolvedFunction
+        return this.http.get(this.highPriorityTicketsDashboardURL)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+
+    }
+
+    getMediumPriorityTicketsForDashBoard() : Promise<any[]>{
+
+        //noinspection TypeScriptUnresolvedFunction
+        return this.http.get(this.mediumPriorityTicketsDashboardURL)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+
+    }
+
+    getLowPriorityTicketsForDashBoard() : Promise<any[]>{
+
+        //noinspection TypeScriptUnresolvedFunction
+        return this.http.get(this.lowPriorityTicketsDashboardURL)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+
+    }
+
+    getTicketsRelatedToDeveloper(state: any): Promise<any> {
 
         const headers = new Headers({'Content-Type': 'application/json'});
         const url = `${this.developerAPIurl}/tickets`;
