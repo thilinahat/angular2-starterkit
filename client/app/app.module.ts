@@ -79,6 +79,7 @@ import {ProductService} from "./services/products.service";
 import {TicketFilterComponent} from "./pages/developer/ticketFilter/ticketFilter.component";
 import {OverdueTicketsComponent} from "./pages/dashboard/overdue-tickets/overdue-tickets.component";
 import {ActiveTicketsComponent} from "./pages/dashboard/active-tickets/active-tickets.component";
+import {PaginationComponent} from "./pages/developer/pagination/pagination.component";
 
 
 //when creating a component, add it here
@@ -103,7 +104,7 @@ import {ActiveTicketsComponent} from "./pages/dashboard/active-tickets/active-ti
         MailTemplatesComponent, MailTemplateHeaderComponent, AddMailTemplateComponent, NotificationComponent,
         BlockUserComponent, DeveloperComponent, ProductSelectionComponent, DeveloperTicketsComponent,
         TicketFilterComponent,SingleTicketComponent, EditTicketsComponent
-        ,OverdueTicketsComponent , ActiveTicketsComponent
+        ,OverdueTicketsComponent , ActiveTicketsComponent, PaginationComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
         ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService, TicketService, ProductService

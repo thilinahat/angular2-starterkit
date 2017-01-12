@@ -5,6 +5,7 @@ import {ProductService} from "../../services/products.service";
 @Component({
     selector: 'dashboard',
     templateUrl: 'dashboard.template.html',
+    styles:['.row{margin-left:0; margin-right: 0}']
 })
 
 export class DashboardComponent {

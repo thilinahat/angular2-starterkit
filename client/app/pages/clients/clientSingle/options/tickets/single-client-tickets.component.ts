@@ -83,7 +83,7 @@ export class SingleClientTicketsComponent {
 
         this.optionsClientService.changeTicketPriority(formData).then(res => {
             this.loadClientTickets();
-            alert('Successfully Added Changed Ticket Priority');
+            alert('Successfully  Changed Ticket Priority');
         }, error => {
             alert(error);
         });
@@ -101,7 +101,7 @@ export class SingleClientTicketsComponent {
 
         this.optionsClientService.changeTicketStatus(formData).then(res => {
             this.loadClientTickets();
-            alert('Successfully Added Changed Ticket Status');
+            alert('Successfully  Changed Ticket Status');
         }, error => {
             alert(error);
         });

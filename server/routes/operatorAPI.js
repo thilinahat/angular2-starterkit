@@ -1306,7 +1306,7 @@ router.post('/update-ticket', screenshotUploader, function (req, res) {
 router.get('/client/data/:clientId/tickets', function (req, res, next) {
 
     const SQL = "SELECT * FROM ticket_data_view  " +
-    " WHERE client_id = " + req.params.clientId + " ORDER BY    `added_date_time` DESC";
+    " WHERE client_id = " + req.params.clientId + " ORDER BY    `ticket_id` DESC";
 
 
         /*"SELECT ticket_id, summary, swimlane_status, swimlane_color, due_date FROM `tickets`" +
