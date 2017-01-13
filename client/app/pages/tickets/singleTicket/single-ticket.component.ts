@@ -49,11 +49,15 @@ export class SingleTicketComponent {
 
     onTicketStatusFormSubmit(){
 
-        let formData = new FormData();
-        formData.append("ticketId", this.selectedTicket.ticket_id);
-        formData.append("selectedSwimlaneStatusId", this.selectedSwimlaneStatusId);
+        /*let formData = new FormData();
+        formData.append("ticketId", );
+        formData.append("selectedSwimlaneStatusId", this.selectedSwimlaneStatusId);*/
+        const ticket = {
+            ticketId: this.selectedTicket.ticket_id,
+            selectedSwimlaneStatusId: this.selectedSwimlaneStatusId
+        };
 
-        this.singleTicketService.changeTicketStatus(formData).then(res => {
+        this.singleTicketService.changeTicketStatus(ticket).then(res => {
             this.loadTicketData();
             alert('Successfully Added Changed Ticket Status');
         }, error => {
@@ -77,11 +81,16 @@ export class SingleTicketComponent {
 
     onPrioritySubmit(){
 
-        let formData = new FormData();
+        /*let formData = new FormData();
         formData.append("ticketId", this.selectedTicket.ticket_id);
-        formData.append("selectedPriorityId", this.selectedPriorityId);
+        formData.append("selectedPriorityId", this.selectedPriorityId);*/
 
-        this.singleTicketService.changeTicketPriority(formData).then(res => {
+        const ticket = {
+            ticketId: this.selectedTicket.ticket_id,
+            selectedPriorityId: this.selectedPriorityId
+        };
+
+        this.singleTicketService.changeTicketPriority(ticket).then(res => {
             this.loadTicketData();
             alert('Successfully Added Changed Ticket Priority');
         }, error => {

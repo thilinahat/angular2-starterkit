@@ -1,20 +1,14 @@
-
-
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Http, Headers} from "@angular/http";
 
 @Injectable()
 export class SingleTicketService {
 
-    private clientAPIurl = 'api/operator';
+    private commonAPIurl = 'api/common';
 
-    private ticketsUrl = this.clientAPIurl +"/tickets";
-    private ticketsChangeStatusUrl = this.clientAPIurl + "/ticket/change-status";
-    private ticketsChangePriorityUrl = this.clientAPIurl + "/ticket/change-priority";
-
-
-
-    private ticketsDataUrl = this.clientAPIurl +"/ticket/data/";
+    private ticketsChangeStatusUrl = this.commonAPIurl + "/ticket/change-status";
+    private ticketsChangePriorityUrl = this.commonAPIurl + "/ticket/change-priority";
+    private ticketsDataUrl = this.commonAPIurl +"/ticket/data/";
 
     constructor(private http: Http) {
     }
@@ -29,7 +23,7 @@ export class SingleTicketService {
     }
 
     getPriorities():Promise<any>{
-        var url = this.ticketsUrl +   "/priorities";
+        var url = this.commonAPIurl +   "/priorities";
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
@@ -37,20 +31,20 @@ export class SingleTicketService {
     }
 
     getTicketswimlaneTypes():Promise<any>{
-        var url = this.ticketsUrl +   "/status-types";
+        var url = this.commonAPIurl +   "/status-types";
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }
 
-    changeTicketStatus(ticket: FormData): Promise<any> {
-
+    changeTicketStatus(ticket: any): Promise<any> {
+        const headers = new Headers({'Content-Type': 'application/json'});
         const url = this.ticketsChangeStatusUrl;
         return new Promise((resolve, reject) => {
             //noinspection TypeScriptUnresolvedFunction
             this.http
-                .post(url, ticket)
+                .post(url, JSON.stringify({ticket: ticket}), {headers: headers})
                 .toPromise()
                 .then(response => {
                     resolve(response);
@@ -64,13 +58,13 @@ export class SingleTicketService {
         });
     }
 
-    changeTicketPriority(ticket: FormData): Promise<any> {
-
+    changeTicketPriority(ticket: any): Promise<any> {
+        const headers = new Headers({'Content-Type': 'application/json'});
         const url = this.ticketsChangePriorityUrl;
         return new Promise((resolve, reject) => {
             //noinspection TypeScriptUnresolvedFunction
             this.http
-                .post(url, ticket)
+                .post(url, JSON.stringify({ticket: ticket}), {headers: headers})
                 .toPromise()
                 .then(response => {
                     resolve(response);

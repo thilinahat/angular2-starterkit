@@ -176,4 +176,114 @@ router.get('/comments/:ticketID', function (req, res, next) {
     });
 });
 
+// get all ticket data
+router.get('/ticket/data/:ticketId', function (req, res, next) {
+
+    //TODO: reduce this joins by calling seperately for swimlane, priorities, problem types
+    const SQL = "SELECT * FROM single_ticket_data_view "
+        + " WHERE ticket_id = " + req.params.ticketId;
+
+    // " client_id, problem_type_id," +
+    // " priority_id," +
+    // " swimlane_status_id" +
+
+
+    //console.log(SQL);
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results[0]);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+// route to update ticket swimlane status
+router.post('/ticket/change-status', function (req, res) {
+
+    const ticket = req.body.ticket;
+
+    var SQL = "UPDATE `vinit_crm`.`tickets` SET `swimlane_status_id` = '" + ticket.selectedSwimlaneStatusId + "'"
+        + " WHERE `tickets`.`ticket_id` = '" + ticket.ticketId + "';";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+        //console.log(SQL);
+        connection.query( SQL,  function(err,rows, result) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting ticket',
+                    message: err
+                });
+            }
+
+
+            var LogSQL = "INSERT INTO `vinit_crm`.`ticket_swimlane_log` (`ticket_id`, `swimlane_status_id`, `loggedTime`, `user_id` ) "
+                + "VALUES (?, ?, ?, '?');";
+
+            var LogValues = [ticket.ticketId, ticket.selectedSwimlaneStatusId, moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'), req.decoded.uid];
+
+            LogSQL = mysql.format(LogSQL, LogValues);
+
+            //console.log(LogSQL);
+            connection.query( LogSQL,  function(err, result) {
+                if (err) {
+                    return res.status(406).json({
+                        success: false,
+                        status: 'Failed while inserting to swimlane ticket log',
+                        message: err
+                    });
+                }
+                connection.release();
+                res.sendStatus(200);
+
+            });
+        });
+    });
+});
+
+// route to update ticket priority
+router.post('/ticket/change-priority', function (req, res) {
+
+    const ticket = req.body.ticket;
+
+    var SQL = "UPDATE `vinit_crm`.`tickets` SET `priority_id` = '" + ticket.selectedPriorityId + "'"
+        + " WHERE `tickets`.`ticket_id` = '" + ticket.ticketId + "';";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query( SQL,  function(err,rows, result) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting ticket',
+                    message: err
+                });
+            }
+
+            connection.release();
+            res.sendStatus(200);
+
+        });
+    });
+});
+
 module.exports = router;
