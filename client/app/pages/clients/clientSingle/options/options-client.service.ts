@@ -22,6 +22,7 @@ export class OptionsClientService {
     private ticketsChangeStatusUrl = this.clientAPIurl + "/ticket/change-status";
 
     private ticketsUrl = this.clientAPIurl +"/tickets";
+    private commonAPIurl = 'api/common';
 
     getClientName(clientId:String):Promise<any>{
         var url = this.clientDataUrl + clientId + "/name";
@@ -72,7 +73,7 @@ export class OptionsClientService {
     }
 
     getPriorities():Promise<any>{
-        var url = this.ticketsUrl +   "/priorities";
+        var url = this.commonAPIurl +   "/priorities";
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
@@ -80,7 +81,7 @@ export class OptionsClientService {
     }
 
     getTicketswimlaneTypes():Promise<any>{
-        var url = this.ticketsUrl +   "/status-types";
+        var url = this.commonAPIurl +   "/status-types";
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
@@ -149,6 +150,26 @@ export class OptionsClientService {
     addTicket(client: FormData): Promise<any> {
 
         const url = `${this.clientAPIurl}/add-ticket`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, client)
+                .toPromise()
+                .then(response => {
+                    resolve(response);
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
+
+    updateTicket(client: FormData): Promise<any> {
+
+        const url = `${this.clientAPIurl}/update-ticket`;
         return new Promise((resolve, reject) => {
             //noinspection TypeScriptUnresolvedFunction
             this.http

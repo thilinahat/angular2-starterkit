@@ -1,0 +1,100 @@
+<span class="nav-tabs-title">Active Tickets By priority:</span>
+<div class="card card-nav-tabs">
+    <div class="card-header" data-background-color="orange">
+        <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                    <li class="active">
+                        <a href="#high" data-toggle="tab">
+                            <i class="material-icons">bug_report</i>
+                            High
+                            <div class="ripple-container"></div></a>
+                    </li>
+                    <li class="">
+                        <a href="#medium" data-toggle="tab">
+                            <i class="material-icons">cloud</i>
+                            Medium
+                            <div class="ripple-container"></div></a>
+                    </li>
+                    <li class="">
+                        <a href="#low" data-toggle="tab">
+                            <i class="material-icons">cloud</i>
+                            Low
+                            <div class="ripple-container"></div></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-content">
+        <div class="tab-content">
+            <div class="tab-pane active" id="high">
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let ticket of highPriorityTickets">
+
+                            <td>{{ticket.summary}} <small><a routerLink="../tickets/{{ticket.ticket_id}}">
+                                <br>TKT :{{ticket.ticket_id}}</a></small> </td>
+                            <td class="td-actions text-right">
+                                <a routerLink="../tickets/{{ticket.ticket_id}}/edit">
+                                    <i class="material-icons">edit</i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td><a>Show all</a></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="tab-pane " id="medium">
+                <table class="table">
+                    <tbody>
+                    <tr *ngFor="let ticket of mediumPriorityTickets">
+
+                        <td>{{ticket.summary}} <small><a routerLink="../tickets/{{ticket.ticket_id}}">
+                            <br>TKT :{{ticket.ticket_id}}</a></small> </td>
+                        <td class="td-actions text-right">
+                            <a routerLink="../tickets/{{ticket.ticket_id}}/edit">
+                                <i class="material-icons">edit</i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td><a>Show all</a></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="tab-pane" id="low">
+                <table class="table">
+                    <tbody>
+                    <tr *ngFor="let ticket of lowPriorityTickets">
+
+                        <td>{{ticket.summary}} <small><a routerLink="../tickets/{{ticket.ticket_id}}">
+                            <br>TKT :{{ticket.ticket_id}}</a></small> </td>
+                        <td class="td-actions text-right">
+                            <a routerLink="../tickets/{{ticket.ticket_id}}/edit">
+                                <i class="material-icons">edit</i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td><a>Show all</a></td>
+                    </tr>
+                    </tfoot>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

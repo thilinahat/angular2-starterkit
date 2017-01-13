@@ -14,32 +14,30 @@
         </div>
 
         <div class="card-content">
-            <div class="tab-content">
-                <div class="tab-pane active" id="profile">
-                    <table class="table">
-                        <colgroup>
-                            <col span="1" style="width: 20%;">
-                            <col span="1" style="width: 70%;">
-                            <col span="1" style="width: 10%;">
-                        </colgroup>
-                        <tbody>
-                        <tr *ngIf="noTickets">
-                            <h3 style="text-align: center">No Tickets For This Client</h3>
-                        </tr>
-                        <tr *ngFor="let ticket of tickets" class="ticket-summary" >
-                            <td (click)="ticketData.open(); changeSelectedClientId(ticket.ticket_id)"><h4 class="swimlane-status" [style.background]="ticket.swimlane_color">{{ticket.swimlane_status}}</h4></td>
-                            <td (click)="ticketData.open(); changeSelectedClientId(ticket.ticket_id)">{{ticket.summary}}</td>
-                            <td class="td-actions text-right">
-                            <td>
-                                <h5 class="btn btn-facebook" (click)="changeSelectedClientId(ticket.ticket_id);ticketStatus.open()" >Change Status
 
-                                </h5>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+
+            <div *ngFor="let ticket of tickets" class="ticket-container">
+                <div class="status-container">
+                    <div class="status priority-{{ticket.color}}" (click)="changeSelectedClientId(ticket.ticket_id);changePriority.open()"><i class="material-icons">vertical_align_center</i>{{ticket.priority_name}}</div>
+                    <div class="status problem-{{ticket.problem_type_color}}"><i class="material-icons">build</i>{{ticket.problem_type_name}}</div>
+                    <div class="status {{ticket.swimlane_color}}" (click)="changeSelectedClientId(ticket.ticket_id);ticketStatus.open()"><i class="material-icons">lock_outline</i>{{ticket.swimlane_status}}</div>
+                    <div class="status status-btn pull-right"><a routerLink="../../../tickets/{{ticket.ticket_id}}"> <i class="material-icons">list</i>Full Data</a></div>
+                    <div class="status status-btn pull-right"><a routerLink="../../../tickets/{{ticket.ticket_id}}"><i class="material-icons">loop</i>Edit</a></div>
+                </div>
+                <div class="ticket-body">
+                    <h4>{{ticket.added_date_time | date:'mediumDate'}}</h4>
+                    <h4>{{ticket.summary}}</h4>
+                    <button data-toggle="collapse" class="btn btn-info" [attr.data-target]="'#ticket-'+ticket.ticket_id">Read More</button>
+                    <p id="ticket-{{ticket.ticket_id}}" class="collapse">
+                        {{ticket.description}}
+                    </p>
                 </div>
             </div>
+
+            <div class="row" *ngIf="noTickets">
+                <h3 style="text-align: center">No Tickets For This Client</h3>
+            </div>
+
         </div>
     </div>
 </div>
@@ -203,6 +201,42 @@
     </modal-body>
 </modal>
 
+<!--To do create chenge problem type-->
+<!--
+<modal #changeProblemType style="background-color: rgba(142, 157, 166, 0.39);">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title"><b>Change Problem Type of #{{selectedTicket.ticket_id}}</b>
+        </h4>
+    </modal-header>
+    <modal-body>
+
+        <form #ticketPriorityForm="ngForm" (ngSubmit)="onProblemTypeSubmit(); changeProblemType.close()">
+
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Select Priority</label>
+                        <select class="form-control" id="problemType" required="true"
+                                [(ngModel)] = "selectedPriorityId" name="selectedPriorityId" >
+                            <option selected disabled>Choose Priority </option>
+                            <option *ngFor="let priority of priorities " [value]="priority.priority_id" >{{priority.priority_name}}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary pull-right">Change Ticket<div class="ripple-container"></div></button>
+            <div class="clearfix"></div>
+        </form>
+
+    </modal-body>
+</modal>
+-->
+
 <modal #selectedscreenshot style="background-color: rgba(142, 157, 166, 0.39);">
     <modal-header [show-close]="true">
         <h4 class="modal-title"><b>Screenshot of #{{selectedTicket.ticket_id}}</b>
@@ -222,3 +256,52 @@
     </modal-body>
 </modal>
 
+<!--            <div class="row" *ngFor="let ticket of tickets" style="border-bottom: 1px solid #ccc">
+
+                <div class="row">
+
+                    <div class="col-xs-2">
+                        <a routerLink="../../../tickets/{{ticket.ticket_id}}"><h5 style="text-align: center">ticket #{{ticket.ticket_id}}</h5></a>
+                    </div>
+
+                    <div  class="col-xs-2">
+                        <h5 [ngClass]="ticket.priority_color" class="ticket-info" (click)="changeSelectedClientId(ticket.ticket_id);changePriority.open()">{{ticket.priority_name}}</h5>
+                    </div>
+
+                    <div  class="col-xs-2">
+                        <h5 class="ticket-info" [ngClass]="ticket.problem_type_color">{{ticket.problem_type_name}}</h5>
+                    </div>
+
+                    <div  class="col-xs-3">
+                        <h5 class="ticket-info" [ngClass]="ticket.swimlane_color" (click)="changeSelectedClientId(ticket.ticket_id);ticketStatus.open()">{{ticket.swimlane_status}}</h5>
+                    </div>
+
+                    <div  class="col-xs-2">
+                        <h5>{{ticket.added_date_time | date:'mediumDate'}}</h5>
+                    </div>
+
+                </div>
+
+                <div class="row " data-toggle="collapse"   [attr.data-target]="'#ticket-' + ticket.ticket_id">
+                    <div class="col-xs-12 ">
+                        <h5 style="padding: 10px" class="ticket-summary">{{ticket.summary}}</h5>
+                    </div>
+                </div>
+                <div  id="ticket-{{ticket.ticket_id}}" class="collapse row">
+                    <div class="col-xs-12">
+                        <h5 style="padding: 10px">Description
+                        </h5>
+                        <p style="margin-left: 1%;">{{ticket.description}}</p>
+                    </div>
+                </div>
+
+
+
+                <!--<div class="col-xs-3"><a routerLink="../../../tickets/{{ticket.ticket_id}}">ticket #{{ticket.ticket_id}}</a></div>
+
+                <div class="col-xs-2 status priority-{{ticket.priority_name}}"
+                     (click)="changeSelectedClientId(ticket.ticket_id);changePriority.open()">pri{{ticket.priority_name}}  </div>
+                <div class="col-xs-2 status problem-{{ticket.problem_type_name}}">ty{{ticket.problem_type_name}}  </div>
+                <div class="col-xs-2 "
+                     (click)="changeSelectedClientId(ticket.ticket_id);ticketStatus.open()">status {{ticket.swimlane_status}}</div>
+                <div class="col-xs-3 header-title-date"> date{{ticket.added_date |date:'mediumDate'}}</div>-->

@@ -9,7 +9,7 @@ import {ClientsComponent} from "./pages/clients/clients.component";
 import {OperatorComponent} from "./pages/operator/operator.component";
 import {AdminComponent} from "./pages/admin/admin.component";
 import {DeveloperComponent} from "./pages/developer/developer.component";
-import {DeveloperTicketsComponent} from "./pages/developer/tickets/tickets.component";
+import {TicketSelectionComponent} from "./pages/developer/ticketSelection/ticketSelection.component";
 import {RoleManagementComponent} from "./pages/admin/role/role.component";
 import {AddUserComponent} from "./pages/admin/role/addUser/addUser.component";
 import {BlockUserComponent} from "./pages/admin/role/blockUser/blockUser.component";
@@ -42,6 +42,8 @@ import {ClientBlockComponent} from "./pages/clients/clientSingle/options/block/c
 import {SendMailComponent} from "./pages/clients/clientSingle/options/sendMail/send-mail.component";
 import {ClientSingleDashboardComponent} from "./pages/clients/clientSingle/dashboard/client-single-dashboard.component";
 import {SingleClientTicketsComponent} from "./pages/clients/clientSingle/options/tickets/single-client-tickets.component";
+import {SingleTicketComponent} from "./pages/tickets/singleTicket/single-ticket.component";
+import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/ticket-edit.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -52,6 +54,10 @@ const routes: Routes = [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent},
             { path: 'tickets', component: TicketsComponent },
+            { path: 'tickets/:ticketId', component: SingleTicketComponent },
+            { path: 'tickets/:ticketId/edit', component: EditTicketsComponent },
+
+
             { path: 'reports', component: ReportsComponent },
             { path: 'clients',component: ClientsComponent , canActivate: [AuthGuard],
                 children: [
@@ -84,7 +90,9 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent},
-            { path: 'tickets', component: TicketsComponent },
+            { path: 'tickets', component: TicketsComponent},
+            { path: 'tickets/:ticketId', component: SingleTicketComponent },
+            { path: 'tickets/:ticketId/edit', component: EditTicketsComponent },
             { path: 'reports', component: ReportsComponent },
             { path: 'roles', component: RoleManagementComponent,
                 children: [
@@ -134,14 +142,12 @@ const routes: Routes = [
         ]
     },
     { path: 'customer', component: CustomersComponent, canActivate: [AuthGuard]},
-    { path: 'developer',component: DeveloperComponent , canActivate: [],
-        /*children: [
-            { path: '', redirectTo: 'search', pathMatch: 'full' },
-            { path: 'search', component: SearchClientComponent },
-            { path: 'add', component: AddclientsComponent },
-            { path: 'mail', component: MailComponent },
-            { path: 'call', component: CallComponent },
-        ]*/
+    { path: 'developer',component: DeveloperComponent , canActivate: [AuthGuard],
+        children: [
+            { path: '', redirectTo: 'tickets', pathMatch: 'full' },
+            { path: 'tickets', component: TicketSelectionComponent},
+            { path: 'tickets/:ticketId', component: SingleTicketComponent },
+        ]
     },
     { path: '**', redirectTo:'login', pathMatch: 'full' }
 ];

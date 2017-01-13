@@ -4,7 +4,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header" data-background-color="purple">
-                    <h4 class="title">Add Ticket to : {{client.company_name}}</h4>
+                    <h4 class="title" [hidden]="!editMode">{{title}} : <a routerLink="../clients/../../{{client.clientId}}">
+                        {{client.company_name}}</a></h4>
+                    <h4 class="title" [hidden]="editMode">TKT : {{id}} of client : <a routerLink="../../../clients/{{client.clientId}}">{{client.company_name}}</a> </h4>
 
                 </div>
                 <div class="card-content">
@@ -20,8 +22,9 @@
                             <!--summary-->
                             <div class="col-md-6 col-xs-12">
                                 <div class="form-group label-floating is-empty">
-                                    <label class="control-label">Summary</label>
-                                    <input type="test" class="form-control" required="true" [(ngModel)]="summary" name="summary">
+                                    <label class="control-label" [hidden]="!editMode">Summary</label>
+                                    <input type="test" class="form-control" required="true"
+                                           [(ngModel)]="summary" name="summary" value="{{summary}}">
                                     <span class="material-input"></span></div>
                             </div>
 
@@ -97,25 +100,32 @@
                                 <div class="form-group">
 
                                     <div class="form-group label-floating is-empty">
-                                        <label class="control-label">Description</label>
-                                        <textarea class="form-control" rows="5" required="true" [(ngModel)]="problemDescription"
-                                                  name="description" maxlength="1000"></textarea>
+                                        <textarea class="form-control " rows="5" required="true" [(ngModel)]="problemDescription"
+                                                  name="description" maxlength="1000"  placeholder="Description"></textarea>
+
                                         <span class="material-input"></span></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4 col-xs-12">
+                            <div class="col-md-6 col-xs-12">
                                 <!--Logo-->
                                 <div class="form-group is-empty is-fileinput">
                                     <label for="logo">Screenshot</label>
                                     <input type="file" class="form-control" id="logo" name="logo" ngModel  accept="image/png,,image/jpeg" (change)="addAddScrenShot($event)">
                                     <input type="text" readonly="" name="screenshot" class="form-control">
+
                                 </div>
+
+                                <div class="col-md-6 col-xs-12" style="height: 100px">
+                                    <!--Logo-->
+                                        <img src="{{screenshotURL}}" alt="" [ngClass]="{'screenshot-preview': screenshotURL != '', 'hide': screenshotURL == ''}"/>
+                                </div>
+
                             </div>
 
-                            <div class="col-md-4 col-xs-12">
+                            <div class="col-md-6 col-xs-12">
                                 <!--developers-->
                                 <div class="form-group">
                                     <label class="control-label">Select Assignee</label>
@@ -127,7 +137,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-xs-12">
+                            <div class="col-md-6 col-xs-12">
                                 <!--due date-->
                                 <div class="form-group">
                                     <label class="control-label">Due date</label>
@@ -139,7 +149,7 @@
                         </div>
 
 
-                        <button type="submit" class="btn btn-primary pull-right">Add Ticket<div class="ripple-container"></div></button>
+                        <button type="submit" class="btn btn-primary pull-right">{{functionalaty}}<div class="ripple-container"></div></button>
                         <div class="clearfix"></div>
                     </form>
                 </div>

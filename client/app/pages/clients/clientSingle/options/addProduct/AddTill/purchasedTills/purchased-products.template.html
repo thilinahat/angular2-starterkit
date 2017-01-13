@@ -13,7 +13,7 @@
             <th>Branch</th>
             <th>Product</th>
             <th>Installation</th>
-            <th>Key</th>
+            <th>Till Name</th>
             <th>Expire Date</th>
         </tr>
     </thead>
@@ -21,7 +21,9 @@
         <td>{{purchasedItem.location}}</td>
         <td>{{purchasedItem.name}}</td>
         <td>{{purchasedItem.loggedTime | date:'mediumDate'}}</td>
-        <td>{{purchasedItem.till_key}}</td>
+        <td>{{purchasedItem.till_name}}</td>
+        <!--<td>{{purchasedItem.till_key}}</td>-->
+
         <td>{{purchasedItem.expiredate |  date:'mediumDate'}}</td>
     </tr>
 </table>

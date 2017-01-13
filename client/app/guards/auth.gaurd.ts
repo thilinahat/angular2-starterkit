@@ -27,7 +27,8 @@ export class AuthGuard implements CanActivate {
         //"/operator/tickets" : ["OPERATOR", "ADMIN"],
         //"/operator/reports" : ["OPERATOR", "ADMIN"], */
         "/customer" : ["CLIENT"],
-        "/change/credentials" : ["OPERATOR", "ADMIN", "CLIENT"],
+        "/developer" : ["DEVELOPER"],
+        "/change/credentials" : ["OPERATOR", "ADMIN", "CLIENT", "DEVELOPER"],
     };
 
 

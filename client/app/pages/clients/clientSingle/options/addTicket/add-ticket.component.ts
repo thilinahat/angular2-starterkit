@@ -3,6 +3,7 @@ import {  ActivatedRoute } from '@angular/router';
 import {OptionsClientService} from "../options-client.service";
 import {ClientDataSharingService} from "../../../../../shared/data/client-data-sharing.service";
 import {Subscription} from "rxjs";
+import {FormControl} from "@angular/forms";
 
 
 @Component({
@@ -13,6 +14,9 @@ import {Subscription} from "rxjs";
 })
 
 export class AddTicketeComponent {
+
+    title:string = "Add Ticket to ";
+    functionalaty:string = "Add ticket";
 
     client:any = {};
     products:any[] = [];
@@ -31,8 +35,11 @@ export class AddTicketeComponent {
     selectedAssigneeId:string = '';
     summary:string = '';
     dueDate:string = '';
+    editMode:boolean = true;
+
 
     screenshot:any;
+    screenshotURL:string="";
 
     errorMessage:string;
 
@@ -71,26 +78,21 @@ export class AddTicketeComponent {
         then(asignees => this.asignees = asignees,
             error =>  this.errorMessage = <any>error );
 
-    }
-
-    onProductChanged(){
 
     }
 
-    onBranchChanged(){
 
-    }
-
-    onTillChanged(){
-
-    }
-
-    onPriorityChanged(){
-
-    }
 
     addAddScrenShot($event: any): void {
         this.screenshot = $event.target.files[0];
+        let reader: FileReader = new FileReader();
+        reader.onloadend = (e => {
+            let data: any = e.target;
+            this.screenshotURL = data.result;
+        });
+
+        reader.readAsDataURL(this.screenshot);
+
     }
 
     onSubmit(form: any): void {

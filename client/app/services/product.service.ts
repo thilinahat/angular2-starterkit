@@ -11,6 +11,7 @@ export class ProductManagementService {
     constructor(private http: Http) { }
 
     private adminAPIurl = 'api/admin';
+    private commonAPIurl = 'api/common';
 
     addProduct(product: FormData): Promise<any> {
 
@@ -56,7 +57,7 @@ export class ProductManagementService {
 
     getAllProducts(): Promise<any> {
 
-        const url = `${this.adminAPIurl}/products`;
+        const url = `${this.commonAPIurl}/products`;
         return new Promise((resolve, reject) => {
             //noinspection TypeScriptUnresolvedFunction
             this.http
