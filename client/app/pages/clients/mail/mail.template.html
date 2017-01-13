@@ -9,12 +9,20 @@
 <div class="row messegeRow">
     <div class="col-md-1"></div>
     <div class="col-md-10">
-        <ul class="list-group">
-            <li class="list-group-item" *ngFor="let incomingMail of incomingMails">
-                <h4 class="list-group-item-heading">{{incomingMail.topic}}</h4>
-                <p class="list-group-item-text" [innerHTML] =  "incomingMail.body"></p>
-            </li>
-        </ul>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default" *ngFor="let incomingMail of incomingMails">
+            <div class="panel-heading" role="tab" attr.id="heading_{{incomingMail.id}}">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" attr.href="#collapse_{{incomingMail.id}}" aria-expanded="false" attr.aria-controls="collapse_{{incomingMail.id}}">
+                        {{incomingMail.topic}}
+                    </a>
+                </h4>
+            </div>
+            <div attr.id="collapse_{{incomingMail.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body" [innerHTML] =  "incomingMail.body"></div>
+            </div>
+        </div>
+    </div>
     </div>
 </div>
 <div class="row sendButtonRow">
