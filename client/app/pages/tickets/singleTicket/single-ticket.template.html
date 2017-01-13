@@ -12,7 +12,7 @@
                     <div class="status priority-{{selectedTicket.priority_name}}" (click)="changePriority.open()">{{selectedTicket.priority_name}}  </div>
                     <div class="status problem-{{selectedTicket.problem_type_name}}">{{selectedTicket.problem_type_name}}</div>
                     <div class="status status-{{selectedTicket.swimlane_status}}" (click)="ticketStatus.open()">{{selectedTicket.swimlane_status}}</div>
-                    <div class="edit-button btn"><a routerLink="edit" class="">Edit</a></div>
+                    <div *ngIf="route.snapshot.parent.path == 'operator' || route.snapshot.parent.path == 'admin'" class="edit-button btn"><a routerLink="edit" class="">Edit</a></div>
                     <div class="header-title-date">Added On: {{selectedTicket.added_date_time |date:'mediumDate'}}</div>
 
                 </div>
@@ -73,6 +73,7 @@
 
                 </table>
 
+                <comments [ticketID]="id"></comments>
             </div>
         </div>
     </div>

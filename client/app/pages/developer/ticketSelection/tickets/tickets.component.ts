@@ -21,8 +21,4 @@ export class DeveloperTicketsComponent {
     onViewMore(ticketID: number){
         this.router.navigate(['/developer/tickets/', ticketID]);
     }
-
-    onUpdateTicket(ticketID: number){
-        this.router.navigate(['/developer/tickets/' + ticketID + '/edit']);
-    }
 }

@@ -147,7 +147,6 @@ const routes: Routes = [
             { path: '', redirectTo: 'tickets', pathMatch: 'full' },
             { path: 'tickets', component: TicketSelectionComponent},
             { path: 'tickets/:ticketId', component: SingleTicketComponent },
-            { path: 'tickets/:ticketId/edit', component: EditTicketsComponent },
         ]
     },
     { path: '**', redirectTo:'login', pathMatch: 'full' }

@@ -183,37 +183,53 @@ router.get('/ticket/data/:ticketId', function (req, res, next) {
     const SQL = "SELECT * FROM single_ticket_data_view "
         + " WHERE ticket_id = " + req.params.ticketId;
 
-    // " client_id, problem_type_id," +
-    // " priority_id," +
-    // " swimlane_status_id" +
-
-
-    //console.log(SQL);
     mysqlConnectionPool.getConnection(function(err, connection) {
 
         connection.query(SQL, function (error, results) {
 
             if (error) {
-
-                console.log("error while retrieving from to db");
-                return;
+                console.log(error);
+                res.status(406).json({
+                    success: false,
+                    message: error
+                });
+            } else if(results[0] && results[0].assignee_id == req.decoded.uid){
+                    res.json(results[0]);
+            } else{
+                res.status(406).json({
+                    success: false,
+                    message: 'not auhtorized'
+                });
             }
 
-            if (results.length > 0) {
-
-                res.json(results[0]);
-
-            }
-            else {
-
-                res.statusCode = 200; //if results are not found for this
-                res.send();
-            }
 
         });
 
         connection.release();
     });
+});
+
+
+/*
+* ***********************************************************************************************************
+*                                                                                                           *
+*                                                                                                           *
+*  FOLLOWING ROUTES ARE ACCESSIBLE BY ALL OPERATORS, ADMINS AND ONLY THE DEVELOPER ASSIGNED TO THAT TICKET  *
+*                                                                                                           *
+*                                                                                                           *
+* ***********************************************************************************************************/
+
+
+// middleware protect ticket data related routes
+router.use(function (req, res, next) {
+
+    if( req.decoded.role == 'OPERATOR' || req.decoded.role == 'ADMIN' || req.decoded.uid == req.body.ticket.assigneeId)
+        next();
+    else
+        return res.status(403).send({
+            success: false,
+            message: 'not authorized'
+        });
 });
 
 // route to update ticket swimlane status

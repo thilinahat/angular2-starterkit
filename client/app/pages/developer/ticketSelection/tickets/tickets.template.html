@@ -9,7 +9,6 @@
             <h4>{{ticket.summary}}</h4>
             <button data-toggle="collapse" class="btn btn-info" [attr.data-target]="'#ticket-'+ticket.ticket_id">Read More</button>
             <button class="btn btn-info" (click)="onViewMore(ticket.ticket_id)">View More</button>
-            <button class="btn btn-info" (click)="onUpdateTicket(ticket.ticket_id)">Update Ticket</button>
             <p id="ticket-{{ticket.ticket_id}}" class="collapse">
                 {{ticket.description}}
             </p>

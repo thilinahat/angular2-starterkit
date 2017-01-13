@@ -8,9 +8,6 @@ import {SingleTicketService} from "./single-ticket.service";
     selector: 'single-ticket',
     templateUrl: 'single-ticket.template.html',
     styleUrls:['single.ticket.css']
-
-
-
 })
 
 export class SingleTicketComponent {
@@ -48,13 +45,10 @@ export class SingleTicketComponent {
 
 
     onTicketStatusFormSubmit(){
-
-        /*let formData = new FormData();
-        formData.append("ticketId", );
-        formData.append("selectedSwimlaneStatusId", this.selectedSwimlaneStatusId);*/
         const ticket = {
             ticketId: this.selectedTicket.ticket_id,
-            selectedSwimlaneStatusId: this.selectedSwimlaneStatusId
+            selectedSwimlaneStatusId: this.selectedSwimlaneStatusId,
+            assigneeId: this.selectedTicket.assignee_id
         };
 
         this.singleTicketService.changeTicketStatus(ticket).then(res => {
@@ -80,14 +74,10 @@ export class SingleTicketComponent {
     }
 
     onPrioritySubmit(){
-
-        /*let formData = new FormData();
-        formData.append("ticketId", this.selectedTicket.ticket_id);
-        formData.append("selectedPriorityId", this.selectedPriorityId);*/
-
         const ticket = {
             ticketId: this.selectedTicket.ticket_id,
-            selectedPriorityId: this.selectedPriorityId
+            selectedPriorityId: this.selectedPriorityId,
+            assigneeId: this.selectedTicket.assignee_id
         };
 
         this.singleTicketService.changeTicketPriority(ticket).then(res => {
