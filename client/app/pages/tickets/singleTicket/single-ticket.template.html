@@ -12,7 +12,7 @@
                     <div class="status priority-{{selectedTicket.priority_name}}" (click)="changePriority.open()">{{selectedTicket.priority_name}}  </div>
                     <div class="status problem-{{selectedTicket.problem_type_name}}">{{selectedTicket.problem_type_name}}</div>
                     <div class="status status-{{selectedTicket.swimlane_status}}" (click)="ticketStatus.open()">{{selectedTicket.swimlane_status}}</div>
-                    <div class="stats"><a routerLink="edit">Edit</a></div>
+                    <div class="edit-button btn"><a routerLink="edit" class="">Edit</a></div>
                     <div class="header-title-date">Added On: {{selectedTicket.added_date_time |date:'mediumDate'}}</div>
 
                 </div>
@@ -40,6 +40,10 @@
                         <td><i class="change-button" (click)="selectedscreenshot.open()">see screen shot</i>
                         </td>
                     </tr>
+                    <tr>
+                        <td>Ticket Due Date</td>
+                        <td>{{selectedTicket.due_date | date:'mediumDate'}}</td>
+                    </tr>
 
                     <tr>
                         <td>Till ID</td>
@@ -51,10 +55,6 @@
                         <td>{{selectedTicket.till_name}} </td>
                     </tr>
 
-                    <tr>
-                        <td>Till expiredate</td>
-                        <td>{{selectedTicket.expiredate | date:'mediumDate'}} </td>
-                    </tr>
 
                     <tr>
                         <td>Product</td>

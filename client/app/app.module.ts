@@ -9,10 +9,9 @@ import {ClientsComponent} from "./pages/clients/clients.component";
 import {OperatorComponent} from "./pages/operator/operator.component";
 import {AdminComponent} from "./pages/admin/admin.component";
 import {DeveloperComponent} from "./pages/developer/developer.component";
-import {ProductSelectionComponent} from "./pages/developer/productSelection/productSelection.component";
-import {TicketFilterComponent} from "./pages/developer/ticketFilter/ticketFilter.component";
-import {DeveloperTicketsComponent} from "./pages/developer/tickets/tickets.component";
-import {PaginationComponent} from "./pages/developer/pagination/pagination.component";
+import {TicketSelectionComponent} from "./pages/developer/ticketSelection/ticketSelection.component";
+import {DeveloperTicketsComponent} from "./pages/developer/ticketSelection/tickets/tickets.component";
+import {PaginationComponent} from "./pages/developer/ticketSelection/pagination/pagination.component";
 import {CommentsComponent} from "./pages/developer/comments/comments.component";
 import {RoleManagementComponent} from "./pages/admin/role/role.component";
 import {RoleManagementHeaderComponent} from "./pages/admin/role/header/header.component";
@@ -36,7 +35,6 @@ import { ClientService } from './services/client.service';
 import { AuthService } from './services/auth.service';
 import { RoleManagementService } from './services/role.service';
 import { ProductManagementService } from './services/product.service';
-import { TicketService } from './services/ticket.service';
 import { AuthGuard } from './guards/auth.gaurd';
 import { AppRoutingModule } from './app.routing';
 
@@ -78,6 +76,11 @@ import {SingleClientPurchasedProductsComponent} from "./pages/clients/clientSing
 import {SingleTicketComponent} from "./pages/tickets/singleTicket/single-ticket.component";
 import {SingleTicketService} from "./pages/tickets/singleTicket/single-ticket.service";
 import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/ticket-edit.component";
+import {TicketService} from "./services/ticket.service";
+import {ProductService} from "./services/products.service";
+import {TicketFilterComponent} from "./pages/developer/ticketSelection/ticketFilter/ticketFilter.component";
+import {OverdueTicketsComponent} from "./pages/dashboard/overdue-tickets/overdue-tickets.component";
+import {ActiveTicketsComponent} from "./pages/dashboard/active-tickets/active-tickets.component";
 
 
 //when creating a component, add it here
@@ -100,12 +103,14 @@ import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/tick
         AdminComponent, RoleManagementComponent, RoleManagementHeaderComponent, AddUserComponent,
         ProductComponent, ProductHeaderComponent, AddMainProductComponent, EditProductComponent,
         MailTemplatesComponent, MailTemplateHeaderComponent, AddMailTemplateComponent, NotificationComponent,
-        BlockUserComponent, DeveloperComponent, ProductSelectionComponent, DeveloperTicketsComponent,
+        BlockUserComponent, DeveloperComponent, TicketSelectionComponent, DeveloperTicketsComponent,
+        TicketFilterComponent,SingleTicketComponent, EditTicketsComponent
+        ,OverdueTicketsComponent , ActiveTicketsComponent, PaginationComponent,
         TicketFilterComponent,SingleTicketComponent, EditTicketsComponent, PaginationComponent,
         CommentsComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
-        ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService, TicketService
+        ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService, TicketService, ProductService
     ],
     bootstrap: [AppComponent],
 })

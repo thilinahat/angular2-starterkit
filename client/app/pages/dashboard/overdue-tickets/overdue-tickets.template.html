@@ -1,0 +1,50 @@
+<span class="nav-tabs-title">OverDue Support Tickets :</span>
+<div class="card card-nav-tabs">
+    <div class="card-header" data-background-color="red">
+        <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                    <li class="active">
+                        <a href="#overdue" data-toggle="tab">
+                            <i class="material-icons">bug_report</i>
+                            OverDue Support Tickets
+                            <div class="ripple-container"></div></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-content">
+        <div class="tab-content">
+            <div class="tab-pane active" id="overdue">
+                <table class="table">
+                    <tbody>
+                    <tr *ngFor="let overDueTicket of overDueTickets">
+
+                        <td>{{overDueTicket.summary}}<small><a routerLink="../tickets/{{overDueTicket.ticket_id}}">
+                            <br>TKT : {{overDueTicket.ticket_id}}</a></small> </td>
+                        <td class="td-actions text-right">
+                            <button type="button" rel="tooltip"
+                                    title="" class="btn btn-primary btn-simple btn-xs" data-original-title="Edit Task">
+                                <a routerLink="../tickets/{{overDueTicket.ticket_id}}/edit">
+                                    <i class="material-icons">edit</i>
+                                </a>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td><i>Show All</i></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>
