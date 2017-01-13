@@ -3,6 +3,7 @@
  */
 import {Component, Input} from "@angular/core";
 import { CanActivate, Router} from '@angular/router';
+import {tick} from "@angular/core/testing";
 
 
 @Component({
@@ -17,7 +18,11 @@ export class DeveloperTicketsComponent {
 
     @Input()  tickets: any[];
 
-    onViewMore(){
-        this.router.navigate(['/developer/tickets/5']);
+    onViewMore(ticketID: number){
+        this.router.navigate(['/developer/tickets/', ticketID]);
+    }
+
+    onUpdateTicket(ticketID: number){
+        this.router.navigate(['/developer/tickets/' + ticketID + '/edit']);
     }
 }
