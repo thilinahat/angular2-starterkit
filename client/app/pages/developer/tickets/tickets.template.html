@@ -1,85 +1,4 @@
 <div class="tickets-component">
-    <!--<div class="ticket-container">
-        <div class="status-container">
-            <div class="status priority-high"><i class="material-icons">vertical_align_top</i>High</div>
-            <div class="status problem-bug"><i class="material-icons">bug_report</i>Bug</div>
-            <div class="status status-open"><i class="material-icons">lock_open</i>Open</div>
-        </div>
-        <div class="ticket-body">
-            <h4>Ticket Summary Goes Here . . </h4>
-            <button data-toggle="collapse" class="btn btn-info" data-target="#ticket-1">Read More</button>
-            <p id="ticket-1" class="collapse">
-                It is a long established fact that a reader will be
-                distracted by the readable content of a page when
-                looking at its layout. The point of using Lorem Ipsum
-                is that it has a more-or-less normal distribution of letters,
-                as opposed to using 'Content here, content here', making it look like
-                readable English. Many desktop publishing packages and web page
-                editors now use Lorem Ipsum as their default model text, and a search
-                for 'lorem ipsum' will uncover many web sites still in their infancy
-            </p>
-        </div>
-        <div class="ticket-comments-container">
-            <button data-toggle="collapse" class="btn btn-info" data-target="#comments"><i class="material-icons">comment</i></button>
-            <div id="comments" class="collapse comments-container chat-list">
-                <ul class="chat-thread">
-                    <li>
-                        <span class="sender-name">Dilan Tharaka</span>
-                        <span class="time">9.41pm</span><br/>What is this issue?</li>
-                    <li>
-                        <span class="sender-name">XYZ Client</span>
-                        <span class="time">9.42pm</span><br/>I can't do any transaction</li>
-                    <li>
-                        <span class="sender-name">Dilan Tharaka</span>
-                        <span class="time">9.43pm</span><br/> Ok, Npw the issue is fixed
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="ticket-container">
-        <div class="status-container">
-            <div class="status priority-low"><i class="material-icons">vertical_align_bottom</i>Low</div>
-            <div class="status problem-task"><i class="material-icons">build</i>Task</div>
-            <div class="status status-open"><i class="material-icons">lock_open</i>Open</div>
-        </div>
-        <div class="ticket-body">
-            <h4>Ticket Summary Goes Here . . .</h4>
-            <button data-toggle="collapse" class="btn btn-info" data-target="#ticket-2">Read More</button>
-            <p id="ticket-2" class="collapse">
-                It is a long established fact that a reader will be
-                distracted by the readable content of a page when
-                looking at its layout. The point of using Lorem Ipsum
-                is that it has a more-or-less normal distribution of letters,
-                as opposed to using 'Content here, content here', making it look like
-                readable English. Many desktop publishing packages and web page
-                editors now use Lorem Ipsum as their default model text, and a search
-                for 'lorem ipsum' will uncover many web sites still in their infancy
-            </p>
-        </div>
-    </div>
-    <div class="ticket-container">
-        <div class="status-container">
-            <div class="status priority-medium"><i class="material-icons">vertical_align_center</i>Medium</div>
-            <div class="status problem-task"><i class="material-icons">build</i>Task</div>
-            <div class="status status-closed"><i class="material-icons">lock_outline</i>Closed</div>
-        </div>
-        <div class="ticket-body">
-            <h4>Ticket Summary Goes Here . . .</h4>
-            <button data-toggle="collapse" class="btn btn-info" data-target="#ticket-3">Read More</button>
-            <p id="ticket-3" class="collapse">
-                It is a long established fact that a reader will be
-                distracted by the readable content of a page when
-                looking at its layout. The point of using Lorem Ipsum
-                is that it has a more-or-less normal distribution of letters,
-                as opposed to using 'Content here, content here', making it look like
-                readable English. Many desktop publishing packages and web page
-                editors now use Lorem Ipsum as their default model text, and a search
-                for 'lorem ipsum' will uncover many web sites still in their infancy
-            </p>
-        </div>
-    </div>-->
-
     <div *ngFor="let ticket of tickets" class="ticket-container">
         <div class="status-container">
             <div class="status priority-{{ticket.color}}"><i class="material-icons">vertical_align_center</i>{{ticket.priority_name}}</div>
@@ -89,10 +8,13 @@
         <div class="ticket-body">
             <h4>{{ticket.summary}}</h4>
             <button data-toggle="collapse" class="btn btn-info" [attr.data-target]="'#ticket-'+ticket.ticket_id">Read More</button>
+            <button class="btn btn-info" >View More</button>
+            <button class="btn btn-info" >Update Ticket</button>
             <p id="ticket-{{ticket.ticket_id}}" class="collapse">
                 {{ticket.description}}
             </p>
         </div>
+        <!--<comments [ticketID]="ticket.ticket_id"></comments>-->
     </div>
 </div>
 

@@ -22,14 +22,14 @@ class AuthService {
                         reject();
                     else if (passwordHash.verify(user.password, results[0].password)){  // verify the password
                         const table = results[0].role == 'OPERATOR' ? 'operators' : results[0].role == 'DEVELOPER' ? 'developers' : 'admins';
-                        sql = 'SELECT blocked FROM ' + table + ' WHERE  id = '+ connection.escape(results[0].user_id);
+                        sql = 'SELECT blocked,name FROM ' + table + ' WHERE  id = '+ connection.escape(results[0].user_id);
                         connection.query(sql, function(err, blockedResult){
                             if (err || blockedResult.length == 0) {
                                 console.log(err)
                                 reject();
                             }
                             else if(!blockedResult[0].blocked){ // user is not blocked
-                                const token = jwt.sign({role: results[0].role, uid: results[0].user_id}, config.jwtSecret, {expiresIn: 3600 * 24});
+                                const token = jwt.sign({role: results[0].role, uid: results[0].user_id, name: blockedResult[0].name}, config.jwtSecret, {expiresIn: 3600 * 24});
 
                                 if (results[0].has_logged_in)
                                     redirectURL = config.redirectURL[results[0].role];

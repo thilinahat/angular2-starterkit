@@ -53,116 +53,19 @@
     background: #ff9900;
 }
 
-.status-red{
+.status-open{
     background: rgb(49, 112, 143);
 }
-.status-yellow{
+.status-in_progress{
     background: #beff0a;
 }
-.status-orange{
+.status-to_be_discussed{
     background: #ff9900;
 }
-.status-green{
+.status-fixed{
     background: #19a219;
-}
-
-.ticket-comments-container{
-    border-top: 2px solid rgba(128, 0, 128, 0.68);
 }
 
 
 
 /******************************************/
-.chat-area .chat-list {
-    border-top: 1px solid #14475D;
-    border-bottom: 1px solid #cfdae1;
-    position: absolute;
-    left: 0;
-    top: 54px;
-    right: 0;
-    bottom: 44px;
-    overflow-y: auto;
-    outline: none;
-}
-
-.chat-thread {
-    margin: 10px 24px;
-    padding: 0;
-    list-style: none;
-    overflow-x: hidden;
-}
-
-.chat-thread li {
-    position: relative;
-    clear: both;
-    display: inline-block;
-    padding: 4px 16px;
-    margin: 0 0 20px 0;
-    font: 13px/19px 'Noto Sans', sans-serif;
-    border-radius: 10px;
-    background-color: #eaeaea;
-}
-
-.sender-name, .time {
-    opacity: 0.5;
-    font-size: 11px;
-    color: #333333;
-}
-
-.time {
-    float: right;
-}
-
-/* Chat - Avatar */
-.chat-thread li:before {
-    position: absolute;
-    top: 0;
-    width: 32px;
-    height: 32px;
-    border-radius: 32px;
-    content: '';
-}
-
-/* Chat - Speech Bubble Arrow */
-.chat-thread li:after {
-    position: absolute;
-    top: 9px;
-    content: '';
-    width: 0;
-    height: 0;
-    border-top: 8px solid #eaeaea;
-}
-
-.chat-thread li:nth-child(odd) {
-    float: right;
-    margin-right: 52px;
-    color: #777777;
-}
-
-.chat-thread li:nth-child(odd):before {
-    right: -52px;
-    background: url(http://cdn.leapdfw.com/wp-content/uploads/2014/12/icon_humen.png);
-    background-size: 100%;
-}
-
-.chat-thread li:nth-child(odd):after {
-    border-right: 8px solid transparent;
-    right: -8px;
-}
-
-.chat-thread li:nth-child(even) {
-    float: left;
-    margin-left: 52px;
-    color: #333333;
-}
-
-.chat-thread li:nth-child(even):before {
-    left: -52px;
-    background: url(http://cdn.leapdfw.com/wp-content/uploads/2014/12/icon_humen.png);
-    background-size: 100%;
-}
-
-.chat-thread li:nth-child(even):after {
-    border-left: 8px solid transparent;
-    left: -8px;
-}

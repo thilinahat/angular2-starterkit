@@ -140,7 +140,7 @@ const routes: Routes = [
         ]
     },
     { path: 'customer', component: CustomersComponent, canActivate: [AuthGuard]},
-    { path: 'developer',component: DeveloperComponent , canActivate: [],
+    { path: 'developer',component: DeveloperComponent , canActivate: [AuthGuard],
         /*children: [
             { path: '', redirectTo: 'search', pathMatch: 'full' },
             { path: 'search', component: SearchClientComponent },

@@ -7,6 +7,7 @@ var multer = require('multer');
 var path = require('path');
 var mysqlConnectionPool = require('../mysqlConnectionPool');
 var mysql = require('mysql');
+var moment = require('moment');
 var config = require('../../config');
 var router = express.Router();
 
@@ -112,6 +113,61 @@ router.get('/status-types', function (req, res, next) {
 
                 res.statusCode = 200; //if results are not found for this
                 res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+// route to insert comments
+router.post('/comment/add',  function (req, res) {
+
+    const comment = req.body.comment;
+    const time = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+    mysqlConnectionPool.getConnection(function (err, connection) {
+        let sql = 'INSERT INTO comments' +
+            '  ( ticket_id, sender_name, sender_role, message, timestamp )' +
+            ' VALUES (?, ?, ?, ?, ?)';
+        let values = [comment.ticketID, req.decoded.name, req.decoded.role, comment.comment, time];
+        connection.query(sql, values, function (err, rows, fields) {
+            if (err) {
+                console.log(err);
+                return res.status(406).json({
+                    status: 'Failed to set comment',
+                    message: err
+                });
+            } else {
+                res.status(200).json({
+                    sender_name: req.decoded.name,
+                    sender_role: req.decoded.role,
+                    message: comment.comment,
+                    timestamp: time
+                });
+            }
+        });
+    });
+});
+
+//get comments of a ticket
+router.get('/comments/:ticketID', function (req, res, next) {
+
+    const SQL = "select * from comments WHERE ticket_id=" + req.params.ticketID ;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log(error);
+                res.json({
+                    message: 'Error While retrieving comments',
+                    error: error
+                });
+            } else {
+                res.json(results);
             }
 
         });
