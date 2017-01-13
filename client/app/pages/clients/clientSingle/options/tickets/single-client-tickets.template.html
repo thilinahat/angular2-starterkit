@@ -22,7 +22,7 @@
                     <div class="status problem-{{ticket.problem_type_color}}"><i class="material-icons">build</i>{{ticket.problem_type_name}}</div>
                     <div class="status {{ticket.swimlane_color}}" (click)="changeSelectedClientId(ticket.ticket_id);ticketStatus.open()"><i class="material-icons">lock_outline</i>{{ticket.swimlane_status}}</div>
                     <div class="status status-btn pull-right"><a routerLink="../../../tickets/{{ticket.ticket_id}}"> <i class="material-icons">list</i>Full Data</a></div>
-                    <div class="status status-btn pull-right"><a routerLink="../../../tickets/{{ticket.ticket_id}}"><i class="material-icons">loop</i>Edit</a></div>
+                    <div class="status status-btn pull-right"><a routerLink="../../../tickets/{{ticket.ticket_id}}/edit"><i class="material-icons">loop</i>Edit</a></div>
                 </div>
                 <div class="ticket-body">
                     <h4>{{ticket.added_date_time | date:'mediumDate'}}</h4>
