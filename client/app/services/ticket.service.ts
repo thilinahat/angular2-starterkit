@@ -131,7 +131,7 @@ export class TicketService {
         return new Promise((resolve, reject) => {
             //noinspection TypeScriptUnresolvedFunction
             this.http
-                .post(url, JSON.stringify({comment: comment}), {headers: headers})
+                .post(url, JSON.stringify({comment: comment, ticketID: comment.ticketID}), {headers: headers})
                 .toPromise()
                 .then(response => {
                     resolve(response.json());
@@ -148,11 +148,11 @@ export class TicketService {
     getComments(ticketID: number): Promise<any> {
 
         const headers = new Headers({'Content-Type': 'application/json'});
-        const url = `${this.commonAPIurl}/comments/${ticketID}`;
+        const url = `${this.commonAPIurl}/comments`;
         return new Promise((resolve, reject) => {
             //noinspection TypeScriptUnresolvedFunction
             this.http
-                .get(url)
+                .post(url, JSON.stringify({ticketID: ticketID}), {headers: headers})
                 .toPromise()
                 .then(response => {
                     resolve(response.json());

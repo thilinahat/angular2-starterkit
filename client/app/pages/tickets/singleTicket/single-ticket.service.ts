@@ -44,7 +44,7 @@ export class SingleTicketService {
         return new Promise((resolve, reject) => {
             //noinspection TypeScriptUnresolvedFunction
             this.http
-                .post(url, JSON.stringify({ticket: ticket}), {headers: headers})
+                .post(url, JSON.stringify({ticket: ticket, ticketID: ticket.ticketId}), {headers: headers})
                 .toPromise()
                 .then(response => {
                     resolve(response);
@@ -64,7 +64,7 @@ export class SingleTicketService {
         return new Promise((resolve, reject) => {
             //noinspection TypeScriptUnresolvedFunction
             this.http
-                .post(url, JSON.stringify({ticket: ticket}), {headers: headers})
+                .post(url, JSON.stringify({ticket: ticket, ticketID: ticket.ticketId}), {headers: headers})
                 .toPromise()
                 .then(response => {
                     resolve(response);

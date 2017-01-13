@@ -48,7 +48,6 @@ export class SingleTicketComponent {
         const ticket = {
             ticketId: this.selectedTicket.ticket_id,
             selectedSwimlaneStatusId: this.selectedSwimlaneStatusId,
-            assigneeId: this.selectedTicket.assignee_id
         };
 
         this.singleTicketService.changeTicketStatus(ticket).then(res => {
@@ -77,7 +76,6 @@ export class SingleTicketComponent {
         const ticket = {
             ticketId: this.selectedTicket.ticket_id,
             selectedPriorityId: this.selectedPriorityId,
-            assigneeId: this.selectedTicket.assignee_id
         };
 
         this.singleTicketService.changeTicketPriority(ticket).then(res => {

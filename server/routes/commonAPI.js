@@ -121,61 +121,6 @@ router.get('/status-types', function (req, res, next) {
     });
 });
 
-// route to insert comments
-router.post('/comment/add',  function (req, res) {
-
-    const comment = req.body.comment;
-    const time = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
-    mysqlConnectionPool.getConnection(function (err, connection) {
-        let sql = 'INSERT INTO comments' +
-            '  ( ticket_id, sender_name, sender_role, message, timestamp )' +
-            ' VALUES (?, ?, ?, ?, ?)';
-        let values = [comment.ticketID, req.decoded.name, req.decoded.role, comment.comment, time];
-        connection.query(sql, values, function (err, rows, fields) {
-            if (err) {
-                console.log(err);
-                return res.status(406).json({
-                    status: 'Failed to set comment',
-                    message: err
-                });
-            } else {
-                res.status(200).json({
-                    sender_name: req.decoded.name,
-                    sender_role: req.decoded.role,
-                    message: comment.comment,
-                    timestamp: time
-                });
-            }
-        });
-    });
-});
-
-//get comments of a ticket
-router.get('/comments/:ticketID', function (req, res, next) {
-
-    const SQL = "select * from comments WHERE ticket_id=" + req.params.ticketID ;
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        connection.query(SQL, function (error, results) {
-
-            if (error) {
-
-                console.log(error);
-                res.json({
-                    message: 'Error While retrieving comments',
-                    error: error
-                });
-            } else {
-                res.json(results);
-            }
-
-        });
-
-        connection.release();
-    });
-});
-
 // get all ticket data
 router.get('/ticket/data/:ticketId', function (req, res, next) {
 
@@ -193,7 +138,7 @@ router.get('/ticket/data/:ticketId', function (req, res, next) {
                     success: false,
                     message: error
                 });
-            } else if(results[0] && results[0].assignee_id == req.decoded.uid){
+            } else if(req.decoded.role == 'OPERATOR' || req.decoded.role == 'ADMIN' || (results[0] && results[0].assignee_id == req.decoded.uid)){
                     res.json(results[0]);
             } else{
                 res.status(406).json({
@@ -223,13 +168,34 @@ router.get('/ticket/data/:ticketId', function (req, res, next) {
 // middleware protect ticket data related routes
 router.use(function (req, res, next) {
 
-    if( req.decoded.role == 'OPERATOR' || req.decoded.role == 'ADMIN' || req.decoded.uid == req.body.ticket.assigneeId)
+    if( req.decoded.role == 'OPERATOR' || req.decoded.role == 'ADMIN')
         next();
-    else
-        return res.status(403).send({
-            success: false,
-            message: 'not authorized'
+    else{
+
+        const ticketID = req.body.ticketID;
+        const SQL = "SELECT assignee_id FROM tickets WHERE ticket_id=" + ticketID;
+
+        mysqlConnectionPool.getConnection(function(err, connection) {
+
+            connection.query(SQL, function (error, results) {
+                if (error) {
+                    console.log(error);
+                    res.status(403).send({
+                        success: false,
+                        message: 'not authorized'
+                    });
+                } else if(results[0] && results[0].assignee_id == req.decoded.uid) {
+                    next()
+                } else {
+                    res.status(403).send({
+                        success: false,
+                        message: 'not authorized'
+                    });
+                }
+            });
+            connection.release();
         });
+    }
 });
 
 // route to update ticket swimlane status
@@ -301,5 +267,61 @@ router.post('/ticket/change-priority', function (req, res) {
         });
     });
 });
+
+// route to insert comments
+router.post('/comment/add',  function (req, res) {
+
+    const comment = req.body.comment;
+    const time = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+    mysqlConnectionPool.getConnection(function (err, connection) {
+        let sql = 'INSERT INTO comments' +
+            '  ( ticket_id, sender_name, sender_role, message, timestamp )' +
+            ' VALUES (?, ?, ?, ?, ?)';
+        let values = [comment.ticketID, req.decoded.name, req.decoded.role, comment.comment, time];
+        connection.query(sql, values, function (err, rows, fields) {
+            if (err) {
+                console.log(err);
+                return res.status(406).json({
+                    status: 'Failed to set comment',
+                    message: err
+                });
+            } else {
+                res.status(200).json({
+                    sender_name: req.decoded.name,
+                    sender_role: req.decoded.role,
+                    message: comment.comment,
+                    timestamp: time
+                });
+            }
+        });
+    });
+});
+
+//get comments of a ticket
+router.post('/comments', function (req, res, next) {
+
+    const SQL = "select * from comments WHERE ticket_id=" + req.body.ticketID ;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log(error);
+                res.json({
+                    message: 'Error While retrieving comments',
+                    error: error
+                });
+            } else {
+                res.json(results);
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
 
 module.exports = router;
