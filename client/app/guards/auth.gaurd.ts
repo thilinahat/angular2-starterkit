@@ -50,17 +50,26 @@ export class AuthGuard implements CanActivate {
                 .then(response => {
                     //noinspection TypeScriptUnresolvedFunction
                     let userRole: string =  response.json().userRole;
+                    let authorized = false;
                     authorizedRoles.forEach(authRole =>{
-                        if(authRole == userRole)
+                        if(authRole == userRole) {
+                            authorized = true;
                             resolve(true);
+                        }
                     });
+                    if(!authorized) {
+                        resolve(false);
+                        this.router.navigate(['/login']);
+                    }
                 }, error => {
                     console.log(error.json());
+                    resolve(false);
                     this.router.navigate(['/login']);
                 })
                 .catch((err) => {
                     //console.log(err);
-                    reject(false);
+                    resolve(false);
+                    this.router.navigate(['/login']);
                 })
         })
     }
