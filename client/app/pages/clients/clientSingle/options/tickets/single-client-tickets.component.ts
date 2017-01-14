@@ -4,6 +4,8 @@ import { OptionsClientService } from "../options-client.service";
 import {ClientDataSharingService} from "../../../../../shared/data/client-data-sharing.service";
 import {Subscription} from "rxjs";
 import {ClientService} from "../../../../../services/client.service";
+import {SingleTicketService} from "../../../../tickets/singleTicket/single-ticket.service";
+import {TicketService} from "../../../../../services/ticket.service";
 
 
 @Component({
@@ -20,6 +22,7 @@ export class SingleClientTicketsComponent {
     client:any;
     errorMessage:String;
     priorities:any[] = [];
+    problemTypes:any[] = [];
     ticketswimlaneTypes:any[] = [];
     tickets:any[] = [];
     noTickets:boolean = false;
@@ -28,6 +31,7 @@ export class SingleClientTicketsComponent {
 
     selectedPriorityId:string = '';
     selectedSwimlaneStatusId:string = '';
+    selectedProblemTypeId:string = '';
 
     ngOnInit() {
 
@@ -38,14 +42,18 @@ export class SingleClientTicketsComponent {
             }
         )
 
-        this.optionsClientService.getPriorities().
+        this.ticketService.getPriorities().
         then(priorities => this.priorities = priorities,
             error =>  this.errorMessage = <any>error );
 
-        this.optionsClientService.getTicketswimlaneTypes().
+        this.ticketService.getTicketswimlaneTypes().
         then(ticketswimlaneTypes => this.ticketswimlaneTypes = ticketswimlaneTypes,
             error =>  this.errorMessage = <any>error );
 
+        this.ticketService.getproblemTypes().
+        then(problemTypes => this.problemTypes = problemTypes,
+            error =>  this.errorMessage = <any>error );
+//
 
     }
     ngOnDestroy() {
@@ -56,6 +64,8 @@ export class SingleClientTicketsComponent {
     constructor(
         private optionsClientService: OptionsClientService,
         private dataHolder: ClientDataSharingService,
+        private singleTicketService:SingleTicketService,
+        private ticketService:TicketService
 
     ){    }
 
@@ -64,24 +74,38 @@ export class SingleClientTicketsComponent {
     }
 
     changeSelectedClientId(ticketId:string){
-        this.optionsClientService.getClientTicktsAllData(ticketId).
-        then(selectedTicket => {
-            this.selectedTicket = selectedTicket;
-            if(this.selectedTicket.sceenshot_name && this.selectedTicket.sceenshot_name.length > 0){
-                this.screanshotavilable = true;
-            }
-            else{ this.screanshotavilable = false; }
-        },
-            error =>  this.errorMessage = <any>error );
+            this.selectedTicket.ticket_id = ticketId;
     }
 
+    onProblemTypeSubmit(){
+
+        const ticket = {
+            ticketId: this.selectedTicket.ticket_id,
+            selectedProblemTypeId: this.selectedProblemTypeId,
+        };
+
+
+
+        this.ticketService.changeTicketProblemType(ticket).then(res => {
+            this.loadClientTickets();
+            alert('Successfully  Changed Ticket Problem Type');
+        }, error => {
+            alert(error);
+        });
+
+        this.selectedProblemTypeId = null;
+
+    }
     onPrioritySubmit(){
 
-        let formData = new FormData();
-        formData.append("ticketId", this.selectedTicket.ticket_id);
-        formData.append("selectedPriorityId", this.selectedPriorityId);
+        const ticket = {
+            ticketId: this.selectedTicket.ticket_id,
+            selectedPriorityId: this.selectedPriorityId,
+        };
 
-        this.optionsClientService.changeTicketPriority(formData).then(res => {
+
+
+        this.ticketService.changeTicketPriority(ticket).then(res => {
             this.loadClientTickets();
             alert('Successfully  Changed Ticket Priority');
         }, error => {
@@ -95,11 +119,12 @@ export class SingleClientTicketsComponent {
 
     onTicketStatusFormSubmit(){
 
-        let formData = new FormData();
-        formData.append("ticketId", this.selectedTicket.ticket_id);
-        formData.append("selectedSwimlaneStatusId", this.selectedSwimlaneStatusId);
+        const ticket = {
+            ticketId: this.selectedTicket.ticket_id,
+            selectedSwimlaneStatusId: this.selectedSwimlaneStatusId,
+        };
 
-        this.optionsClientService.changeTicketStatus(formData).then(res => {
+        this.ticketService.changeTicketStatus(ticket).then(res => {
             this.loadClientTickets();
             alert('Successfully  Changed Ticket Status');
         }, error => {

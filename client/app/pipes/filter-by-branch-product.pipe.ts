@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+    import { Pipe, PipeTransform } from '@angular/core';
 
 /*
  * filter an array of tills which has product id and branch id fields on it

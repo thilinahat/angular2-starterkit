@@ -121,6 +121,42 @@ router.get('/status-types', function (req, res, next) {
     });
 });
 
+
+//
+//get ticket problem typs
+router.get('/problem-types', function (req, res, next) {
+
+    const SQL = "select * from problem_types" ;
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db view");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+
+
 // get all ticket data
 router.get('/ticket/data/:ticketId', function (req, res, next) {
 
@@ -267,6 +303,34 @@ router.post('/ticket/change-priority', function (req, res) {
         });
     });
 });
+
+//
+// route to update ticket problem type
+router.post('/ticket/change-problem-type', function (req, res) {
+
+    const ticket = req.body.ticket;
+
+    var SQL = "UPDATE `vinit_crm`.`tickets` SET `problem_type_id` = '" + ticket.selectedProblemTypeId + "'"
+        + " WHERE `tickets`.`ticket_id` = '" + ticket.ticketId + "';";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query( SQL,  function(err,rows, result) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting ticket',
+                    message: err
+                });
+            }
+
+            connection.release();
+            res.sendStatus(200);
+
+        });
+    });
+});
+
 
 // route to insert comments
 router.post('/comment/add',  function (req, res) {

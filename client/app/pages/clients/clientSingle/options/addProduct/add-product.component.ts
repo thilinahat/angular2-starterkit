@@ -157,7 +157,7 @@ export class AddProductComponent {
             error =>  this.errorMessage = <any>error );
     }
 
-    onProductChanged(){
+    onProductChanged = function(){
 
         for (var product of this.products) {
             if(this.selectedProductId == product.product_Id){
@@ -170,7 +170,7 @@ export class AddProductComponent {
     }
 
 
-    onBranchChanged(){
+    onBranchChanged = function(){
 
         for (var branch of this.branches) {
             if(this.selectedBranchId == branch.branch_id){

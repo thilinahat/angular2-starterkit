@@ -78,6 +78,25 @@
     font-size: 20px;
     font-weight: 700;
 }
+
+.added-date{
+    display: inline-flex;
+    width: inherit;
+    margin: 5px 0 8px 5px;
+    border-radius: 30px;
+    /*background: rgba(140, 45, 175, 0.58);*/
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: capitalize;
+
+
+}
+
+.summary{
+    cursor: pointer;
+}
+
 .ticket-body{
     border-bottom: 1px solid    #9c27b0;
 }
@@ -116,12 +135,13 @@
 }
 
 
+
 .open{background:#2ecc71}
 .in_progress{background: #f1c40f}
 .to_be_discussed{
     background: #9c3427;
 }
-.Reopen{background: #C5EFF7
+.Reopen{background: #43b0c5
 }
 .cant_reproduced{background: #ff5d09
 }

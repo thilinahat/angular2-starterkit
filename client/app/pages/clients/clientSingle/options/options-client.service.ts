@@ -211,26 +211,6 @@ export class OptionsClientService {
             .catch(this.handleError);
     }
 
-    changeTicketPriority(ticket: FormData): Promise<any> {
-
-        const url = this.ticketsChangePriorityUrl;
-        return new Promise((resolve, reject) => {
-            //noinspection TypeScriptUnresolvedFunction
-            this.http
-                .post(url, ticket)
-                .toPromise()
-                .then(response => {
-                    resolve(response);
-                },error => {
-                    reject(error);
-                })
-                .catch((err) => {
-                    console.log(err);
-                    reject(err);
-                });
-        });
-    }
-
 
     changeTicketStatus(ticket: FormData): Promise<any> {
 

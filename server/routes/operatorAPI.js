@@ -434,7 +434,6 @@ router.get('/client/data/:clientId/name', function (req, res, next) {
 router.get('/client/searchdata', function (req, res,next) {
 
     const SQL = 'SELECT `company_name`, `client_id` FROM `client`;';
-    console.log("working :" +SQL);
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 

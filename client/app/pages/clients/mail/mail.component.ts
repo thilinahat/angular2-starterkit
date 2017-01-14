@@ -22,7 +22,7 @@ export class MailComponent implements OnInit{
     clientAddress : string;
 
     constructor (private emailService : EmailService ){
-        this.clientAddress = "tharakamd6@gmail.com";
+        this.clientAddress = "chamupathi2008@gmail.com";
     }
 
     model = new MailModel("","");

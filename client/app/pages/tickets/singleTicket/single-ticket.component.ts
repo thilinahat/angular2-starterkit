@@ -19,6 +19,7 @@ export class SingleTicketComponent {
     errorMessage:String;
 
     priorities:any[] = [];
+    problemTypes:any[] = [];
     ticketswimlaneTypes:any[] = [];
     selectedSwimlaneStatusId:string;
     selectedPriorityId:String;
