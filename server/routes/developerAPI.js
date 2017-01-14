@@ -23,7 +23,7 @@ router.use(function (req, res, next) {
                     success: false,
                     message: 'failed to authenticate token.'
                 });
-            } else if(decoded.role == 'DEVELOPER'){
+            } else if(decoded.role == 'DEVELOPER' || decoded.role == 'OPERATOR' || decoded.role == 'ADMIN'){
                 req.decoded = decoded;
                 next();
             } else
