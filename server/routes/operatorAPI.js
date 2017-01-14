@@ -239,7 +239,6 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                     message: err
                 });
             } else {
-                console.log("no error client table updated")
 
                 async.parallel({
                     emails: function (callback) {
@@ -250,8 +249,6 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                                 callback(err, null);
                             }
                             else if (client.emails && client.emails.length > 0) {
-
-                                console.log("email deleted")
 
                                 sql = "INSERT INTO client_mail (client_id, mail) VALUES ?";
                                 const values = [];
@@ -265,12 +262,11 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                                         console.log(err);
                                     }
                                     else {
-                                        console.log("mail added")
-
                                         callback(null, null);
                                     }
                                 });
-                            }
+                            } else
+                                callback(null, null);
                         });
                     },
                     phones: function (callback) {
@@ -288,12 +284,11 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                                     if (err)
                                         callback(err, null);
                                     else {
-                                        console.log("phones added")
-
                                         callback(null, null);
                                     }
                                 });
-                            }
+                            } else
+                                callback(null, null);
                         });
                     },
                     faxes: function (callback) {
@@ -311,12 +306,11 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                                     if (err)
                                         callback(err, null);
                                     else {
-                                        console.log("fax added")
-
                                         callback(null, null);
                                     }
                                 });
-                            }
+                            } else
+                                callback(null, null);
                         });
                     }
                 }, function (err, results) {
@@ -1340,127 +1334,12 @@ router.get('/client/data/:clientId/tickets', function (req, res, next) {
     });
 });
 
-//get ticket data
-router.get('/ticket/data/:ticketId', function (req, res, next) {
-
-    //To do: reduce this joins by calling seperately for swimlane, priorities, problem types
-    const SQL = "SELECT * FROM single_ticket_data_view "
-        + " WHERE ticket_id = " + req.params.ticketId;
-
-    ""
-
-    // " client_id, problem_type_id," +
-    // " priority_id," +
-    // " swimlane_status_id" +
+//get ticket data - moved to common api
 
 
-    //console.log(SQL);
-    mysqlConnectionPool.getConnection(function(err, connection) {
+// route for change ticket swimlane status - moved to common api
 
-        connection.query(SQL, function (error, results) {
-
-            if (error) {
-
-                console.log("error while retrieving from to db");
-                return;
-            }
-
-            if (results.length > 0) {
-
-                res.json(results[0]);
-
-            }
-            else {
-
-                res.statusCode = 200; //if results are not found for this
-                res.send();
-            }
-
-        });
-
-        connection.release();
-    });
-});
-
-// route for change ticket priority
-router.post('/ticket/change-priority', screenshotUploader, function (req, res) {
-
-    const ticket = req.body;
-
-    var dt = datetime.create();
-
-    //format to insert to the data base 2016-12-26 00:07:18
-    var formatted = dt.format('Y-m-d H:M:S');
-
-    var SQL = "UPDATE `vinit_crm`.`tickets` SET `priority_id` = '" + ticket.selectedPriorityId + "'"
-        + " WHERE `tickets`.`ticket_id` = '" + ticket.ticketId + "';";
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        connection.query( SQL,  function(err,rows, result) {
-            if (err) {
-                return res.status(406).json({
-                    success: false,
-                    status: 'Failed while inserting ticket',
-                    message: err
-                });
-            }
-
-            connection.release();
-            res.sendStatus(200);
-
-        });
-    });
-});
-
-// route for change ticket priority
-router.post('/ticket/change-status', screenshotUploader, function (req, res) {
-
-    const ticket = req.body;
-
-    var dt = datetime.create();
-
-    //format to insert to the data base 2016-12-26 00:07:18
-    var formatted = dt.format('Y-m-d H:M:S');
-
-    var SQL = "UPDATE `vinit_crm`.`tickets` SET `swimlane_status_id` = '" + ticket.selectedSwimlaneStatusId + "'"
-        + " WHERE `tickets`.`ticket_id` = '" + ticket.ticketId + "';";
-
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        connection.query( SQL,  function(err,rows, result) {
-            if (err) {
-                return res.status(406).json({
-                    success: false,
-                    status: 'Failed while inserting ticket',
-                    message: err
-                });
-            }
-
-
-            var LogSQL = "INSERT INTO `vinit_crm`.`ticket_swimlane_log` (`ticket_id`, `swimlane_status_id`, `loggedTime`, `user_id` ) "
-                + "VALUES (?, ?, ?, '?');";
-
-            var LogValues = [ticket.ticketId, ticket.selectedSwimlaneStatusId, formatted, req.decoded.uid];
-
-            LogSQL = mysql.format(LogSQL, LogValues);
-
-            connection.query( LogSQL,  function(err, result) {
-                if (err) {
-                    return res.status(406).json({
-                        success: false,
-                        status: 'Failed while inserting priority ticket log',
-                        message: err
-                    });
-                }
-                connection.release();
-                res.sendStatus(200);
-
-            });
-        });
-    });
-});
+// route for change ticket priority - moved to common api
 
 //get till data
 router.get('/client/data/:clientId/purchased-items', function (req, res, next) {

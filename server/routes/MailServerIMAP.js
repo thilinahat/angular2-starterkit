@@ -7,7 +7,7 @@ var inspect = require('util').inspect;
 var express = require('express');
 var router = express.Router();
 var config = require('../../config');
-
+var mail_id = 0;
 
 var data = {
     "headers":[]
@@ -18,7 +18,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/i',function (req,res,next) {
-    getUnreadMessages(function (dat) {
+    getUnreadMessages(function (dat,err) {
         res.json(dat);
     });
 })
@@ -51,12 +51,15 @@ imap.once('end', function() {
 
 function getUnreadMessages(callback) {
     imap.connect();
+    var topic;
+    var sender;
+
     imap.once('ready',function () {
         openInbox(function (err,box) {
             if(err) throw err;
             imap.search([['ALL'],['FROM','tharakamd6@gmail.com']],function (err,results) {
                 if(err) throw err;
-                var f = imap.fetch(results, { bodies: ['HEADER.FIELDS (FROM)','TEXT'] });
+                var f = imap.fetch(results, { bodies: ['HEADER.FIELDS (FROM SUBJECT)','TEXT'] });
                 var msgJson = { // variable to store all email details
                     "messages":[]
                 }
@@ -67,19 +70,26 @@ function getUnreadMessages(callback) {
                             count += chunk.length;
                             buffer += chunk.toString('utf8');
                         });
-                        stream.once('end',function () {
-                            if (info.which === 'TEXT'){
 
+                        stream.once('end',function () {
+                            var head = Imap.parseHeader(buffer);
+                            if(info.which === 'HEADER.FIELDS (FROM SUBJECT)')
+                            {
+                                topic = head.subject;
+                                sender = head.from;
+                            }
+                            if (info.which === 'TEXT'){
                                 var fistline = buffer.split('\n')[0]; // get first line
                                 var msgBody = buffer.split(fistline)[2]; // get the body with html
                                 var msgLines = msgBody.split('\n');
                                 msgLines.splice(0,2);
                                 msgLines.splice(msgLines.length-2,2); // remove last line
                                 var msg = msgLines.join('\n'); // recreate msg
-
+                                ++mail_id;
                                 var singleMail = {
-                                    topic : "Hello World",
-                                    body: msg
+                                    topic : topic,
+                                    body: msg,
+                                    id: mail_id
                                 };
 
                                 msgJson["messages"].push(singleMail);
@@ -87,6 +97,7 @@ function getUnreadMessages(callback) {
                             }
                         });
                     });
+
                 });
                 f.once('error', function(err) {
                     console.log('Fetch error: ' + err);

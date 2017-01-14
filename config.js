@@ -36,7 +36,7 @@ module.exports =  {
         smtp_pw: 'gts5610k',
         smtp_server: 'smtp.mail.yahoo.com',
         imap_un: 'dilantharakamd6@yahoo.com',
-        imap_pw: 'gts5610ka',
+        imap_pw: 'gts5610k',
         imap_server: 'imap.mail.yahoo.com',
         imap_port: 993
 

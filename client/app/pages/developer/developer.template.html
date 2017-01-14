@@ -1,8 +1,3 @@
 <div class="container">
-    <!--<product-selection (onProductSelect)="onProductSelect($event)"></product-selection>-->
-    <ticket-filter [products]="products" [priorities]="priorities" [statuses]="statuses" (onStateChange)="onStateChange($event)"></ticket-filter>
-    <div class="">
-        <developer-tickets [tickets]="tickets"></developer-tickets>
-    </div>
-    <pagination [totalPages]="totalPages" [currentPage]="currentPage" (onPageChange)="onPageChange($event)"></pagination>
+    <router-outlet></router-outlet>
 </div>

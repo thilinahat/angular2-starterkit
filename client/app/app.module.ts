@@ -9,8 +9,10 @@ import {ClientsComponent} from "./pages/clients/clients.component";
 import {OperatorComponent} from "./pages/operator/operator.component";
 import {AdminComponent} from "./pages/admin/admin.component";
 import {DeveloperComponent} from "./pages/developer/developer.component";
-import {ProductSelectionComponent} from "./pages/developer/productSelection/productSelection.component";
-import {DeveloperTicketsComponent} from "./pages/developer/tickets/tickets.component";
+import {TicketSelectionComponent} from "./pages/developer/ticketSelection/ticketSelection.component";
+import {DeveloperTicketsComponent} from "./pages/developer/ticketSelection/tickets/tickets.component";
+import {PaginationComponent} from "./pages/developer/ticketSelection/pagination/pagination.component";
+import {CommentsComponent} from "./pages/developer/comments/comments.component";
 import {RoleManagementComponent} from "./pages/admin/role/role.component";
 import {RoleManagementHeaderComponent} from "./pages/admin/role/header/header.component";
 import {AddUserComponent} from "./pages/admin/role/addUser/addUser.component";
@@ -76,10 +78,9 @@ import {SingleTicketService} from "./pages/tickets/singleTicket/single-ticket.se
 import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/ticket-edit.component";
 import {TicketService} from "./services/ticket.service";
 import {ProductService} from "./services/products.service";
-import {TicketFilterComponent} from "./pages/developer/ticketFilter/ticketFilter.component";
+import {TicketFilterComponent} from "./pages/developer/ticketSelection/ticketFilter/ticketFilter.component";
 import {OverdueTicketsComponent} from "./pages/dashboard/overdue-tickets/overdue-tickets.component";
 import {ActiveTicketsComponent} from "./pages/dashboard/active-tickets/active-tickets.component";
-import {PaginationComponent} from "./pages/developer/pagination/pagination.component";
 
 
 //when creating a component, add it here
@@ -102,9 +103,11 @@ import {PaginationComponent} from "./pages/developer/pagination/pagination.compo
         AdminComponent, RoleManagementComponent, RoleManagementHeaderComponent, AddUserComponent,
         ProductComponent, ProductHeaderComponent, AddMainProductComponent, EditProductComponent,
         MailTemplatesComponent, MailTemplateHeaderComponent, AddMailTemplateComponent, NotificationComponent,
-        BlockUserComponent, DeveloperComponent, ProductSelectionComponent, DeveloperTicketsComponent,
+        BlockUserComponent, DeveloperComponent, TicketSelectionComponent, DeveloperTicketsComponent,
         TicketFilterComponent,SingleTicketComponent, EditTicketsComponent
-        ,OverdueTicketsComponent , ActiveTicketsComponent, PaginationComponent
+        ,OverdueTicketsComponent , ActiveTicketsComponent, PaginationComponent,
+        TicketFilterComponent,SingleTicketComponent, EditTicketsComponent, PaginationComponent,
+        CommentsComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
         ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService, TicketService, ProductService

@@ -70,7 +70,7 @@ router.post('/tickets/with-count',  function (req, res) {
                 ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
                 ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
                 ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
-                ' WHERE `tickets`.`assignee_id`=1 AND ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter +
+                ' WHERE `tickets`.`assignee_id`=' + req.decoded.uid +  ' AND ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter +
                 ' LIMIT ' + offset + ',' + TICKETS_PER_PAGE;
 
             mysqlConnectionPool.getConnection(function(err, connection) {
@@ -94,7 +94,7 @@ router.post('/tickets/with-count',  function (req, res) {
                 ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
                 ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
                 ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
-                ' WHERE `tickets`.`assignee_id`=1 AND ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter ;
+                ' WHERE `tickets`.`assignee_id`=' + req.decoded.uid + ' AND ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter ;
 
             mysqlConnectionPool.getConnection(function(err, connection) {
                 connection.query(sql, function (error, results) {
@@ -142,7 +142,7 @@ router.post('/tickets',  function (req, res) {
         ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
         ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
         ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
-        ' WHERE `tickets`.`assignee_id`=1 AND ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter +
+        ' WHERE `tickets`.`assignee_id`=' + req.decoded.uid + ' AND ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter +
         ' LIMIT ' + offset + ',' + TICKETS_PER_PAGE;
 
     mysqlConnectionPool.getConnection(function(err, connection) {

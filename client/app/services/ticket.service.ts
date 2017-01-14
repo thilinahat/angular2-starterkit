@@ -1,4 +1,6 @@
-
+/**
+ * Created by thilina on 1/7/17.
+ */
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -8,6 +10,8 @@ export class TicketService {
 
     constructor(private http: Http) { }
 
+    private developerAPIurl = 'api/developer';
+    private commonAPIurl = 'api/common';
     private headers = new Headers({'Content-Type': 'multipart/form-data'});
     private ticketAPIurl = 'api/operator';
     private numberOfActiveTicketsURL = this.ticketAPIurl +"/tickets/number-of-active-tickets";
@@ -16,9 +20,6 @@ export class TicketService {
     private highPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/high-priority-tickets-for-dashboard"
     private mediumPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/medium-priority-tickets-for-dashboard"
     private lowPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/low-priority-tickets-for-dashboard"
-
-
-     private developerAPIurl = 'api/developer';
 
 
     getNumberOfActiveTickets() : Promise<any[]>{
@@ -110,6 +111,48 @@ export class TicketService {
             //noinspection TypeScriptUnresolvedFunction
             this.http
                 .post(url, JSON.stringify({state: state}), {headers: headers})
+                .toPromise()
+                .then(response => {
+                    resolve(response.json());
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
+
+    setComment(comment: any): Promise<any> {
+
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const url = `${this.commonAPIurl}/comment/add`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, JSON.stringify({comment: comment, ticketID: comment.ticketID}), {headers: headers})
+                .toPromise()
+                .then(response => {
+                    resolve(response.json());
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
+
+    getComments(ticketID: number): Promise<any> {
+
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const url = `${this.commonAPIurl}/comments`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, JSON.stringify({ticketID: ticketID}), {headers: headers})
                 .toPromise()
                 .then(response => {
                     resolve(response.json());

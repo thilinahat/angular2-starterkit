@@ -1,0 +1,117 @@
+.comments-container{
+    width: 60%;
+}
+
+.chat-area .chat-list {
+    border-top: 1px solid #14475D;
+    border-bottom: 1px solid #cfdae1;
+    position: absolute;
+    left: 0;
+    top: 54px;
+    right: 0;
+    bottom: 44px;
+    overflow-y: auto;
+    outline: none;
+}
+
+.chat-thread {
+    margin: 10px 24px;
+    padding: 0;
+    list-style: none;
+    overflow-x: hidden;
+}
+
+.chat-thread li {
+    position: relative;
+    clear: both;
+    display: inline-block;
+    padding: 4px 16px;
+    margin: 0 0 20px 0;
+    font: 13px/19px 'Noto Sans', sans-serif;
+    border-radius: 10px;
+    background-color: #eaeaea;
+    color: #333333;
+}
+
+.sender-name, .time {
+    opacity: 0.5;
+    font-size: 11px;
+    color: #333333;
+}
+
+/* Chat - Avatar */
+.chat-thread li:before {
+    position: absolute;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 32px;
+    content: '';
+}
+
+/* Chat - Speech Bubble Arrow */
+.chat-thread li:after {
+    position: absolute;
+    top: 9px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 8px solid #eaeaea;
+}
+
+.chat-thread li.left{
+    float: right;
+    margin-right: 52px;
+}
+.chat-thread li.left:before{
+    right: -52px;
+    background: url(http://cdn.leapdfw.com/wp-content/uploads/2014/12/icon_humen.png);
+    background-size: 100%;
+}
+.chat-thread li.left:after{
+    border-right: 8px solid transparent;
+    right: -8px;
+}
+.chat-thread li.left .sender-name{
+    float: right;
+}.chat-thread li.left .time{
+     float: right;
+ }
+
+
+.chat-thread li.right {
+    float: left;
+    margin-left: 52px;
+}
+.chat-thread li.right:before {
+    left: -52px;
+    background: url(http://cdn.leapdfw.com/wp-content/uploads/2014/12/icon_humen.png);
+    background-size: 100%;
+}
+.chat-thread li.right:after {
+    border-left: 8px solid transparent;
+    left: -8px;
+}
+.chat-thread li.right .sender-name{
+    float: left;
+}
+.chat-thread li.right .time{
+    float: left;
+}
+
+.comment-box{
+    padding: 0 60px 0 100px;
+    display: inline-flex;
+}
+.comment-box>.form-group{
+    display: inline;
+    float: left;
+    width: 400px;
+}
+.comment-box>button{
+    top: 75px;
+    left: 15px;
+    display: inline;
+    float: right;
+    height: 50px;
+}
