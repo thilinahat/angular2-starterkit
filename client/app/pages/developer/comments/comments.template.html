@@ -3,7 +3,7 @@
     <button data-toggle="collapse" class="btn btn-info" [attr.data-target]="'#comments-' + ticketID" (click)="onClick()"><i class="material-icons">comment</i></button>
     <div id="comments-{{ticketID}}" class="chat-list collapse">
         <ul class="chat-thread">
-            <li *ngFor="let comment of comments" [ngClass]="{'left' : comment.sender_role == 'OPERATOR', 'right' : comment.sender_role == 'DEVELOPER'}">
+            <li *ngFor="let comment of comments" [ngClass]="{'left' : comment.sender_role == 'OPERATOR' || comment.sender_role == 'ADMIN', 'right' : comment.sender_role == 'DEVELOPER'}">
                 <b><span class="sender-name" >{{comment.sender_name}}</span></b>
                 <br/>
                 {{comment.message}}

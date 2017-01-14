@@ -19,18 +19,20 @@
             <div *ngFor="let ticket of tickets" class="ticket-container">
                 <div class="status-container">
                     <div class="status priority-{{ticket.color}}" (click)="changeSelectedClientId(ticket.ticket_id);changePriority.open()"><i class="material-icons">vertical_align_center</i>{{ticket.priority_name}}</div>
-                    <div class="status problem-{{ticket.problem_type_color}}"><i class="material-icons">build</i>{{ticket.problem_type_name}}</div>
+                    <div class="status problem-{{ticket.problem_type_color}}" (click)="changeSelectedClientId(ticket.ticket_id);changeProblemType.open()"><i class="material-icons">build</i>{{ticket.problem_type_name}}</div>
                     <div class="status {{ticket.swimlane_color}}" (click)="changeSelectedClientId(ticket.ticket_id);ticketStatus.open()"><i class="material-icons">lock_outline</i>{{ticket.swimlane_status}}</div>
+
+                    <div class="added-date  pull-right" >{{ticket.added_date_time}}</div>
+
                     <div class="status status-btn pull-right"><a routerLink="../../../tickets/{{ticket.ticket_id}}"> <i class="material-icons">list</i>Full Data</a></div>
-                    <div class="status status-btn pull-right"><a routerLink="../../../tickets/{{ticket.ticket_id}}"><i class="material-icons">loop</i>Edit</a></div>
+                    <div class="status status-btn pull-right"><a routerLink="../../../tickets/{{ticket.ticket_id}}/edit"><i class="material-icons">loop</i>Edit</a></div>
                 </div>
                 <div class="ticket-body">
-                    <h4>{{ticket.added_date_time | date:'mediumDate'}}</h4>
-                    <h4>{{ticket.summary}}</h4>
-                    <button data-toggle="collapse" class="btn btn-info" [attr.data-target]="'#ticket-'+ticket.ticket_id">Read More</button>
+                    <h4 data-toggle="collapse" [attr.data-target]="'#ticket-'+ticket.ticket_id" class="summary">{{ticket.summary}}</h4>
                     <p id="ticket-{{ticket.ticket_id}}" class="collapse">
                         {{ticket.description}}
                     </p>
+                    <comments [ticketID]="ticket.ticket_id"></comments>
                 </div>
             </div>
 
@@ -42,95 +44,6 @@
     </div>
 </div>
 
-<modal #ticketData>
-    <modal-header [show-close]="true">
-        <h4 class="modal-title"><b>Ticket Id : {{selectedTicket.ticket_id}}</b>
-            <i class="swimlane-status pull-right" [style.background]="selectedTicket.swimlane_color" style="margin-right: 3%;">
-                {{selectedTicket.swimlane_status}}
-            </i>
-        </h4>
-    </modal-header>
-    <modal-body>
-        <table class="table">
-            <colgroup>
-                <col span="1" style="width: 20%;">
-                <col span="1" style="width: 80%;">
-            </colgroup>
-            <tr>
-                <td>Client</td>
-                <td>{{client.company_name}}</td>
-            </tr>
-            <tr>
-                <td>Summary</td>
-                <td>{{selectedTicket.summary}}</td>
-            </tr>
-            <tr>
-                <td>Description</td>
-                <td>{{selectedTicket.description}}</td>
-            </tr>
-            <tr>
-                <td>Problem type</td>
-                <td>{{selectedTicket.problem_type_name}}
-                </td>
-            </tr>
-
-
-            <tr>
-                <td>Priority</td>
-                <td>{{selectedTicket.priority_name}} <i class="change-button" (click)="changePriority.open()">change</i></td>
-            </tr>
-
-            <tr>
-                <td>Status</td>
-                <td>{{selectedTicket.swimlane_status}}<i class="change-button" (click)="ticketStatus.open()">change</i>
-                </td>
-            </tr>
-
-            <tr *ngIf="screanshotavilable">
-                <td>Screenshot</td>
-                <td><i class="change-button" (click)="selectedscreenshot.open()">see screen shot</i>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Till ID</td>
-                <td>{{selectedTicket.till_id}}</td>
-            </tr>
-
-            <tr>
-                <td>Till Name</td>
-                <td>{{selectedTicket.till_name}} </td>
-            </tr>
-
-            <tr>
-                <td>Till expiredate</td>
-                <td>{{selectedTicket.expiredate | date:'mediumDate'}} </td>
-            </tr>
-
-            <tr>
-                <td>Product</td>
-                <td>{{selectedTicket.name}}</td>
-            </tr>
-
-            <tr>
-                <td>Branch</td>
-                <td>{{selectedTicket.location}}</td>
-            </tr>
-
-            <tr>
-                <td>Assignee</td>
-                <td>{{selectedTicket.developer_name}}</td>
-            </tr>
-            <tr>
-                <td>Logged by</td>
-                <td>{{selectedTicket.user_id}}</td>
-            </tr>
-
-
-
-        </table>
-    </modal-body>
-</modal>
 
 <modal #changePriority style="background-color: rgba(142, 157, 166, 0.39);">
     <modal-header [show-close]="true">
@@ -201,8 +114,6 @@
     </modal-body>
 </modal>
 
-<!--To do create chenge problem type-->
-<!--
 <modal #changeProblemType style="background-color: rgba(142, 157, 166, 0.39);">
     <modal-header [show-close]="true">
         <h4 class="modal-title"><b>Change Problem Type of #{{selectedTicket.ticket_id}}</b>
@@ -216,11 +127,11 @@
 
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label class="control-label">Select Priority</label>
+                        <label class="control-label">Select Problem Type</label>
                         <select class="form-control" id="problemType" required="true"
-                                [(ngModel)] = "selectedPriorityId" name="selectedPriorityId" >
-                            <option selected disabled>Choose Priority </option>
-                            <option *ngFor="let priority of priorities " [value]="priority.priority_id" >{{priority.priority_name}}</option>
+                                [(ngModel)] = "selectedProblemTypeId" name="selectedProblemTypeId" >
+                            <option selected disabled>Choose Problem Type</option>
+                            <option *ngFor="let problemType of problemTypes " [value]="problemType.problem_type_id" >{{problemType.problem_type_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -235,7 +146,7 @@
 
     </modal-body>
 </modal>
--->
+
 
 <modal #selectedscreenshot style="background-color: rgba(142, 157, 166, 0.39);">
     <modal-header [show-close]="true">

@@ -8,6 +8,7 @@ export class SingleTicketService {
 
     private ticketsChangeStatusUrl = this.commonAPIurl + "/ticket/change-status";
     private ticketsChangePriorityUrl = this.commonAPIurl + "/ticket/change-priority";
+    private ticketsChangeProblemTypeUrl = this.commonAPIurl + "/ticket/change-problem-type";
     private ticketsDataUrl = this.commonAPIurl +"/ticket/data/";
 
     constructor(private http: Http) {
@@ -78,6 +79,25 @@ export class SingleTicketService {
         });
     }
 
+    changeTicketProblemType(ticket: any): Promise<any> {
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const url = this.ticketsChangeProblemTypeUrl;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, JSON.stringify({ticket: ticket, ticketID: ticket.ticketId}), {headers: headers})
+                .toPromise()
+                .then(response => {
+                    resolve(response);
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
 
     private handleError(error: any): Promise<any> {
         //console.error('An error occurred', error); // for demo purposes only

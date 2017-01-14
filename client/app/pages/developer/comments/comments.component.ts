@@ -17,7 +17,7 @@ export class CommentsComponent {
     commentbox: string = '';
     comments: any[] = [];
 
-    @Input()  ticketID: number;
+    @Input()  ticketID: any;
 
     onSubmit(form: any){
         form.ticketID = this.ticketID;

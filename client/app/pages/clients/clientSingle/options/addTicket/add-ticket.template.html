@@ -35,7 +35,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Select product</label>
                                     <select class="form-control" id="product" required="true"
-                                            [(ngModel)] = "selectedProductId" name="selectedProductId" (change)="onProductChanged()">
+                                            [(ngModel)] = "selectedProductId" name="selectedProductId" (ngModelChange)="onProductChanged">
                                         <option selected disabled>Choose Product</option>
                                         <option *ngFor="let product of products" [value]="product.product_Id">{{product.name}}</option>
                                     </select>
@@ -47,7 +47,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Select branch</label>
                                     <select class="form-control" id="branch" required="true"
-                                            [(ngModel)] = "selectedBranchId" name="selectedBranchId" (change)="onBranchChanged()">
+                                            [(ngModel)] = "selectedBranchId" name="selectedBranchId" (ngModelChange)="onBranchChanged">
                                         <option selected disabled>Choose Branch</option>
                                         <option *ngFor="let branch of branches" [value]="branch.branch_id">{{branch.name}}</option>
                                     </select>
@@ -59,7 +59,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Select Till</label>
                                     <select class="form-control" id="till" required="true"
-                                            [(ngModel)] = "selectedTillId" name="selectedTillId" (change)="onTillChanged()">
+                                            [(ngModel)] = "selectedTillId" name="selectedTillId" >
                                         <option selected disabled>Choose Till</option>
                                         <option *ngFor="let till of ( tills | filterByBranchProducts:selectedProductId: selectedBranchId )" [value]="till.till_id" >{{till.till_name}}</option>
                                         <!--<option *ngFor="let till of tills " [value]="till.till_id" >{{till.till_name}}</option>-->
@@ -87,7 +87,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Select Priority</label>
                                     <select class="form-control" id="priority" required="true"
-                                            [(ngModel)] = "selectedPriority" name="selectedPriority" (change)="onPriorityChanged()">
+                                            [(ngModel)] = "selectedPriority" name="selectedPriority" >
                                         <option selected disabled>Choose Priority</option>
                                         <option *ngFor="let priority of priorities " [value]="priority.priority_id" >{{priority.priority_name}}</option>
                                     </select>

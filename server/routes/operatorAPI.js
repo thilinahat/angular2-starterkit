@@ -239,7 +239,6 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                     message: err
                 });
             } else {
-                console.log("no error client table updated")
 
                 async.parallel({
                     emails: function (callback) {
@@ -250,8 +249,6 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                                 callback(err, null);
                             }
                             else if (client.emails && client.emails.length > 0) {
-
-                                console.log("email deleted")
 
                                 sql = "INSERT INTO client_mail (client_id, mail) VALUES ?";
                                 const values = [];
@@ -265,12 +262,11 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                                         console.log(err);
                                     }
                                     else {
-                                        console.log("mail added")
-
                                         callback(null, null);
                                     }
                                 });
-                            }
+                            } else
+                                callback(null, null);
                         });
                     },
                     phones: function (callback) {
@@ -288,12 +284,11 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                                     if (err)
                                         callback(err, null);
                                     else {
-                                        console.log("phones added")
-
                                         callback(null, null);
                                     }
                                 });
-                            }
+                            } else
+                                callback(null, null);
                         });
                     },
                     faxes: function (callback) {
@@ -311,12 +306,11 @@ router.post('/client/edit/:clientId', logoUploader, function (req, res) {
                                     if (err)
                                         callback(err, null);
                                     else {
-                                        console.log("fax added")
-
                                         callback(null, null);
                                     }
                                 });
-                            }
+                            } else
+                                callback(null, null);
                         });
                     }
                 }, function (err, results) {
@@ -440,7 +434,6 @@ router.get('/client/data/:clientId/name', function (req, res, next) {
 router.get('/client/searchdata', function (req, res,next) {
 
     const SQL = 'SELECT `company_name`, `client_id` FROM `client`;';
-    console.log("working :" +SQL);
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
