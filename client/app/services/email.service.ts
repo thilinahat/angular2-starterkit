@@ -37,7 +37,8 @@ export class EmailService{
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.smtp_apiUrl,{
             title: mailModal.title,
-            body: mailModal.body
+            body: mailModal.body,
+            sending_to: mailModal.to
         },options)
             .map(this.extractData)
             .catch(this.handleError)

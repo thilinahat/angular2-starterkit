@@ -19,11 +19,11 @@ var transporter = nodemailer.createTransport('smtps://'+ config.email.smtp_un
  */
 router.post('/', function (req, res, next) {
     var reqBody = req.body;
-
+    console.log(reqBody.sending_to);
     // setup e-mail data with unicode symbols
     var mailOptions = {
         from: '"Dilan Tharaka" <dilantharakamd6@yahoo.com>', // sender address
-        to: 'chamupathi2008@gmail.com', // list of receivers
+        to: reqBody.sending_to, // list of receivers
         subject: reqBody.title, // Subject line
         text: reqBody.body, // plaintext body
         html: "<b>" + reqBody.body  + "</b>" // html body
