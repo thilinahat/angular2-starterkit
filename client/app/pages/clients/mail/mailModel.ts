@@ -5,6 +5,7 @@ export class MailModel{
 
     constructor(
         public title : string,
-        public body : string
+        public body : string,
+        public to: string
     ){}
 }

@@ -39,7 +39,6 @@ import {AddTicketeComponent} from "./pages/clients/clientSingle/options/addTicke
 import {AddProductComponent} from "./pages/clients/clientSingle/options/addProduct/add-product.component";
 import {ClientEditComponent} from "./pages/clients/clientSingle/clientedit/clientedit.component";
 import {ClientBlockComponent} from "./pages/clients/clientSingle/options/block/client-block.component";
-import {SendMailComponent} from "./pages/clients/clientSingle/options/sendMail/send-mail.component";
 import {ClientSingleDashboardComponent} from "./pages/clients/clientSingle/dashboard/client-single-dashboard.component";
 import {SingleClientTicketsComponent} from "./pages/clients/clientSingle/options/tickets/single-client-tickets.component";
 import {SingleTicketComponent} from "./pages/tickets/singleTicket/single-ticket.component";
@@ -77,7 +76,7 @@ const routes: Routes = [
                     {path: 'add-note', component: AddNoteComponent},
                     {path: 'add-product', component: AddProductComponent},
                     {path: 'add-ticket', component: AddTicketeComponent},
-                    {path: 'send-mail', component: SendMailComponent},
+                    {path: 'send-mail', component: MailComponent},
                     {path: 'client-block', component: ClientBlockComponent},
                     {path: 'edit', component: ClientEditComponent},
                     {path: 'tickets', component: SingleClientTicketsComponent},
@@ -133,7 +132,7 @@ const routes: Routes = [
                     {path: 'add-note', component: AddNoteComponent},
                     {path: 'add-product', component: AddProductComponent},
                     {path: 'add-ticket', component: AddTicketeComponent},
-                    {path: 'send-mail', component: SendMailComponent},
+                    {path: 'send-mail', component: MailComponent},
                     {path: 'client-block', component: ClientBlockComponent},
                     {path: 'edit', component: ClientEditComponent},
                     {path: 'tickets', component: SingleClientTicketsComponent},

@@ -64,7 +64,6 @@ import {ClientEditComponent} from "./pages/clients/clientSingle/clientedit/clien
 
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 import {ClientSingleDashboardComponent} from "./pages/clients/clientSingle/dashboard/client-single-dashboard.component";
-import {SendMailComponent} from "./pages/clients/clientSingle/options/sendMail/send-mail.component";
 import {ClientBlockComponent} from "./pages/clients/clientSingle/options/block/client-block.component";
 import {ClientdataComponent} from "./pages/clients/clientSingle/dashboard/clientdata/clientdata.component";
 import {ClienthistoryComponent} from "./pages/clients/clientSingle/dashboard/clienthistory/clienthistory.component";
@@ -97,7 +96,7 @@ import {ActiveTicketsComponent} from "./pages/dashboard/active-tickets/active-ti
         AddCallComponent, AddNoteComponent,
         AddProductComponent, AddTicketeComponent,
         AddTillComponent, CallComponent, ChangeCredentialsComponent,
-        ClientSingleDashboardComponent, SendMailComponent, ClientBlockComponent,
+        ClientSingleDashboardComponent, ClientBlockComponent,
         ClientEditComponent, SearchClientComponent, SingleClientTicketsComponent,
         SingleClientPurchasedProductsComponent, AdminSidenavigationComponent, OperatorComponent,
         AdminComponent, RoleManagementComponent, RoleManagementHeaderComponent, AddUserComponent,
