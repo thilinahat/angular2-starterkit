@@ -21,8 +21,12 @@ export class EmailService{
      * IMAP function
      * @returns {Observable<R>}
      */
-    getMails(): Observable<IncomingMail[]> {
-        return this.http.get(this.imap_apiUrl)
+    getMails(from:String): Observable<IncomingMail[]> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.imap_apiUrl,{
+            from: from
+        },options)
             .map(this.extractData)
             .catch(this.handleError);
     }
