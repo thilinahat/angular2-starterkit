@@ -23,6 +23,7 @@ export class TicketSelectionComponent {
     currentPage: number = 1;
 
     state = {productID: "Any", priorityID: "Any", statusID: "Any"};
+    page:any = 1;
 
     constructor(
         private productManagementService: ProductManagementService,
@@ -75,6 +76,7 @@ export class TicketSelectionComponent {
     }
 
     onPageChange(state: any): void{
+        this.page = state.page;
         const currentState = this.state;
         currentState['page'] = state.page;
         this.ticketService.getTicketsRelatedToDeveloper(currentState).then(tickets => {
@@ -83,6 +85,21 @@ export class TicketSelectionComponent {
         }, error => {
 
         });
+
+    }
+
+    onTicketUpdate(){
+
+        const currentState = this.state;
+        currentState['page'] = this.page;
+        this.ticketService.getTicketsRelatedToDeveloper(currentState).then(tickets => {
+            this.tickets = tickets;
+//            this.currentPage = this.page;
+        }, error => {
+
+        });
+
+        console.log("");
 
     }
 

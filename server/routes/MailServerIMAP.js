@@ -57,7 +57,7 @@ function getUnreadMessages(callback) {
     imap.once('ready',function () {
         openInbox(function (err,box) {
             if(err) throw err;
-            imap.search([['ALL'],['FROM','tharakamd6@gmail.com']],function (err,results) {
+            imap.search([['ALL'],['FROM','chamupathi2008@gmail.com']],function (err,results) {
                 if(err) throw err;
                 var f = imap.fetch(results, { bodies: ['HEADER.FIELDS (FROM SUBJECT)','TEXT'] });
                 var msgJson = { // variable to store all email details

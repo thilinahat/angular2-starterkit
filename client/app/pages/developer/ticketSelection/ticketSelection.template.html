@@ -1,5 +1,5 @@
 <ticket-filter [products]="products" [priorities]="priorities" [statuses]="statuses" (onStateChange)="onStateChange($event)"></ticket-filter>
 <div class="">
-    <developer-tickets [tickets]="tickets"></developer-tickets>
+    <developer-tickets [tickets]="tickets" (onTicketUpdate)="onTicketUpdate($event)"></developer-tickets>
 </div>
 <pagination [totalPages]="totalPages" [currentPage]="currentPage" (onPageChange)="onPageChange($event)"></pagination>

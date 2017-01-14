@@ -2,6 +2,7 @@
  * Created by thilina on 1/6/17.
  */
 import {Component} from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'developer',
@@ -11,7 +12,10 @@ import {Component} from "@angular/core";
 
 export class DeveloperComponent {
 
-    constructor() {}
+    constructor(
+        private route: ActivatedRoute,
+
+    ) {}
 
     ngOnInit(){
 
