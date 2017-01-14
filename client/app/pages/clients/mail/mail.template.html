@@ -1,14 +1,17 @@
 <!--model creating examples-->
 <!--https://github.com/dougludlow/ng2-bs3-modal-->
 <div class="row addressRow">
-    <div class="col-lg-4 col-md-4"></div>
-    <div class="col-lg-4 col-md-4">
-        <a href="#"> {{clientAddress}}  <span class="badge">{{incomingMails?.length}} </span></a>
+    <div class="col-lg-4 col-md-4 col-sm-4"></div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <select class="form-control" (change)="onEmailChanged($event)">
+            <option *ngFor="let client_email of client_emails" [innerHTML] = "client_email"></option>
+        </select>
+        <!--<a href="#"> {{clientAddress}}  <span class="badge">{{incomingMails?.length}} </span></a>-->
     </div>
 </div>
 <div class="row messegeRow">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-md-1 col-lg-1 col-sm-1"></div>
+    <div class="col-md-10 col-lg-10 col-sm-10">
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default" *ngFor="let incomingMail of incomingMails">
             <div class="panel-heading" role="tab" attr.id="heading_{{incomingMail.id}}">
@@ -26,8 +29,8 @@
     </div>
 </div>
 <div class="row sendButtonRow">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-md-1 col-lg-1 col-sm-1"></div>
+    <div class="col-md-10 col-lg-10 col-sm-10">
         <button type="button" class="btn btn-primary" (click)="modal.open()">Send New Email</button>
     </div>
 </div>

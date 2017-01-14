@@ -24,12 +24,15 @@ export class MailComponent implements OnInit{
     errorMessage: string;
     incomingMails : IncomingMail[];
     clientAddress : string;
+    client_emails : any;
     subscription:Subscription;
+    selected_email: string;
     client:any;
 
     constructor (private emailService : EmailService, private optionsClientService: OptionsClientService,
                  private dataHolder: ClientDataSharingService){
         this.clientAddress = "tharakamd6@gmail.com";
+        this.client_emails = [];
     }
 
     model = new MailModel("","",this.clientAddress);
@@ -43,10 +46,11 @@ export class MailComponent implements OnInit{
     ngOnInit() {
 
         this.subscription = this.dataHolder.clientData$.subscribe(
-            client => {this.client = client;
-                console.log(this.client.emails);
-
-                }
+            client => {
+                this.client = client;
+                this.client_emails = this.client.emails;
+                this.selected_email = this.client_emails[0];
+            }
         )
         this.getEmail();
     }
@@ -55,7 +59,7 @@ export class MailComponent implements OnInit{
      * subscribs to imap service and ger mails
      */
     getEmail(){
-        this.emailService.getMails().
+        this.emailService.getMails(this.selected_email).
         subscribe(
             data  => this.incomingMails = data,
             error =>  this.errorMessage = <any>error
@@ -72,5 +76,11 @@ export class MailComponent implements OnInit{
                 error => this.errorMessage = <any>error
             );
 
+    }
+
+    onEmailChanged(event:any){
+        this.selected_email = event.target.value;
+        this.incomingMails = [];
+        this.getEmail();
     }
 }

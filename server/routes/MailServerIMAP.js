@@ -17,8 +17,10 @@ router.get('/', function (req, res, next) {
     res.json(data.headers);
 });
 
-router.get('/i',function (req,res,next) {
-    getUnreadMessages(function (dat,err) {
+router.post('/i',function (req,res,next) {
+    var reqBody = req.body;
+    var sender_email = reqBody.from;
+    getUnreadMessages(sender_email, function (dat,err) {
         res.json(dat);
     });
 })
@@ -49,7 +51,7 @@ imap.once('end', function() {
     console.log(data.headers);
 });
 
-function getUnreadMessages(callback) {
+function getUnreadMessages(sender_email, callback) {
     imap.connect();
     var topic;
     var sender;
@@ -57,7 +59,7 @@ function getUnreadMessages(callback) {
     imap.once('ready',function () {
         openInbox(function (err,box) {
             if(err) throw err;
-            imap.search([['ALL'],['FROM','tharakamd6@gmail.com']],function (err,results) {
+            imap.search([['ALL'],['FROM',sender_email]],function (err,results) {
                 if(err) throw err;
                 var f = imap.fetch(results, { bodies: ['HEADER.FIELDS (FROM SUBJECT)','TEXT'] });
                 var msgJson = { // variable to store all email details
