@@ -7,6 +7,7 @@ import {Http} from "@angular/http";
 export class SingleTicketService {
 
     private clientAPIurl = 'api/operator';
+    private commonAPIurl = 'api/common';
 
     private ticketsUrl = this.clientAPIurl +"/tickets";
     private ticketsChangeStatusUrl = this.clientAPIurl + "/ticket/change-status";
@@ -29,7 +30,7 @@ export class SingleTicketService {
     }
 
     getPriorities():Promise<any>{
-        var url = this.ticketsUrl +   "/priorities";
+        var url = this.commonAPIurl +   "/priorities";
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
@@ -37,7 +38,7 @@ export class SingleTicketService {
     }
 
     getTicketswimlaneTypes():Promise<any>{
-        var url = this.ticketsUrl +   "/status-types";
+        var url = this.commonAPIurl +   "/status-types";
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
