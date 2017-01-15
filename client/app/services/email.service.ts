@@ -14,7 +14,7 @@ import 'rxjs/add/operator/catch';
 export class EmailService{
     private imap_apiUrl = '/mail/i';
     private smtp_apiUrl = '/mailsend';
-
+    private all_address_apiUrl = "/api/common/customer/all/emails"
     constructor (private http: Http) {}
 
     /**
@@ -48,6 +48,22 @@ export class EmailService{
             .catch(this.handleError)
     }
 
+    /**
+     * get all email address of clients
+     * @param res
+     * @returns {any|{}}
+     */
+    getAllAddresses():Promise<any>{
+        return this.http.get(this.all_address_apiUrl)
+            .toPromise()
+            .then(res => {
+                return this.extractData(res);
+            })
+            .catch(error => {
+                return error;
+            });
+    }
+
     private extractData(res: Response) {
         let body = res.json();
         return body|| { };
@@ -66,4 +82,6 @@ export class EmailService{
         console.error("error" + errMsg);
         return Observable.throw(errMsg);
     }
+
+
 }

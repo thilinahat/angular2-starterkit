@@ -8,6 +8,7 @@ var express = require('express');
 var router = express.Router();
 var config = require('../../config');
 var mail_id = 0;
+var isConnected = false;
 
 var data = {
     "headers":[]
@@ -47,8 +48,8 @@ imap.once('error', function(err) {
 
 
 imap.once('end', function() {
-    console.log('Connection ended');
-    console.log(data.headers);
+    console.log('IMAP Connection ended');
+    isConnected = false;
 });
 
 function getUnreadMessages(sender_email, callback) {
@@ -57,6 +58,7 @@ function getUnreadMessages(sender_email, callback) {
     var sender;
 
     imap.once('ready',function () {
+        isConnected = true;
         openInbox(function (err,box) {
             if(err) throw err;
             imap.search([['ALL'],['FROM',sender_email]],function (err,results) {
