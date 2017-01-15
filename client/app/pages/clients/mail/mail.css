@@ -2,3 +2,11 @@
     padding-top:25px;
     padding-bottom: 25px;
 }
+
+.notification-row{
+    padding-top: 25px;
+}
+
+.center-text {
+    text-align: center;
+}

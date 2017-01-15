@@ -154,6 +154,34 @@ router.get('/ticket/data/:ticketId', function (req, res, next) {
     });
 });
 
+// get all email address of customers
+router.get('/customer/all/emails',function (req,res,next) {
+    const SQL = "SELECT DISTINCT mail as email FROM `client_mail` ";
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+                console.log(error);
+                res.status(406).json({
+                    success: false,
+                    message: error
+                });
+            } else if(req.decoded.role == 'OPERATOR' || req.decoded.role == 'ADMIN'){
+                res.json(results);
+            } else{
+                res.status(406).json({
+                    success: false,
+                    message: 'not auhtorized'
+                });
+            }
+
+
+        });
+
+        connection.release();
+    });
+});
 
 /*
 * ***********************************************************************************************************

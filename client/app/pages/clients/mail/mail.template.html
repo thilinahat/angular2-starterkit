@@ -1,5 +1,13 @@
 <!--model creating examples-->
 <!--https://github.com/dougludlow/ng2-bs3-modal-->
+<div class="row notification-row" *ngIf="!is_client_selected">
+    <div class="col-lg-2 col-md-2 col-sm-2"></div>
+    <div class="col-lg-8 col-md-8 col-sm-8">
+        <div class="alert alert-warning center-text" role="alert" ><p class="center-text">No client is selected or no email address is
+            registerd with the selected client. Showing all email address in the system</p></div>
+        <!--<a href="#"> {{clientAddress}}  <span class="badge">{{incomingMails?.length}} </span></a>-->
+    </div>
+</div>
 <div class="row addressRow">
     <div class="col-lg-4 col-md-4 col-sm-4"></div>
     <div class="col-lg-4 col-md-4 col-sm-4">
