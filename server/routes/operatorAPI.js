@@ -1086,7 +1086,7 @@ router.get('/tickets/problemtypes', function (req, res, next) {
 //get developers
 router.get('/developers', function (req, res, next) {
 
-    const SQL = "select * from developers" ;
+    const SQL = "select * from developers where blocked != 1" ;
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
