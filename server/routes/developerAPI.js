@@ -154,19 +154,19 @@ router.post('/tickets',  function (req, res) {
 
     const offset = (state.page - 1) * TICKETS_PER_PAGE;
 
-    var sql = 'SELECT `tickets`.`summary`, `tickets`.`description`, `tickets`.`ticket_id`,' +
-        ' `priorities`.`priority_name`,`priorities`.`color`, `ticketswimlane`.`swimlane_status`,' +
-        ' `ticketswimlane`.`swimlane_color`, `problem_types`.`problem_type_name`, `problem_types`.`problem_type_color`, ' +
-        ' `client`.`client_id`, `client`.`company_name`, ' +
-        ' concat(date(`tickets`.`added_date_time`),"") AS `added_date_time` ' +
-        ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
-        ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
-        ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
-        ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
-        ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
-        ' INNER JOIN `client` ON `tickets`.`client_id`=`client`.`client_id`' +
-        ' WHERE '
-        + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter ;
+        var sql = 'SELECT `tickets`.`summary`, `tickets`.`description`, `tickets`.`ticket_id`,' +
+            ' `priorities`.`priority_name`,`priorities`.`color`, `ticketswimlane`.`swimlane_status`,' +
+            ' `ticketswimlane`.`swimlane_color`, `problem_types`.`problem_type_name`, `problem_types`.`problem_type_color`, ' +
+            ' `client`.`client_id`, `client`.`company_name`, ' +
+            ' concat(date(`tickets`.`added_date_time`),"") AS `added_date_time` ' +
+            ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
+            ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
+            ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
+            ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
+            ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
+            ' INNER JOIN `client` ON `tickets`.`client_id`=`client`.`client_id`' +
+            ' WHERE '
+            + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter ;
 
     if(req.decoded.role == 'DEVELOPER') {
         sql = sql + ' AND ' + ' `tickets`.`assignee_id`=' + req.decoded.uid;

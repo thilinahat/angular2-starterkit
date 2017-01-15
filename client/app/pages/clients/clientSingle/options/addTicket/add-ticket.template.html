@@ -131,7 +131,7 @@
                                     <label class="control-label">Select Assignee</label>
                                     <select class="form-control" id="assignee" required="true"
                                             [(ngModel)] = "selectedAssigneeId" name="selectedAssigneeId" >
-                                        <option selected disabled>Choose Priority</option>
+                                        <option selected disabled>Choose Assignee</option>
                                         <option *ngFor="let asignee of asignees " [value]="asignee.id" >{{asignee.name}}</option>
                                     </select>
                                 </div>
