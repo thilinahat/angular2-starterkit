@@ -114,6 +114,34 @@ router.get('/users/unblocked/:role',  function (req, res) {
     });
 });
 
+// route to get developers
+router.get('/users/developers',  function (req, res) {
+    mysqlConnectionPool.getConnection(function (err, connection) {
+        const sql = 'SELECT * FROM developers;';
+        connection.query(sql, function (err, results) {
+            if (err) {
+                return res.sendStatus(400);
+            } else {
+                res.json(results);
+            }
+        });
+    });
+});
+
+// route to get developers
+router.get('/users/operators',  function (req, res) {
+    mysqlConnectionPool.getConnection(function (err, connection) {
+        const sql = 'SELECT * FROM operators;';
+        connection.query(sql, function (err, results) {
+            if (err) {
+                return res.sendStatus(400);
+            } else {
+                res.json(results);
+            }
+        });
+    });
+});
+
 // route to block operators, developers
 router.post('/user/block',  function (req, res) {
     const user = req.body.user;

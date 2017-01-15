@@ -81,6 +81,10 @@ import {TicketFilterComponent} from "./pages/developer/ticketSelection/ticketFil
 import {OverdueTicketsComponent} from "./pages/dashboard/overdue-tickets/overdue-tickets.component";
 import {ActiveTicketsComponent} from "./pages/dashboard/active-tickets/active-tickets.component";
 import {EmailService} from "./services/email.service";
+import {AllUsersComponent} from "./pages/admin/role/allUsers/allUsers.component";
+import {AllOperatorsComponent} from "./pages/admin/role/allUsers/Operators/all-operators.component";
+import {AllDevelopersComponent} from "./pages/admin/role/allUsers/Divelopers/all-developers.component";
+import {AllProductsComponent} from "./pages/admin/product/allProducts/allProduct.component";
 
 
 //when creating a component, add it here
@@ -104,10 +108,11 @@ import {EmailService} from "./services/email.service";
         ProductComponent, ProductHeaderComponent, AddMainProductComponent, EditProductComponent,
         MailTemplatesComponent, MailTemplateHeaderComponent, AddMailTemplateComponent, NotificationComponent,
         BlockUserComponent, DeveloperComponent, TicketSelectionComponent, DeveloperTicketsComponent,
-        TicketFilterComponent,SingleTicketComponent, EditTicketsComponent
-        ,OverdueTicketsComponent , ActiveTicketsComponent, PaginationComponent,
+        TicketFilterComponent,SingleTicketComponent, EditTicketsComponent,
+        OverdueTicketsComponent , ActiveTicketsComponent, PaginationComponent,
         TicketFilterComponent,SingleTicketComponent, EditTicketsComponent, PaginationComponent,
-        CommentsComponent
+        CommentsComponent, AllUsersComponent, AllOperatorsComponent, AllDevelopersComponent,
+        AllProductsComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
         ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService, TicketService, ProductService

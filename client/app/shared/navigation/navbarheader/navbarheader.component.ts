@@ -8,7 +8,7 @@ import {Component, Input} from "@angular/core";
 
 export class NavbarheaderComponent {
     ToggleNavBar = function () {
-        console.log("working");
+        // console.log("working");
 
     }
 }

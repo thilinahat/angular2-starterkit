@@ -16,22 +16,14 @@ export class EditProductComponent {
     productDescriptionMap: any = {};
     description: string = "";
 
-    ngOnInit(){
-        this.productManagementService.getAllProducts().then(results => {
-            this.products = results;
-            for(let product of this.products) {
-                this.productDescriptionMap[product.name] = product.description;
-            }
-        }, error => {
-           alert(error);
-        });
-    }
 
     constructor(private productManagementService: ProductManagementService ) {}
 
     onSubmit(form: any): void{
         this.productManagementService.editProduct(form).then(
             response => {
+                this.loadData();
+                this.description = null;
                 alert(response.message);
             }, error => {
                 alert(error.message + '\n' + error.status);
@@ -41,5 +33,22 @@ export class EditProductComponent {
 
     onSelect(product: any): void{
         this.description = this.productDescriptionMap[product];
+    }
+
+
+    ngOnInit(){
+        this.loadData();
+    }
+
+    loadData(){
+        this.productManagementService.getAllProducts().then(results => {
+            this.products = results;
+            for(let product of this.products) {
+                this.productDescriptionMap[product.name] = product.description;
+            }
+        }, error => {
+            alert(error);
+        });
+
     }
 }

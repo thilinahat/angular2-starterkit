@@ -43,6 +43,7 @@ import {ClientSingleDashboardComponent} from "./pages/clients/clientSingle/dashb
 import {SingleClientTicketsComponent} from "./pages/clients/clientSingle/options/tickets/single-client-tickets.component";
 import {SingleTicketComponent} from "./pages/tickets/singleTicket/single-ticket.component";
 import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/ticket-edit.component";
+import {AllUsersComponent} from "./pages/admin/role/allUsers/allUsers.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -98,6 +99,7 @@ const routes: Routes = [
                     { path: '', redirectTo: 'add', pathMatch: 'full' },
                     { path: 'add', component: AddUserComponent },
                     { path: 'block', component: BlockUserComponent },
+                    { path: 'all', component: AllUsersComponent },
                 ]
             },
             { path: 'products', component: ProductComponent,
