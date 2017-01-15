@@ -1,21 +1,135 @@
 <div class="tickets-component">
-    <div *ngFor="let ticket of tickets" class="ticket-container">
+    <div *ngFor="let ticket of tickets; let i = index" class="ticket-container" >
         <div class="status-container">
-            <div class="status priority-{{ticket.color}}"><i class="material-icons">vertical_align_center</i>{{ticket.priority_name}}</div>
-            <div class="status problem-{{ticket.problem_type_color}}"><i class="material-icons">build</i>{{ticket.problem_type_name}}</div>
-            <div class="status status-{{ticket.swimlane_color}}"><i class="material-icons">lock_outline</i>{{ticket.swimlane_status}}</div>
+            <div class="status priority-{{ticket.color}}" (click)="changeSelectedClientId(ticket.ticket_id);changeSelectedTicketIndex(i);
+            changePriority.open()">
+                <i class="material-icons">vertical_align_center</i>{{ticket.priority_name}}</div>
+            <div class="status problem-{{ticket.problem_type_color}}" (click)="changeSelectedClientId(ticket.ticket_id);changeSelectedTicketIndex(i);
+            changeProblemType.open()"><i class="material-icons">build</i>{{ticket.problem_type_name}}</div>
+
+            <div class="status {{ticket.swimlane_color}}" (click)="changeSelectedClientId(ticket.ticket_id);changeSelectedTicketIndex(i);
+            ticketStatus.open()"><i class="material-icons">lock_outline</i>{{ticket.swimlane_status}}</div>
+
+            <div class="added-date  pull-right">{{ticket.added_date_time }}</div>
+
+            <div class="status status-btn pull-right"><a routerLink="../tickets/{{ticket.ticket_id}}"> <i class="material-icons">list</i>Full Data</a></div>
+            <div *ngIf="route.snapshot.parent.url == 'operator' || route.snapshot.parent.url == 'admin'"
+                 class="status status-btn pull-right"><a routerLink="../tickets/{{ticket.ticket_id}}/edit"><i class="material-icons">loop</i>Edit</a></div>
         </div>
         <div class="ticket-body">
-            <h4>{{ticket.summary}}</h4>
-            <button data-toggle="collapse" class="btn btn-info" [attr.data-target]="'#ticket-'+ticket.ticket_id">Read More</button>
-            <button class="btn btn-info" (click)="onViewMore(ticket.ticket_id)">View More</button>
+            <h4 data-toggle="collapse" [attr.data-target]="'#ticket-'+ticket.ticket_id" class="summary">ticket :#{{ticket.ticket_id}}  {{ticket.summary}}</h4>
+            <!--<button data-toggle="collapse" class="btn btn-info" [attr.data-target]="'#ticket-'+ticket.ticket_id">Read More</button>-->
+            <!--<button class="btn btn-info" (click)="onViewMore(ticket.ticket_id)">View More</button>-->
             <p id="ticket-{{ticket.ticket_id}}" class="collapse">
                 {{ticket.description}}
             </p>
         </div>
-        <!--<comments [ticketID]="ticket.ticket_id"></comments>-->
+        <comments [ticketID]="ticket.ticket_id"></comments>
     </div>
 </div>
+
+<modal #changePriority style="background-color: rgba(142, 157, 166, 0.39);">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title"><b>Change Priority of #{{selectedTicket.ticket_id}}</b>
+        </h4>
+    </modal-header>
+    <modal-body>
+
+        <form #ticketPriorityForm="ngForm" (ngSubmit)="onPrioritySubmit(); changePriority.close()">
+
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Select Priority</label>
+                        <select class="form-control" id="assignee" required="true"
+                                [(ngModel)] = "selectedPriorityId" name="selectedPriorityId" >
+                            <option selected disabled>Choose Priority </option>
+                            <option *ngFor="let priority of priorities " [value]="priority.priority_id" >{{priority.priority_name}}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary pull-right">Change Ticket<div class="ripple-container"></div></button>
+            <div class="clearfix"></div>
+        </form>
+
+    </modal-body>
+</modal>
+
+<modal #ticketStatus style="background-color: rgba(142, 157, 166, 0.39);">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title"><b>Change status of #{{selectedTicket.ticket_id}}</b>
+
+        </h4>
+
+        <hr>
+    </modal-header>
+    <modal-body>
+
+        <form #ticketStatusForm="ngForm" (ngSubmit)="onTicketStatusFormSubmit(); ticketStatus.close()">
+
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Select Status</label>
+                        <select class="form-control" id="selectedSwimlaneStatusId" required="true"
+                                [(ngModel)] = "selectedSwimlaneStatusId" name="selectedSwimlaneStatusId" >
+                            <option selected disabled>Choose Priority </option>
+                            <option *ngFor="let type of ticketswimlaneTypes " [value]="type.swimlane_id" >{{type.swimlane_status}}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary pull-right">Change Ticket Status<div class="ripple-container"></div></button>
+            <div class="clearfix"></div>
+        </form>
+
+    </modal-body>
+</modal>
+
+<modal #changeProblemType style="background-color: rgba(142, 157, 166, 0.39);">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title"><b>Change Problem Type of #{{selectedTicket.ticket_id}}</b>
+        </h4>
+    </modal-header>
+    <modal-body>
+
+        <form #ticketPriorityForm="ngForm" (ngSubmit)="onProblemTypeSubmit(); changeProblemType.close()">
+
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label">Select Problem Type</label>
+                        <select class="form-control" id="problemType" required="true"
+                                [(ngModel)] = "selectedProblemTypeId" name="selectedProblemTypeId" >
+                            <option selected disabled>Choose Problem Type</option>
+                            <option *ngFor="let problemType of problemTypes " [value]="problemType.problem_type_id" >{{problemType.problem_type_name}}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary pull-right">Change Ticket<div class="ripple-container"></div></button>
+            <div class="clearfix"></div>
+        </form>
+
+    </modal-body>
+</modal>
+
 
 
 <!--priority icons-->
