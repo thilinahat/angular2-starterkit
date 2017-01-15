@@ -3,7 +3,7 @@
     color: white;
     margin: 5px 0 8px 5px;
     border-radius: 30px;
-    background: rgba(140, 45, 175, 0.58);
+    /*background: rgba(140, 45, 175, 0.58);*/
     padding: 5px 10px;
     font-size: 15px;
     font-weight: 700;
@@ -39,28 +39,66 @@
     padding-top: 12px;
 }
 
-.priority-high{
+.priority-red{
     background: rgba(255, 0, 0, 0.67);
 }
-.priority-low{
+.priority-green{
     background: #19a219;
 }
-.priority-medium{
+.priority-yellow{
     background: #ff9900;
 }
 
-.problem-bug{
+.problem-red{
     background: rgba(255, 0, 0, 0.67);
 }
-.problem-task{
+.problem-yellow{
     background: #ff9900;
 }
 
-.status-open{
+.status-red{
     background: rgb(49, 112, 143);
 }
-.status-closed{
+.status-yellow{
+    background: #beff0a;
+}
+.status-orange{
+    background: #ff9900;
+}
+.status-green{
     background: #19a219;
+}
+
+.ticket-comments-container{
+    border-top: 2px solid rgba(128, 0, 128, 0.68);
+}
+
+
+
+.open{background:#2ecc71}
+.in_progress{background: #f1c40f}
+.to_be_discussed{
+    background: #9c3427;
+}
+.Reopen{background: #43b0c5
+}
+.cant_reproduced{background: #ff5d09
+}
+.duplicate{background: #C0392B;
+    color: white;
+}
+.fixed{background: #3A539B;
+    color: white;
+}
+.bug{
+    background: #e74c3c
+}
+.other{
+    background: #f1c40f
+}
+
+.status-btn{
+    border-radius: 0 !important;
 }
 
 .ticket-comments-container{

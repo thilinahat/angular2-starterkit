@@ -39,6 +39,10 @@
     font-weight: 700;
 }
 
+.summary{
+    cursor: pointer;
+}
+
 .added-date{
     display: inline-flex;
     width: inherit;
@@ -51,6 +55,10 @@
     text-transform: capitalize;
 
 
+}
+
+.company-name{
+    color: black;
 }
 
 .priority-red{

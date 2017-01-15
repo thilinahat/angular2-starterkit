@@ -9,9 +9,9 @@
                 <div class="title">
                     <div class="header-title">Ticket {{id}}</div>
 
-                    <div class="status priority-{{selectedTicket.priority_name}}" (click)="changePriority.open()">{{selectedTicket.priority_name}}  </div>
-                    <div class="status problem-{{selectedTicket.problem_type_name}}" (click)="changeProblemType.open()">{{selectedTicket.problem_type_name}}</div>
-                    <div class="status status-{{selectedTicket.swimlane_status}}" (click)="ticketStatus.open()">{{selectedTicket.swimlane_status}}</div>
+                    <div class="status priority-{{selectedTicket.priority_color}}" (click)="changePriority.open()">{{selectedTicket.priority_name}}  </div>
+                    <div class="status problem-{{selectedTicket.problem_type_color}}" (click)="changeProblemType.open()">{{selectedTicket.problem_type_name}}</div>
+                    <div class="status {{selectedTicket.swimlane_color}}" (click)="ticketStatus.open()">{{selectedTicket.swimlane_status}}</div>
                     <div *ngIf="route.snapshot.parent.url == 'operator' || route.snapshot.parent.url == 'admin'" class="edit-button btn"><a routerLink="edit" class="">Edit</a></div>
                     <div class="header-title-date">Added On: {{selectedTicket.added_date_time |date:'mediumDate'}}</div>
 
@@ -31,6 +31,10 @@
                     <tr>
                         <td>Description</td>
                         <td>{{selectedTicket.description}}</td>
+                    </tr>
+                    <tr>
+                        <td>Client</td>
+                        <td><a routerLink="../../clients/{{selectedTicket.client_id}}">{{selectedTicket.company_name}}</a></td>
                     </tr>
 
 

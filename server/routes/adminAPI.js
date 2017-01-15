@@ -72,7 +72,7 @@ router.post('/user/add',  function (req, res) {
 
     UserService.addOperatorOrDeveloperOrAdmin(user).then(response => {
         const mail = {
-            to: user.email,
+            sending_to: user.email,
             title: "VinIT CRM Login Credentials",
             body: "Your Username is " + response.username + '.\n Your Password is ' + response.password
         };

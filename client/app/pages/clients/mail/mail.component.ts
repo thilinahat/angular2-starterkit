@@ -29,9 +29,11 @@ export class MailComponent implements OnInit{
     selected_email: string;
     client:any;
 
-    constructor (private emailService : EmailService, private optionsClientService: OptionsClientService,
+    constructor (
+                 private emailService : EmailService,
+                 private optionsClientService: OptionsClientService,
                  private dataHolder: ClientDataSharingService){
-        this.clientAddress = "tharakamd6@gmail.com";
+        this.clientAddress = "chamupathi2008@gmail.com";
         this.client_emails = [];
     }
 

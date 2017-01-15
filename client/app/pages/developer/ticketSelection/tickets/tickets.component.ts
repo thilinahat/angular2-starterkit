@@ -11,7 +11,7 @@ import {forEach} from "@angular/router/src/utils/collection";
 @Component({
     selector: 'developer-tickets',
     templateUrl: 'tickets.template.html',
-    styleUrls: ['tickets..css'],
+    styleUrls: ['tickets.css'],
 })
 
 export class DeveloperTicketsComponent {

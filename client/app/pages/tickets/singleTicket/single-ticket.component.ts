@@ -7,7 +7,7 @@ import {SingleTicketService} from "./single-ticket.service";
 @Component({
     selector: 'single-ticket',
     templateUrl: 'single-ticket.template.html',
-    styleUrls:['single.ticket.css']
+    styleUrls:['single.ticket.css','../../developer/ticketSelection/tickets/tickets.css']
 })
 
 export class SingleTicketComponent {

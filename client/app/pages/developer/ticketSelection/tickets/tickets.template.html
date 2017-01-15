@@ -11,17 +11,21 @@
             ticketStatus.open()"><i class="material-icons">lock_outline</i>{{ticket.swimlane_status}}</div>
 
             <div class="added-date  pull-right">{{ticket.added_date_time }}</div>
+            <div class="status company-name"><a routerLink="../clients/{{ticket.client_id}}">Client : {{ticket.company_name}}</a></div>
 
-            <div class="status status-btn pull-right"><a routerLink="../tickets/{{ticket.ticket_id}}"> <i class="material-icons">list</i>Full Data</a></div>
+            <div class="status status-btn pull-right"><a routerLink="../tickets/{{ticket.ticket_id}}"> <i class="material-icons">list</i>View more</a></div>
             <div *ngIf="route.snapshot.parent.url == 'operator' || route.snapshot.parent.url == 'admin'"
-                 class="status status-btn pull-right"><a routerLink="../tickets/{{ticket.ticket_id}}/edit"><i class="material-icons">loop</i>Edit</a></div>
+                 class="status status-btn pull-right"><a routerLink="../tickets/{{ticket.ticket_id}}/edit">
+                <i class="material-icons">loop</i>Edit</a></div>
         </div>
         <div class="ticket-body">
-            <h4 data-toggle="collapse" [attr.data-target]="'#ticket-'+ticket.ticket_id" class="summary">ticket :#{{ticket.ticket_id}}  {{ticket.summary}}</h4>
+            <h4 data-toggle="collapse" [attr.data-target]="'#ticket-'+ticket.ticket_id" class="summary"> ticket :#{{ticket.ticket_id}}  {{ticket.summary}}</h4>
             <!--<button data-toggle="collapse" class="btn btn-info" [attr.data-target]="'#ticket-'+ticket.ticket_id">Read More</button>-->
             <!--<button class="btn btn-info" (click)="onViewMore(ticket.ticket_id)">View More</button>-->
             <p id="ticket-{{ticket.ticket_id}}" class="collapse">
-                {{ticket.description}}
+                <b>Description:</b> {{ticket.description}}
+                <br>
+                <a routerLink="../tickets/{{ticket.ticket_id}}">view more</a>
             </p>
         </div>
         <comments [ticketID]="ticket.ticket_id"></comments>

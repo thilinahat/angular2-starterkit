@@ -18,6 +18,7 @@ export class TicketSelectionComponent {
     products: any[] = [];
     priorities: any[] = [];
     statuses: any[] = [];
+    problemTypes:any[] = [];
     tickets: any[];
     totalPages: number = 1;
     currentPage: number = 1;
@@ -39,16 +40,23 @@ export class TicketSelectionComponent {
             alert(error);
         });
 
-        this.optionsClientService.getPriorities().then(results => {
+        this.ticketService.getPriorities().then(results => {
             results.unshift({priority_id: "Any", priority_name: "All"});
             this.priorities = results;
         }, error =>  {
             alert(error);
         });
 
-        this.optionsClientService.getTicketswimlaneTypes().then(results => {
+        this.ticketService.getTicketswimlaneTypes().then(results => {
             results.unshift({swimlane_id: "Any", swimlane_status: "All"});
             this.statuses = results;
+        }, error =>  {
+            alert(error);
+        });
+
+        this.ticketService.getproblemTypes().then(results => {
+            results.unshift({problem_type_id: "Any", problem_type_name: "All"});
+            this.problemTypes = results;
         }, error =>  {
             alert(error);
         });

@@ -80,6 +80,7 @@ import {ProductService} from "./services/products.service";
 import {TicketFilterComponent} from "./pages/developer/ticketSelection/ticketFilter/ticketFilter.component";
 import {OverdueTicketsComponent} from "./pages/dashboard/overdue-tickets/overdue-tickets.component";
 import {ActiveTicketsComponent} from "./pages/dashboard/active-tickets/active-tickets.component";
+import {EmailService} from "./services/email.service";
 
 
 //when creating a component, add it here
@@ -110,6 +111,7 @@ import {ActiveTicketsComponent} from "./pages/dashboard/active-tickets/active-ti
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
         ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService, TicketService, ProductService
+        ,EmailService
     ],
     bootstrap: [AppComponent],
 })

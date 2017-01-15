@@ -20,6 +20,7 @@ export class TicketFilterComponent {
     @Input() products: any[];
     @Input() priorities: any[];
     @Input() statuses: any[];
+    @Input() problemTypes:any[];
     @Output() onStateChange: EventEmitter<any> = new EventEmitter();
 
     onProductChange(productId: any): void{
