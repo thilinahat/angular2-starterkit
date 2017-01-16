@@ -15,6 +15,7 @@ export class DeveloperSidenavigationComponent {
 
     private Navitems: Navitem[] = [
         {name:"Tickets",  path:"tickets", icon:"content_paste",isactive:false},
+        {name:"Change Credentials",  path:"/change/credentials", icon:"vpn_key", isactive:false},
         {name:"Logout",  path:"/logout", icon:"exit_to_app", isactive:false},
     ];
 

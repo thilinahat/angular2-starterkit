@@ -1,3 +1,11 @@
+.sidebar .logo, .off-canvas-sidebar .logo {
+    padding: 5px 15px;
+}
+
+.sidebar .nav, .off-canvas-sidebar .nav {
+    margin-top: 10px;
+}
+
 .logged-in-user{
     margin-top: 10px;
     /* width: 100%; */
