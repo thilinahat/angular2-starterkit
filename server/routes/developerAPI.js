@@ -61,6 +61,7 @@ router.post('/tickets/with-count',  function (req, res) {
 
     const offset = 0;
 
+    //console.log(productFilter);
     async.parallel({
         tickets: function(callback) {
 
@@ -86,6 +87,7 @@ router.post('/tickets/with-count',  function (req, res) {
             sql = sql + ' ORDER BY `tickets`.`ticket_id` DESC ' +
                 'LIMIT ' + offset + ',' + TICKETS_PER_PAGE;
 
+            //console.log(sql);
             mysqlConnectionPool.getConnection(function(err, connection) {
                 connection.query(sql, function (error, results) {
                     if (error) {
@@ -107,13 +109,14 @@ router.post('/tickets/with-count',  function (req, res) {
                 ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
                 ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
                 ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
-                ' WHERE ' +
+                ' WHERE '
                 + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter ;
 
             if(req.decoded.role == 'DEVELOPER') {
                 sql = sql + ' AND ' + ' `tickets`.`assignee_id`=' + req.decoded.uid;
             }
 
+            //console.log(sql);
             mysqlConnectionPool.getConnection(function(err, connection) {
                 connection.query(sql, function (error, results) {
                     if (error) {
