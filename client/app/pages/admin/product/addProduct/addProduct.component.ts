@@ -7,7 +7,7 @@ import {ProductManagementService} from '../../../../services/product.service';
 @Component({
     selector: 'add-main-product',
     templateUrl: 'addProduct.template.html',
-    styles: [],
+    styles: ['.form-container{margin-top: 25px}'],
 })
 
 export class AddMainProductComponent {
