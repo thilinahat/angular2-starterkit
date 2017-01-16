@@ -81,6 +81,23 @@ class UserService {
         });
     }
 
+    unblockOperatorOrDeveloperOrAdmin(user) {
+        return new Promise((fulfill, reject) => {
+            mysqlConnectionPool.getConnection(function (err, connection) {
+                const sql = 'UPDATE ' + user.role + ' SET blocked = false WHERE name = ?';
+                const values = [user.name];
+
+                connection.query(sql, values, function (err, results) {
+                    if (err) {
+                        reject(err);
+                    }
+                    fulfill();
+                });
+            });
+
+        });
+    }
+
 }
 
 module.exports = new UserService();

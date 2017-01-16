@@ -114,6 +114,21 @@ router.get('/users/unblocked/:role',  function (req, res) {
     });
 });
 
+// route to get all blocked users of a specific role
+router.get('/users/blocked/:role',  function (req, res) {
+    const table = req.params.role;
+    mysqlConnectionPool.getConnection(function (err, connection) {
+        const sql = 'SELECT name FROM ' + table + ' WHERE blocked=true';
+        connection.query(sql, function (err, results) {
+            if (err) {
+                return res.sendStatus(400);
+            } else {
+                res.json(results);
+            }
+        });
+    });
+});
+
 // route to get developers
 router.get('/users/developers',  function (req, res) {
     mysqlConnectionPool.getConnection(function (err, connection) {
@@ -151,6 +166,20 @@ router.post('/user/block',  function (req, res) {
     }, err => {
         return res.status(406).json({
             status: 'Failed to block ' + user.name,
+            message: err
+        });
+    });
+});
+
+// route to unblock operators, developers
+router.post('/user/unblock',  function (req, res) {
+    const user = req.body.user;
+    UserService.unblockOperatorOrDeveloperOrAdmin(user).then(response => {
+        res.status(200).json({
+            message: user.name + ' Unblocked Successfully'});
+    }, err => {
+        return res.status(406).json({
+            status: 'Failed to unblock ' + user.name,
             message: err
         });
     });

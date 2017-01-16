@@ -17,6 +17,7 @@ import {RoleManagementComponent} from "./pages/admin/role/role.component";
 import {RoleManagementHeaderComponent} from "./pages/admin/role/header/header.component";
 import {AddUserComponent} from "./pages/admin/role/addUser/addUser.component";
 import {BlockUserComponent} from "./pages/admin/role/blockUser/blockUser.component";
+import {UnblockUserComponent} from "./pages/admin/role/unblockUser/unblockUser.component";
 import {ProductComponent} from "./pages/admin/product/product.component";
 import {ProductHeaderComponent} from "./pages/admin/product/header/header.component";
 import {AddMainProductComponent} from "./pages/admin/product/addProduct/addProduct.component";
@@ -112,7 +113,7 @@ import {AllProductsComponent} from "./pages/admin/product/allProducts/allProduct
         OverdueTicketsComponent , ActiveTicketsComponent, PaginationComponent,
         TicketFilterComponent,SingleTicketComponent, EditTicketsComponent, PaginationComponent,
         CommentsComponent, AllUsersComponent, AllOperatorsComponent, AllDevelopersComponent,
-        AllProductsComponent
+        AllProductsComponent, UnblockUserComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
         ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService, TicketService, ProductService

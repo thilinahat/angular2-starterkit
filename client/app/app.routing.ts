@@ -13,6 +13,7 @@ import {TicketSelectionComponent} from "./pages/developer/ticketSelection/ticket
 import {RoleManagementComponent} from "./pages/admin/role/role.component";
 import {AddUserComponent} from "./pages/admin/role/addUser/addUser.component";
 import {BlockUserComponent} from "./pages/admin/role/blockUser/blockUser.component";
+import {UnblockUserComponent} from "./pages/admin/role/unblockUser/unblockUser.component";
 import {ProductComponent} from "./pages/admin/product/product.component";
 import {AddMainProductComponent} from "./pages/admin/product/addProduct/addProduct.component";
 import {EditProductComponent} from "./pages/admin/product/editProduct/editProduct.component";
@@ -99,6 +100,7 @@ const routes: Routes = [
                     { path: '', redirectTo: 'add', pathMatch: 'full' },
                     { path: 'add', component: AddUserComponent },
                     { path: 'block', component: BlockUserComponent },
+                    { path: 'unblock', component: UnblockUserComponent },
                     { path: 'all', component: AllUsersComponent },
                 ]
             },

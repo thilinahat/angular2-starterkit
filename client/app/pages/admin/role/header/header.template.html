@@ -9,20 +9,26 @@
                         <ul class="nav nav-tabs" data-tabs="tabs">
                             <li routerLinkActive="active">
                                 <a [routerLink]="['add']" >
-                                    <i class="material-icons">add</i>
+                                    <i class="material-icons">add_circle</i>
                                     Add User
-                                    <div class="ripple-container"></div></a>
-                            </li>
-                            <li routerLinkActive="active">
-                                <a [routerLink]="['block']">
-                                    <i class="material-icons">block</i>
-                                    Block User
                                     <div class="ripple-container"></div></a>
                             </li>
                             <li routerLinkActive="active">
                                 <a [routerLink]="['all']" >
                                     <i class="material-icons">supervisor_account</i>
                                     All Users
+                                    <div class="ripple-container"></div></a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['block']">
+                                    <i class="material-icons">do_not_disturb_on</i>
+                                    Block User
+                                    <div class="ripple-container"></div></a>
+                            </li>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['unblock']">
+                                    <i class="material-icons">do_not_disturb_off</i>
+                                    Unblock User
                                     <div class="ripple-container"></div></a>
                             </li>
                         </ul>
