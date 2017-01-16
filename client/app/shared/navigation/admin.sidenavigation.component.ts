@@ -21,6 +21,7 @@ export class AdminSidenavigationComponent {
         {name:"Roles",  path:"roles", icon:"group", isactive:false},
         {name:"Products",  path:"products", icon:"shopping_cart", isactive:false},
         {name:"Email Templates",  path:"mail-templates", icon:"email", isactive:false},
+        {name:"Change Credentials",  path:"/change/credentials", icon:"vpn_key", isactive:false},
         {name:"Logout",  path:"/logout", icon:"exit_to_app", isactive:false},
     ];
 

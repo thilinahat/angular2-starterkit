@@ -42,7 +42,6 @@ router.use(function (req, res, next) {
     }
 });
 
-
 // route to get tickets and ticket count assigned to developer
 router.post('/tickets/with-count',  function (req, res) {
 
@@ -62,156 +61,7 @@ router.post('/tickets/with-count',  function (req, res) {
 
     const offset = 0;
 
-    async.parallel({
-        tickets: function(callback) {
-
-            var sql
-            if(req.decoded.role == 'DEVELOPER'){
-                sql = 'SELECT `tickets`.`summary`, `tickets`.`description`, `tickets`.`ticket_id`, `priorities`.`priority_name`, `priorities`.`color`, `ticketswimlane`.`swimlane_status`, `ticketswimlane`.`swimlane_color`, `problem_types`.`problem_type_name`, `problem_types`.`problem_type_color` ' +
-                    ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
-                    ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
-                    ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
-                    ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
-                    ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
-                    ' WHERE `tickets`.`assignee_id`=' + req.decoded.uid +  ' AND ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter +
-                    ' LIMIT ' + offset + ',' + TICKETS_PER_PAGE;
-            }
-            else{
-                sql = 'SELECT `tickets`.`summary`, `tickets`.`description`, `tickets`.`ticket_id`, `priorities`.`priority_name`, `priorities`.`color`, `ticketswimlane`.`swimlane_status`, `ticketswimlane`.`swimlane_color`, `problem_types`.`problem_type_name`, `problem_types`.`problem_type_color` ' +
-                    ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
-                    ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
-                    ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
-                    ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
-                    ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
-                    ' WHERE ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter +
-                    ' LIMIT ' + offset + ',' + TICKETS_PER_PAGE;
-            }
-
-
-            mysqlConnectionPool.getConnection(function(err, connection) {
-                connection.query(sql, function (error, results) {
-                    if (error) {
-                        console.log(error);
-                        callback(error, null);
-                    } else
-                        callback(null, results);
-
-                });
-
-                connection.release();
-            });
-        },
-        count: function(callback) {
-
-            var sql
-            if(req.decoded.role == 'DEVELOPER'){
-                sql = 'SELECT  COUNT(`tickets`.`ticket_id`) as count ' +
-                    ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
-                    ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
-                    ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
-                    ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
-                    ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
-                    ' WHERE `tickets`.`assignee_id`=' + req.decoded.uid + ' AND ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter ;
-
-            }
-            else{
-                sql = 'SELECT  COUNT(`tickets`.`ticket_id`) as count ' +
-                    ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
-                    ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
-                    ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
-                    ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
-                    ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
-                    ' WHERE ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter ;
-
-            }
-
-            mysqlConnectionPool.getConnection(function(err, connection) {
-                connection.query(sql, function (error, results) {
-                    if (error) {
-                        console.log(error);
-                        callback(error, null);
-                    } else
-                        callback(null, Math.ceil(results[0].count/TICKETS_PER_PAGE));
-
-                });
-
-                connection.release();
-            });
-        }
-    }, function(err, results) {  // after matching social media and and government profiles
-        if (err)
-            res.send(err);
-
-        res.json(results);
-    });
-});
-
-// route to get tickets assigned to developer
-router.post('/tickets',  function (req, res) {
-
-    const state = req.body.state;  // state of product, priority, status
-    const TICKETS_PER_PAGE = 2;
-
-    let productFilter = 1;
-    let priorityFilter = 1;
-    let statusFilter = 1;
-
-    if(state.productID != "Any")
-        productFilter = '`products`.`product_Id`=' + state.productID;
-    if(state.priorityID != "Any")
-        priorityFilter = '`tickets`.`priority_id`=' + state.priorityID;
-    if(state.statusID != "Any")
-        statusFilter = '`tickets`.`swimlane_status_id`=' + state.statusID;
-
-    const offset = (state.page - 1) * TICKETS_PER_PAGE;
-
-    var sql = 'SELECT `tickets`.`summary`, `tickets`.`description`, `tickets`.`ticket_id`, `priorities`.`priority_name`,`priorities`.`color`, `ticketswimlane`.`swimlane_status`, `ticketswimlane`.`swimlane_color`, `problem_types`.`problem_type_name`, `problem_types`.`problem_type_color` ' +
-        ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
-        ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
-        ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
-        ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
-        ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
-        ' WHERE `tickets`.`assignee_id`=' + req.decoded.uid + ' AND ' + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter +
-        ' ORDER BY `tickets`.`ticket_id` DESC '+
-        ' LIMIT ' + offset + ',' + TICKETS_PER_PAGE;
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-        connection.query(sql, function (error, results) {
-            if (error) {
-                console.log(error);
-                res.status(400).json({
-                    error: error
-                });
-            } else
-                res.json(results);
-
-        });
-
-        connection.release();
-    });
-});
-
-
-/*
-// route to get tickets and ticket count assigned to developer
-router.post('/tickets/with-count',  function (req, res) {
-
-    const state = req.body.state;  // state of product, priority, status
-    const TICKETS_PER_PAGE = 2;
-
-    let productFilter = 1;
-    let priorityFilter = 1;
-    let statusFilter = 1;
-
-    if(state.productID != "Any")
-        productFilter = '`products`.`product_Id`=' + state.productID;
-    if(state.priorityID != "Any")
-        priorityFilter = '`tickets`.`priority_id`=' + state.priorityID;
-    if(state.statusID != "Any")
-        statusFilter = '`tickets`.`swimlane_status_id`=' + state.statusID;
-
-    const offset = 0;
-
+    //console.log(productFilter);
     async.parallel({
         tickets: function(callback) {
 
@@ -229,17 +79,15 @@ router.post('/tickets/with-count',  function (req, res) {
                 ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
                 ' INNER JOIN `client` ON `tickets`.`client_id`=`client`.`client_id`' +
                 ' WHERE '
-                + priorityFilter +  ' AND ' +  productFilter+ ' AND ' +  statusFilter
-                + ' AND ' +   ' `tickets`.`assignee_id`=' + req.decoded.uid
-                + ' LIMIT ' + offset + ',' + TICKETS_PER_PAGE;
-/!*            if(req.decoded.role == 'DEVELOPER')
+                + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter ;
+
+            if(req.decoded.role == 'DEVELOPER')
                 sql =  sql + ' AND ' +   ' `tickets`.`assignee_id`=' + req.decoded.uid
 
             sql = sql + ' ORDER BY `tickets`.`ticket_id` DESC ' +
-                'LIMIT ' + offset + ',' + TICKETS_PER_PAGE;*!/
+                'LIMIT ' + offset + ',' + TICKETS_PER_PAGE;
 
-            console.log(sql);
-
+            //console.log(sql);
             mysqlConnectionPool.getConnection(function(err, connection) {
                 connection.query(sql, function (error, results) {
                     if (error) {
@@ -261,14 +109,14 @@ router.post('/tickets/with-count',  function (req, res) {
                 ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
                 ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
                 ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
-                ' WHERE ' +
-                + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter
-                + ' AND ' + ' `tickets`.`assignee_id`=' + req.decoded.uid;
+                ' WHERE '
+                + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter ;
 
-         /!*   if(req.decoded.role == 'DEVELOPER') {
+            if(req.decoded.role == 'DEVELOPER') {
                 sql = sql + ' AND ' + ' `tickets`.`assignee_id`=' + req.decoded.uid;
-            }*!/
+            }
 
+            //console.log(sql);
             mysqlConnectionPool.getConnection(function(err, connection) {
                 connection.query(sql, function (error, results) {
                     if (error) {
@@ -320,16 +168,14 @@ router.post('/tickets',  function (req, res) {
             ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
             ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
             ' INNER JOIN `client` ON `tickets`.`client_id`=`client`.`client_id`' +
-            ' WHERE ' +
-             productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter ;
+            ' WHERE '
+            + productFilter +  ' AND ' + priorityFilter + ' AND ' +  statusFilter ;
 
     if(req.decoded.role == 'DEVELOPER') {
         sql = sql + ' AND ' + ' `tickets`.`assignee_id`=' + req.decoded.uid;
     }
         sql = sql + ' ORDER BY `tickets`.`ticket_id` DESC ' +
         'LIMIT ' + offset + ',' + TICKETS_PER_PAGE;
-
-    console.log(sql);
 
     mysqlConnectionPool.getConnection(function(err, connection) {
         connection.query(sql, function (error, results) {
@@ -347,5 +193,4 @@ router.post('/tickets',  function (req, res) {
     });
 });
 
-*/
 module.exports = router;
