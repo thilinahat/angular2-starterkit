@@ -7,7 +7,7 @@ import {ActivatedRoute} from "@angular/router";
 @Component({
     selector: 'developer',
     templateUrl: 'developer.template.html',
-    styleUrls: [],
+    styles: ['.main-panel{padding: 0 50px;}'],
 })
 
 export class DeveloperComponent {

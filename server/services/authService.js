@@ -36,7 +36,8 @@ class AuthService {
 
                                 const response = {
                                     token: token,
-                                    redirectURL: redirectURL
+                                    redirectURL: redirectURL,
+                                    name: blockedResult[0].name
                                 };
                                 fulfill(response);
                             }

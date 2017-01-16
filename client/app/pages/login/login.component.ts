@@ -18,6 +18,7 @@ export class LoginComponent {
 
     onSubmit(form: any): void {
         this.authService.login(form).then(res => {
+                localStorage.setItem("CRM_USERNAME", res.name);
                 this.router.navigate([res.redirectURL]);
             }, error => {
             alert('Invalid Username or Password');

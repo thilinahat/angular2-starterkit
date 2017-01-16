@@ -1,0 +1,16 @@
+.logged-in-user{
+    margin-top: 10px;
+    /* width: 100%; */
+    text-align: center;
+}
+
+.logged-in-user>i{
+    color: #9C27B0;
+}
+
+.logged-in-user>span{
+    display: block;
+    /* margin-top: 5px; */
+    /* margin-left: 5px; */
+    text-transform: capitalize;
+}

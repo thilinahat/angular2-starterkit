@@ -48,6 +48,7 @@ import {AllUsersComponent} from "./pages/admin/role/allUsers/allUsers.component"
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
+    { path: 'logout', component: LoginComponent, canActivate: [AuthGuard] },
     { path: 'change/credentials', component: ChangeCredentialsComponent, canActivate: [AuthGuard] },
 
     { path: 'operator', component: OperatorComponent, canActivate: [AuthGuard],

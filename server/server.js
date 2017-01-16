@@ -61,6 +61,7 @@ app.use(webpackHotMiddleWare(compiler, {
 
 app.use('/', index);
 app.use('/login', index);
+app.use('/logout', index);
 app.use('/customer', index);
 app.use('/operator/*', index);
 app.use('/admin/*', index);

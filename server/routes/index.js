@@ -5,16 +5,27 @@ var jwt = require('jsonwebtoken');
 var AuthService = require('../services/authService');
 var config = require('../../config');
 
+// route for user login
 router.post('/authenticate', function(req, res, next){
     const user = req.body.user;
     AuthService.verifyUser(user).then(response => {
         res.cookie('CRM_COOKIE', response.token, { maxAge: 3600 * 24 * 1000});
         res.status(200).json({
-            redirectURL: response.redirectURL
+            redirectURL: response.redirectURL,
+            name: response.name
         });
     }, error => {
         res.sendStatus(403);
     })
+});
+
+// route for user log out
+router.post('/user/logout', function(req, res, next){
+    const token = req.cookies['CRM_COOKIE'];
+    if (token) {
+        res.clearCookie('CRM_COOKIE');
+    }
+    res.send(200);
 });
 
 router.post('/verify/user', function(req, res, next){

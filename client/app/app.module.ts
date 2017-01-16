@@ -28,8 +28,9 @@ import {AddMailTemplateComponent} from "./pages/admin/mailTemplates/addTemplate/
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {TicketsComponent} from "./pages/tickets/tickets.componet";
 import {ReportsComponent} from "./pages/reports/reports.component";
-import {SidenavigationComponent} from "./shared/navigation/sidenavigation.component";
+import {OperatorSidenavigationComponent} from "./shared/navigation/operator.sidenavigation.component";
 import {AdminSidenavigationComponent} from "./shared/navigation/admin.sidenavigation.component";
+import {DeveloperSidenavigationComponent} from "./shared/navigation/developer.sidenavigation.component";
 
 
 import { ClientService } from './services/client.service';
@@ -93,7 +94,7 @@ import {AllProductsComponent} from "./pages/admin/product/allProducts/allProduct
     imports: [BrowserModule, FormsModule, HttpModule, AppRoutingModule, MainPipeModule, Ng2Bs3ModalModule,SimpleNotificationsModule],
     declarations: [AppComponent, ClientsComponent,
         DashboardComponent, TicketsComponent,
-        ReportsComponent, SidenavigationComponent,
+        ReportsComponent, OperatorSidenavigationComponent,
         NavbarheaderComponent, AddclientsComponent,
         ClientsHeaderComponent,SingleClientComponent,
         MailComponent, LoginComponent, CustomersComponent,
@@ -113,7 +114,7 @@ import {AllProductsComponent} from "./pages/admin/product/allProducts/allProduct
         OverdueTicketsComponent , ActiveTicketsComponent, PaginationComponent,
         TicketFilterComponent,SingleTicketComponent, EditTicketsComponent, PaginationComponent,
         CommentsComponent, AllUsersComponent, AllOperatorsComponent, AllDevelopersComponent,
-        AllProductsComponent, UnblockUserComponent
+        AllProductsComponent, UnblockUserComponent, DeveloperSidenavigationComponent
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
         ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService, TicketService, ProductService
