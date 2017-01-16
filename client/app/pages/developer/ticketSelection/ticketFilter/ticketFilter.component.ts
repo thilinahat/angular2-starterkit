@@ -25,6 +25,7 @@ export class TicketFilterComponent {
 
     onProductChange(productId: any): void{
         this.productID = productId;
+        console.log(typeof (productId));
         this.onStateChange.next({
             productID: this.productID,
             priorityID: this.priorityID,
@@ -34,6 +35,7 @@ export class TicketFilterComponent {
 
     onPriorityChange(priorityId: any): void{
         this.priorityID = priorityId;
+        console.log(typeof (priorityId));
         this.onStateChange.next({
             productID: this.productID,
             priorityID: this.priorityID,
