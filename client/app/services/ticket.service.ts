@@ -20,6 +20,7 @@ export class TicketService {
     private highPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/high-priority-tickets-for-dashboard"
     private mediumPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/medium-priority-tickets-for-dashboard"
     private lowPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/low-priority-tickets-for-dashboard"
+    private numberOfResolvedTickets7URL = this.ticketAPIurl + "/tickets/number-of-resolved-tickets-in-last-7-days";
 
     private ticketsChangeStatusUrl = this.commonAPIurl + "/ticket/change-status";
     private ticketsChangePriorityUrl = this.commonAPIurl + "/ticket/change-priority";
@@ -31,6 +32,16 @@ export class TicketService {
 
         //noinspection TypeScriptUnresolvedFunction
         return this.http.get(this.numberOfActiveTicketsURL)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+
+    }
+
+    getNumberOfResolvedTicketsInLast7() : Promise<any[]>{
+
+        //noinspection TypeScriptUnresolvedFunction
+        return this.http.get(this.numberOfResolvedTickets7URL)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);

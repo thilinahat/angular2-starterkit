@@ -13,6 +13,8 @@ export class DashboardComponent {
     private name: String = "DashBoard"
     numberOfActiveTickets:any = {};
     numberOfExpiringTills:any = {};
+    numberOfresolvedTickets7:any = {};
+
     errorMessage:string;
 
     ngOnInit(){
@@ -22,7 +24,12 @@ export class DashboardComponent {
             error =>  this.errorMessage = <any>error
         )
 
-        this.productService.getNumberOfActiveTickets().then(
+        this.ticketService.getNumberOfResolvedTicketsInLast7().then(
+            numberOfresolvedTickets7 => this.numberOfresolvedTickets7 = numberOfresolvedTickets7,
+            error =>  this.errorMessage = <any>error
+        )
+
+        this.productService.getNumberOfExpiringTills().then(
             numberOfExpiringTills => this.numberOfExpiringTills = numberOfExpiringTills,
             error =>  this.errorMessage = <any>error
 

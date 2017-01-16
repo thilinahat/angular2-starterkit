@@ -10,7 +10,7 @@ export class ProductService{
     private numberOfExpiringTillsURL = this.ticketAPIurl +"/tickets/number-of-expiring-tills";
 
 
-    getNumberOfActiveTickets() : Promise<any[]>{
+    getNumberOfExpiringTills() : Promise<any[]>{
 
         //noinspection TypeScriptUnresolvedFunction
         return this.http.get(this.numberOfExpiringTillsURL)

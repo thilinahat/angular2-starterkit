@@ -1378,7 +1378,7 @@ router.get('/client/data/:clientId/purchased-items', function (req, res, next) {
 });
 
 //get number of active tills
-//To do move thic to commen
+
 router.get('/tickets/number-of-active-tickets', function (req, res, next) {
 
 
@@ -1413,7 +1413,7 @@ router.get('/tickets/number-of-active-tickets', function (req, res, next) {
 
 
 //get number of expiring tills in next month and expired in last 30 days
-//To do move thic to commen
+
 router.get('/tickets/number-of-expiring-tills', function (req, res, next) {
 
 
@@ -1446,6 +1446,45 @@ router.get('/tickets/number-of-expiring-tills', function (req, res, next) {
         connection.release();
     });
 });
+
+//get number of resolved tickets in last seven days
+router.get('/tickets/number-of-resolved-tickets-in-last-7-days', function (req, res, next) {
+
+
+    const SQL = "SELECT COUNT(DISTINCT `tickets`.`ticket_id`) AS resolved_ticket_count_in_7 " +
+        " FROM `tickets` INNER JOIN `ticket_swimlane_log` " +
+        " on `tickets`.`ticket_id` = `ticket_swimlane_log`.`ticket_id` " +
+        " and `tickets`.`swimlane_status_id` = `ticket_swimlane_log`.`swimlane_status_id` " +
+        " WHERE `tickets`.`swimlane_status_id` = 7 " +
+        " and `ticket_swimlane_log`.`loggedTime` between adddate(now(),-7) and now()";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results[0]);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
 
 //get overdue support tickets
 //To do: move this to commen
