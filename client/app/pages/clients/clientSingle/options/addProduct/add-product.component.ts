@@ -45,6 +45,10 @@ export class AddProductComponent {
 
     subscription:Subscription;
 
+    noPurchases:boolean = false;
+    purchasedList:any[] = [];
+
+
     ngOnDestroy() {
         // prevent memory leak when component is destroyed
         this.subscription.unsubscribe();
@@ -80,15 +84,23 @@ export class AddProductComponent {
             error =>  this.errorMessage = <any>error );
 
         this.getBranches();
+        this.loadPurchasedProducts();
+
     }
 
     constructor(
         private route:ActivatedRoute,
         private clientService: OptionsClientService,
-        private dataHolder: ClientDataSharingService
+        private dataHolder: ClientDataSharingService,
+        private optionsClientService: OptionsClientService,
+
 
     ){    }
 
+    onTillAdd(any:any){
+            console.log("emit found");
+            this.loadPurchasedProducts();
+    }
     showAddnewProduct = function () {
         this.showAddNewProduct = !this.showAddNewProduct;
     }
@@ -184,6 +196,21 @@ export class AddProductComponent {
     }
 
     getInitialData(client:any){
+
+    }
+
+    loadPurchasedProducts(){
+
+        this.optionsClientService.getClientPurchasedItems(this.id).
+        then(purchasedList => {
+                this.purchasedList = purchasedList;
+                this.noPurchases = false;
+            }
+            ,
+            error =>  {
+                this.errorMessage = <any>error;
+                this.noPurchases = true;
+            });
 
     }
 }

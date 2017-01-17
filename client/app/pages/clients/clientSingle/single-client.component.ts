@@ -28,11 +28,12 @@ export class SingleClientComponent {
 
         this.sub = this.route.params.subscribe(params => {
             this.id = params['clientId'];
+            this.clientService.getClientData(this.id).
+            then(clientdata => this.dataHolder.changeClient(clientdata),
+                error =>  this.errorMessage = <any>error );
         });
 
-        this.clientService.getClientData(this.id).
-        then(clientdata => this.dataHolder.changeClient(clientdata),
-            error =>  this.errorMessage = <any>error );
+
 
 
         this.subscription = this.dataHolder.clientData$.subscribe(

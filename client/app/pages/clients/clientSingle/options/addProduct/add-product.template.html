@@ -96,7 +96,8 @@
 
                         <div class="row border" >
 
-                            <add-till [branch]="selectedBranchName" [productId]="selectedProductId" [product]="selectedProductName" [branchId]="selectedBranchId"></add-till>
+                            <add-till [branch]="selectedBranchName" [productId]="selectedProductId" [product]="selectedProductName"
+                                      [branchId]="selectedBranchId" (onTillAdd) = "onTillAdd($event)"></add-till>
 <!--
                             <add-till></add-till>
 -->
@@ -105,7 +106,7 @@
 
                         <div class="row border" >
 
-                            <purchased-products ></purchased-products>
+                            <purchased-products  [client]="client" [purchasedList]="purchasedList" [noPurchases]="noPurchases" ></purchased-products>
 
                         </div>
 

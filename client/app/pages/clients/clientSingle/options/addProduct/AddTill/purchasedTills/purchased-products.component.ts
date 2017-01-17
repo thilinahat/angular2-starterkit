@@ -14,49 +14,13 @@ import {ClientDataSharingService} from "../../../../../../../shared/data/client-
 
 export class SingleClientPurchasedProductsComponent {
 
+    @Input()
     client:any;
-    subscription:Subscription;
-    errorMessage:String;
-
+    @Input()
     purchasedList:any[] = [];
     @Input()
     noPurchases:boolean;
 
 
-    ngOnInit() {
-
-        this.subscription = this.dataHolder.clientData$.subscribe(
-            client => {
-                this.client = client;
-                this.loadPurchasedProducts();
-            }
-        )
-    }
-
-    ngOnDestroy() {
-        // prevent memory leak when component is destroyed
-        this.subscription.unsubscribe();
-    }
-
-    constructor(
-        private optionsClientService: OptionsClientService,
-        private dataHolder: ClientDataSharingService,
-
-    ){    }
-
-
-    loadPurchasedProducts(){
-        this.optionsClientService.getClientPurchasedItems(this.client.client_id).
-        then(purchasedList => {
-            this.purchasedList = purchasedList;
-            this.noPurchases = false;
-            }
-            ,
-            error =>  {
-            this.errorMessage = <any>error;
-            this.noPurchases = true;
-        });
-
-    }
 }
 

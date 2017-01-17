@@ -1,4 +1,4 @@
-import {Component, Input,} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {OptionsClientService} from "../../options-client.service";
 import {Subscription} from "rxjs";
@@ -32,6 +32,7 @@ export class AddTillComponent {
     @Input()
     branchId:String;
 
+    @Output() onTillAdd = new EventEmitter<null>();
     noPurchases:boolean = false;
 
 
@@ -51,8 +52,7 @@ export class AddTillComponent {
     constructor(
         private route:ActivatedRoute,
         private clientService: OptionsClientService,
-        private dataHolder: ClientDataSharingService
-
+        private dataHolder: ClientDataSharingService,
 
     ){    }
 
@@ -92,10 +92,13 @@ export class AddTillComponent {
     }
 
     handleTillAdding(){
+        this.onTillAdd.emit(null);
         alert('till was successfully added');
-        this.noPurchases = false;
         this.productKey = null;
         this.expireDate = null;
         this.tillName = null;
+
     }
+
+
 }

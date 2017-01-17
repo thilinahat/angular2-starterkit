@@ -182,6 +182,27 @@ export class TicketService {
         });
     }
 
+    getSwimlaneHistory(ticketID: number): Promise<any> {
+
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const url = `${this.commonAPIurl}/swimlane-history`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, JSON.stringify({ticketID: ticketID}), {headers: headers})
+                .toPromise()
+                .then(response => {
+                    resolve(response.json());
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
+
 
     getPriorities():Promise<any>{
         var url = this.commonAPIurl +   "/priorities";
