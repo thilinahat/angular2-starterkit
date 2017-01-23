@@ -22,6 +22,7 @@ export class TillFilterComponent {
 
     ngOnInit(){
         this.client.company_name = 'Any';
+        this.client.client_id = 'Any';
     }
     onProductChange(productId: any): void{
         this.productID = productId;

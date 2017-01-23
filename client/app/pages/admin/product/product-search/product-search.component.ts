@@ -30,7 +30,7 @@ export class ProductSearchComponent{
             error =>  this.errorMessage = <any>error );
 
         this.productManagementService.getAllProducts().then(results => {
-            results.unshift({product_Id: "Any", name: "All"});
+            results.unshift({product_Id: "Any", name: "Any"});
             this.products = results;
         }, error => {
             alert(error);
