@@ -56,7 +56,14 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent},
-            { path: 'tickets', component: TicketsComponent },
+            { path: 'tickets', component: TicketsComponent,
+                children: [
+                    { path: '', redirectTo: 'search', pathMatch: 'full' },
+                    { path: 'search', component: TicketSelectionComponent },
+                    { path: 'add', component: AddNewTicketComponent },
+
+                ]
+            },
             { path: 'tickets/:ticketId', component: SingleTicketComponent },
             { path: 'tickets/:ticketId/edit', component: EditTicketsComponent },
 
