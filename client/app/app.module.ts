@@ -87,6 +87,8 @@ import {AllUsersComponent} from "./pages/admin/role/allUsers/allUsers.component"
 import {AllOperatorsComponent} from "./pages/admin/role/allUsers/Operators/all-operators.component";
 import {AllDevelopersComponent} from "./pages/admin/role/allUsers/Divelopers/all-developers.component";
 import {AllProductsComponent} from "./pages/admin/product/allProducts/allProduct.component";
+import {TicketsHeaderComponent} from "./pages/tickets/ticketsHeader/tickets-header.component";
+import {AddNewTicketComponent} from "./pages/tickets/add-new-ticket.component";
 
 
 //when creating a component, add it here
@@ -114,7 +116,9 @@ import {AllProductsComponent} from "./pages/admin/product/allProducts/allProduct
         OverdueTicketsComponent , ActiveTicketsComponent, PaginationComponent,
         TicketFilterComponent,SingleTicketComponent, EditTicketsComponent, PaginationComponent,
         CommentsComponent, AllUsersComponent, AllOperatorsComponent, AllDevelopersComponent,
-        AllProductsComponent, UnblockUserComponent, DeveloperSidenavigationComponent
+        AllProductsComponent, UnblockUserComponent, DeveloperSidenavigationComponent, TicketsHeaderComponent,
+        AddNewTicketComponent
+
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,
         ClienthistoryService, RoleManagementService, ProductManagementService, SingleTicketService, TicketService, ProductService

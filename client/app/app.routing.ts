@@ -45,6 +45,7 @@ import {SingleClientTicketsComponent} from "./pages/clients/clientSingle/options
 import {SingleTicketComponent} from "./pages/tickets/singleTicket/single-ticket.component";
 import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/ticket-edit.component";
 import {AllUsersComponent} from "./pages/admin/role/allUsers/allUsers.component";
+import {AddNewTicketComponent} from "./pages/tickets/add-new-ticket.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -92,7 +93,15 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent},
-            { path: 'tickets', component: TicketsComponent},
+            { path: 'tickets', component: TicketsComponent,
+
+                children: [
+                    { path: '', redirectTo: 'search', pathMatch: 'full' },
+                    { path: 'search', component: TicketSelectionComponent },
+                    { path: 'add', component: AddNewTicketComponent },
+
+                ]
+            },
             { path: 'tickets/:ticketId', component: SingleTicketComponent },
             { path: 'tickets/:ticketId/edit', component: EditTicketsComponent },
             { path: 'reports', component: ReportsComponent },

@@ -182,6 +182,7 @@ export class AddProductComponent {
     }
 
 
+
     onBranchChanged = function(){
 
         for (var branch of this.branches) {

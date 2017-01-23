@@ -39,7 +39,7 @@ export class SingleclientheaderComponent {
             {name:"add note",path:"/operator/clients/" + this.client.client_id + "/addnote", active:true},
             {name:"add product",path:"/operator/clients/" + this.client.client_id +"/addproduct", active:false},
             {name:"add ticket",path:"/operator/clients/" + this.client.client_id +"/addticket", active:false},
-            {name:"Send Mail",path:"/operator/clients/" + this.client.client_id +"/sendmail", active:false},
+            {name:"mails",path:"/operator/clients/" + this.client.client_id +"/sendmail", active:false},
             {name:"block",path:"/operator/clients/" + this.client.client_id +"/block", active:false},
         ];
     }

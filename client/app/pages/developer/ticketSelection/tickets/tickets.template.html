@@ -11,11 +11,22 @@
             ticketStatus.open()"><i class="material-icons">lock_outline</i>{{ticket.swimlane_status}}</div>
 
             <div class="added-date  pull-right">{{ticket.added_date_time }}</div>
-            <div class="status company-name"><a routerLink="../clients/{{ticket.client_id}}">Client : {{ticket.company_name}}</a></div>
+            <div *ngIf="route.snapshot.parent.parent.url == 'operator' || route.snapshot.parent.parent.url == 'admin'"
+                    class="status company-name"><a routerLink="../../clients/{{ticket.client_id}}">Client : {{ticket.company_name}}</a></div>
 
-            <div class="status status-btn pull-right"><a routerLink="../tickets/{{ticket.ticket_id}}"> <i class="material-icons">list</i>View more</a></div>
-            <div *ngIf="route.snapshot.parent.url == 'operator' || route.snapshot.parent.url == 'admin'"
-                 class="status status-btn pull-right"><a routerLink="../tickets/{{ticket.ticket_id}}/edit">
+            <div *ngIf="route.snapshot.parent.url == 'developer'"
+                    class="status company-name">Client : {{ticket.company_name}}</div>
+
+            <div *ngIf="route.snapshot.parent.url == 'developer' "
+                    class="status status-btn pull-right">
+                <a routerLink="../tickets/{{ticket.ticket_id}}"> <i class="material-icons">list</i>View more</a></div>
+
+            <div *ngIf="route.snapshot.parent.parent.url == 'operator' || route.snapshot.parent.parent.url == 'admin'"
+                    class="status status-btn pull-right">
+                <a routerLink="../{{ticket.ticket_id}}"> <i class="material-icons">list</i>View more</a></div>
+
+            <div *ngIf="route.snapshot.parent.parent.url == 'operator' || route.snapshot.parent.parent.url == 'admin'"
+                 class="status status-btn pull-right"><a routerLink="../{{ticket.ticket_id}}/edit">
                 <i class="material-icons">loop</i>Edit</a></div>
         </div>
         <div class="ticket-body">
@@ -25,7 +36,9 @@
             <p id="ticket-{{ticket.ticket_id}}" class="collapse">
                 <b>Description:</b> {{ticket.description}}
                 <br>
-                <a routerLink="../tickets/{{ticket.ticket_id}}">view more</a>
+                <a *ngIf="route.snapshot.parent.url == 'developer'" routerLink="../tickets/{{ticket.ticket_id}}">view more</a>
+                <a *ngIf="route.snapshot.parent.parent.url == 'operator' || route.snapshot.parent.parent.url == 'admin'"
+                   routerLink="../{{ticket.ticket_id}}">view more</a>
             </p>
         </div>
         <comments [ticketID]="ticket.ticket_id"></comments>

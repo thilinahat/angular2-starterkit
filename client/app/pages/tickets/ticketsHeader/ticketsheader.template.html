@@ -6,21 +6,23 @@
             <div class="card-header" data-background-color="purple">
                 <div class="nav-tabs-navigation">
                     <div class="nav-tabs-wrapper">
-
+                        <span class="nav-tabs-title">Clients:</span>
                         <ul class="nav nav-tabs" data-tabs="tabs">
                             <li routerLinkActive="active">
-                                <a routerLink="../searchplease" >
+                                <a [routerLink]="['search']">
                                     <i class="material-icons">search
                                     </i>
                                     Search
                                     <div class="ripple-container"></div></a>
                             </li>
 
-                            <li *ngFor="let header of headerItems" [class.active]="header.path === (currentactivepath) " routerLinkActive="active">
-                                <a routerLink="{{header.path}}">
-                                    <small>{{header.name}}</small>
-                                </a>
+                            <li routerLinkActive="active">
+                                <a [routerLink]="['add']" >
+                                    <i class="material-icons">add</i>
+                                    Add Ticket
+                                    <div class="ripple-container"></div></a>
                             </li>
+
                         </ul>
                     </div>
                 </div>
