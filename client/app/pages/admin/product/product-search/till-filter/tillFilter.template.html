@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="client_name">Client Name</label>
+            <select class="form-control" id="client_name"
+                    name="client" ngModel (change)="onClientChange($event.target.value) " [(ngModel)]="client.client_id" >
+                <option *ngFor="let client of clientNameAndIds" [value]="client.client_id">{{client.company_name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="client_id">Client Id</label>
+            <select class="form-control" id="client_id"
+                    name="client" ngModel (change)="onClientChange($event.target.value)" [(ngModel)]="client.client_id">
+                <option *ngFor="let client of clientNameAndIds" [value]="client.client_id">{{client.client_id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="product">Product</label>
+            <select class="form-control" id="product" name="product" ngModel (change)="onProductChange($event.target.value)" [(ngModel)]="productID">
+                <option *ngFor="let product of products" [value]="product.product_Id">{{product.name}}</option>
+            </select>
+        </div>
+    </div>
+</div>

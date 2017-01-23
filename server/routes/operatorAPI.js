@@ -1340,7 +1340,7 @@ router.get('/client/data/:clientId/tickets', function (req, res, next) {
 
 // route for change ticket priority - moved to common api
 
-//get till data
+//get till data of client
 router.get('/client/data/:clientId/purchased-items', function (req, res, next) {
 
 
@@ -1377,8 +1377,50 @@ router.get('/client/data/:clientId/purchased-items', function (req, res, next) {
     });
 });
 
-//get number of active tills
+//get till data
+router.post('/products/data', function (req, res, next) {
 
+    const tillFilterData = req.body.data;
+
+    console.log(tillFilterData)
+
+    let productFilter = 1;
+    let clientIdfilter = 1;
+
+    if(tillFilterData.productID != "Any")
+        productFilter = ' `till`.`product_Id` = ' + tillFilterData.productID;
+    if(tillFilterData.clientID != "Any")
+        clientIdfilter = ' `till`.`client_id` = ' + tillFilterData.clientID;
+
+
+    const SQL = "SELECT * FROM till "
+        + "inner join `client_till_log` on till.till_id = client_till_log.till_id "
+        + "inner join branch on till.branch_id = branch.branch_id "
+        + "inner join products on till.product_Id = products.product_Id"
+        + " WHERE " + productFilter + " and " + clientIdfilter;
+
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+                res.json(results);
+
+
+        });
+
+        connection.release();
+    });
+
+
+});
+
+//get number of active tills
 router.get('/tickets/number-of-active-tickets', function (req, res, next) {
 
 

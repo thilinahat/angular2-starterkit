@@ -1,4 +1,6 @@
-<ticket-filter [products]="products" [priorities]="priorities" [statuses]="statuses" [problemTypes]="problemTypes" (onStateChange)="onStateChange($event)"></ticket-filter>
+<ticket-filter [products]="products" [priorities]="priorities" [statuses]="statuses" [problemTypes]="problemTypes"
+               (onStateChange)="onStateChange($event)"></ticket-filter>
+
 <div class="">
     <developer-tickets [tickets]="tickets" (onTicketUpdate)="onTicketUpdate($event)"></developer-tickets>
 </div>

@@ -12,6 +12,7 @@ export class ProductManagementService {
 
     private adminAPIurl = 'api/admin';
     private commonAPIurl = 'api/common';
+    private operatorAPIurl = 'api/operator'
 
     addProduct(product: FormData): Promise<any> {
 
@@ -62,6 +63,30 @@ export class ProductManagementService {
             //noinspection TypeScriptUnresolvedFunction
             this.http
                 .get(url)
+                .toPromise()
+                .then(response => {
+                    resolve(response.json());
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
+
+    //
+
+
+    getFilterdTills(productFilterData: any): Promise<any> {
+
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const url = `${this.operatorAPIurl}/products/data`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, JSON.stringify({data: productFilterData}), {headers: headers})
                 .toPromise()
                 .then(response => {
                     resolve(response.json());

@@ -46,6 +46,7 @@ import {SingleTicketComponent} from "./pages/tickets/singleTicket/single-ticket.
 import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/ticket-edit.component";
 import {AllUsersComponent} from "./pages/admin/role/allUsers/allUsers.component";
 import {AddNewTicketComponent} from "./pages/tickets/add-new-ticket.component";
+import {ProductSearchComponent} from "./pages/admin/product/product-search/product-search.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -126,6 +127,8 @@ const routes: Routes = [
                     { path: '', redirectTo: 'add', pathMatch: 'full' },
                     { path: 'add', component: AddMainProductComponent },
                     { path: 'edit', component: EditProductComponent },
+                    { path: 'search', component: ProductSearchComponent },
+
                 ]
             },
             { path: 'mail-templates', component: MailTemplatesComponent,

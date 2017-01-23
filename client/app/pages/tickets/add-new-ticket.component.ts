@@ -57,24 +57,7 @@ export class AddNewTicketComponent {
 
         }
 
-        /*this.subscription = this.dataHolder.clientData$.subscribe(
-            client => {
-                this.client = client;
 
-                this.optionsClientService.getClientProducts(client.client_id).
-                then(products => this.products = products,
-                    error =>  this.errorMessage = <any>error );
-
-                this.optionsClientService.getBranches(client.client_id).
-                then(branches => this.branches = branches,
-                    error =>  this.errorMessage = <any>error );
-
-                this.optionsClientService.getTills(client.client_id).
-                then(tills => this.tills = tills,
-                    error =>  this.errorMessage = <any>error );
-
-            }
-        )*/
 
         this.optionsClientService.getProblemTypes().
         then(problemTypes => this.problemTypes = problemTypes,

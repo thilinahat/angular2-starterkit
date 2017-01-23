@@ -89,6 +89,9 @@ import {AllDevelopersComponent} from "./pages/admin/role/allUsers/Divelopers/all
 import {AllProductsComponent} from "./pages/admin/product/allProducts/allProduct.component";
 import {TicketsHeaderComponent} from "./pages/tickets/ticketsHeader/tickets-header.component";
 import {AddNewTicketComponent} from "./pages/tickets/add-new-ticket.component";
+import {ProductSearchComponent} from "./pages/admin/product/product-search/product-search.component";
+import {TillFilterComponent} from "./pages/admin/product/product-search/till-filter/till-filter.component";
+import {FilteredProductsComponent} from "./pages/admin/product/product-search/products/products.component";
 
 
 //when creating a component, add it here
@@ -117,7 +120,7 @@ import {AddNewTicketComponent} from "./pages/tickets/add-new-ticket.component";
         TicketFilterComponent,SingleTicketComponent, EditTicketsComponent, PaginationComponent,
         CommentsComponent, AllUsersComponent, AllOperatorsComponent, AllDevelopersComponent,
         AllProductsComponent, UnblockUserComponent, DeveloperSidenavigationComponent, TicketsHeaderComponent,
-        AddNewTicketComponent
+        AddNewTicketComponent, ProductSearchComponent, TillFilterComponent, FilteredProductsComponent
 
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,

@@ -6,7 +6,7 @@ import {Component} from "@angular/core";
 @Component({
     selector: 'product',
     templateUrl: './product.template.html',
-    styleUrls: [],
+    styleUrls: ['product.css'],
 })
 
 export class ProductComponent {
