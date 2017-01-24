@@ -21,6 +21,10 @@ export class OptionsClientService {
     private ticketsChangePriorityUrl = this.clientAPIurl + "/ticket/change-priority";
     private ticketsChangeStatusUrl = this.clientAPIurl + "/ticket/change-status";
 
+    //admin only
+    private supportTimegetUrl = 'api/admin/client/data/';
+    private supportTimeAddUrl = 'api/admin/client/add-time';
+
     private ticketsUrl = this.clientAPIurl +"/tickets";
     private commonAPIurl = 'api/common';
 
@@ -58,6 +62,14 @@ export class OptionsClientService {
 
     getTills(clientId:String):Promise<any>{
         var url = this.clientDataUrl + clientId + "/tills";
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getClientSupportTime(clientId:String):Promise<any>{
+        var url = this.supportTimegetUrl + clientId + "/supportTime";
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
@@ -193,6 +205,26 @@ export class OptionsClientService {
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
+    }
+
+    addTimeToClient(data: any): Promise<any> {
+
+        const url = `${this.supportTimeAddUrl}`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .post(url, data)
+                .toPromise()
+                .then(response => {
+                    resolve(response);
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
     }
 
     getClientPurchasedItems(clientId:String):Promise<any>{

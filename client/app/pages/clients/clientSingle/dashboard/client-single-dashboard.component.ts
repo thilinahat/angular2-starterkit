@@ -28,7 +28,7 @@ export class ClientSingleDashboardComponent {
 
     ngOnInit() {
 
-        this.sub = this.route.params.subscribe(params => {
+        this.sub = this.route.parent.params.subscribe(params => {
             this.id = params['clientId'];
         });
 

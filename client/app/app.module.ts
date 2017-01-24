@@ -54,7 +54,6 @@ import {ClientsHeaderComponent} from "./pages/clients/header/clients.header";
 import {SingleClientComponent} from "./pages/clients/clientSingle/single-client.component";
 import {MailComponent} from "./pages/clients/mail/mail.component";
 import {CustomersComponent } from "./pages/customers/customers.component";
-import {SingleclientheaderComponent} from "./pages/clients/clientSingle/singleclientheader/singleclientheader.component";
 import {AddCallComponent} from "./pages/clients/clientSingle/options/addCall/add-call.component";
 import {OptionsClientService} from "./pages/clients/clientSingle/options/options-client.service";
 import {AddNoteComponent} from "./pages/clients/clientSingle/options/addNote/add-note.component";
@@ -92,6 +91,7 @@ import {AddNewTicketComponent} from "./pages/tickets/add-new-ticket.component";
 import {ProductSearchComponent} from "./pages/admin/product/product-search/product-search.component";
 import {TillFilterComponent} from "./pages/admin/product/product-search/till-filter/till-filter.component";
 import {FilteredProductsComponent} from "./pages/admin/product/product-search/products/products.component";
+import {SupportTimeComponent} from "./pages/clients/clientSingle/options/supportTime/support-time.component";
 
 
 //when creating a component, add it here
@@ -103,7 +103,7 @@ import {FilteredProductsComponent} from "./pages/admin/product/product-search/pr
         NavbarheaderComponent, AddclientsComponent,
         ClientsHeaderComponent,SingleClientComponent,
         MailComponent, LoginComponent, CustomersComponent,
-        SingleclientheaderComponent, ClientdataComponent,
+        ClientdataComponent,
         ClienthistoryComponent,ClientproductComponent,
         AddCallComponent, AddNoteComponent,
         AddProductComponent, AddTicketeComponent,
@@ -120,7 +120,8 @@ import {FilteredProductsComponent} from "./pages/admin/product/product-search/pr
         TicketFilterComponent,SingleTicketComponent, EditTicketsComponent, PaginationComponent,
         CommentsComponent, AllUsersComponent, AllOperatorsComponent, AllDevelopersComponent,
         AllProductsComponent, UnblockUserComponent, DeveloperSidenavigationComponent, TicketsHeaderComponent,
-        AddNewTicketComponent, ProductSearchComponent, TillFilterComponent, FilteredProductsComponent
+        AddNewTicketComponent, ProductSearchComponent, TillFilterComponent, FilteredProductsComponent,
+        SupportTimeComponent
 
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,

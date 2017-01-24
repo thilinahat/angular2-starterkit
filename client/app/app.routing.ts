@@ -47,6 +47,7 @@ import {EditTicketsComponent} from "./pages/tickets/singleTicket/ticketEdit/tick
 import {AllUsersComponent} from "./pages/admin/role/allUsers/allUsers.component";
 import {AddNewTicketComponent} from "./pages/tickets/add-new-ticket.component";
 import {ProductSearchComponent} from "./pages/admin/product/product-search/product-search.component";
+import {SupportTimeComponent} from "./pages/clients/clientSingle/options/supportTime/support-time.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -162,6 +163,8 @@ const routes: Routes = [
                     {path: 'client-block', component: ClientBlockComponent},
                     {path: 'edit', component: ClientEditComponent},
                     {path: 'tickets', component: SingleClientTicketsComponent},
+                    {path: 'support-time', component: SupportTimeComponent},
+
                 ]
             },
         ]

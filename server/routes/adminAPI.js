@@ -236,4 +236,109 @@ router.post('/product/edit',  function (req, res) {
     });
 });
 
+//route to get available time
+router.get('/client/data/:clientId/supportTime', function (req, res, next) {
+
+    const SQL = "SELECT support_time FROM client  " +
+        " WHERE client_id = " + req.params.clientId ;
+
+
+    /*"SELECT ticket_id, summary, swimlane_status, swimlane_color, due_date FROM `tickets`" +
+     "inner join ticketswimlane on tickets.`swimlane_status_id` = ticketswimlane.swimlane_id" +
+     " WHERE client_id = " + req.params.clientId + " ORDER BY `tickets`.`ticket_id` DESC";
+     */
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db: "+ error);
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results[0]);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//add-time
+// route to edit productsadd-time
+router.post('/client/add-time',  function (req, res) {
+
+    const data = req.body;
+
+    var currentTime;
+
+
+    const SQL = "SELECT support_time FROM client  " +
+        " WHERE client_id = " + data.clientId ;
+
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db: "+ error);
+                return;
+            }
+
+            if (results.length > 0) {
+
+                if(results[0].support_time == null){
+                    currentTime = 0
+                }
+                else{
+                    currentTime = results[0].support_time;
+                }
+
+                let sql = 'UPDATE `client` SET `support_time` = ' + (parseInt( data.addingTime )*60 + currentTime ).toString() + ' WHERE `client`.`client_id` = ' + data.clientId +';';
+
+                connection.query(sql,  function (err, results) {
+                    if (err) {
+                        return res.status(406).json({
+                            status: 'Failed to update Client',
+                            message: err
+                        });
+                    } else {
+                        res.status(200).json({
+                            message: ' Client Updated Successfully'
+                        });
+                    }
+                });
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+
+
+
+
+
+        connection.release();
+    });
+
+});
+
+
 module.exports = router;

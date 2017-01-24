@@ -43,7 +43,7 @@
                             <td>Contact Person: {{client.contact_person_name}}</td>
                         </tr>
                         <tr>
-                            <td>Support time left: {{client.support_time}} sec.</td>
+                            <td>Support time left: {{client.support_time | secondsToHourMin}} </td>
                         </tr>
                         <tr *ngFor="let mail of mails">
                             <td>email: {{mail.mail}}</td>

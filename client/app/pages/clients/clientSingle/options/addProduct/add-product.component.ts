@@ -98,7 +98,6 @@ export class AddProductComponent {
     ){    }
 
     onTillAdd(any:any){
-            console.log("emit found");
             this.loadPurchasedProducts();
     }
     showAddnewProduct = function () {

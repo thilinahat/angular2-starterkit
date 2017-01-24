@@ -78,6 +78,12 @@
         </a>
     </li>
 
+    <li   routerLinkActive="active" *ngIf="route.snapshot.parent.url == 'admin'">
+        <a [routerLink]="['support-time']">
+            <small>Support</small>
+        </a>
+    </li>
+
 </ul>
 
 <router-outlet ></router-outlet>
