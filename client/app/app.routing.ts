@@ -68,6 +68,8 @@ const routes: Routes = [
             { path: 'tickets/:ticketId', component: SingleTicketComponent },
             { path: 'tickets/:ticketId/edit', component: EditTicketsComponent },
 
+            { path: 'products', component: ProductSearchComponent },
+
 
             { path: 'reports', component: ReportsComponent },
             { path: 'clients',component: ClientsComponent , canActivate: [AuthGuard],
