@@ -1382,8 +1382,6 @@ router.post('/products/data', function (req, res, next) {
 
     const tillFilterData = req.body.data;
 
-    console.log(tillFilterData)
-
     let productFilter = 1;
     let clientIdfilter = 1;
 
@@ -1393,10 +1391,21 @@ router.post('/products/data', function (req, res, next) {
         clientIdfilter = ' `till`.`client_id` = ' + tillFilterData.clientID;
 
 
-    const SQL = "SELECT * FROM till "
-        + "inner join `client_till_log` on till.till_id = client_till_log.till_id "
-        + "inner join branch on till.branch_id = branch.branch_id "
-        + "inner join products on till.product_Id = products.product_Id"
+    const SQL = "SELECT till.till_id," +
+        " till.till_name," +
+        " branch.name AS location," +
+        " products.name AS name," +
+        " loggedTime," +
+        " till.till_name," +
+        " till.expiredate," +
+        " client.client_id," +
+        " client.company_name " +
+        " FROM till "
+        + " inner join `client_till_log` on till.till_id = client_till_log.till_id "
+        + " inner join branch on till.branch_id = branch.branch_id "
+        + " inner join products on till.product_Id = products.product_Id"
+        + " inner join client on till.client_id = client.client_id "
+
         + " WHERE " + productFilter + " and " + clientIdfilter;
 
 

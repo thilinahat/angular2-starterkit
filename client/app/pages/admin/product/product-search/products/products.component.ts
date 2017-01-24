@@ -8,7 +8,15 @@ import {Input, Component} from "@angular/core";
 })
 export class FilteredProductsComponent{
 
+    date:Date;
     @Input() purchasedList:any[] = [];
     @Input() noPurchases:boolean;
 
+    ngOnInit(){
+        this.date = new Date();
+    }
+
+    isExpired(addedTime:any){
+        return (new Date(addedTime) < this.date);
+    }
 }
