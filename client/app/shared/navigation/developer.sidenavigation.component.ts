@@ -12,6 +12,7 @@ import {Navitem} from "./navitem.component";
 export class DeveloperSidenavigationComponent {
 
     username: string = '';
+    toggleOn: boolean = false;
 
     private Navitems: Navitem[] = [
         {name:"Tickets",  path:"tickets", icon:"content_paste",isactive:false},

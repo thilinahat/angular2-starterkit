@@ -9,6 +9,7 @@ import {Navitem} from "./navitem.component";
 export class OperatorSidenavigationComponent {
 
     username: string = '';
+    toggleOn: boolean = false;
 
     private Navitems: Navitem[] = [
         {name:"Dashboard",  path:"/operator/dashboard", icon:"dashboard",isactive:true},
