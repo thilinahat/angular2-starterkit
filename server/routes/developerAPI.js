@@ -3,7 +3,6 @@
  */
 var express = require('express');
 var jwt = require('jsonwebtoken');
-var multer = require('multer');
 var path = require('path');
 var mysqlConnectionPool = require('../mysqlConnectionPool');
 var mysql = require('mysql');

@@ -1,30 +1,50 @@
-<div class="sidebar" data-color="purple" id="sideNavBar">
+<div id="sideNavBar">
 
+    <div class="sidebar" data-color="purple" id="desktop-side-nav">
+        <div class="logo">
+            <a routerLink="dashboard" class="simple-text">
+                VinIT CRM
+            </a>
+            <div class="logged-in-user">
+                <i class="material-icons">account_circle</i>
+                <span>{{username}}</span>
+            </div>
+       </div>
 
-    <div class="logo">
-        <a routerLink="dashboard" class="simple-text">
-            VinIT CRM
-        </a>
-        <div class="logged-in-user">
-            <i class="material-icons">account_circle</i>
-            <span>{{username}}</span>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li *ngFor="let nav of Navitems"  class="main-nav-item"  routerLinkActive="active">
+                    <a [routerLink]="[nav.path]">
+                        <i class="material-icons">{{nav.icon}}</i>
+                        <p>{{nav.name}}</p>
+                    </a>
+                </li>
+
+            </ul>
         </div>
     </div>
+    <div [ngClass]="{'toggleOn': toggleOn, 'toggleOff': !toggleOn}" class="sidebar" data-color="purple" id="tab-side-nav">
+        <div class="logo">
+            <a routerLink="dashboard" class="simple-text">
+                VinIT CRM
+            </a>
+            <div class="logged-in-user">
+                <i class="material-icons">account_circle</i>
+                <span>{{username}}</span>
+            </div>
+        </div>
 
-    <div class="sidebar-wrapper">
-        <ul class="nav">
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li *ngFor="let nav of Navitems"  class="main-nav-item"  routerLinkActive="active">
+                    <a [routerLink]="[nav.path]">
+                        <i class="material-icons">{{nav.icon}}</i>
+                        <p>{{nav.name}}</p>
+                    </a>
+                </li>
 
-            <!--"-->
-
-            <li *ngFor="let nav of Navitems"  class="main-nav-item"  routerLinkActive="active">
-                <a [routerLink]="[nav.path]">
-                    <i class="material-icons">{{nav.icon}}</i>
-                    <p>{{nav.name}}</p>
-                </a>
-            </li>
-
-        </ul>
-
-
+            </ul>
+        </div>
     </div>
+    <span class="side-nav-toggle" (click)="toggleOn = !toggleOn;"><i class="material-icons">view_headline</i></span>
 </div>

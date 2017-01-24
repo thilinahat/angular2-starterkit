@@ -12,6 +12,7 @@ import {Navitem} from "./navitem.component";
 export class AdminSidenavigationComponent {
 
     username: string = '';
+    toggleOn: boolean = false;
 
     private Navitems: Navitem[] = [
         {name:"Dashboard",  path:"dashboard", icon:"dashboard",isactive:true},

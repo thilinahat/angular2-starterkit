@@ -1,3 +1,6 @@
+#desktop-side-nav{
+    display: block;
+}
 .sidebar .logo, .off-canvas-sidebar .logo {
     padding: 5px 15px;
 }
@@ -21,4 +24,72 @@
     /* margin-top: 5px; */
     /* margin-left: 5px; */
     text-transform: capitalize;
+}
+
+#tab-side-nav{
+    display:  none;
+    height: 100%;
+    position: fixed;
+    z-index: 5;
+    margin-top: 43px;
+    padding-top: 15px;
+    left: -260px;
+    background: #EEEEEE;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+#tab-side-nav ul{
+    background: #f0f8ff;
+}
+
+#tab-side-nav .nav li > a {
+    margin: 10px 15px;
+    border-radius: 3px;
+    color: #3C4858;
+}
+
+#tab-side-nav .nav li.active > a, #tab-side-nav .nav li.active i{
+    color: #FFFFFF;
+}
+
+#tab-side-nav .nav li i{
+    font-size: 24px;
+    float: left;
+    margin-right: 15px;
+    line-height: 30px;
+    width: 30px;
+    text-align: center;
+    color: #a9afbb;
+}
+
+.side-nav-toggle{
+    display: none;
+    padding: 10px;
+    background: #9C27B0;
+    color: white;
+    z-index: 5;
+    position: fixed;
+}
+
+.toggleOn{
+    width: 260px;
+}
+.toggleOff{
+    width: 0;
+}
+
+@media only screen and (max-width: 991px) {
+    #desktop-side-nav{
+        display: none;
+    }
+    #tab-side-nav{
+        display: block;
+    }
+    .side-nav-toggle{
+        display:  inline;
+    }
+    .side-nav-toggle:hover{
+        cursor: pointer;
+    }
 }

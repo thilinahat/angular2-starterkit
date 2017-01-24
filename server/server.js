@@ -20,6 +20,7 @@ var operatorAPI = require('./routes/operatorAPI');
 var adminAPI = require('./routes/adminAPI');
 var developerAPI = require('./routes/developerAPI');
 var commonAPI = require('./routes/commonAPI');
+var fileAPI = require('./routes/fileAPI');
 
 var notFound = require('./routes/notfound');
 
@@ -71,6 +72,7 @@ app.use('/api/operator', operatorAPI); //API for operator initiated actions
 app.use('/api/admin', adminAPI); //API for admin initiated actions
 app.use('/api/developer', developerAPI); //API for developer initiated actions
 app.use('/api/common', commonAPI); // common utilities for ADMIN , DEVELOPER. OPERATOR
+app.use('/api/file', fileAPI); // API to serve contract files
 app.use('/api', api);
 app.use('/mail',mailServerImap);
 app.use('/mailsend',mailServerSMTP);
