@@ -1429,7 +1429,48 @@ router.post('/products/data', function (req, res, next) {
 
 });
 
-//get number of active tills
+//get expired tills
+router.get('/products/tills/expired', function (req, res, next) {
+
+    const SQL = "SELECT till.till_id," +
+        " till.till_name," +
+        " branch.name AS location," +
+        " products.name AS name," +
+        " loggedTime," +
+        " till.till_name," +
+        " till.expiredate," +
+        " client.client_id," +
+        " client.company_name " +
+        " FROM till "
+        + " inner join `client_till_log` on till.till_id = client_till_log.till_id "
+        + " inner join branch on till.branch_id = branch.branch_id "
+        + " inner join products on till.product_Id = products.product_Id"
+        + " inner join client on till.client_id = client.client_id "
+
+        + " WHERE till.expiredate < now()" ;
+
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db");
+                return;
+            }
+            res.json(results);
+
+
+        });
+
+        connection.release();
+    });
+
+
+});
+
+//get number of active tickets
 router.get('/tickets/number-of-active-tickets', function (req, res, next) {
 
 

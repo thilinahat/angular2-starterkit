@@ -12,6 +12,7 @@ export class FilteredProductsComponent{
     date:Date;
     @Input() purchasedList:any[] = [];
     @Input() noPurchases:boolean;
+    @Input() inDashboardView:boolean;
 
     ngOnInit(){
         this.date = new Date();

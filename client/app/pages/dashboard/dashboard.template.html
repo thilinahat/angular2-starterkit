@@ -178,7 +178,7 @@
                         <li class="active">
                             <a href="#duelicence" data-toggle="tab">
                                 <i class="material-icons">bug_report</i>
-                                Due licence keys
+                                Expired Tills
                                 <div class="ripple-container"></div></a>
                         </li>
 
@@ -190,46 +190,7 @@
         <div class="card-content">
             <div class="tab-content">
                 <div class="tab-pane active" id="duelicence">
-                    <table class="table">
-                        <tbody>
-                        <tr>
-
-                            <td><small><a routerLink="../#">xtream solutions</a></small> </td>
-                            <td>Contract C032 <small><a routerLink="../#">Contract</a></small> </td>
-                            <td>In 2 weeks  </td>
-                            <td><a routerLink="../clients/mail"><i class="material-icons">mail</i></a></td>
-                        </tr>
-
-                        <tr>
-
-                            <td><small><a routerLink="../#">xtream solutions</a></small> </td>
-                            <td>Contract C032 <small><a routerLink="../#">Contract</a></small> </td>
-                            <td>In 1 month(s)  </td>
-                            <td><a routerLink="../clients/mail"><i class="material-icons">mail</i></a></td>
-                        </tr>
-                        <tr>
-
-                            <td><small><a routerLink="../#">exchange plus</a></small> </td>
-                            <td>Contract C032 <small><a routerLink="../#">Contract</a></small> </td>
-                            <td>In 3 week(s)  </td>
-                            <td><a routerLink="../clients/mail"><i class="material-icons">mail</i></a></td>
-                        </tr>
-
-                        <tr>
-
-                            <td><small><a routerLink="../#">european double</a></small> </td>
-                            <td>Contract C032 <small><a routerLink="../#">Contract</a></small> </td>
-                            <td>In 1 week(s)  </td>
-                            <td><a routerLink="../clients/mail"><i class="material-icons">mail</i></a></td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td><i class="material-icons">keyboard_arrow_left</i> <i class="material-icons">keyboard_arrow_right</i></td>
-                            <td></td>
-                        </tr>
-                        </tfoot>
-                    </table>
+                    <filtered-products [purchasedList]="purchasedList" [noPurchases]="noPurchases" [inDashboardView]="inDashboardView"></filtered-products>
                 </div>
 
 

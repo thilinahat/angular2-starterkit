@@ -24,7 +24,8 @@
             <td>{{purchasedItem.name}}</td>
             <td>{{purchasedItem.loggedTime | date:'mediumDate'}}  </td>
             <td>{{purchasedItem.till_name}}</td>
-            <td><a routerLink="../../clients/{{purchasedItem.client_id}}">{{purchasedItem.company_name}}</a></td>
+            <td *ngIf="!inDashboardView"><a routerLink="../../clients/{{purchasedItem.client_id}}">{{purchasedItem.company_name}}</a></td>
+            <td *ngIf="inDashboardView"><a routerLink="../clients/{{purchasedItem.client_id}}">hi {{purchasedItem.company_name}}</a></td>
 
             <td>{{purchasedItem.expiredate |  date:'mediumDate'}}</td>
             <!--<td>{{purchasedItem.till_key}}</td>-->

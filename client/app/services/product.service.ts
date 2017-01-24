@@ -99,4 +99,25 @@ export class ProductManagementService {
                 });
         });
     }
+
+    getExpiredTills(): Promise<any> {
+
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const url = `${this.operatorAPIurl}/products/tills/expired`;
+        return new Promise((resolve, reject) => {
+            //noinspection TypeScriptUnresolvedFunction
+            this.http
+                .get(url)
+                .toPromise()
+                .then(response => {
+                    resolve(response.json());
+                },error => {
+                    reject(error);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
 }

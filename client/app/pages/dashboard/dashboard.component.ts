@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {TicketService} from "../../services/ticket.service";
 import {ProductService} from "../../services/products.service";
+import {ProductManagementService} from "../../services/product.service";
 
 @Component({
     selector: 'dashboard',
@@ -14,6 +15,9 @@ export class DashboardComponent {
     numberOfActiveTickets:any = {};
     numberOfExpiringTills:any = {};
     numberOfresolvedTickets7:any = {};
+    purchasedList:any[] = [];
+    noPurchases:boolean;
+    inDashboardView:boolean = true;
 
     errorMessage:string;
 
@@ -34,9 +38,21 @@ export class DashboardComponent {
             error =>  this.errorMessage = <any>error
 
         )
+
+        this.productManagementService.getExpiredTills().then(results => {
+
+            this.purchasedList = results;
+
+            this.noPurchases = results.length == 0;
+
+        }, error => {
+            this.errorMessage = <any>error
+        });
     }
     constructor(
         private ticketService:TicketService,
-        private productService:ProductService
+        private productService:ProductService,
+        private productManagementService: ProductManagementService,
+
     ){}
 }
