@@ -1,0 +1,41 @@
+<div class="row">
+
+
+    <div class="col-xs-12">
+        <div class="card">
+            <div class="card-header" data-background-color="purple">
+                <h4 class="title">Call History</h4>
+
+            </div>
+            <div class="card-content">
+                <h3 *ngIf="noHistory" style="text-align: center">
+                    No call history for this client
+                </h3>
+                <table class="table" *ngIf="!noHistory">
+                    <tr *ngFor="let historyitem of history">
+                        <td >
+                                    <!--<tr *ngIf="history.type == 'note'">note</tr>-->
+                            <tr class="subject">
+                    <small>{{historyitem.loggedTime | date:"mediumDate"}} @ {{historyitem.loggedTime | date:"mediumTime"}} </small> : <b>{{historyitem.subject}}</b>
+                            </tr>
+                            <tr class="col-xs-12" style="font-size: smaller">
+                                <p>
+                                    {{historyitem.call_description}}
+                                </p>
+                            </tr>
+
+                            <tr>
+                                <small> call duration {{historyitem.call_time}}min(s) </small>
+                            </tr>
+
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

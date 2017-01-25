@@ -34,7 +34,7 @@ import {ChangeCredentialsComponent} from "./shared/changeCredentials/changeCrede
 
 import { AuthGuard } from './guards/auth.gaurd';
 import { AuthService } from './services/auth.service';
-import {AddCallComponent} from "./pages/clients/clientSingle/options/addCall/add-call.component";
+import {AddCallComponent} from "./pages/clients/clientSingle/options/call/addCall/add-call.component";
 import {AddNoteComponent} from "./pages/clients/clientSingle/options/addNote/add-note.component";
 import {AddTicketeComponent} from "./pages/clients/clientSingle/options/addTicket/add-ticket.component";
 import {AddProductComponent} from "./pages/clients/clientSingle/options/addProduct/add-product.component";
@@ -48,6 +48,7 @@ import {AllUsersComponent} from "./pages/admin/role/allUsers/allUsers.component"
 import {AddNewTicketComponent} from "./pages/tickets/add-new-ticket.component";
 import {ProductSearchComponent} from "./pages/admin/product/product-search/product-search.component";
 import {SupportTimeComponent} from "./pages/clients/clientSingle/options/supportTime/support-time.component";
+import {SingleClientCallComponent} from "./pages/clients/clientSingle/options/call/single-client-call.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -87,7 +88,7 @@ const routes: Routes = [
                 children: [
                     {path: '', redirectTo: 'client-dash-board', pathMatch: 'full'},
                     {path: 'client-dash-board', component: ClientSingleDashboardComponent},
-                    {path: 'add-call', component: AddCallComponent},
+                    {path: 'add-call', component: SingleClientCallComponent},
                     {path: 'add-note', component: AddNoteComponent},
                     {path: 'add-product', component: AddProductComponent},
                     {path: 'add-ticket', component: AddTicketeComponent},
@@ -155,7 +156,7 @@ const routes: Routes = [
                 children: [
                     {path: '', redirectTo: 'client-dash-board', pathMatch: 'full'},
                     {path: 'client-dash-board', component: ClientSingleDashboardComponent},
-                    {path: 'add-call', component: AddCallComponent},
+                    {path: 'add-call', component: SingleClientCallComponent},
                     {path: 'add-note', component: AddNoteComponent},
                     {path: 'add-product', component: AddProductComponent},
                     {path: 'add-ticket', component: AddTicketeComponent},

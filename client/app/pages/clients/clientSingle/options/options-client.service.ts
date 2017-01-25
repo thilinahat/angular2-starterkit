@@ -15,14 +15,15 @@ export class OptionsClientService {
     private clientBlockUrl =  'api/operator/client/block';
     private clientUnBlockUrl =  'api/operator/client/unblock';
     private clientAddNoteUrl = 'api/operator/client/addnote';
+    private clientAddCallUrl = 'api/operator/client/addcall';
 
     private clientDataUrl = this.clientAPIurl +"/client/data/";
     private ticketsDataUrl = this.clientAPIurl +"/ticket/data/";
     private ticketsChangePriorityUrl = this.clientAPIurl + "/ticket/change-priority";
     private ticketsChangeStatusUrl = this.clientAPIurl + "/ticket/change-status";
+    private supportTimegetUrl = 'api/operator/client/data/';
 
     //admin only
-    private supportTimegetUrl = 'api/admin/client/data/';
     private supportTimeAddUrl = 'api/admin/client/add-time';
 
     private ticketsUrl = this.clientAPIurl +"/tickets";
@@ -158,6 +159,21 @@ export class OptionsClientService {
             .catch(this.handleError);
     }
 
+    addCallToClient (data: any): Promise<any> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.clientAddCallUrl, { data })
+            .toPromise()
+            .catch(this.handleError);
+    }
+
+    getCallHistory(clientId:string):Promise<any>{
+        var url = this.clientDataUrl + clientId +   "/call-history";
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
 
     addTicket(client: FormData): Promise<any> {
 

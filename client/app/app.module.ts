@@ -54,7 +54,7 @@ import {ClientsHeaderComponent} from "./pages/clients/header/clients.header";
 import {SingleClientComponent} from "./pages/clients/clientSingle/single-client.component";
 import {MailComponent} from "./pages/clients/mail/mail.component";
 import {CustomersComponent } from "./pages/customers/customers.component";
-import {AddCallComponent} from "./pages/clients/clientSingle/options/addCall/add-call.component";
+import {AddCallComponent} from "./pages/clients/clientSingle/options/call/addCall/add-call.component";
 import {OptionsClientService} from "./pages/clients/clientSingle/options/options-client.service";
 import {AddNoteComponent} from "./pages/clients/clientSingle/options/addNote/add-note.component";
 import {AddProductComponent} from "./pages/clients/clientSingle/options/addProduct/add-product.component";
@@ -92,6 +92,8 @@ import {ProductSearchComponent} from "./pages/admin/product/product-search/produ
 import {TillFilterComponent} from "./pages/admin/product/product-search/till-filter/till-filter.component";
 import {FilteredProductsComponent} from "./pages/admin/product/product-search/products/products.component";
 import {SupportTimeComponent} from "./pages/clients/clientSingle/options/supportTime/support-time.component";
+import {CallHistoryComponent} from "./pages/clients/clientSingle/options/call/call-history/call-history.component";
+import {SingleClientCallComponent} from "./pages/clients/clientSingle/options/call/single-client-call.component";
 
 
 //when creating a component, add it here
@@ -121,7 +123,7 @@ import {SupportTimeComponent} from "./pages/clients/clientSingle/options/support
         CommentsComponent, AllUsersComponent, AllOperatorsComponent, AllDevelopersComponent,
         AllProductsComponent, UnblockUserComponent, DeveloperSidenavigationComponent, TicketsHeaderComponent,
         AddNewTicketComponent, ProductSearchComponent, TillFilterComponent, FilteredProductsComponent,
-        SupportTimeComponent
+        SupportTimeComponent, CallHistoryComponent, SingleClientCallComponent
 
          ],
     providers: [ClientService, AuthService, AuthGuard, OptionsClientService, ClientDataSharingService,

@@ -27,11 +27,9 @@ export class SupportTimeComponent{
             this.subscription = this.dataHolder.clientData$.subscribe(
             client => {
                 this.client = client;
+                this.availableTime = client.support_time;
                 if(!this.client.client_id){
                     this.updateClient();
-                }
-                else{
-                    this.getSupportTime();
                 }
 
             }

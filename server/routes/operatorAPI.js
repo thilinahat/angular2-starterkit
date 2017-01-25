@@ -985,22 +985,141 @@ router.post('/client/addnote',  function (req, res) {
 
     SQL = mysql.format(SQL, values);
 
-        mysqlConnectionPool.getConnection(function(err, connection) {
+    mysqlConnectionPool.getConnection(function(err, connection) {
 
-            connection.query( SQL,  function(err, result) {
-                if (err) {
-                    return res.status(406).json({
-                        success: false,
-                        status: 'Failed while inserting client general data',
-                        message: err
-                    });
+        connection.query( SQL,  function(err, result) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting client general data',
+                    message: err
+                });
+            }
+            connection.release();
+            res.sendStatus(200);
+
+        });
+    });
+
+});
+
+//route for adding a call to a client/*
+router.post('/client/addcall',  function (req, res) {
+
+    const data = req.body.data;
+
+    var dt = datetime.create();
+
+    //format to insert to the data base 2016-12-26 00:07:18
+    var formatted = dt.format('Y-m-d H:M:S');
+
+
+    var SQL = "INSERT INTO `vinit_crm`.`client_call` (`client_id`, `user_id`, `subject`, `call_description`, `call_time`, `loggedTime`) " +
+        "VALUES ('?', '?', ? , ?, '?', ? );";
+
+    var values = [data.clientId, req.decoded.uid ,data.subject, data.call_description, data.call_time, formatted];
+
+    SQL = mysql.format(SQL, values);
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query( SQL,  function(err, result) {
+            if (err) {
+                return res.status(406).json({
+                    success: false,
+                    status: 'Failed while inserting client call data',
+                    message: err
+                });
+            }
+
+            SQL = "SELECT support_time FROM client  " +
+                " WHERE client_id = " + data.clientId ;
+
+            connection.query(SQL, function (error, results) {
+
+                if (error) {
+
+                    console.log("error while retrieving from to db: "+ error);
+                    return;
                 }
-                connection.release();
-                res.sendStatus(200);
+
+                if (results.length > 0) {
+
+                    if(results[0].support_time == null){
+                        currentTime = 0
+                    }
+                    else{
+                        currentTime = results[0].support_time;
+                    }
+
+                    let sql = 'UPDATE `client` SET `support_time` = ' + (currentTime - parseInt( data.call_time )*60  ).toString() + ' WHERE `client`.`client_id` = ' + data.clientId +';';
+
+                    connection.query(sql,  function (err, results) {
+                        if (err) {
+                            return res.status(406).json({
+                                status: 'Failed to update Client',
+                                message: err
+                            });
+                        } else {
+                            res.status(200).json({
+                                message: ' Client Updated Successfully'
+                            });
+                        }
+                    });
+
+                }
+                else {
+
+                    res.send();
+                }
 
             });
+
+
+            connection.release();
+            res.sendStatus(200);
+
+        });
+    });
+
+});
+
+//route to get available time
+router.get('/client/data/:clientId/supportTime', function (req, res, next) {
+
+    const SQL = "SELECT support_time FROM client  " +
+        " WHERE client_id = " + req.params.clientId ;
+
+
+    /*"SELECT ticket_id, summary, swimlane_status, swimlane_color, due_date FROM `tickets`" +
+     "inner join ticketswimlane on tickets.`swimlane_status_id` = ticketswimlane.swimlane_id" +
+     " WHERE client_id = " + req.params.clientId + " ORDER BY `tickets`.`ticket_id` DESC";
+     */
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db: "+ error);
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results[0]);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
         });
 
+        connection.release();
+    });
 });
 
 //get client history limited - last 20
@@ -1017,6 +1136,40 @@ router.get('/client/data/:clientId/history', function (req, res, next) {
 
         + " ORDER BY `loggedTimeStamp` DESC"
         + " LIMIT 20";
+
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db view");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get client call history
+router.get('/client/data/:clientId/call-history', function (req, res, next) {
+
+    const SQL = "select * from client_call"  + " WHERE client_id = " + req.params.clientId
+        + " ORDER BY `client_call`.`loggedTime` DESC";
 
 
     mysqlConnectionPool.getConnection(function(err, connection) {

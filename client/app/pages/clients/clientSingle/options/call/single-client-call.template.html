@@ -1,0 +1,8 @@
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <add-call [client]="client" (onCallAdd)="onCallAdd($event)"></add-call>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <call-history [history]="history" [client]="client" [noHistory]="noHistory"></call-history>
+    </div>
+</div>

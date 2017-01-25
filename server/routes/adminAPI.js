@@ -236,43 +236,6 @@ router.post('/product/edit',  function (req, res) {
     });
 });
 
-//route to get available time
-router.get('/client/data/:clientId/supportTime', function (req, res, next) {
-
-    const SQL = "SELECT support_time FROM client  " +
-        " WHERE client_id = " + req.params.clientId ;
-
-
-    /*"SELECT ticket_id, summary, swimlane_status, swimlane_color, due_date FROM `tickets`" +
-     "inner join ticketswimlane on tickets.`swimlane_status_id` = ticketswimlane.swimlane_id" +
-     " WHERE client_id = " + req.params.clientId + " ORDER BY `tickets`.`ticket_id` DESC";
-     */
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        connection.query(SQL, function (error, results) {
-
-            if (error) {
-
-                console.log("error while retrieving from to db: "+ error);
-                return;
-            }
-
-            if (results.length > 0) {
-
-                res.json(results[0]);
-
-            }
-            else {
-
-                res.statusCode = 200; //if results are not found for this
-                res.send();
-            }
-
-        });
-
-        connection.release();
-    });
-});
 
 //add-time
 // route to edit productsadd-time
