@@ -22,7 +22,7 @@ router.post('/', function (req, res, next) {
     console.log(reqBody.sending_to);
     // setup e-mail data with unicode symbols
     var mailOptions = {
-        from: '"Dilan Tharaka" <dilantharakamd6@yahoo.com>', // sender address
+        from: '"vinit" <' + config.email.smtp_un +'>', // sender address
         to: reqBody.sending_to, // list of receivers
         subject: reqBody.title, // Subject line
         text: reqBody.body, // plaintext body

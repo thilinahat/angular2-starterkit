@@ -31,7 +31,10 @@ module.exports =  {
         admin: 'ADMIN',
         developer: 'DEVELOPER'
     },
-    email: {
+    email: {//change setting allow non secure apps in yahoo mail
+
+        // cvinit484@yahoo.com
+        // 1234@admin
         smtp_un:'dilantharakamd6@yahoo.com',
         smtp_pw: 'gts5610k',
         smtp_server: 'smtp.mail.yahoo.com',
