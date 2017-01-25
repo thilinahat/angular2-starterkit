@@ -14,7 +14,7 @@
                         </li>
 
                         <li >
-                            <a  href="#" aria-expanded="true">
+                            <a  aria-expanded="true">
                                 <i class="material-icons">list</i>
                                 Show all ({{clientHistory.length}})
 
@@ -98,6 +98,20 @@
                             <tr class="subject" style="color: red"><small >  {{history.loggedDate}} </small> : {{history.subject}} </tr>
                             <tr class="col-xs-12" style="font-size: smaller"> branch {{history.productName}} removed from client : {{client.company_name}} </tr>
                             <tr><small> Product removed at :{{history.loggedTime }} </small> </tr>
+
+                        </td>
+
+                        <td *ngIf="history.type == 'call'">
+                            <tr class="subject" style="color: darkblue">
+                                <small>{{history.loggedDate}}</small>  : {{history.subject}}
+                            </tr>
+                            <tr class="col-xs-12" style="font-size: smaller">
+                                {{history.content}}
+                            </tr>
+
+                            <tr>
+                                <small> Call added at :{{history.loggedTime }} </small>
+                            </tr>
 
                         </td>
 
