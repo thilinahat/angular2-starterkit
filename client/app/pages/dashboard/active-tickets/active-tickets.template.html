@@ -46,7 +46,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td><a>Show all</a></td>
+                        <td (click)="loadAllActiveTickets();activeTickets.open()" style="cursor: pointer"><a>Show all</a></td>
                     </tr>
                     </tfoot>
                 </table>
@@ -89,7 +89,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td><a>Show all</a></td>
+                        <td >Show all</td>
                     </tr>
                     </tfoot>
 
@@ -98,3 +98,38 @@
         </div>
     </div>
 </div>
+
+<modal #activeTickets style="background-color: rgba(142, 157, 166, 0.39);">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title"><b>Active tickets</b>
+            <a routerLink="../tickets">Go to tickets</a>
+
+        </h4>
+
+        <hr>
+    </modal-header>
+    <modal-body>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table">
+                    <tbody>
+                    <tr *ngFor="let ticket of allActiveTickets">
+
+                        <td>{{ticket.summary}} <small><a routerLink="../tickets/{{ticket.ticket_id}}">
+                            <br>TKT :{{ticket.ticket_id}}</a></small> </td>
+                        <td class="td-actions text-right">
+                            <a routerLink="../tickets/{{ticket.ticket_id}}/edit">
+                                <i class="material-icons">edit</i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+
+    </modal-body>
+</modal>
+

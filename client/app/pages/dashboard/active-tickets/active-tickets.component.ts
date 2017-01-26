@@ -14,6 +14,7 @@ export class ActiveTicketsComponent{
     highPriorityTickets:any[] = [];
     mediumPriorityTickets:any[] = [];
     lowPriorityTickets:any[] = [];
+    allActiveTickets:any[] = [];
 
     ngOnInit(){
 
@@ -32,6 +33,12 @@ export class ActiveTicketsComponent{
     }
 
 
+    loadAllActiveTickets(){
+        this.ticketService.getAllActiveTicketsForDashBoard().
+        then(allActiveTickets => this.allActiveTickets = allActiveTickets,
+            error =>  this.errorMessage = <any>error );
+
+    }
     constructor(
         private ticketService:TicketService
     ){}

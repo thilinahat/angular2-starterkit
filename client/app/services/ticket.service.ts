@@ -17,9 +17,12 @@ export class TicketService {
     private numberOfActiveTicketsURL = this.ticketAPIurl +"/tickets/number-of-active-tickets";
     private overdueTicketsURL = this.ticketAPIurl + "/tickets/overdue-tickets"
     private overdueTicketsDashboardURL = this.ticketAPIurl + "/tickets/overdue-tickets-for-dashboard"
+    private allOverdueTicketsDashboardURL = this.ticketAPIurl + "/tickets/all-overdue-tickets-for-dashboard"
     private highPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/high-priority-tickets-for-dashboard"
     private mediumPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/medium-priority-tickets-for-dashboard"
     private lowPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/low-priority-tickets-for-dashboard"
+    private allActiveTicketsDashboardURL = this.ticketAPIurl + "/tickets/all-active-tickets-for-dashboard"
+
     private numberOfResolvedTickets7URL = this.ticketAPIurl + "/tickets/number-of-resolved-tickets-in-last-7-days";
 
     private ticketsChangeStatusUrl = this.commonAPIurl + "/ticket/change-status";
@@ -68,6 +71,16 @@ export class TicketService {
 
     }
 
+    getAllOverDueTicketsForDashBoard() : Promise<any[]>{
+
+        //noinspection TypeScriptUnresolvedFunction
+        return this.http.get(this.allOverdueTicketsDashboardURL)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+
+    }
+
     getHighPriorityTicketsForDashBoard() : Promise<any[]>{
 
         //noinspection TypeScriptUnresolvedFunction
@@ -98,6 +111,15 @@ export class TicketService {
 
     }
 
+    getAllActiveTicketsForDashBoard() : Promise<any[]>{
+
+        //noinspection TypeScriptUnresolvedFunction
+        return this.http.get(this.allActiveTicketsDashboardURL)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+
+    }
     getTicketsRelatedToDeveloperWithCount(state: any): Promise<any> {
 
         const headers = new Headers({'Content-Type': 'application/json'});

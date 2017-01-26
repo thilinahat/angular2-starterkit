@@ -12,6 +12,7 @@ export class OverdueTicketsComponent{
 
     errorMessage:string;
     overDueTickets:any[] = [];
+    allOverDueTickets:any[] = [];
 
     ngOnInit(){
 
@@ -21,6 +22,13 @@ export class OverdueTicketsComponent{
 
     }
 
+
+    loadAllOverDueTickets(){
+        this.ticketService.getAllOverDueTicketsForDashBoard().
+        then(allOverDueTickets => this.allOverDueTickets = allOverDueTickets,
+            error =>  this.errorMessage = <any>error );
+
+    }
 
     constructor(
         private ticketService:TicketService
