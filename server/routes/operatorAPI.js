@@ -1122,7 +1122,7 @@ router.get('/client/data/:clientId/supportTime', function (req, res, next) {
     });
 });
 
-//get client history limited - last 20
+//get client history limited - last 7
 router.get('/client/data/:clientId/history', function (req, res, next) {
 
     const SQL = "select * from note_history"  + " WHERE client_id = " + req.params.clientId
@@ -1137,7 +1137,51 @@ router.get('/client/data/:clientId/history', function (req, res, next) {
         + " union select * from client_product_removed_history "  + " WHERE client_id = " + req.params.clientId
 
         + " ORDER BY `loggedTimeStamp` DESC"
-        + " LIMIT 20";
+        + " LIMIT 7";
+
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving from to db view");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get client history all
+router.get('/client/data/:clientId/history-all', function (req, res, next) {
+
+    const SQL = "select * from note_history"  + " WHERE client_id = " + req.params.clientId
+        + " union select * from till_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from call_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from ticket_create_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from client_blocked_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from client_unblocked_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from client_branch_add_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from client_branch_remove_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from client_product_added_history "  + " WHERE client_id = " + req.params.clientId
+        + " union select * from client_product_removed_history "  + " WHERE client_id = " + req.params.clientId
+
+        + " ORDER BY `loggedTimeStamp` DESC";
 
 
     mysqlConnectionPool.getConnection(function(err, connection) {

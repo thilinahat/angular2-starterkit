@@ -17,6 +17,7 @@ import {ActivatedRoute} from "@angular/router";
 
 export class ClienthistoryComponent {
     clientHistory:any[]  = [];
+    allHistoryData:any[] = [];
     noHistory:boolean;
     id:any;
     subscription: Subscription;
@@ -35,6 +36,7 @@ export class ClienthistoryComponent {
 
         this.clienthistoryService.getClientHistory(this.id).then(clientHistory => {
             this.clientHistory = clientHistory;
+            this.allHistoryData = clientHistory;
 
         },
             error => {
@@ -55,6 +57,18 @@ export class ClienthistoryComponent {
         }
     }
 
+    loadAllHistory(){
+
+        this.clienthistoryService.getClientHistoryAll(this.id).then(allHistoryData => {
+
+                this.allHistoryData = allHistoryData;
+
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.handleClientHistory();
+            });
+    }
     constructor(
     private clienthistoryService :ClienthistoryService,
     private route: ActivatedRoute,

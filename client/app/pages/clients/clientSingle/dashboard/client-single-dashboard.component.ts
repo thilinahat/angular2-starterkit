@@ -5,6 +5,7 @@ import 'rxjs/add/operator/switchMap';
 import {Subscription} from "rxjs";
 import {ClientService} from "../../../../services/client.service";
 import {ClientDataSharingService} from "../../../../shared/data/client-data-sharing.service";
+import {OptionsClientService} from "../options/options-client.service";
 
 @Component({
 
@@ -24,6 +25,7 @@ export class ClientSingleDashboardComponent {
     subscription:Subscription;
 
     private errorMessage:any;
+    client:any = {};
 
 
     ngOnInit() {
@@ -37,6 +39,9 @@ export class ClientSingleDashboardComponent {
             error =>  this.errorMessage = <any>error );
 
 
+
+
+
         this.subscription = this.dataHolder.clientData$.subscribe(
             client => this.client = client
         )
@@ -44,13 +49,13 @@ export class ClientSingleDashboardComponent {
 
     }
 
-    client:any;
 
 
     constructor(
         private route: ActivatedRoute,
         private clientService: ClientService,
-        private dataHolder: ClientDataSharingService
+        private dataHolder: ClientDataSharingService,
+        private optionsClientService:OptionsClientService
 
     ) {}
 
