@@ -124,17 +124,17 @@
     </modal-header>
     <modal-body>
 
-        <form #ticketPriorityForm="ngForm" (ngSubmit)="onPrioritySubmit(); changePriority.close()">
+        <form #ticketPriorityForm="ngForm" (ngSubmit)="onProblemTypeSubmit(); changeProblemType.close()">
 
             <div class="row">
 
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label class="control-label">Select Priority</label>
+                        <label class="control-label">Select Problem Type</label>
                         <select class="form-control" id="problemType" required="true"
-                                [(ngModel)] = "selectedPriorityId" name="selectedPriorityId" >
-                            <option selected disabled>Choose Priority </option>
-                            <option *ngFor="let priority of priorities " [value]="priority.priority_id" >{{priority.priority_name}}</option>
+                                [(ngModel)] = "selectedProblemTypeId" name="selectedProblemTypeId" >
+                            <option selected disabled>Choose Problem Type</option>
+                            <option *ngFor="let problemType of problemTypes " [value]="problemType.problem_type_id" >{{problemType.problem_type_name}}</option>
                         </select>
                     </div>
                 </div>

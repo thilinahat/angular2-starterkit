@@ -3,6 +3,7 @@ import {Component, Input} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {SingleTicketService} from "./single-ticket.service";
+import {TicketService} from "../../../services/ticket.service";
 
 @Component({
     selector: 'single-ticket',
@@ -23,6 +24,7 @@ export class SingleTicketComponent {
     ticketswimlaneTypes:any[] = [];
     selectedSwimlaneStatusId:string;
     selectedPriorityId:String;
+    selectedProblemTypeId:string;
 
     ngOnInit() {
 
@@ -34,13 +36,18 @@ export class SingleTicketComponent {
 
         });
 
-        this.singleTicketService.getPriorities().
+        this.ticketService.getPriorities().
         then(priorities => this.priorities = priorities,
             error =>  this.errorMessage = <any>error );
 
-        this.singleTicketService.getTicketswimlaneTypes().
+        this.ticketService.getTicketswimlaneTypes().
         then(ticketswimlaneTypes => this.ticketswimlaneTypes = ticketswimlaneTypes,
             error =>  this.errorMessage = <any>error );
+
+        this.ticketService.getproblemTypes().
+        then(problemTypes => this.problemTypes = problemTypes,
+            error =>  this.errorMessage = <any>error );
+
 
     }
 
@@ -89,9 +96,30 @@ export class SingleTicketComponent {
         this.selectedPriorityId = null;
     }
 
+    onProblemTypeSubmit(){
+
+        const ticket = {
+            ticketId: this.selectedTicket.ticket_id,
+            selectedProblemTypeId: this.selectedProblemTypeId,
+        };
+
+
+
+        this.ticketService.changeTicketProblemType(ticket).then(res => {
+            this.loadTicketData();
+            alert('Successfully  Changed Ticket Problem Type');
+        }, error => {
+            alert(error);
+        });
+
+        this.selectedProblemTypeId = null;
+
+    }
+
     constructor(
         private route: ActivatedRoute,
-        private singleTicketService:SingleTicketService
+        private singleTicketService:SingleTicketService,
+        private ticketService:TicketService
 
     ) {}
 
