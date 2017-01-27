@@ -1886,42 +1886,6 @@ router.get('/tickets/all-overdue-tickets-for-dashboard', function (req, res, nex
     });
 });
 
-//get Medium Priority support tickets only 4 newest first
-//To do: move this to commen
-router.get('/tickets/medium-priority-tickets-for-dashboard', function (req, res, next) {
-
-
-    const SQL = "SELECT ticket_id, summary, added_date_time, swimlane_status ,	swimlane_color FROM `tickets` " +
-        " join ticketswimlane on tickets.swimlane_status_id = ticketswimlane.swimlane_id" +
-        " WHERE priority_id = 2 and `swimlane_status_id` != 7" +
-        " ORDER BY `tickets`.`ticket_id` ASC LIMIT 5";
-
-    mysqlConnectionPool.getConnection(function(err, connection) {
-
-        connection.query(SQL, function (error, results) {
-
-            if (error) {
-
-                console.log("error while retrieving overdue-tickets from to db");
-                return;
-            }
-
-            if (results.length > 0) {
-
-                res.json(results);
-
-            }
-            else {
-
-                res.statusCode = 200; //if results are not found for this
-                res.send();
-            }
-
-        });
-
-        connection.release();
-    });
-});
 
 //get High Priority support tickets only 4 newest first
 //To do: move this to commen
@@ -1962,7 +1926,155 @@ router.get('/tickets/low-priority-tickets-for-dashboard', function (req, res, ne
 
 //get High Priority support tickets only 4 newest first
 //To do: move this to commen
+router.get('/tickets/all-low-priority-tickets-for-dashboard', function (req, res, next) {
+
+
+    const SQL = "SELECT ticket_id, summary, added_date_time, swimlane_status ,	swimlane_color FROM `tickets` " +
+        " join ticketswimlane on tickets.swimlane_status_id = ticketswimlane.swimlane_id" +
+        " WHERE priority_id = 1 and `swimlane_status_id` != 7" +
+        " ORDER BY `tickets`.`ticket_id` ASC ";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving overdue-tickets from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get Medium Priority support tickets only 4 newest first
+//To do: move this to commen
+router.get('/tickets/medium-priority-tickets-for-dashboard', function (req, res, next) {
+
+
+    const SQL = "SELECT ticket_id, summary, added_date_time, swimlane_status ,	swimlane_color FROM `tickets` " +
+        " join ticketswimlane on tickets.swimlane_status_id = ticketswimlane.swimlane_id" +
+        " WHERE priority_id = 2 and `swimlane_status_id` != 7" +
+        " ORDER BY `tickets`.`ticket_id` ASC LIMIT 5";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving overdue-tickets from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get Medium Priority support tickets only 4 newest first
+//To do: move this to commen
+router.get('/tickets/all-medium-priority-tickets-for-dashboard', function (req, res, next) {
+
+
+    const SQL = "SELECT ticket_id, summary, added_date_time, swimlane_status ,	swimlane_color FROM `tickets` " +
+        " join ticketswimlane on tickets.swimlane_status_id = ticketswimlane.swimlane_id" +
+        " WHERE priority_id = 2 and `swimlane_status_id` != 7" +
+        " ORDER BY `tickets`.`ticket_id` ASC ";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving overdue-tickets from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get High Priority support tickets only 4 newest first
+//To do: move this to commen
 router.get('/tickets/high-priority-tickets-for-dashboard', function (req, res, next) {
+
+
+    const SQL = "SELECT ticket_id, summary, added_date_time, swimlane_status ,	swimlane_color FROM `tickets` " +
+        " join ticketswimlane on tickets.swimlane_status_id = ticketswimlane.swimlane_id" +
+        " WHERE priority_id = 3 and `swimlane_status_id` != 7" +
+        " ORDER BY `tickets`.`ticket_id` ASC LIMIT 5";
+
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+
+                console.log("error while retrieving overdue-tickets from to db");
+                return;
+            }
+
+            if (results.length > 0) {
+
+                res.json(results);
+
+            }
+            else {
+
+                res.statusCode = 200; //if results are not found for this
+                res.send();
+            }
+
+        });
+
+        connection.release();
+    });
+});
+
+//get High Priority support tickets only 4 newest first
+//To do: move this to commen
+router.get('/tickets/all-high-priority-tickets-for-dashboard', function (req, res, next) {
 
 
     const SQL = "SELECT ticket_id, summary, added_date_time, swimlane_status ,	swimlane_color FROM `tickets` " +

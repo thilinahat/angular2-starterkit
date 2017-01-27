@@ -21,6 +21,9 @@ export class TicketService {
     private highPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/high-priority-tickets-for-dashboard"
     private mediumPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/medium-priority-tickets-for-dashboard"
     private lowPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/low-priority-tickets-for-dashboard"
+    private allhighPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/all-high-priority-tickets-for-dashboard"
+    private allmediumPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/all-medium-priority-tickets-for-dashboard"
+    private alllowPriorityTicketsDashboardURL = this.ticketAPIurl + "/tickets/all-low-priority-tickets-for-dashboard"
     private allActiveTicketsDashboardURL = this.ticketAPIurl + "/tickets/all-active-tickets-for-dashboard"
 
     private numberOfResolvedTickets7URL = this.ticketAPIurl + "/tickets/number-of-resolved-tickets-in-last-7-days";
@@ -75,6 +78,36 @@ export class TicketService {
 
         //noinspection TypeScriptUnresolvedFunction
         return this.http.get(this.allOverdueTicketsDashboardURL)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+
+    }
+
+    getAllHighPriorityTicketsForDashBoard() : Promise<any[]>{
+
+        //noinspection TypeScriptUnresolvedFunction
+        return this.http.get(this.allhighPriorityTicketsDashboardURL)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+
+    }
+
+    getAllMediumPriorityTicketsForDashBoard() : Promise<any[]>{
+
+        //noinspection TypeScriptUnresolvedFunction
+        return this.http.get(this.allmediumPriorityTicketsDashboardURL)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+
+    }
+
+    getAllLowPriorityTicketsForDashBoard() : Promise<any[]>{
+
+        //noinspection TypeScriptUnresolvedFunction
+        return this.http.get(this.alllowPriorityTicketsDashboardURL)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);

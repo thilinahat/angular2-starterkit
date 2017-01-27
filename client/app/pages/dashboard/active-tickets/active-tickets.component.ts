@@ -14,7 +14,9 @@ export class ActiveTicketsComponent{
     highPriorityTickets:any[] = [];
     mediumPriorityTickets:any[] = [];
     lowPriorityTickets:any[] = [];
-    allActiveTickets:any[] = [];
+    allHighPriorityTickets:any[] = [];
+    allMediumPriorityTickets:any[] = [];
+    allLowPriorityTickets:any[] = [];
 
     ngOnInit(){
 
@@ -33,9 +35,23 @@ export class ActiveTicketsComponent{
     }
 
 
-    loadAllActiveTickets(){
-        this.ticketService.getAllActiveTicketsForDashBoard().
-        then(allActiveTickets => this.allActiveTickets = allActiveTickets,
+    loadAllHighPriorityTickets(){
+        this.ticketService.getAllHighPriorityTicketsForDashBoard().
+        then(allHighPriorityTickets => this.allHighPriorityTickets = allHighPriorityTickets,
+            error =>  this.errorMessage = <any>error );
+
+    }
+
+    loadAllMediumPriorityTickets(){
+        this.ticketService.getAllMediumPriorityTicketsForDashBoard().
+        then(allMediumPriorityTickets => this.allMediumPriorityTickets = allMediumPriorityTickets,
+            error =>  this.errorMessage = <any>error );
+
+    }
+
+    loadAllLowPriorityTickets(){
+        this.ticketService.getAllLowPriorityTicketsForDashBoard().
+        then(allLowPriorityTickets => this.allLowPriorityTickets = allLowPriorityTickets,
             error =>  this.errorMessage = <any>error );
 
     }
