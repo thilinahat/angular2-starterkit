@@ -19,7 +19,7 @@ export class TicketSelectionComponent {
     priorities: any[] = [];
     statuses: any[] = [];
     problemTypes:any[] = [];
-    tickets: any[];
+    tickets: any[] = [];
     totalPages: number = 1;
     currentPage: number = 1;
 

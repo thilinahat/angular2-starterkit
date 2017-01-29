@@ -16,7 +16,7 @@ import {forEach} from "@angular/router/src/utils/collection";
 
 export class DeveloperTicketsComponent {
 
-    @Input()  tickets: any[];
+    @Input()  tickets: any[] = [];
     @Output() onTicketUpdate: EventEmitter<any> = new EventEmitter();
 
     priorities:any[] = [];
@@ -75,7 +75,6 @@ export class DeveloperTicketsComponent {
 
         this.ticketService.changeTicketProblemType(ticket).then(res => {
             this.updateTicketProblemType();
-            alert('Successfully  Changed Ticket Problem Type');
         }, error => {
             alert(error);
         });
@@ -94,7 +93,6 @@ export class DeveloperTicketsComponent {
 
         this.ticketService.changeTicketPriority(ticket).then(res => {
             this.updateTicketPriority();
-            alert('Successfully  Changed Ticket Priority');
         }, error => {
             alert(error);
         });
@@ -113,7 +111,6 @@ export class DeveloperTicketsComponent {
 
         this.ticketService.changeTicketStatus(ticket).then(res => {
             this.updateTicketStatus();
-            alert('Successfully  Changed Ticket Status');
         }, error => {
             alert(error);
         });

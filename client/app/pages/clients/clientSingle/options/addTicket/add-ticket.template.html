@@ -86,7 +86,7 @@
                             <div class="col-md-4 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label">Select Till</label>
-                                    <select class="form-control" id="till" required="true"
+                                    <select class="form-control" id="till" required="false"
                                             [(ngModel)] = "selectedTillId" name="selectedTillId" >
                                         <option selected disabled>Choose Till</option>
                                         <option *ngFor="let till of ( tills | filterByBranchProducts:selectedProductId: selectedBranchId )" [value]="till.till_id" >{{till.till_name}}</option>
@@ -157,7 +157,7 @@
                                 <!--developers-->
                                 <div class="form-group">
                                     <label class="control-label">Select Assignee</label>
-                                    <select class="form-control" id="assignee" required="true"
+                                    <select class="form-control" id="assignee" required="false"
                                             [(ngModel)] = "selectedAssigneeId" name="selectedAssigneeId" >
                                         <option selected disabled>Choose Assignee</option>
                                         <option *ngFor="let asignee of asignees " [value]="asignee.id" >{{asignee.name}}</option>

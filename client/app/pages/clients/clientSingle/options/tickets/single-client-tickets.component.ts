@@ -88,7 +88,6 @@ export class SingleClientTicketsComponent {
 
         this.ticketService.changeTicketProblemType(ticket).then(res => {
             this.loadClientTickets();
-            alert('Successfully  Changed Ticket Problem Type');
         }, error => {
             alert(error);
         });
@@ -107,7 +106,6 @@ export class SingleClientTicketsComponent {
 
         this.ticketService.changeTicketPriority(ticket).then(res => {
             this.loadClientTickets();
-            alert('Successfully  Changed Ticket Priority');
         }, error => {
             alert(error);
         });
@@ -126,7 +124,6 @@ export class SingleClientTicketsComponent {
 
         this.ticketService.changeTicketStatus(ticket).then(res => {
             this.loadClientTickets();
-            alert('Successfully  Changed Ticket Status');
         }, error => {
             alert(error);
         });

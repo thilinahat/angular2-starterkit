@@ -71,8 +71,9 @@ router.post('/tickets/with-count',  function (req, res) {
                 ' `problem_types`.`problem_type_name`, `problem_types`.`problem_type_color`,' +
                 ' concat(date(`tickets`.`added_date_time`),"") AS `added_date_time`, ' +
                 ' `client`.`client_id`, `client`.`company_name`' +
-                ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
-                ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
+                ' FROM `tickets`' +
+                // ' INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
+                ' INNER JOIN `products` ON `tickets`.`product_id`=`products`.`product_Id` ' +
                 ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
                 ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
                 ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
@@ -103,8 +104,9 @@ router.post('/tickets/with-count',  function (req, res) {
         count: function(callback) {
 
             var sql = 'SELECT  COUNT(`tickets`.`ticket_id`) as count ' +
-                ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
-                ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
+                ' FROM `tickets`' +
+                // ' INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
+                ' INNER JOIN `products` ON `tickets`.`product_id`=`products`.`product_Id` ' +
                 ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
                 ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
                 ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +
@@ -129,7 +131,7 @@ router.post('/tickets/with-count',  function (req, res) {
                 connection.release();
             });
         }
-    }, function(err, results) {  // after matching social media and and government profiles
+    }, function(err, results) {
         if (err)
             res.send(err);
 
@@ -161,8 +163,9 @@ router.post('/tickets',  function (req, res) {
             ' `ticketswimlane`.`swimlane_color`, `problem_types`.`problem_type_name`, `problem_types`.`problem_type_color`, ' +
             ' `client`.`client_id`, `client`.`company_name`, ' +
             ' concat(date(`tickets`.`added_date_time`),"") AS `added_date_time` ' +
-            ' FROM `tickets` INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
-            ' INNER JOIN `products` ON `till`.`product_Id`=`products`.`product_Id` ' +
+            ' FROM `tickets` ' +
+            //' INNER JOIN `till` ON `tickets`.`till_id`=`till`.`till_id` ' +
+            ' INNER JOIN `products` ON `tickets`.`product_id`=`products`.`product_Id` ' +
             ' INNER JOIN `priorities` ON `tickets`.`priority_id`= `priorities`.`priority_id` ' +
             ' INNER JOIN `ticketswimlane` ON `tickets`.`swimlane_status_id`=`ticketswimlane`.`swimlane_id` ' +
             ' INNER JOIN `problem_types` ON `tickets`.`problem_type_id`=`problem_types`.`problem_type_id`' +

@@ -49,12 +49,12 @@
                         <td>{{selectedTicket.due_date | date:'mediumDate'}}</td>
                     </tr>
 
-                    <tr>
+                    <tr *ngIf="selectedTicket.till_id">
                         <td>Till ID</td>
                         <td>{{selectedTicket.till_id}}</td>
                     </tr>
 
-                    <tr>
+                    <tr *ngIf="selectedTicket.till_name">
                         <td>Till Name</td>
                         <td>{{selectedTicket.till_name}} </td>
                     </tr>
@@ -70,7 +70,7 @@
                         <td>{{selectedTicket.location}}</td>
                     </tr>
 
-                    <tr>
+                    <tr *ngIf="selectedTicket.developer_name">
                         <td>Assignee</td>
                         <td>{{selectedTicket.developer_name}}</td>
                     </tr>

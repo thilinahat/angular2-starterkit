@@ -155,12 +155,103 @@ router.get('/problem-types', function (req, res, next) {
     });
 });
 
+function getTillData(results, connection, res){
+
+    if(results[0].till_id){
+        var tillSQL = " select `till`.`till_name`  from till" +
+            " where  `till`.`till_id` = "  + results[0].till_id ;
+        connection.query(tillSQL, function (error, till_results) {
+
+            if (error) {
+                console.log(error);
+                res.status(406).json({
+                    success: false,
+                    message: error
+                });
+            }
+            else{
+//                            console.log(developre_results[0]);
+                results[0].till_name = till_results[0].till_name;
+                res.json(results[0]);
+            }
+        });
+    }
+    else{
+        res.json(results[0]);
+    }
+
+}
+
+function getAssignee(results, connection, res, callback){
+
+    if(results[0].assignee_id){
+        var assigneeSQL = " select `developers`.`name` AS `developer_name` from `developers` " +
+            " where  `developers`.`id` = "  + results[0].assignee_id ;
+        connection.query(assigneeSQL, function (error, developre_results) {
+
+            if (error) {
+                console.log(error);
+                res.status(406).json({
+                    success: false,
+                    message: error
+                });
+            }
+            else{
+//                            console.log(developre_results[0]);
+                results[0].developer_name = developre_results[0].developer_name;
+                callback(results, connection, res)
+
+            }
+        });
+    }
+    else{
+        callback(results, connection, res)
+    }
+}
+
 // get all ticket data
 router.get('/ticket/data/:ticketId', function (req, res, next) {
 
     //TODO: reduce this joins by calling seperately for swimlane, priorities, problem types
-    const SQL = "SELECT * FROM single_ticket_data_view "
+  /*  const SQL = "SELECT * FROM single_ticket_data_view "
         + " WHERE ticket_id = " + req.params.ticketId;
+*/
+
+  const SQL = "SELECT      " +
+      "`tickets`.`client_id` AS `client_id`,        " +
+      "`tickets`.`problem_type_id` AS `problem_type_id`,        " +
+      "`problem_types`.`problem_type_color`AS `problem_type_color`,  " +
+      "`tickets`.`priority_id` AS `priority_id`,        " +
+      "`tickets`.`swimlane_status_id` AS `swimlane_status_id`,        " +
+      "`ticketswimlane`.`swimlane_color`AS `swimlane_color`,        " +
+      "`tickets`.`ticket_id` AS `ticket_id`,        " +
+      "`tickets`.`due_date` AS `due_date`,        " +
+      "`tickets`.`summary` AS `summary`,        " +
+      "`tickets`.`sceenshot_name` AS `sceenshot_name`,        " +
+      "`tickets`.`description` AS `description`,        " +
+      "`problem_types`.`problem_type_name` AS `problem_type_name`,        " +
+      "`priorities`.`priority_name` AS `priority_name`,        " +
+      "`priorities`.`color` AS priority_color,        " +
+      "`ticketswimlane`.`swimlane_status` AS `swimlane_status`,        " +
+      "`tickets`.`till_id` AS `till_id`,        " +
+      "`products`.`name` AS `product_name`,        `products`.`product_Id` AS `product_Id`,        " +
+      "`branch`.`branch_id` AS `branch_id` ,        " +
+      "`branch`.`location` AS `location`,        " +
+      // " `developers`.`name` AS `developer_name`,        " +
+      "`tickets`.`assignee_id`AS `assignee_id`,        `client`.`company_name` AS `company_name`,        " +
+      "`tickets`.`user_id` AS `user_id` ,        concat(date(`tickets`.`added_date_time`),'') AS `added_date_time`" +
+      "    FROM        " +
+      "`tickets` join `ticketswimlane`    " +
+      "on        `tickets`.`swimlane_status_id` = `ticketswimlane`.`swimlane_id`   " +
+      "join `priorities`    on `tickets`.`priority_id` = `priorities`.`priority_id`   " +
+      " join `problem_types`    on `tickets`.`problem_type_id` = `problem_types`.`problem_type_id`   " +
+      //" join `developers`    on `tickets`.`assignee_id` = `developers`.`id`   " +
+      // " join `till`    on `tickets`.`till_id` = `till`.`till_id`   " +
+       " join `branch`    on `tickets`.`branch_id` = `branch`.`branch_id`   " +
+       " join `products`    on `tickets`.`product_id` = `products`.`product_Id`   " +
+      " join `client`    on `tickets`.`client_id` = `client`.`client_id`    "
+      + " WHERE ticket_id = " + req.params.ticketId;
+
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
@@ -172,8 +263,11 @@ router.get('/ticket/data/:ticketId', function (req, res, next) {
                     success: false,
                     message: error
                 });
-            } else if(req.decoded.role == 'OPERATOR' || req.decoded.role == 'ADMIN' || (results[0] && results[0].assignee_id == req.decoded.uid)){
-                    res.json(results[0]);
+            } else if((req.decoded.role == 'OPERATOR' || req.decoded.role == 'ADMIN' )|| (results[0] && results[0].assignee_id == req.decoded.uid)){
+
+                getAssignee(results, connection, res, getTillData)
+
+
             } else{
                 res.status(406).json({
                     success: false,

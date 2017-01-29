@@ -1347,6 +1347,12 @@ router.post('/add-ticket', screenshotUploader, function (req, res) {
 
     const ticket = req.body;
 
+//    console.log(ticket)
+
+    if(!ticket.selectedAssigneeId ) ticket.selectedAssigneeId = null;
+
+    if(!ticket.selectedTillId) ticket.selectedTillId = null;
+
     if (Array.isArray(req.files.screenshot) && req.files.screenshot.length > 0) {
         ticket.screenShotFileName =  req.files.screenshot[0].filename;
     }
@@ -1358,18 +1364,24 @@ router.post('/add-ticket', screenshotUploader, function (req, res) {
 
 
     //swimlane status id = 1 (OPEN) is hardcoded.
-    var SQL = "INSERT INTO `vinit_crm`.`tickets` (`ticket_id`, `swimlane_status_id`, `client_id`, `summary`, `description`, `problem_type_id`, `priority_id`, `assignee_id`, `sceenshot_name`, `due_date`, `user_id`,  `till_id`, `added_date_time`)"
-        + " VALUES (NULL, '1', ?, ?, ?, ?, ?, ?, ?, ? , '?' , ? , ?); ";
-    var values = [ticket.clientId, ticket.summary, ticket.problemDescription, ticket.selectedProblemTypeId, ticket.selectedPriority, ticket.selectedAssigneeId, ticket.screenShotFileName,  ticket.dueDate, req.decoded.uid, ticket.selectedTillId, formatted];
+    var SQL = "INSERT INTO `vinit_crm`.`tickets` (`ticket_id`, `swimlane_status_id`," +
+        " `client_id`, `summary`, `description`, `problem_type_id`, `priority_id`," +
+        " `assignee_id`, `sceenshot_name`, `due_date`, `user_id`,  `till_id`," +
+        " `product_id`, `branch_id`, `added_date_time`)"
+        + " VALUES (NULL, '1', ?, ?, ?, ?, ?, ?, ?, ? , '?' , ? , ?, ?, ?); ";
+    var values = [ticket.clientId, ticket.summary, ticket.problemDescription, ticket.selectedProblemTypeId,
+        ticket.selectedPriority, ticket.selectedAssigneeId, ticket.screenShotFileName,  ticket.dueDate, req.decoded.uid,
+        ticket.selectedTillId, ticket.selectedProductId, ticket.selectedBranchId, formatted];
 
     SQL = mysql.format(SQL, values);
 
-    //console.log(SQL);
+//    console.log(SQL);
 
     mysqlConnectionPool.getConnection(function(err, connection) {
 
         connection.query( SQL,  function(err,rows, result) {
             if (err) {
+                console.log(err);
                 return res.status(406).json({
                     success: false,
                     status: 'Failed while inserting ticket',
@@ -1389,6 +1401,7 @@ router.post('/add-ticket', screenshotUploader, function (req, res) {
 
             connection.query( LogSQL,  function(err, result) {
                 if (err) {
+                    console.log(err)
                     return res.status(406).json({
                         success: false,
                         status: 'Failed while inserting ticket log',
@@ -1396,8 +1409,7 @@ router.post('/add-ticket', screenshotUploader, function (req, res) {
                     });
                 }
                 connection.release();
-                res.sendStatus(200);
-
+                res.json(ticket.id);
             });
         });
     });
@@ -1408,6 +1420,10 @@ router.post('/update-ticket', screenshotUploader, function (req, res) {
 
     const ticket = req.body;
     var screenshotPresent = false;
+
+    if(!ticket.selectedAssigneeId || ticket.selectedAssigneeId == 'null' || ticket.selectedAssigneeId == 'NULL') ticket.selectedAssigneeId = null;
+
+    if(!ticket.selectedTillId || ticket.selectedTillId == 'null' || ticket.selectedTillId == 'NULL') ticket.selectedTillId = null;
 
     if (Array.isArray(req.files.screenshot) && req.files.screenshot.length > 0) {
         ticket.screenShotFileName =  req.files.screenshot[0].filename;
@@ -1497,14 +1513,44 @@ router.post('/update-ticket', screenshotUploader, function (req, res) {
 //get client tickets
 router.get('/client/data/:clientId/tickets', function (req, res, next) {
 
+/*
     const SQL = "SELECT * FROM ticket_data_view  " +
     " WHERE client_id = " + req.params.clientId + " ORDER BY    `ticket_id` DESC";
-
-
-        /*"SELECT ticket_id, summary, swimlane_status, swimlane_color, due_date FROM `tickets`" +
-        "inner join ticketswimlane on tickets.`swimlane_status_id` = ticketswimlane.swimlane_id" +
-        " WHERE client_id = " + req.params.clientId + " ORDER BY `tickets`.`ticket_id` DESC";
 */
+
+const SQL = "SELECT    `tickets`.`client_id` AS `client_id`," +
+    "        `tickets`.`problem_type_id` AS `problem_type_id`," +
+    "        `problem_types`.`problem_type_color`AS `problem_type_color`," +
+    "        `tickets`.`priority_id` AS `priority_id`," +
+    "      `tickets`.`swimlane_status_id` AS `swimlane_status_id`," +
+    "        `ticketswimlane`.`swimlane_color`AS `swimlane_color`," +
+    "        `tickets`.`ticket_id` AS `ticket_id`," +
+    "        `tickets`.`summary` AS `summary`," +
+    "        `tickets`.`sceenshot_name` AS `sceenshot_name`," +
+    "        `tickets`.`description` AS `description`," +
+    "        `problem_types`.`problem_type_name` AS `problem_type_name`," +
+    "        `priorities`.`priority_name` AS `priority_name`," +
+    "        `priorities`.`color` AS color," +
+    "        `ticketswimlane`.`swimlane_status` AS `swimlane_status`," +
+    "        `tickets`.`till_id` AS `till_id`," +
+    // "        `till`.`till_name` AS `till_name`," +
+    "        `products`.`name` AS `product_name`," +
+    // "        `till`.`expiredate` AS `expiredate`," +
+    "        `branch`.`location` AS `location`," +
+    // "        `developers`.`name` AS `developer_name`," +
+    "        `tickets`.`user_id` AS `user_id` , " +
+    "       concat(date(`tickets`.`added_date_time`),'') AS `added_date_time`" +
+    "    FROM       `tickets`" +
+    " join `ticketswimlane`    on        `tickets`.`swimlane_status_id` = `ticketswimlane`.`swimlane_id`" +
+    "    join `priorities`    on `tickets`.`priority_id` = `priorities`.`priority_id`" +
+    "    join `problem_types`    on `tickets`.`problem_type_id` = `problem_types`.`problem_type_id`" +
+    // "    join `developers`    on `tickets`.`assignee_id` = `developers`.`id`" +
+    // "    join `till`    on `tickets`.`till_id` = `till`.`till_id`" +
+    "    join `branch`    on `tickets`.`branch_id` = `branch`.`branch_id`" +
+    "    join `products`    on `tickets`.`product_id` = `products`.`product_Id` "
+
+        + "WHERE tickets.client_id = " + req.params.clientId + " ORDER BY    `ticket_id` DESC";
+
     mysqlConnectionPool.getConnection(function(err, connection) {
 
         connection.query(SQL, function (error, results) {

@@ -1,4 +1,5 @@
 <div class="tickets-component">
+
     <div *ngFor="let ticket of tickets; let i = index" class="ticket-container" >
         <div class="status-container">
             <div class="status priority-{{ticket.color}}" (click)="changeSelectedClientId(ticket.ticket_id);changeSelectedTicketIndex(i);

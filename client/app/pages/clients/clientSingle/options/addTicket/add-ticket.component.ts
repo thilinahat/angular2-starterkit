@@ -1,5 +1,5 @@
 import {Component, Input,} from "@angular/core";
-import {  ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {OptionsClientService} from "../options-client.service";
 import {ClientDataSharingService} from "../../../../../shared/data/client-data-sharing.service";
 import {Subscription} from "rxjs";
@@ -110,7 +110,8 @@ export class AddTicketeComponent {
         formData.append("dueDate", this.dueDate);
 
         this.optionsClientService.addTicket(formData).then(res => {
-            alert('Successfully Added Ticket');
+//            alert(res);
+            this.changeRoute(res._body);
             this.refreshFields();
         }, error => {
             alert(error);
@@ -121,7 +122,13 @@ export class AddTicketeComponent {
         this.subscription.unsubscribe();
     }
 
+    changeRoute(ticketId:any){
+        this.router.navigate(['../../../tickets/' + ticketId], { relativeTo: this.route });
+    }
+
+
     constructor(
+        private router:Router,
         private route:ActivatedRoute,
         private optionsClientService: OptionsClientService,
         private dataHolder: ClientDataSharingService,
