@@ -9,18 +9,6 @@ var webpackHotMiddleWare = require('webpack-hot-middleware');
 var webpackConfig = require('../webpack/webpack.dev');
 
 var index = require('./routes/index');
-var api = require('./routes/api');
-
-// mail routes
-var mailServerImap = require('./routes/MailServerIMAP');
-var mailServerSMTP = require('./routes/MailServerSMTP');
-
-
-var operatorAPI = require('./routes/operatorAPI');
-var adminAPI = require('./routes/adminAPI');
-var developerAPI = require('./routes/developerAPI');
-var commonAPI = require('./routes/commonAPI');
-var fileAPI = require('./routes/fileAPI');
 
 var notFound = require('./routes/notfound');
 
@@ -36,7 +24,6 @@ app.engine('html', require('ejs').renderFile);
 // Set Multiple Static Folder
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, './uploads/logos')));
-app.use(express.static(path.join(__dirname, './uploads/screenshots')));
 
 // Body Parser MW
 app.use(bodyParser.json());
@@ -61,21 +48,6 @@ app.use(webpackHotMiddleWare(compiler, {
 }));
 
 app.use('/', index);
-app.use('/login', index);
-app.use('/logout', index);
-app.use('/customer', index);
-app.use('/operator/*', index);
-app.use('/admin/*', index);
-app.use('/developer/*', index);
-app.use('/change/credentials', index);
-app.use('/api/operator', operatorAPI); //API for operator initiated actions
-app.use('/api/admin', adminAPI); //API for admin initiated actions
-app.use('/api/developer', developerAPI); //API for developer initiated actions
-app.use('/api/common', commonAPI); // common utilities for ADMIN , DEVELOPER. OPERATOR
-app.use('/api/file', fileAPI); // API to serve contract files
-app.use('/api', api);
-app.use('/mail',mailServerImap);
-app.use('/mailsend',mailServerSMTP);
 app.use('/*', notFound);
 
 
