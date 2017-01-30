@@ -282,6 +282,50 @@ router.get('/ticket/data/:ticketId', function (req, res, next) {
     });
 });
 
+//need improvements
+function getEmailsAddreses(client_id){
+
+    const SQL = "SELECT DISTINCT mail as email FROM `client_mail` where client_id = " + client_id;
+    mysqlConnectionPool.getConnection(function(err, connection) {
+
+        connection.query(SQL, function (error, results) {
+
+            if (error) {
+                console.log(error);
+                connection.release();
+                return null;
+            } else{
+                connection.release();
+                console.log("in get Email" )
+                return results;
+            }
+        });
+
+
+    });
+
+}
+
+function sendEmail(to, mail_title, mail_body){
+    const mail = {
+        sending_to: to,
+        title: mail_title,
+        body: mail_body
+    };
+    request({  // mailing
+        method: 'POST',
+        url: "http://localhost:8080/mailsend",
+        body: mail,
+        json: true,
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }, (error, profiles, body) => {
+        if (error)
+        console.log(error);
+});
+
+}
 // get all email address of customers
 router.get('/customer/all/emails',function (req,res,next) {
     const SQL = "SELECT DISTINCT mail as email FROM `client_mail` ";
@@ -390,6 +434,10 @@ router.post('/ticket/change-status', function (req, res) {
                         message: err
                     });
                 }
+
+              //  var mails = getEmailsAddreses(15);
+                console.log(mails);
+
                 connection.release();
                 res.sendStatus(200);
 

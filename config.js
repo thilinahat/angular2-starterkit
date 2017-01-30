@@ -10,20 +10,20 @@ module.exports =  {
         database: 'vinit_crm'
     },
     admin: {
-        usernamePrefix: 'CRM_ADMIN',
-        passwordPrefix: 'CRM_ADMIN'
+        usernamePrefix: 'C_AD_U',
+        passwordPrefix: 'C_AD_P'
     },
     client: {
             usernamePrefix: 'CRM_CLIENT_USERNAME',
             passwordPrefix: 'CRM_CLIENT_PASSWORD'
     },
     operator: {
-        usernamePrefix: 'CRM_OPERATOR_USERNAME',
-        passwordPrefix: 'CRM_OPERATOR_PASSWORD'
+        usernamePrefix: 'C_OP_U',
+        passwordPrefix: 'C_OP_P'
     },
     developer: {
-        usernamePrefix: 'CRM_DEVELOPER_USERNAME',
-        passwordPrefix: 'CRM_DEVELOPER_PASSWORD'
+        usernamePrefix: 'C_D_U',
+        passwordPrefix: 'C_D_P'
     },
     roles: {
         client: 'CLIENT',
@@ -35,11 +35,11 @@ module.exports =  {
 
         // cvinit484@yahoo.com
         // 1234@admin
-        smtp_un:'dilantharakamd6@yahoo.com',
-        smtp_pw: 'gts5610k',
+        smtp_un:'cvinit484@yahoo.com',
+        smtp_pw: '1234@admin',
         smtp_server: 'smtp.mail.yahoo.com',
-        imap_un: 'dilantharakamd6@yahoo.com',
-        imap_pw: 'gts5610k',
+        imap_un: 'cvinit484@yahoo.com',
+        imap_pw: '1234@admin',
         imap_server: 'imap.mail.yahoo.com',
         imap_port: 993
 
