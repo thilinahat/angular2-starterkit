@@ -9,6 +9,9 @@ var mysqlConnectionPool = require('../mysqlConnectionPool');
 var mysql = require('mysql');
 var moment = require('moment');
 var config = require('../../config');
+var TicketDataService = require('../services/ticketDataService');
+var MailService = require('../services/mailService');
+
 var router = express.Router();
 
 // middleware protect api routes
@@ -436,10 +439,37 @@ router.post('/ticket/change-status', function (req, res) {
                 }
 
               //  var mails = getEmailsAddreses(15);
-                console.log(mails);
+                TicketDataService.getClientDataOfTicket(ticket).then(
+                    response => {
+                        console.log(response.client.mail);
+                        connection.release();
+                        res.sendStatus(200);
 
-                connection.release();
-                res.sendStatus(200);
+                        MailService.getMailTemplateForStatus(ticket.selectedSwimlaneStatusId).then(
+                            templateResponse => {
+                            console.log(templateResponse);
+
+                            for (var i = 0; i < response.client.mail.length; i++) {
+                                var mail = {
+                                    sending_to: response.client.mail[i],
+                                    title: MailService.replaceWithTicketParams(templateResponse.mail_subject, ticket),
+                                    body: MailService.replaceWithTicketParams(templateResponse.mail_template, ticket)
+
+                                }
+                                console.log(mail);
+                                MailService.sendMail(mail)
+                                //Do something
+                            }
+
+                        }
+                    );
+
+
+
+
+            }
+                );
+
 
             });
         });

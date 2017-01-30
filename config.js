@@ -50,6 +50,12 @@ module.exports =  {
         CLIENT: '/client/',
         ADMIN: '/admin/',
         DEVELOPER: '/developer'
+    },
+    defaultMails:{
+        status_change: {
+            mail_subject: "status change in $TICKET_ID",
+            mail_template: "hi $COMPANY_NAME, \n your ticket $TICKET_ID status changed to $TICKET_STATUS. thanks. vinit team"
+        }
     }
 
 };
